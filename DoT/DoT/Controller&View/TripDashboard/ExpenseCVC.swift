@@ -14,6 +14,7 @@ final class ExpenseCollectionViewCell: BaseCollectionViewCell {
     private let categoryLabel = UILabel()
     private let expenseLabel = UILabel()
     private let remainLabel = UILabel()
+    var objectID: String = ""
     
     override func configureHierarchy() {
         
@@ -60,5 +61,6 @@ final class ExpenseCollectionViewCell: BaseCollectionViewCell {
         categoryLabel.text = data.category.name
         expenseLabel.text = "-\(NumberUtil.convertDecimal(data.expense as NSNumber))"
         remainLabel.text = NumberUtil.convertDecimal(remainBudget as NSNumber)
+        objectID = data.objectID
     }
 }
