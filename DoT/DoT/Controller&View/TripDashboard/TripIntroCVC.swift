@@ -22,12 +22,12 @@ final class TripIntroCollectionViewCell: BaseCollectionViewCell {
         
         tripTitle.snp.makeConstraints {
             $0.top.equalTo(contentView).inset(20)
-            $0.leading.equalTo(contentView).inset(10)
+            $0.horizontalEdges.equalTo(contentView).inset(10)
         }
         
         tripDay.snp.makeConstraints {
             $0.top.equalTo(tripTitle.snp.bottom).offset(10)
-            $0.leading.equalTo(contentView).inset(10)
+            $0.horizontalEdges.equalTo(contentView).inset(10)
             $0.bottom.equalTo(contentView).inset(20)
         }
     }

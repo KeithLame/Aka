@@ -8,33 +8,29 @@
 import Foundation
 import PhotosUI
 
-class ExpenseEditViewModel {
+final class ExpenseEditViewModel {
     
     private let realmManager = try? RealmManager()
     
-    var photoIDs: [String] = []
-    var expense: String = ""
-    var category: ExpenseCategory? = nil
-    var memo: String = ""
-    var place: String = ""
-    var photo: String = ""
+    private var photoIDs: [String] = []
+    private var expense: String = ""
+    private var category: ExpenseCategory? = nil
+    private var memo: String = ""
+    private var place: String = ""
+    private var photo: String = ""
     
-    // 선택한 사진의 순서에 맞게 Identifier들을 배열로 저장.
-    var selectedAssetIdentifiers = [String]()
+    let complete: Observable<Void?> = Observable(nil)
     
-    var complete: Observable<Void?> = Observable(nil)
-    
-    var inputTripDetailInfoListener: Observable<TripDetailInfo?> = Observable(nil)
-    
+    let inputTripDetailInfoListener: Observable<TripDetailInfo?> = Observable(nil)
     let inputExpenseListener: Observable<String> = Observable("")
     let inputMemoListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")
     
-    var inputImageDataListener: Observable<[Data]> = Observable([])
-    var outputImageDataListener: Observable<[Data]> = Observable([])
+    let inputImageDataListener: Observable<[Data]> = Observable([])
+    let outputImageDataListener: Observable<[PhotoInfoDTO]> = Observable([])
     
-    var inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
-    var outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
+    let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
+    let outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
     
     let inputCheckSaveButtonEnabledListener: Observable<Void?> = Observable(nil)
     let outputCheckSaveButtonEnabledListener: Observable<Bool> = Observable(false)
@@ -42,8 +38,8 @@ class ExpenseEditViewModel {
     let inputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     let outputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     
-    var inputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
-    var outputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    let inputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    let outputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
     
     init() {
         
@@ -57,7 +53,6 @@ class ExpenseEditViewModel {
             inputPlaceListener.data = tripDetailInfo.place ?? ""
             
             for photo in tripDetailInfo.photos {
-                selectedAssetIdentifiers.append(photo.assetIdentifier)
                 inputImageDataListener.data.append(photo.data)
             }
         }
@@ -136,26 +131,14 @@ class ExpenseEditViewModel {
                 }
             }
             
-            // 1 - 2 FileManager
-            // for idx in 0 ..< imageData.count {
-            //     let filename = objectID + "\(idx)"
-            //     removeImageFromDocument(filename: filename)
-            // }
-            
             // 2. 사진 데이터 저장
             // 2 - 1 Realm
             
-            for idx in 0 ..< imageData.count {
-                let filename = objectID + "\(idx)"
-                let newPhoto = PhotoInfoDTO(filename: filename, assetIdentifier: selectedAssetIdentifiers[idx], data: inputImageDataListener.data[idx])
-                realmManager.appendPhoto(tripDetailDTO, photo: newPhoto)
-            }
+            let savedPhotoDTOs = outputImageDataListener.data
             
-            // 2 - 2 FileManager
-            // for idx in 0 ..< imageData.count {
-            //     let filename = objectID + "\(idx)"
-            //     saveImageToDocument(image: imageData[idx], filename: filename)
-            // }
+            for photoDTO in savedPhotoDTOs {
+                realmManager.appendPhoto(tripDetailDTO, photo: photoDTO)
+            }
             
             // 사진 제외 정보 수정
             tripDetail.expense = expense.convertDouble()
@@ -189,63 +172,23 @@ class ExpenseEditViewModel {
             outputDeleteButtonClickedListener.data = ()
         }
         
+        // 새로운 Data로 PhotoInfoDTO 생성 후 output에 저장
         inputImageDataListener.bind { [weak self] datas in
         
-            guard let self else { return }
+            guard let self,
+                  let tripDetail = inputTripDetailInfoListener.data else { return }
             
-            outputImageDataListener.data = datas
-        }
-    }
-    
-    private func updatePhotoRealm() {
-        
-    }
-    
-    // 파일 저장
-    func saveImageToDocument(image: Data, filename: String) {
-        //앱 도큐먼트 위치
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        print(documentDirectory)
-        
-        // 이미지를 저장할 경로(파일명) 지정
-        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        
-        do {
-            try image.write(to: fileURL)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    // 파일 로드
-    func loadImagePathToDocument(filename: String) -> String {
-        
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return "" }
-        
-        let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        
-        // 해당 경로에 파일이 존재하는 지 확인
-        return fileURL.path()
-        // if FileManager.default.fileExists(atPath: fileURL.path()) {
-        //     return UIImage(contentsOfFile: fileURL.path())
-        // } else {
-        //     return UIImage(systemName: "star.fill")
-        // }
-    }
-    
-    // 파일 삭제
-    func removeImageFromDocument(filename: String) {
-        
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        
-        let fileURL = documentDirectory.appending(path: "\(filename).jpg")
-        
-        if FileManager.default.fileExists(atPath: fileURL.path()) {
-            do {
-                try FileManager.default.removeItem(atPath: fileURL.path())
-            } catch {
-                print(error.localizedDescription)
+            let objectID = tripDetail.objectID
+            let imageData = inputImageDataListener.data
+            var photos: [PhotoInfoDTO] = []
+            
+            for idx in 0 ..< imageData.count {
+                let filename = objectID + "\(idx)"
+                let newPhoto = PhotoInfoDTO(filename: filename, data: inputImageDataListener.data[idx])
+                photos.append(newPhoto)
             }
+            
+            outputImageDataListener.data = photos
         }
     }
     

@@ -70,6 +70,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             layoutView.editButton.isEnabled = isEnabled
         }
         
+        // 데이터 수정 시 Expense VC로 이동
         expenseEditVM.outputEditButtonClickedListener.bind { [weak self] _ in
             
             guard let self else { return }
@@ -79,13 +80,15 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             self.navigationController?.popViewController(animated: true)
         }
         
+        // 데이터 삭제 시 Expense VC로 이동
         expenseEditVM.outputDeleteButtonClickedListener.bind { [weak self] _ in
             
             guard let self else { return }
             
+            expenseEditVM.complete.data = ()
+            
             navigationController?.popViewController(animated: true)
         }
-        
         
         // 이미지 선택 시 사진 콜렉션뷰 업데이트
         expenseEditVM.outputImageDataListener.bind { [weak self] datas in
@@ -127,15 +130,17 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         // MARK: Photo Collecion View
         let photoRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self else { return }
+            guard let self,
+                  let photoDTO = itemIdentifier as? PhotoInfoDTO,
+                  let image = UIImage(data: photoDTO.data) else { return }
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
             cell.photoImageView.addGestureRecognizer(tapGesture)
-            guard let imageData = itemIdentifier as? Data, let image = UIImage(data: imageData) else { return }
+            
+            let data = photoDTO.data
             
             cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
-            cell.deleteButton.tag = imageData.hashValue
-            
+            cell.deleteButton.tag = data.hashValue
             cell.configure(data: image)
         }
         
@@ -149,32 +154,11 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         }
     }
     
+    // 데이터 삭제
     override func rightBarButtonClicked(_ sender: UIButton) {
         
-        let alertTitle = "해당 지출내역을 삭제합니다"
-        let deleteTitle = "삭제"
-        let cancelTitle = "취소"
+        let alert = makeAlert()
         
-        let attributeAlertTitle = NSMutableAttributedString(string: alertTitle)
-        let font = FontManager.getFont(size: .medium, scale: .Bold)
-        
-        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.blackWhite], range: (alertTitle as NSString).range(of: alertTitle))
-        
-        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
-        let deleteButton = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in
-            
-            guard let self else { return }
-            
-            expenseEditVM.inputDeleteButtonClickedListener.data = ()
-        }
-        let cancelButton = UIAlertAction(title: cancelTitle, style: .cancel)
-        
-        alert.setValue(attributeAlertTitle, forKey: "attributedTitle")
-        deleteButton.setValue(UIColor.justRed, forKey: "titleTextColor")
-        cancelButton.setValue(UIColor.justGray, forKey: "titleTextColor")
-        
-        alert.addAction(deleteButton)
-        alert.addAction(cancelButton)
         present(alert, animated: true)
     }
     
@@ -225,18 +209,18 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     // 사진첩 선택
     @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
         
-        // 이미지의 Identifier를 사용하기 위해서는 초기화를 shared로 해줘야 합니다.
+        let limitCount = 5 - (expenseEditVM.inputImageDataListener.data).count
+        
+        // 이미지의 Identifier를 사용하기 위해서는 초기화를 shared로 해줘야 함
         var config = PHPickerConfiguration(photoLibrary: .shared())
-        // 라이브러리에서 보여줄 Assets을 필터를 한다. (기본값: 이미지, 비디오, 라이브포토)
+        // 라이브러리에서 보여줄 Assets을 필터 (기본값: 이미지, 비디오, 라이브포토)
         config.filter = PHPickerFilter.any(of: [.images])
-        // 다중 선택 갯수 설정 (0 = 무제한)
-        config.selectionLimit = 5
-        // 선택 동작을 나타냄 (default: 기본 틱 모양, ordered: 선택한 순서대로 숫자로 표현, people: 뭔지 모르겠게요)
+        // 다중 선택 갯수 설정 - 최대 5개로 한정 (0 = 무제한)
+        config.selectionLimit = limitCount
+        // 선택 동작을 나타냄 (default: 기본 틱 모양, ordered: 선택한 순서대로 숫자로 표현)
         config.selection = .ordered
-        // 잘은 모르겠지만, current로 설정하면 트랜스 코딩을 방지한다고 하네요!?
-        // config.preferredAssetRepresentationMode = .current
-        // 이 동작이 있어야 PHPicker를 실행 시, 선택했던 이미지를 기억해 표시할 수 있다. (델리게이트 코드 참고)
-        config.preselectedAssetIdentifiers = expenseEditVM.selectedAssetIdentifiers
+        // current로 설정 시 트랜스 코딩을 방지
+        config.preferredAssetRepresentationMode = .current
         
         let phPicker = PHPickerViewController(configuration: config)
         phPicker.delegate = self
@@ -253,11 +237,10 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         for idx in 0 ..< datas.count {
             if datas[idx].hashValue == dataHashVaulue {
                 datas.remove(at: idx)
-                expenseEditVM.selectedAssetIdentifiers.remove(at: idx)
                 break
             }
         }
-        print("delete")
+        
         expenseEditVM.inputImageDataListener.data = datas
     }
 }
@@ -271,33 +254,28 @@ extension ExpenseEditViewController: PHPickerViewControllerDelegate {
             return
         }
         
-        // Picker에서 선택한 이미지의 Identifier들을 저장 (assetIdentifier은 옵셔널 값이라서 compactMap 받음)
-        // 위의 PHPickerConfiguration에서 사용하기 위해서 입니다.
-        expenseEditVM.selectedAssetIdentifiers = results.compactMap { $0.assetIdentifier }
-        
         let dispatchGroup = DispatchGroup()
         
-        var imageDataDic = [String: Data]()
+        // 임시 데이터 보관소 - 저장 순서 체크
+        var identifierGroup = [String?]()
+        var imageDataDic = [String?: Data]()
         
-        for idx in 0 ..< expenseEditVM.selectedAssetIdentifiers.count {
+        for result in results {
             
             dispatchGroup.enter()
             
-            let identifier = self.expenseEditVM.selectedAssetIdentifiers[idx]
-            let itemProvider = results[idx].itemProvider
+            let identifier = result.assetIdentifier
+            let itemProvider = result.itemProvider
             
-            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            identifierGroup.append(identifier)
+            
+            // 모두 새로 선택한 Image이기 때문에 canLoadObject로 체크하지 않아도 됨
+            itemProvider.loadObject(ofClass: UIImage.self) { readingImage, error in
                 
-                itemProvider.loadObject(ofClass: UIImage.self) { readingImage, error in
-                    
-                    guard let image = readingImage as? UIImage else { return }
-                    
-                    guard let data = image.jpegData(compressionQuality: 1.0) else { return }
-                    
-                    imageDataDic[identifier] = data
-                    dispatchGroup.leave()
-                }
-            } else {
+                guard let image = readingImage as? UIImage,
+                      let data = image.jpegData(compressionQuality: 1.0) else { return }
+                
+                imageDataDic[identifier] = data
                 dispatchGroup.leave()
             }
         }
@@ -305,8 +283,9 @@ extension ExpenseEditViewController: PHPickerViewControllerDelegate {
         dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
             
             guard let self = self else { return }
-            // 선택한 이미지의 순서대로 정렬하여 스택뷰에 올리기
-            for identifier in expenseEditVM.selectedAssetIdentifiers {
+            
+            // 선택한 이미지의 순서대로 저장
+            for identifier in identifierGroup {
                 
                 guard let data = imageDataDic[identifier] else { continue }
                 
@@ -316,39 +295,7 @@ extension ExpenseEditViewController: PHPickerViewControllerDelegate {
         
         picker.dismiss(animated: true)
     }
-    
-    
 }
-
-extension ExpenseEditViewController {
-    
-    private func update() {
-        
-        DispatchQueue.main.async {
-            // Category Snapshot
-            var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
-            categorySnapshot.appendSections([.category])
-            
-            categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
-            
-            self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
-            
-            // Photo Snapshot
-            var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
-            photoSnapshot.appendSections([.photo])
-            
-            let datas = self.expenseEditVM.outputImageDataListener.data
-            
-            if !datas.isEmpty {
-                photoSnapshot.appendItems(datas, toSection: .photo)
-            }
-            photoSnapshot.appendItems(["plus Photo"], toSection: .photo)
-            
-            self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
-        }
-    }
-}
-
 
 extension ExpenseEditViewController: UITextFieldDelegate {
     
@@ -380,5 +327,60 @@ extension ExpenseEditViewController: UITextViewDelegate {
     }
 }
 
-
-
+extension ExpenseEditViewController {
+    
+    private func update() {
+        
+        DispatchQueue.main.async {
+            // Category Snapshot
+            var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
+            categorySnapshot.appendSections([.category])
+            
+            categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
+            
+            self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
+            
+            // Photo Snapshot
+            var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
+            photoSnapshot.appendSections([.photo])
+            
+            let datas = self.expenseEditVM.outputImageDataListener.data
+            photoSnapshot.appendItems(datas, toSection: .photo)
+            
+            if datas.count < 5 {
+                photoSnapshot.appendItems(["plus Photo"], toSection: .photo)
+            }
+            
+            self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
+        }
+    }
+    
+    private func makeAlert() -> UIAlertController {
+        let alertTitle = "해당 지출내역을 삭제합니다"
+        let deleteTitle = "삭제"
+        let cancelTitle = "취소"
+        
+        let attributeAlertTitle = NSMutableAttributedString(string: alertTitle)
+        let font = FontManager.getFont(size: .medium, scale: .Bold)
+        
+        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.blackWhite], range: (alertTitle as NSString).range(of: alertTitle))
+        
+        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        let deleteButton = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in
+            
+            guard let self else { return }
+            
+            expenseEditVM.inputDeleteButtonClickedListener.data = ()
+        }
+        let cancelButton = UIAlertAction(title: cancelTitle, style: .cancel)
+        
+        alert.setValue(attributeAlertTitle, forKey: "attributedTitle")
+        deleteButton.setValue(UIColor.justRed, forKey: "titleTextColor")
+        cancelButton.setValue(UIColor.justGray, forKey: "titleTextColor")
+        
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        
+        return alert
+    }
+}

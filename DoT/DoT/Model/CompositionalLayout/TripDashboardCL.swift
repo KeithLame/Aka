@@ -102,7 +102,7 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createHeader()]
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10)
         
         return section
     }

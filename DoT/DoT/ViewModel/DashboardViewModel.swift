@@ -208,27 +208,27 @@ final class DashboardViewModel {
         // 환율 정보 업데이트 기준 날짜 저장
         inputLastUpdateDateListener.data = DateUtil.convertStringToDate(dateStr: date, type: .exchange)
         
-        // APIManager.shared.callAPI(api: api, type: [ExchangeAPIModel].self) { [weak self] response in
+        APIManager.shared.callAPI(api: api, type: [ExchangeAPIModel].self) { [weak self] response in
             
-        //     print("############# 환율 API 호출 #############")
-        //     
-        //     guard let self else { return }
-        //     
-        //     switch response {
-        //     case .success(let success):
-        //         
-        //         // 빈 배열이 왔다면, 기존 데이터 사용
-        //         if success.isEmpty {
-        //             exchangeFetchListener.data = ()
-        //             
-        //             // 정상적인 데이터가 넘어오면, 새로운 데이터로 덮어씌우기
-        //         } else {
-        //             createExchangeListener.data = success
-        //         }
-        //         
-        //     case .failure(let failure):
-        //         createExchangeListener.data = []
-        //     }
-        // }
+            print("############# 환율 API 호출 #############")
+            
+            guard let self else { return }
+            
+            switch response {
+            case .success(let success):
+                
+                // 빈 배열이 왔다면, 기존 데이터 사용
+                if success.isEmpty {
+                    exchangeFetchListener.data = ()
+                    
+                    // 정상적인 데이터가 넘어오면, 새로운 데이터로 덮어씌우기
+                } else {
+                    createExchangeListener.data = success
+                }
+                
+            case .failure(let failure):
+                createExchangeListener.data = []
+            }
+        }
     }
 }

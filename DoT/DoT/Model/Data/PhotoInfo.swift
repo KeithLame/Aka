@@ -10,6 +10,5 @@ import Foundation
 struct PhotoInfo: Hashable {
     var objectID: String
     var filename: String
-    var assetIdentifier: String
     var data: Data
 }
