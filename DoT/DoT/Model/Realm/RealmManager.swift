@@ -61,6 +61,20 @@ final class RealmManager {
 
 // Trip Info
 extension RealmManager {
+    
+    func getTripDetailByObjectID(_ objectID: String) -> TripDetailInfoDTO? {
+        
+        let detailDTOs = fetch(TripDetailInfoDTO.self)
+        
+        for detailDTO in detailDTOs {
+            if detailDTO.objectID == objectID {
+                return detailDTO
+            }
+        }
+        
+        return nil
+    }
+    
     func updateTripBudgetByID(id: String, value: String) {
         do {
             try realm.write {
@@ -73,6 +87,13 @@ extension RealmManager {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func appendTripDetail(_ data: TripInfoDTO, tripDetail: TripDetailInfoDTO) {
+        
+        try! realm.write {
+            data.tripDetail.append(tripDetail)
         }
     }
 }
@@ -98,10 +119,10 @@ extension RealmManager {
         }
     }
     
-    func appendTripDetail(_ data: TripInfoDTO, tripDetail: TripDetailInfoDTO) {
+    func appendPhoto(_ data: TripDetailInfoDTO, photo: PhotoInfoDTO) {
         
         try! realm.write {
-            data.tripDetail.append(tripDetail)
+            data.photo.append(photo)
         }
     }
 }

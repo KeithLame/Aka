@@ -228,7 +228,6 @@ final class DashboardViewModel {
                 
             case .failure(let failure):
                 createExchangeListener.data = []
-                print(failure.responseCode!)
             }
         }
     }

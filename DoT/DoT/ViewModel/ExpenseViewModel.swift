@@ -121,7 +121,7 @@ final class ExpenseViewModel {
                 
                 guard let category else { return }
                 
-                let newExpense = TripDetailInfoDTO(expense: expense, category: category, photo: nil, memo: nil, place: nil, expenseDate: Date())
+                let newExpense = TripDetailInfoDTO(expense: expense, category: category, memo: nil, place: nil, expenseDate: Date())
                 
                 let tripInfoDTO = realmManager.fetchOrigin(TripInfoDTO.self)
                 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let configuration = Realm.Configuration(schemaVersion: 1) {
+            migration, oldSchemaVersion in
+            
+            // schemaVersion: 1
+            // TripDetailInfoDTO / photo 변수 타입 변경 String? -> List<PhotoInfoDTO> 
+            if oldSchemaVersion < 1 {
+                print("schema: 0 -> 1")
+            }
+        }
+        
+        Realm.Configuration.defaultConfiguration = configuration
+        
         return true
     }
 

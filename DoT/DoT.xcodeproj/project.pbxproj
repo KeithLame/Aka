@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC5FF4EF2BB03F3D00962363 /* PrivacyPolicyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FF4EE2BB03F3D00962363 /* PrivacyPolicyCVC.swift */; };
+		AC5FF4F32BB1A25300962363 /* PhotoInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FF4F22BB1A25300962363 /* PhotoInfoDTO.swift */; };
+		AC5FF4F52BB1A2B800962363 /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FF4F42BB1A2B800962363 /* PhotoInfo.swift */; };
 		AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */; };
 		AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6542BA6BB8300EF14BD /* TripIntro.swift */; };
 		AC61A6572BA6C97400EF14BD /* TripDetailInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */; };
@@ -100,6 +102,8 @@
 
 /* Begin PBXFileReference section */
 		AC5FF4EE2BB03F3D00962363 /* PrivacyPolicyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyCVC.swift; sourceTree = "<group>"; };
+		AC5FF4F22BB1A25300962363 /* PhotoInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfoDTO.swift; sourceTree = "<group>"; };
+		AC5FF4F42BB1A2B800962363 /* PhotoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfo.swift; sourceTree = "<group>"; };
 		AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardViewModel.swift; sourceTree = "<group>"; };
 		AC61A6542BA6BB8300EF14BD /* TripIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntro.swift; sourceTree = "<group>"; };
 		AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailInfoDTO.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				AC939C372BA9BA460048956B /* DTO */,
 				AC939C352BA9B74C0048956B /* TripInfo.swift */,
 				AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */,
+				AC5FF4F42BB1A2B800962363 /* PhotoInfo.swift */,
 				AC939C382BA9CD640048956B /* Exchange.swift */,
 				AC66689F2BA0179C00AED57A /* InProgressTrip.swift */,
 				AC61A6542BA6BB8300EF14BD /* TripIntro.swift */,
@@ -298,6 +303,7 @@
 				AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */,
 				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
 				AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */,
+				AC5FF4F22BB1A25300962363 /* PhotoInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -571,6 +577,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5FF4F32BB1A25300962363 /* PhotoInfoDTO.swift in Sources */,
 				AC61A6642BA6EAB600EF14BD /* CategoryCVC.swift in Sources */,
 				AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */,
 				AC939C3B2BA9E5900048956B /* TripDetailInfo.swift in Sources */,
@@ -579,6 +586,7 @@
 				AC939C252BA88EF50048956B /* ExpenseCRV.swift in Sources */,
 				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
 				AC6DF5C12BAF04BD00EB224D /* PhotoCVC.swift in Sources */,
+				AC5FF4F52BB1A2B800962363 /* PhotoInfo.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
 				AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */,
 				AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */,
