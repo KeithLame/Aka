@@ -217,27 +217,27 @@ extension TripDashboardViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let tripInfo = tripDashboardVM.tripInfo else { return }
-        let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate > $1.expenseDate }
+        guard let tripInfo = tripDashboardVM.tripInfo,
+              let cell = collectionView.cellForItem(at: indexPath) as? ExpenseCollectionViewCell else { return }
+        
+        let objectID = cell.objectID
+        let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate > $1.expenseDate }.filter { $0.objectID == objectID }
         
         let expenseIndexOfSection = TripDashboardCompositionalLayout.expenseIndexOfSection
         
-        for section in expenseIndexOfSection {
+        if expenseIndexOfSection.contains(indexPath.section) {
             
-            if section == indexPath.section {
+            let nextVC = ExpenseEditViewController()
+            nextVC.expenseEditVM.inputTripDetailInfoListener.data = tripDetail.first
+            nextVC.expenseEditVM.complete.bind { [weak self] _ in
                 
-                let nextVC = ExpenseEditViewController()
-                nextVC.expenseEditVM.inputTripDetailInfoListener.data = tripDetail[indexPath.item]
-                nextVC.expenseEditVM.complete.bind { [weak self] _ in
-                    
-                    guard let self else { return }
-                    
-                    let snapshot = diffableDataSource.snapshot()
-                    diffableDataSource.applySnapshotUsingReloadData(snapshot)
-                }
+                guard let self else { return }
                 
-                navigationController?.pushViewController(nextVC, animated: true)
+                let snapshot = diffableDataSource.snapshot()
+                diffableDataSource.applySnapshotUsingReloadData(snapshot)
             }
+            
+            navigationController?.pushViewController(nextVC, animated: true)
         }
     }
 }
