@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
     
-    func configure(title: String, image: UIImage?, fontSize: Consts.FontSize = .regular, fontScale: Consts.FontScale = .Medium, backgroundColor: UIColor = .pointBlue, foregroundColor: UIColor = .justWhite, imageColor: UIColor = .justWhite) {
+    func configure(title: String, image: UIImage?, fontSize: Consts.FontSize = .medium, fontScale: Consts.FontScale = .Medium, backgroundColor: UIColor = .pointBlue, foregroundColor: UIColor = .justWhite, imageColor: UIColor = .justWhite) {
         
         let buttonTitle = title
         var titleAttrribute = AttributedString.init(buttonTitle)

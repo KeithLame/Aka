@@ -21,7 +21,7 @@ final class TripIntroCollectionViewCell: BaseCollectionViewCell {
     override func configureLayout() {
         
         tripTitle.snp.makeConstraints {
-            $0.top.equalTo(contentView).inset(20)
+            $0.top.equalTo(contentView).inset(10)
             $0.horizontalEdges.equalTo(contentView).inset(10)
         }
         
@@ -34,8 +34,8 @@ final class TripIntroCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         
-        tripTitle.configure(text: "여행 제목", fontSize: .huge, fontScale: .Bold)
-        tripDay.configure(text: "여행 일차", fontSize: .large, fontScale: .Bold)
+        tripTitle.configure(text: "여행 제목", fontSize: .extraLarge, fontScale: .Bold)
+        tripDay.configure(text: "여행 일차", fontSize: .medium, fontScale: .Bold)
     }
     
     func configure(data: TripIntro) {

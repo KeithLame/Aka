@@ -28,13 +28,12 @@ final class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         }
         
         currencyLabel.snp.makeConstraints {
-            $0.top.equalTo(budgetCardLayoutView).inset(20)
-            $0.bottom.equalTo(budgetCardLayoutView.snp.centerY).offset(-10)
+            $0.top.equalTo(budgetCardLayoutView).inset(10)
             $0.horizontalEdges.equalTo(budgetCardLayoutView).inset(20)
         }
         
         budgetLabel.snp.makeConstraints {
-            $0.top.equalTo(currencyLabel.snp.centerY).offset(20)
+            $0.top.equalTo(currencyLabel.snp.bottom).offset(20)
             $0.horizontalEdges.equalTo(budgetCardLayoutView).inset(20)
             $0.bottom.equalTo(budgetCardLayoutView).inset(30)
         }
@@ -58,12 +57,13 @@ final class BudgetCardCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         
-        currencyLabel.configure(text: "KRW", fontSize: .large, fontScale: .Bold, color: .justWhite)
+        currencyLabel.configure(text: "KRW", fontSize: .small, fontScale: .Bold, color: .justWhite)
         budgetLabel.configure(text: "100,000,000원", fontSize: .huge, fontScale: .Bold, color: .justWhite)
         
         budgetCardLayoutView.layer.cornerRadius = 10
         budgetCardLayoutView.backgroundColor = .pointBlue
         
+        // budgetLabel.textAlignment = .center
         budgetEditButton.configure(title: "예산 수정", image: nil, fontScale: .Bold)
         expenseButton.configure(title: "지출", image: nil, fontScale: .Bold)
         expenseButton.configuration?.background.backgroundColor = .blackWhite

@@ -32,7 +32,6 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         let deleteActionTitle = NSLocalizedString("Delete", comment: "Delete action title")
         let deleteAction = UIContextualAction(style: .destructive, title: deleteActionTitle) { _, _, completion in
         }
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
         
         let layout = UICollectionViewCompositionalLayout { section, environment in
             
@@ -67,7 +66,7 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         
         let section = NSCollectionLayoutSection(group: group)
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }
