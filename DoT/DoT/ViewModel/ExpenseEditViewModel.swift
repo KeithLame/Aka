@@ -56,7 +56,7 @@ class ExpenseEditViewModel {
             inputMemoListener.data = tripDetailInfo.memo ?? ""
             inputPlaceListener.data = tripDetailInfo.place ?? ""
             
-            for photo in tripDetailInfo.photo {
+            for photo in tripDetailInfo.photos {
                 selectedAssetIdentifiers.append(photo.assetIdentifier)
                 inputImageDataListener.data.append(photo.data)
             }

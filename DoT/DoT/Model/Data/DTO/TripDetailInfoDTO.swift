@@ -12,7 +12,7 @@ final class TripDetailInfoDTO: Object {
     @Persisted(primaryKey: true) var objectID: String = UUID().uuidString
     @Persisted var expense: Double
     @Persisted var category: ExpenseCategory
-    @Persisted var photo: List<PhotoInfoDTO>
+    @Persisted var photos: List<PhotoInfoDTO>
     @Persisted var memo: String?
     @Persisted var place: String?
     @Persisted var expenseDate: Date
@@ -30,9 +30,9 @@ final class TripDetailInfoDTO: Object {
     
     func translate() -> TripDetailInfo {
         
-        let photo = Array(self.photo.map { $0.translate() })
+        let photos = Array(self.photos.map { $0.translate() })
         
-        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, place: self.place ,expense: self.expense, category: self.category, photo: photo, memo: self.memo , expenseDate: self.expenseDate)
+        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, place: self.place ,expense: self.expense, category: self.category, photos: photos, memo: self.memo , expenseDate: self.expenseDate)
         
         return translateTripDetailInfo
     }

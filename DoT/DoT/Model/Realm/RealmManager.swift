@@ -122,7 +122,7 @@ extension RealmManager {
     func appendPhoto(_ data: TripDetailInfoDTO, photo: PhotoInfoDTO) {
         
         try! realm.write {
-            data.photo.append(photo)
+            data.photos.append(photo)
         }
     }
 }
