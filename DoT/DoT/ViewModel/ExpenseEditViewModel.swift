@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import PhotosUI
 
 final class ExpenseEditViewModel {
     
     private let realmManager = try? RealmManager()
     
+    // 데이터 임시 저장용
     private var photoIDs: [String] = []
     private var expense: String = ""
     private var category: ExpenseCategory? = nil
@@ -26,7 +26,9 @@ final class ExpenseEditViewModel {
     let inputMemoListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")
     
+    // 사진 데이터 저장
     let inputImageDataListener: Observable<[Data]> = Observable([])
+    // 사진 데이터를 통해 PhotoInfoDTO로 변환 후 저장
     let outputImageDataListener: Observable<[PhotoInfoDTO]> = Observable([])
     
     let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
@@ -40,6 +42,9 @@ final class ExpenseEditViewModel {
     
     let inputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
     let outputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    
+    // inputImageDataListener에 Data를 새로 넣으면서 outputImageDataListener가 자동으로 호출됨
+    let inputDeleteImageButtonClickedListener: Observable<Int?> = Observable(nil)
     
     init() {
         
@@ -115,11 +120,8 @@ final class ExpenseEditViewModel {
                   let tripDetailDTO = realmManager.getTripDetailByObjectID(tripDetail.objectID) else { return }
             
             let objectID = tripDetail.objectID
-            let imageData = inputImageDataListener.data
-            // 사진 정보 추가 삭제
-            // 1. 기존 사진 데이터 삭제
-            // 1 - 1 Realm
             
+            // 1. 기존 사진 데이터 삭제
             var photoDTOs = realmManager.fetch(PhotoInfoDTO.self)
             photoDTOs = photoDTOs.filter { $0.filename.contains(objectID) }
             
@@ -131,9 +133,7 @@ final class ExpenseEditViewModel {
                 }
             }
             
-            // 2. 사진 데이터 저장
-            // 2 - 1 Realm
-            
+            // 2. 새로운 사진 데이터 저장
             let savedPhotoDTOs = outputImageDataListener.data
             
             for photoDTO in savedPhotoDTOs {
@@ -151,11 +151,26 @@ final class ExpenseEditViewModel {
             outputEditButtonClickedListener.data = ()
         }
         
-        // 삭제 버튼 클릭
+        // 삭제 버튼 클릭 1. 하위 PhotoInfoDTO 삭제 2. TripDetailInfoDTO 삭제
         inputDeleteButtonClickedListener.bind { [weak self] _ in
             
             guard let self, let tripDetail = inputTripDetailInfoListener.data, let realmManager else { return }
             
+            let objectID = tripDetail.objectID
+            
+            // 1. 하위 PhotoInfoDTO 삭제
+            var photoDTOs = realmManager.fetch(PhotoInfoDTO.self)
+            photoDTOs = photoDTOs.filter { $0.filename.contains(objectID) }
+            
+            photoDTOs.forEach {
+                do {
+                    try realmManager.delete($0)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            // 2. TripDetailInfoDTO 삭제
             let TripDetailInfoDTO = realmManager.fetch(TripDetailInfoDTO.self)
             
             TripDetailInfoDTO.forEach {
@@ -170,6 +185,24 @@ final class ExpenseEditViewModel {
             }
             
             outputDeleteButtonClickedListener.data = ()
+        }
+        
+        // 이미지 삭제 버튼 클릭
+        inputDeleteImageButtonClickedListener.bind { [weak self] tag in
+            
+            guard let self else { return }
+            
+            let dataHashVaulue = tag
+            var datas = inputImageDataListener.data
+            
+            for idx in 0 ..< datas.count {
+                if datas[idx].hashValue == dataHashVaulue {
+                    datas.remove(at: idx)
+                    break
+                }
+            }
+            
+            inputImageDataListener.data = datas
         }
         
         // 새로운 Data로 PhotoInfoDTO 생성 후 output에 저장

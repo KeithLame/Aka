@@ -130,12 +130,13 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         // MARK: Photo Collecion View
         let photoRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self,
-                  let photoDTO = itemIdentifier as? PhotoInfoDTO,
-                  let image = UIImage(data: photoDTO.data) else { return }
+            guard let self else { return }
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
             cell.photoImageView.addGestureRecognizer(tapGesture)
+            
+            guard let photoDTO = itemIdentifier as? PhotoInfoDTO,
+                  let image = UIImage(data: photoDTO.data) else { return }
             
             let data = photoDTO.data
             
@@ -231,17 +232,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     // 선택된 사진 삭제
     @objc private func deleteButtonClicked(sender: UIButton) {
         
-        let dataHashVaulue = sender.tag
-        var datas = expenseEditVM.inputImageDataListener.data
-        
-        for idx in 0 ..< datas.count {
-            if datas[idx].hashValue == dataHashVaulue {
-                datas.remove(at: idx)
-                break
-            }
-        }
-        
-        expenseEditVM.inputImageDataListener.data = datas
+        expenseEditVM.inputDeleteImageButtonClickedListener.data = sender.tag
     }
 }
 
