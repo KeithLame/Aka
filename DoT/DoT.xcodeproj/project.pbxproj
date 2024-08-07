@@ -13,7 +13,7 @@
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
 		ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */; };
 		ACF5ACCE2B99838700DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCD2B99838700DBEF85 /* Base */; };
-		ACF5ACD62B9985F300DBEF85 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACD52B9985F300DBEF85 /* .gitignore */; };
+		ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACF5ACCD2B99838700DBEF85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACF5ACCF2B99838700DBEF85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ACF5ACD52B9985F300DBEF85 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +42,6 @@
 		ACF5ACB52B99838600DBEF85 = {
 			isa = PBXGroup;
 			children = (
-				ACF5ACD52B9985F300DBEF85 /* .gitignore */,
 				ACF5ACC02B99838600DBEF85 /* DoT */,
 				ACF5ACBF2B99838600DBEF85 /* Products */,
 			);
@@ -66,6 +65,7 @@
 				ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */,
 				ACF5ACCC2B99838700DBEF85 /* LaunchScreen.storyboard */,
 				ACF5ACCF2B99838700DBEF85 /* Info.plist */,
+				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
 			);
 			path = DoT;
 			sourceTree = "<group>";
@@ -128,7 +128,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF5ACD62B9985F300DBEF85 /* .gitignore in Resources */,
 				ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */,
 				ACF5ACCE2B99838700DBEF85 /* Base in Resources */,
 				ACF5ACC92B99838600DBEF85 /* Base in Resources */,
@@ -144,6 +143,7 @@
 			files = (
 				ACF5ACC62B99838600DBEF85 /* ViewController.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
+				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
