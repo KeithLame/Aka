@@ -1,6 +1,5 @@
 # DoT
 
-# DoT
 프로젝트 기간 : 2024.03.09 ~ 
 
 ## ⚠️ Commit Convention
@@ -9,9 +8,17 @@
 - docs 		: 문서 수정
 - clean 	: 불필요한 코드 정리 / 버그 수정
 - refactor 	: 코드 리팩토링
-- create    : 파일 생성/추가
-- delete    : 파일 제거
+- create    	: 파일 생성/추가
+- delete    	: 파일 제거
 ```
+
+<p align="center">
+	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/bae7f678-e82e-400e-9f87-e21b38558161" align="center" width="19.5%">
+	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/060e8778-49a8-4934-a0a3-1ca563ede733" align="center" width="19.5%">
+	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/bb7f3e3f-5bbc-4e05-b610-5226f0ccda9c" align="center" width="19.5%">
+	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/7fd52e82-12d3-4a45-8563-5cd736cb4dc6" align="center" width="19.5%">
+	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/5d00ca7c-9d87-4f37-b411-f0d385e0353c" align="center" width="19.5%">
+</p>
 
 ## 앱 소개 및 기능
 
