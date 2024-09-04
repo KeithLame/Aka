@@ -1,8 +1,6 @@
 # DoT
 
-프로젝트 기간 : 2024.03.09 ~ 
-
-## ⚠️ Commit Convention
+## ⚠️ Commit Convention ⚠️
 ```
 - feat 		: 기능 추가
 - docs 		: 문서 수정
@@ -20,31 +18,39 @@
 	<img src = "https://github.com/DONOTINTO/DoT/assets/123792519/5d00ca7c-9d87-4f37-b411-f0d385e0353c" align="center" width="19.5%">
 </p>
 
+## COLOR RGB
+ - Black: 39/255 39/255 39/255
+ - White: 241/255 241/255 241/255
+ - Gray: 132/255 132/255 132/255
+ - Blue: 0/255 96/255 209/255
+
+
 ## 앱 소개 및 기능
+프로젝트 기간 : 2024.03.09 ~ 
 
 - 여행에 필요한 예산 및 지출을 관리함과 동시에 여행 기록을 저장
 - **Configuration** : 최소버전 16.0 / 세로모드 / 아이폰용 / 라이트 모드
 - **v1.0 기능** : 환율 정보 / 예산 설정 / 지출 기록 / 여행 기록 저장
 - 업데이트 : 공유, 검색, 다크 모드, 로그인, 위치 검색 및 저장
 
-## 핵심 기능
 
+## 핵심 기능
 - **환율 정보 |** API 통신 일 별 환율 정보 및 최근 환율 비교
 - **예산 설정 |** 여행 예산 설정 시 적용된 환율 계산
 - **지출 기록 |** 예산에서 지출 합계 계산, Realm을 통해 지출 금액, 사진, 품목, 메모 저장
 - **여행 기록 |** List로 지출 기록을 모두 저장
 
-## 기술 스택
 
-iOS(Swif)
-- 프레임워크
+## 기술 스택
+**iOS(Swift)**
+- **프레임워크**
     - UIKit - Code Base
-- 라이브러리
+- **라이브러리**
     - Snapkit(codebase UI)  / Realm / Alamofire / Kingfisher / PhotosUI / PHPickerConfiguration
     - UICollectionCompositional Layout / 
-- 디자인 패턴
+- **디자인 패턴**
     - MVC / MVVM / SingleTon / Delegate
-- 버전 관리
+- **버전 관리**
     - Git / Github / Github Desktop
 
 
@@ -52,6 +58,9 @@ iOS(Swif)
 [Open API 제공목록_Open API 제공목록 - 상세 : 한국수출입은행 메인한글홈페이지](https://www.koreaexim.go.kr/ir/HPHKIR020M01?apino=2&viewtype=C&searchselect=&searchword=)
 
 한국수출입 은행
+
+- 일일 1000회 콜 수 제한
+- 현금 환전 시 예상 금액: 원금 + (원금 1.75%)
 
 - URL: https://www.koreaexim.go.kr/site/program/financial/exchangeJSON
 - query:
@@ -77,11 +86,9 @@ iOS(Swif)
 	}
 ]
 ```
-- 일일 1000회 콜 수 제한
-- 현금 환전 시 예상 금액: 원금 + (원금 1.75%)
+
 
 ## 공수 산정
-
 | Index | Sub Index | (UI/Feat) | Contents | DeTail | Expect | Actual |
 |:-:|:-:|:-:|:-:|:-| :-: | :-: |
 | **1** | | Feat | 부모클래스 | 부모 클래스 생성하여 자주 사용하는 프로퍼티/메소드 미리 지정 | 1 H | |
@@ -98,6 +105,7 @@ iOS(Swif)
 | **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | 10 H | |
 ||||||**101 H**||
 
+---
 ## Iteration
 ### Iteration - 1 ( 3월 4일 ~ 3월 7일)
 - 프로젝트 기획
