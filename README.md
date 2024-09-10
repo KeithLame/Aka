@@ -105,7 +105,28 @@
 | **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | 10 H | |
 ||||||**101 H**||
 
----
+## 데이터베이스 구조
+
+환율 정보(ExchangeRate)
+
+| Date(PK - Date) | cur_unit(String) | deal_bas_r(String) | cur_nm(String) |
+| --- | --- | --- | --- |
+
+여행 정보(TripInfo)
+
+| ID (PK - Object ID) | 여행 제목(String) | 인원(Int) | 통화(String) | 예산(Double) | 시작일(Date) | 종료일(Date) | 세부 기록(FK)[TripDetailInfo.id] |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+여행 세부 기록(TripDetailInfo)
+
+| id(PK - Object ID) | 지출(Double) | 카테고리(Enum) | 사진(UIImage?) | 메모(String?) | 날짜(Date?) | 맵 정보(FK)[MapInfo.id?] |
+| --- | --- | --- | --- | --- | --- | --- |
+
+맵 정보(MapInfo)
+| id(PK - Object ID) | identifier(String) | latitude(Double?) | longitude(Double?) |
+| --- | --- | --- | --- |
+
+
 ## Iteration
 ### Iteration - 1 ( 3월 4일 ~ 3월 7일)
 - 프로젝트 기획
