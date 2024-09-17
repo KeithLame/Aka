@@ -26,7 +26,7 @@
 
 
 ## 앱 소개 및 기능
-프로젝트 기간 : 2024.03.09 ~ 
+프로젝트 기간 : 2024.03.08 ~ 
 
 - 여행에 필요한 예산 및 지출을 관리함과 동시에 여행 기록을 저장
 - **Configuration** : 최소버전 16.0 / 세로모드 / 아이폰용 / 라이트 모드
@@ -139,3 +139,9 @@
 - 앱 아이콘 및 리소스 정리
 
 ### Iteration - 2 ( 3월 8일 ~ 3월 10일)
+- CollectionView Compositional Layout 구성하기
+- 메인 화면 2개 만들기
+- Collection View용 View Model
+- API용 View Model
+- 환율 API Model
+- Consts(Color, Font)
