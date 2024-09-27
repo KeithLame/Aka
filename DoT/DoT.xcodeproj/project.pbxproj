@@ -14,6 +14,13 @@
 		ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */; };
 		ACF5ACCE2B99838700DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCD2B99838700DBEF85 /* Base */; };
 		ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */; };
+		ACF5ACE62B9AFB9C00DBEF85 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACDF2B9AFB9B00DBEF85 /* NotoSansKR-Medium.otf */; };
+		ACF5ACE72B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */; };
+		ACF5ACE82B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE12B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf */; };
+		ACF5ACE92B9AFB9C00DBEF85 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE22B9AFB9C00DBEF85 /* NotoSansKR-Light.otf */; };
+		ACF5ACEA2B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE32B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf */; };
+		ACF5ACEB2B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */; };
+		ACF5ACEC2B9AFB9C00DBEF85 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		ACF5ACCD2B99838700DBEF85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACF5ACCF2B99838700DBEF85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		ACF5ACDF2B9AFB9B00DBEF85 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		ACF5ACE12B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-DemiLight.otf"; sourceTree = "<group>"; };
+		ACF5ACE22B9AFB9C00DBEF85 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		ACF5ACE32B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +80,31 @@
 				ACF5ACCC2B99838700DBEF85 /* LaunchScreen.storyboard */,
 				ACF5ACCF2B99838700DBEF85 /* Info.plist */,
 				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
+				ACF5ACDD2B9AFB8300DBEF85 /* Resource */,
 			);
 			path = DoT;
+			sourceTree = "<group>";
+		};
+		ACF5ACDD2B9AFB8300DBEF85 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5ACDE2B9AFB9000DBEF85 /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		ACF5ACDE2B9AFB9000DBEF85 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */,
+				ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */,
+				ACF5ACE12B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf */,
+				ACF5ACE22B9AFB9C00DBEF85 /* NotoSansKR-Light.otf */,
+				ACF5ACDF2B9AFB9B00DBEF85 /* NotoSansKR-Medium.otf */,
+				ACF5ACE32B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf */,
+				ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,9 +165,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF5ACE62B9AFB9C00DBEF85 /* NotoSansKR-Medium.otf in Resources */,
 				ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */,
+				ACF5ACE92B9AFB9C00DBEF85 /* NotoSansKR-Light.otf in Resources */,
+				ACF5ACEC2B9AFB9C00DBEF85 /* NotoSansKR-Black.otf in Resources */,
 				ACF5ACCE2B99838700DBEF85 /* Base in Resources */,
+				ACF5ACEB2B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf in Resources */,
+				ACF5ACE82B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf in Resources */,
 				ACF5ACC92B99838600DBEF85 /* Base in Resources */,
+				ACF5ACEA2B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf in Resources */,
+				ACF5ACE72B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
