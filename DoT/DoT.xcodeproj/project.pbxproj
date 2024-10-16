@@ -22,6 +22,8 @@
 		ACF5ACEB2B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */; };
 		ACF5ACEC2B9AFB9C00DBEF85 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */; };
 		ACF5ACEF2B9AFD4500DBEF85 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ACF5ACEE2B9AFD4500DBEF85 /* SnapKit */; };
+		ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */; };
+		ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		ACF5ACE32B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,9 @@
 		ACF5ACC02B99838600DBEF85 /* DoT */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
+				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
+				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
 				ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */,
 				ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */,
 				ACF5ACC52B99838600DBEF85 /* ViewController.swift */,
@@ -81,7 +88,6 @@
 				ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */,
 				ACF5ACCC2B99838700DBEF85 /* LaunchScreen.storyboard */,
 				ACF5ACCF2B99838700DBEF85 /* Info.plist */,
-				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
 				ACF5ACDD2B9AFB8300DBEF85 /* Resource */,
 			);
 			path = DoT;
@@ -194,8 +200,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF5ACC62B99838600DBEF85 /* ViewController.swift in Sources */,
+				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
+				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
