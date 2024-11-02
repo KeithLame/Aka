@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
-		ACF5ACC62B99838600DBEF85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC52B99838600DBEF85 /* ViewController.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
 		ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */; };
 		ACF5ACCE2B99838700DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCD2B99838700DBEF85 /* Base */; };
@@ -24,13 +23,16 @@
 		ACF5ACEF2B9AFD4500DBEF85 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ACF5ACEE2B9AFD4500DBEF85 /* SnapKit */; };
 		ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */; };
 		ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */; };
+		ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF52B9B03FC00DBEF85 /* BaseView.swift */; };
+		ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */; };
+		ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */; };
+		ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ACF5ACC52B99838600DBEF85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ACF5ACC82B99838600DBEF85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACF5ACCD2B99838700DBEF85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,6 +47,10 @@
 		ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
 		ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		ACF5ACF52B9B03FC00DBEF85 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +87,15 @@
 				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
 				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
 				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
+				ACF5ACF92B9B072800DBEF85 /* Model */,
+				ACF5ACFA2B9B074800DBEF85 /* ViewModel */,
+				ACF5ACFB2B9B078A00DBEF85 /* Controller&View */,
+				ACF5ACF42B9B03D400DBEF85 /* Base */,
 				ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */,
 				ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */,
-				ACF5ACC52B99838600DBEF85 /* ViewController.swift */,
 				ACF5ACC72B99838600DBEF85 /* Main.storyboard */,
-				ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */,
 				ACF5ACCC2B99838700DBEF85 /* LaunchScreen.storyboard */,
+				ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */,
 				ACF5ACCF2B99838700DBEF85 /* Info.plist */,
 				ACF5ACDD2B9AFB8300DBEF85 /* Resource */,
 			);
@@ -113,6 +122,46 @@
 				ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		ACF5ACF42B9B03D400DBEF85 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5ACF52B9B03FC00DBEF85 /* BaseView.swift */,
+				ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		ACF5ACF92B9B072800DBEF85 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ACF5ACFA2B9B074800DBEF85 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ACF5ACFB2B9B078A00DBEF85 /* Controller&View */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5ACFC2B9B079F00DBEF85 /* DashBoard */,
+			);
+			path = "Controller&View";
+			sourceTree = "<group>";
+		};
+		ACF5ACFC2B9B079F00DBEF85 /* DashBoard */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */,
+				ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */,
+			);
+			path = DashBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,10 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF5ACC62B99838600DBEF85 /* ViewController.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
+				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
+				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
+				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
+				ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */,
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 			);
