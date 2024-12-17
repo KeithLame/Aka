@@ -16,13 +16,4 @@ enum Consts {
         case large = 19
         case extraLarge = 30
     }
-    
-    enum Color {
-        
-        static let whiteBlack = UIColor(named: "WhiteBlack")
-        static let pointBlue = UIColor(named: "PointBlue")
-        static let justWhite = UIColor(named: "JustWhite")
-        static let justGray = UIColor(named: "JustGray")
-        static let justBlack = UIColor(named: "JustBlack")
-    }
 }
