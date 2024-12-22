@@ -27,6 +27,11 @@
 		ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */; };
 		ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */; };
 		ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */; };
+		ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */; };
+		ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */; };
+		ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD062B9B0F3400DBEF85 /* Observable.swift */; };
+		ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */; };
+		ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,11 @@
 		ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCL.swift; sourceTree = "<group>"; };
+		ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		ACF5AD062B9B0F3400DBEF85 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,7 @@
 			children = (
 				ACF5ACF52B9B03FC00DBEF85 /* BaseView.swift */,
 				ACF5ACF72B9B049200DBEF85 /* BaseViewController.swift */,
+				ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -136,6 +147,8 @@
 		ACF5ACF92B9B072800DBEF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5AD032B9B0B5D00DBEF85 /* CompositionalLayout */,
+				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +156,7 @@
 		ACF5ACFA2B9B074800DBEF85 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -160,8 +174,17 @@
 			children = (
 				ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */,
 				ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */,
+				ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */,
 			);
 			path = DashBoard;
+			sourceTree = "<group>";
+		};
+		ACF5AD032B9B0B5D00DBEF85 /* CompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */,
+			);
+			path = CompositionalLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,10 +275,15 @@
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
+				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
+				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
+				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
 				ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */,
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
+				ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */,
+				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

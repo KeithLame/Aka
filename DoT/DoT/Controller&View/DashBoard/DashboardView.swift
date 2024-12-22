@@ -6,7 +6,26 @@
 //
 
 import UIKit
+import SnapKit
 
-class DashboardView: BaseView {
+final class DashboardView: BaseView {
     
+    let dashboardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: DashboardCompositionalLayout.create())
+    
+    override func configureHierarchy() {
+        
+        addSubview(dashboardCollectionView)
+    }
+    
+    override func configureLayout() {
+        
+        dashboardCollectionView.snp.makeConstraints {
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+    }
+    
+    override func configureView() {
+        
+        dashboardCollectionView.backgroundColor = .clear
+    }
 }
