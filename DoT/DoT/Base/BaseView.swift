@@ -12,6 +12,8 @@ class BaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .whiteBlack
+        
         configureHierarchy()
         configureLayout()
         configureView()
