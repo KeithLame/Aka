@@ -30,11 +30,8 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     override func configureNavigation() {
         
-        let leftBarButton = makeLeftBarButtonItem()
-        let rightBarButton = makeRightBarButtonItem()
-        
-        navigationItem.leftBarButtonItem = leftBarButton
-        navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.leftBarButtonItem = makeLeftBarButtonItem()
+        navigationItem.rightBarButtonItem = makeRightBarButtonItem()
     }
 }
 
@@ -53,12 +50,11 @@ extension DashboardViewController {
         let title = "새로운 여행"
         
         var titleAttr = AttributedString.init(title)
-        titleAttr.font = FontManager.getFont(size: .small)
+        titleAttr.font = FontManager.getFont(size: .small, scale: .Bold)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         let createTripCustomView = UIButton()
         
-        var imageConfiguration = UIImage.SymbolConfiguration(font: .boldSystemFont(ofSize: 13))
         let buttonImage = UIImage.plane.withTintColor(.blackWhite, renderingMode: .alwaysOriginal)
         
         buttonConfiguration.image = buttonImage

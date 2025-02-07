@@ -36,7 +36,7 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
         
         introLabel.text = "[여행 제목] 여행을\n 진행하고 있어요"
         introLabel.textColor = .blackWhite
-        introLabel.font = FontManager.getFont(size: .large)
+        introLabel.font = FontManager.getFont(size: .large, scale: .Bold)
         introLabel.numberOfLines = 2
         
         let attrString = NSMutableAttributedString(string: introLabel.text!)
@@ -55,7 +55,6 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
         tripDashboradPushButton.configuration = buttonConfigure
         
         DispatchQueue.main.async {
-            print(self.tripDashboradPushButton.frame.width)
             self.tripDashboradPushButton.layer.cornerRadius = self.tripDashboradPushButton.frame.width / 2
             self.tripDashboradPushButton.layer.masksToBounds = true
         }
