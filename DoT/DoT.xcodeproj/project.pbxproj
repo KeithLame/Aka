@@ -20,7 +20,6 @@
 		ACF5ACEA2B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE32B9AFB9C00DBEF85 /* NotoSansKR-Regular.otf */; };
 		ACF5ACEB2B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE42B9AFB9C00DBEF85 /* NotoSansKR-Bold.otf */; };
 		ACF5ACEC2B9AFB9C00DBEF85 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE52B9AFB9C00DBEF85 /* NotoSansKR-Black.otf */; };
-		ACF5ACEF2B9AFD4500DBEF85 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ACF5ACEE2B9AFD4500DBEF85 /* SnapKit */; };
 		ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */; };
 		ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */; };
 		ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACF52B9B03FC00DBEF85 /* BaseView.swift */; };
@@ -32,6 +31,17 @@
 		ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD062B9B0F3400DBEF85 /* Observable.swift */; };
 		ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */; };
 		ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */; };
+		ACF5AD0E2B9C0EB200DBEF85 /* CreateTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD0D2B9C0EB200DBEF85 /* CreateTripVC.swift */; };
+		ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD0F2B9C0EBB00DBEF85 /* CreateTripView.swift */; };
+		ACF5AD132B9C25C900DBEF85 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ACF5AD122B9C25C900DBEF85 /* SnapKit */; };
+		ACF5AD162B9C5A3F00DBEF85 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ACF5AD152B9C5A3F00DBEF85 /* FSCalendar */; };
+		ACF5AD192B9C650F00DBEF85 /* NSObject++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD182B9C650F00DBEF85 /* NSObject++.swift */; };
+		ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD1A2B9C677600DBEF85 /* CalendarCustomCell.swift */; };
+		ACF5AD1D2B9C6B1C00DBEF85 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD1C2B9C6B1C00DBEF85 /* CalendarViewModel.swift */; };
+		ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD1E2B9C729C00DBEF85 /* DateUtil.swift */; };
+		ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD212B9CB14300DBEF85 /* CalendarVC.swift */; };
+		ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD232B9CB14E00DBEF85 /* CalendarView.swift */; };
+		ACF5AD262B9CBC9400DBEF85 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +71,15 @@
 		ACF5AD062B9B0F3400DBEF85 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCVC.swift; sourceTree = "<group>"; };
+		ACF5AD0D2B9C0EB200DBEF85 /* CreateTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripVC.swift; sourceTree = "<group>"; };
+		ACF5AD0F2B9C0EBB00DBEF85 /* CreateTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		ACF5AD182B9C650F00DBEF85 /* NSObject++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject++.swift"; sourceTree = "<group>"; };
+		ACF5AD1A2B9C677600DBEF85 /* CalendarCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCustomCell.swift; sourceTree = "<group>"; };
+		ACF5AD1C2B9C6B1C00DBEF85 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		ACF5AD1E2B9C729C00DBEF85 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		ACF5AD212B9CB14300DBEF85 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		ACF5AD232B9CB14E00DBEF85 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF5ACEF2B9AFD4500DBEF85 /* SnapKit in Frameworks */,
+				ACF5AD132B9C25C900DBEF85 /* SnapKit in Frameworks */,
+				ACF5AD162B9C5A3F00DBEF85 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +114,10 @@
 		ACF5ACC02B99838600DBEF85 /* DoT */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5AD172B9C64F800DBEF85 /* Extension */,
 				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
 				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
+				ACF5AD1E2B9C729C00DBEF85 /* DateUtil.swift */,
 				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
 				ACF5ACF92B9B072800DBEF85 /* Model */,
 				ACF5ACFA2B9B074800DBEF85 /* ViewModel */,
@@ -149,6 +171,7 @@
 			children = (
 				ACF5AD032B9B0B5D00DBEF85 /* CompositionalLayout */,
 				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
+				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */,
+				ACF5AD1C2B9C6B1C00DBEF85 /* CalendarViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -164,6 +188,7 @@
 		ACF5ACFB2B9B078A00DBEF85 /* Controller&View */ = {
 			isa = PBXGroup;
 			children = (
+				ACF5AD0C2B9C0E9200DBEF85 /* CreateTrip */,
 				ACF5ACFC2B9B079F00DBEF85 /* DashBoard */,
 			);
 			path = "Controller&View";
@@ -187,6 +212,34 @@
 			path = CompositionalLayout;
 			sourceTree = "<group>";
 		};
+		ACF5AD0C2B9C0E9200DBEF85 /* CreateTrip */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD0D2B9C0EB200DBEF85 /* CreateTripVC.swift */,
+				ACF5AD0F2B9C0EBB00DBEF85 /* CreateTripView.swift */,
+				ACF5AD202B9CB11900DBEF85 /* Calendar */,
+			);
+			path = CreateTrip;
+			sourceTree = "<group>";
+		};
+		ACF5AD172B9C64F800DBEF85 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD182B9C650F00DBEF85 /* NSObject++.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		ACF5AD202B9CB11900DBEF85 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD212B9CB14300DBEF85 /* CalendarVC.swift */,
+				ACF5AD232B9CB14E00DBEF85 /* CalendarView.swift */,
+				ACF5AD1A2B9C677600DBEF85 /* CalendarCustomCell.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,7 +257,8 @@
 			);
 			name = DoT;
 			packageProductDependencies = (
-				ACF5ACEE2B9AFD4500DBEF85 /* SnapKit */,
+				ACF5AD122B9C25C900DBEF85 /* SnapKit */,
+				ACF5AD152B9C5A3F00DBEF85 /* FSCalendar */,
 			);
 			productName = DoT;
 			productReference = ACF5ACBE2B99838600DBEF85 /* DoT.app */;
@@ -236,6 +290,7 @@
 			mainGroup = ACF5ACB52B99838600DBEF85;
 			packageReferences = (
 				ACF5ACED2B9AFD4500DBEF85 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ACF5AD142B9C5A3F00DBEF85 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = ACF5ACBF2B99838600DBEF85 /* Products */;
 			projectDirPath = "";
@@ -271,20 +326,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
+				ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */,
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
 				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
 				ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */,
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
+				ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */,
+				ACF5AD192B9C650F00DBEF85 /* NSObject++.swift in Sources */,
+				ACF5AD262B9CBC9400DBEF85 /* CalendarType.swift in Sources */,
+				ACF5AD1D2B9C6B1C00DBEF85 /* CalendarViewModel.swift in Sources */,
 				ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */,
 				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
+				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
+				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
+				ACF5AD0E2B9C0EB200DBEF85 /* CreateTripVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,13 +593,26 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		ACF5AD142B9C5A3F00DBEF85 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ACF5ACEE2B9AFD4500DBEF85 /* SnapKit */ = {
+		ACF5AD122B9C25C900DBEF85 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ACF5ACED2B9AFD4500DBEF85 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		ACF5AD152B9C5A3F00DBEF85 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACF5AD142B9C5A3F00DBEF85 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
