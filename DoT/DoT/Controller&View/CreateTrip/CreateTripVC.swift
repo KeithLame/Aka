@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import FSCalendar
 
 class CreateTripViewController: BaseViewController<CreateTripView> {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func configureNavigation() {
@@ -24,8 +25,20 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         navigationItem.rightBarButtonItem = makeRightBarButtonItem()
     }
     
+    override func configure() {
+        
+        layoutView.periodButton.addTarget(self, action: #selector(periodButtonClicked), for: .touchUpInside)
+    }
+    
     @objc private func createTripButtonClicked() {
         
+    }
+    
+    @objc private func periodButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = CalendarViewController()
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
