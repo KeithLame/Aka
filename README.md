@@ -91,18 +91,24 @@
 ## 공수 산정
 | Index | Sub Index | (UI/Feat) | Contents | DeTail | Expect | Actual |
 |:-:|:-:|:-:|:-:|:-| :-: | :-: |
-| **1** | | Feat | 부모클래스 | 부모 클래스 생성하여 자주 사용하는 프로퍼티/메소드 미리 지정 | 1 H | |
+| **1** | | Feat | 부모클래스 | 부모 클래스 생성하여 자주 사용하는 프로퍼티/메소드 미리 지정 | 1 H | 30M |
 | **2** | | Feat | Realm Manager | Realm 객체를 관리하는 매니저 생성 및 Realm의 CRUD 관리 | 5 H | |
 | **3** | | Feat | API Manager | API 호출 객체, API를 호출하는 메인 기능 관리 | 3 H | |
 | **4** | | Feat | API Model | API 응답으로 온 JSON에 맞추어 데이터를 Decode할 모델 생성 | 3 H | |
-| **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | |
+| **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | 30 M |
 | **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | 5 H | |
 | **7** | | Feat | FileManager | 이미지 저장을 위한 FileManager 객체 생성 및 이미지 저장 및 호출 관리 | 6 H | |
-| **8** | | Feat | Model | Model 객체 생성 및 기능 관리 | 10 H | |
+| **8** | | Feat | Model | Model 객체 생성 및 기능 관리 | ~~10 H~~ | |
+| | **8 - 1** | | | Observable - ViewModel에서 사용할 관찰자(값 변화 탐지용) | | 30 M |
 | **9** | | Feat | ViewModel | View에 필요한 데이터 처리 및 기능 관리 | 20 H | |
-| **10** | | UI | View | View 객체 생성 및 화면 그리기 | 15 H | |
-| **11** | | Feat | ViewController | ViewController 객체 내 View, ViewModel 관리 및 처리 | 20 H | |
-| **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | 10 H | |
+| **10** | | UI | View | View 객체 생성 및 화면 그리기 | ~~15 H~~ | |
+| | **10 - 1** | | | Dashboard View | 3H | 1H |
+| | **10 - 2** | | | CreateTrip View | 2H | 1H 30M |
+| **11** | | Feat | ViewController | ViewController 객체 내 View, ViewModel 관리 및 처리 | ~~20 H~~ | |
+| | **11 - 1** | | | Dashboard VC | 4H | 2H |
+| | **11 - 2** | | | CreateTrip VC | 4H |  |
+| **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | ~~10 H~~ | |
+| | **12 - 1** | | | IntroCollectionViewCell | | 30 M |
 ||||||**101 H**||
 
 ## 데이터베이스 구조
@@ -145,3 +151,32 @@
 - API용 View Model
 - 환율 API Model
 - Consts(Color, Font)
+
+### 회고
+3월 8일
+
+Diffable DataSource를 적용하는데 다음 두가지 어려움이 있어 고민만 하다 시간이 많이 버려졌다.
+
+1. 여러 섹션에 들어가는 데이터가 다른경우
+2. View Model의 영역
+
+위 문제들은 다음과 같이 해결하려한다.
+
+1. collectionView에서 필요한 데이터 타입만을 모은 Hashable한 구조체를 만든다.
+2. View Model은 어디까지나 비즈니스 로직 영역이기 때문에, Cell을 그려준다거나 하는 부분들은 모두 Controller에서 하는것이 맞을 것 같다.   
+UI를 통해 들어오거나, 로직 처리가 필요한 경우만 Input Observer를 통해 체크하여 로직을 돌리고 output을 통해 View에게 다시 전달해주기만 하면 될 것 같다.   
+내일은 이 부분을 인지하고 다시 코드를 수정해볼 생각이다.
+
+3월 9일
+
+Calendar 구간 설정 구현에서 많이 애먹었다.
+
+다음 문제들이 있었다.
+1. custom cell을 어떻게 구성할 것인가
+2. fsCalendar titleLabel의 높이가 center가 아님
+3. 그 외 셀 선택 및 처리 문제 등등
+
+1번의 경우 선택했을 때 표시될 원과, 선택 구간 표시 View(좌,우)로 나누었다. 이는 인터넷에서 참고하였다.
+2번의 경우 fsCalendar cell의 프로퍼티로 titleLabel을 찾을 수 있었다. 이를 contentView의 centerY와 일치하게 변경해주었다.
+그 외 fsCalendar에서 제공하는 selection 기능을 모두 꺼버리고 커스텀 cell로 모두 해결하였다. 장점이라면, deselected 처리까지 selected에서 가능캐 하여 viewModel의 deselected의 observer를 없앨 수 있었다.
+다만 아직 리팩토리할 여지가 많이 남아있다. fsCalendar도 collectionview로 이루어져있기 때문에, Diffable Datasource를 적용할 수 만 있다면, 애니메이션 처리가 자연스러워질 것 같다. 가능 여부는 더 살펴봐야 할 것 같다.
