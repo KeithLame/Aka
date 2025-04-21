@@ -30,8 +30,16 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     override func configureNavigation() {
         
-        navigationItem.leftBarButtonItem = makeLeftBarButtonItem()
-        navigationItem.rightBarButtonItem = makeRightBarButtonItem()
+        navigationItem.leftBarButtonItem = makeSymbolBarButtonItem()
+        navigationItem.rightBarButtonItem = makeRightBarButtonItem(title: "새로운 여행")
+    }
+    
+    override func rightBarButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = CreateTripViewController()
+        let naviVC = UINavigationController(rootViewController: nextVC)
+        
+        present(naviVC, animated: true)
     }
 }
 
@@ -43,49 +51,5 @@ extension DashboardViewController {
         snapshot.appendSections([.intro])
         snapshot.appendItems(["0"], toSection: .intro)
         self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
-    }
-    
-    private func makeRightBarButtonItem() -> UIBarButtonItem {
-        
-        let title = "새로운 여행"
-        
-        var titleAttr = AttributedString.init(title)
-        titleAttr.font = FontManager.getFont(size: .small, scale: .Bold)
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
-        let createTripCustomView = UIButton()
-        
-        let buttonImage = UIImage.plane.withTintColor(.blackWhite, renderingMode: .alwaysOriginal)
-        
-        buttonConfiguration.image = buttonImage
-        buttonConfiguration.imagePadding = 10
-        buttonConfiguration.imagePlacement = .leading
-        buttonConfiguration.title = title
-        buttonConfiguration.attributedTitle = titleAttr
-        buttonConfiguration.baseForegroundColor = .blackWhite
-        buttonConfiguration.baseBackgroundColor = .clear
-        
-        createTripCustomView.configuration = buttonConfiguration
-        createTripCustomView.addTarget(self, action: #selector(createTripButtonClicked), for: .touchUpInside)
-        
-        let createTripBarButton = UIBarButtonItem(customView: createTripCustomView)
-        return createTripBarButton
-    }
-    
-    private func makeLeftBarButtonItem() -> UIBarButtonItem {
-        
-        let symbolImage = UIImage.symbol
-        
-        let symbolBarButtonItem = UIBarButtonItem(image: symbolImage, style: .plain, target: self, action: nil)
-        
-        return symbolBarButtonItem
-    }
-    
-    @objc private func createTripButtonClicked() {
-        
-        let nextVC = CreateTripViewController()
-        let naviVC = UINavigationController(rootViewController: nextVC)
-        
-        present(naviVC, animated: true)
     }
 }
