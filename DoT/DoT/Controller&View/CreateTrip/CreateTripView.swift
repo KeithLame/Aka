@@ -140,17 +140,8 @@ class CreateTripView: BaseView {
         currencyLiteralLabel.textColor = .blackWhite
         currencyLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
         
-        let currencyTitle = "통화 선택"
-        var currencyTitleAttr = AttributedString.init(currencyTitle)
-        currencyTitleAttr.font = FontManager.getFont(size: .regular, scale: .Medium)
         
-        var currencyButtonConfiguration = UIButton.Configuration.plain()
-        currencyButtonConfiguration.title = currencyTitle
-        currencyButtonConfiguration.attributedTitle = currencyTitleAttr
-        currencyButtonConfiguration.baseForegroundColor = .justWhite
-        currencyButtonConfiguration.background.backgroundColor = .pointBlue
-        currencyButtonConfiguration.titleAlignment = .trailing
-        currencyChoiceButton.configuration = currencyButtonConfiguration
+        currencyChoiceButton.configure(title: "통화 선택")
         
         budgetLiteralLabel.text = "예산"
         budgetLiteralLabel.textColor = .blackWhite
@@ -169,15 +160,6 @@ class CreateTripView: BaseView {
         budgetPerPersonLabel.textColor = .blackWhite
         budgetPerPersonLabel.font = FontManager.getFont(size: .small, scale: .Medium)
         
-        let periodTitle = "여행 기간 설정"
-        var periodTitleAttr = AttributedString.init(periodTitle)
-        periodTitleAttr.font = FontManager.getFont(size: .regular, scale: .Bold)
-        
-        var periodButtonConfiguration = UIButton.Configuration.plain()
-        periodButtonConfiguration.title = periodTitle
-        periodButtonConfiguration.attributedTitle = periodTitleAttr
-        periodButtonConfiguration.baseForegroundColor = .justWhite
-        periodButtonConfiguration.background.backgroundColor = .pointBlue
-        periodButton.configuration = periodButtonConfiguration
+        periodButton.configure(title: "여행 기간 설정")
     }
 }

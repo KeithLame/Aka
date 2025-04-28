@@ -42,6 +42,7 @@
 		ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD212B9CB14300DBEF85 /* CalendarVC.swift */; };
 		ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD232B9CB14E00DBEF85 /* CalendarView.swift */; };
 		ACF5AD262B9CBC9400DBEF85 /* CalendarType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */; };
+		ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD272B9D6BEC00DBEF85 /* UIButton++.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		ACF5AD212B9CB14300DBEF85 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		ACF5AD232B9CB14E00DBEF85 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarType.swift; sourceTree = "<group>"; };
+		ACF5AD272B9D6BEC00DBEF85 /* UIButton++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton++.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF5AD182B9C650F00DBEF85 /* NSObject++.swift */,
+				ACF5AD272B9D6BEC00DBEF85 /* UIButton++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
 				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
+				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */,
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
 				ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */,

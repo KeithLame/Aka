@@ -37,6 +37,13 @@ class CalendarView: BaseView {
     
     override func configureView() {
         
+        configureCalendar()
+        saveButton.configure(title: "기간 선택 완료")
+        saveButton.isEnabled = false
+    }
+    
+    private func configureCalendar() {
+        
         calendar.allowsMultipleSelection = true
         calendar.locale = Locale(identifier: "ko_KR")
         
@@ -58,18 +65,5 @@ class CalendarView: BaseView {
         
         calendar.appearance.headerTitleAlignment = .center
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        
-        let saveTitle = "기간 선택 완료"
-        var saveTitleAttr = AttributedString.init(saveTitle)
-        saveTitleAttr.font = FontManager.getFont(size: .regular, scale: .Bold)
-        
-        var saveButtonConfiguration = UIButton.Configuration.plain()
-        saveButtonConfiguration.title = saveTitle
-        saveButtonConfiguration.attributedTitle = saveTitleAttr
-        saveButtonConfiguration.baseForegroundColor = .justWhite
-        saveButtonConfiguration.background.backgroundColor = .pointBlue
-        saveButton.configuration = saveButtonConfiguration
-        
-        saveButton.isEnabled = false
     }
 }
