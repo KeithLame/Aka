@@ -38,6 +38,7 @@ class CalendarView: BaseView {
     override func configureView() {
         
         configureCalendar()
+        
         saveButton.configure(title: "기간 선택 완료")
         saveButton.isEnabled = false
     }

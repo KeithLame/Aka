@@ -34,25 +34,10 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         
-        introLabel.text = "[여행 제목] 여행을\n 진행하고 있어요"
-        introLabel.textColor = .blackWhite
-        introLabel.font = FontManager.getFont(size: .large, scale: .Bold)
-        introLabel.numberOfLines = 2
+        introLabel.configure(text: "[여행 제목] 여행을\n 진행하고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
         
-        let attrString = NSMutableAttributedString(string: introLabel.text!)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 12
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        introLabel.attributedText = attrString
-
-        
-        let imageConfiguration = UIImage.SymbolConfiguration(weight: .bold)
-        let image = UIImage(systemName: "arrow.right", withConfiguration: imageConfiguration)?.withTintColor(.justWhite, renderingMode: .alwaysOriginal)
-        
-        var buttonConfigure = UIButton.Configuration.plain()
-        buttonConfigure.background.backgroundColor = .pointBlue
-        buttonConfigure.image = image
-        tripDashboradPushButton.configuration = buttonConfigure
+        let image = UIImage(systemName: "arrow.right")
+        tripDashboradPushButton.configure(image: image)
         
         DispatchQueue.main.async {
             self.tripDashboradPushButton.layer.cornerRadius = self.tripDashboradPushButton.frame.width / 2

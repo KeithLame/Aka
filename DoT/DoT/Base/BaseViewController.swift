@@ -41,31 +41,17 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         let symbolImage = UIImage.symbol
         
         let symbolBarButtonItem = UIBarButtonItem(image: symbolImage, style: .plain, target: self, action: nil)
+        symbolBarButtonItem.isEnabled = false
         
         return symbolBarButtonItem
     }
     
     func makeRightBarButtonItem(title: String) -> UIBarButtonItem {
         
-        let title = title
-        
-        var titleAttr = AttributedString.init(title)
-        titleAttr.font = FontManager.getFont(size: .small, scale: .Bold)
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
         let createCustomView = UIButton()
+        let buttonImage = UIImage.plane
         
-        let buttonImage = UIImage.plane.withTintColor(.blackWhite, renderingMode: .alwaysOriginal)
-        
-        buttonConfiguration.image = buttonImage
-        buttonConfiguration.imagePadding = 10
-        buttonConfiguration.imagePlacement = .leading
-        buttonConfiguration.title = title
-        buttonConfiguration.attributedTitle = titleAttr
-        buttonConfiguration.baseForegroundColor = .blackWhite
-        buttonConfiguration.baseBackgroundColor = .clear
-        
-        createCustomView.configuration = buttonConfiguration
+        createCustomView.configure(title: title, image: buttonImage, fontSize: .small, fontScale: .Bold, backgroundColor: .clear, foregroundColor: .blackWhite, buttonColor: .blackWhite)
         createCustomView.addTarget(self, action: #selector(rightBarButtonClicked), for: .touchUpInside)
         
         let createBarButton = UIBarButtonItem(customView: createCustomView)

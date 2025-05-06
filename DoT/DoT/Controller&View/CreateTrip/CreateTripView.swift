@@ -104,45 +104,23 @@ class CreateTripView: BaseView {
     
     override func configureView() {
         
-        
         titleTextField.configure(placeHolder: "여행 제목을 입력해주세요", fontSize: .extraLarge, textAlignment: .left)
-        
-        placeLiteralLabel.text = "여행지"
-        placeLiteralLabel.textColor = .blackWhite
-        placeLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
-        
         placeTextField.configure(placeHolder: "여행지를 입력해주세요")
+        budgetTextField.configure(placeHolder: "0 원")
+        budgetTextField.keyboardType = .decimalPad
         
-        headcountLiteralLabel.text = "인원"
-        headcountLiteralLabel.textColor = .blackWhite
-        headcountLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
+        placeLiteralLabel.configure(text: "여행지", fontSize: .regular, fontScale: .Bold)
+        headcountLiteralLabel.configure(text: "인원", fontSize: .regular, fontScale: .Bold)
+        currencyLiteralLabel.configure(text: "통화", fontSize: .regular, fontScale: .Bold)
+        headcountLabel.configure(text: "0명", fontSize: .regular, fontScale: .Medium)
+        budgetLiteralLabel.configure(text: "예산", fontSize: .regular, fontScale: .Bold)
+        budgetPerPersonLabel.configure(text: "1인당 0원", fontSize: .small, fontScale: .Medium)
         
-        headcountLabel.text = "0명"
-        headcountLabel.textColor = .blackWhite
-        headcountLabel.font = FontManager.getFont(size: .regular, scale: .Medium)
+        currencyChoiceButton.configure(title: "통화 선택")
+        periodButton.configure(title: "여행 기간 설정")
         
         headcountStepper.maximumValue = 10
         headcountStepper.minimumValue = 0
         headcountStepper.backgroundColor = .whiteBlack
-        
-        currencyLiteralLabel.text = "통화"
-        currencyLiteralLabel.textColor = .blackWhite
-        currencyLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
-        
-        
-        currencyChoiceButton.configure(title: "통화 선택")
-        
-        budgetLiteralLabel.text = "예산"
-        budgetLiteralLabel.textColor = .blackWhite
-        budgetLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
-        
-        budgetTextField.configure(placeHolder: "0 원")
-        budgetTextField.keyboardType = .decimalPad
-        
-        budgetPerPersonLabel.text = "1인당 0원"
-        budgetPerPersonLabel.textColor = .blackWhite
-        budgetPerPersonLabel.font = FontManager.getFont(size: .small, scale: .Medium)
-        
-        periodButton.configure(title: "여행 기간 설정")
     }
 }
