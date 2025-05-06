@@ -104,25 +104,14 @@ class CreateTripView: BaseView {
     
     override func configureView() {
         
-        let titlePlaceHolder = "여행 제목을 입력해주세요"
-        titleTextField.textAlignment = .left
-        titleTextField.placeholder = titlePlaceHolder
-        titleTextField.keyboardType = .default
-        titleTextField.textColor = .blackWhite
-        titleTextField.font = FontManager.getFont(size: .extraLarge, scale: .Medium)
-        titleTextField.attributedPlaceholder = NSAttributedString(string: titlePlaceHolder, attributes: [.foregroundColor: UIColor.justGray])
+        
+        titleTextField.configure(placeHolder: "여행 제목을 입력해주세요", fontSize: .extraLarge, textAlignment: .left)
         
         placeLiteralLabel.text = "여행지"
         placeLiteralLabel.textColor = .blackWhite
         placeLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
         
-        let placePlaceHolder = "여행지를 입력해주세요"
-        placeTextField.textAlignment = .right
-        placeTextField.placeholder = placePlaceHolder
-        placeTextField.keyboardType = .default
-        placeTextField.textColor = .blackWhite
-        placeTextField.font = FontManager.getFont(size: .regular, scale: .Medium)
-        placeTextField.attributedPlaceholder = NSAttributedString(string: placePlaceHolder, attributes: [.foregroundColor: UIColor.justGray])
+        placeTextField.configure(placeHolder: "여행지를 입력해주세요")
         
         headcountLiteralLabel.text = "인원"
         headcountLiteralLabel.textColor = .blackWhite
@@ -147,14 +136,8 @@ class CreateTripView: BaseView {
         budgetLiteralLabel.textColor = .blackWhite
         budgetLiteralLabel.font = FontManager.getFont(size: .regular, scale: .Bold)
         
-        let budgetPlaceHolder = "0 원"
-        budgetTextField.textAlignment = .right
-        budgetTextField.placeholder = budgetPlaceHolder
-        budgetTextField.keyboardType = .default
-        budgetTextField.textColor = .blackWhite
+        budgetTextField.configure(placeHolder: "0 원")
         budgetTextField.keyboardType = .decimalPad
-        budgetTextField.font = FontManager.getFont(size: .regular, scale: .Medium)
-        budgetTextField.attributedPlaceholder = NSAttributedString(string: budgetPlaceHolder, attributes: [.foregroundColor: UIColor.justGray])
         
         budgetPerPersonLabel.text = "1인당 0원"
         budgetPerPersonLabel.textColor = .blackWhite
