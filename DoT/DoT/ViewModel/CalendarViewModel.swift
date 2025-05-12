@@ -13,15 +13,13 @@ class CalendarViewModel {
     var endDate: Date? = nil
     var rangeDate: [Date] = []
     
-    // let rangeDate: Observable<[Date]> = Observable([])
     let inputSelectedListener: Observable<Date?> = Observable(nil)
     let outputSelectedListener: Observable<CalendarType?> = Observable(nil)
     
     init() {
         
-        inputSelectedListener.bind { [weak self] date in
+        inputSelectedListener.bind { date in
             
-            guard let self else { return }
             guard let date else { return }
             
             // 1. 둘 다 있지만, endDate를 지운 경우
@@ -29,7 +27,7 @@ class CalendarViewModel {
                 self.endDate = nil
                 self.rangeDate = [self.startDate!]
                 
-                outputSelectedListener.data = .only
+                self.outputSelectedListener.data = .only
                 return
             }
             
@@ -39,7 +37,7 @@ class CalendarViewModel {
                 self.rangeDate = [endDate]
                 self.endDate = nil
                 
-                outputSelectedListener.data = .only
+                self.outputSelectedListener.data = .only
                 return
             }
             
@@ -49,7 +47,7 @@ class CalendarViewModel {
                 self.endDate = nil
                 self.rangeDate = []
                 
-                outputSelectedListener.data = .none
+                self.outputSelectedListener.data = .none
                 return
             }
             
@@ -58,7 +56,7 @@ class CalendarViewModel {
                 self.startDate = date
                 self.rangeDate = [date]
                 
-                outputSelectedListener.data = .only
+                self.outputSelectedListener.data = .only
                 return
             }
             
@@ -67,13 +65,13 @@ class CalendarViewModel {
                 self.endDate = date
                 self.rangeDate = DateUtil.datesRange(from: startDate, to: date)
                 
-                outputSelectedListener.data = .both
+                self.outputSelectedListener.data = .both
             } else { // 6. start date보다 빠르면 새로운 값을 start date로 설정
                 self.endDate = nil
                 self.startDate = date
                 self.rangeDate = [date]
                 
-                outputSelectedListener.data = .only
+                self.outputSelectedListener.data = .only
             }
         }
     }

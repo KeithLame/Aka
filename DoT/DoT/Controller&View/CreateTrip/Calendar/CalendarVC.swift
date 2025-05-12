@@ -19,10 +19,17 @@ class CalendarViewController: BaseViewController<CalendarView> {
     
     override func bindData() {
         
-        calendarVM.outputSelectedListener.bind { _ in
+        calendarVM.outputSelectedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
             
             self.layoutView.calendar.reloadData()
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
     }
     
     override func configure() {
