@@ -7,14 +7,17 @@
 
 import Foundation
 
-class CalendarViewModel {
+final class CalendarViewModel {
     
-    var startDate: Date? = nil
-    var endDate: Date? = nil
-    var rangeDate: [Date] = []
+    private var startDate: Date? = nil
+    private var endDate: Date? = nil
+    private var rangeDate: [Date] = []
     
     let inputSelectedListener: Observable<Date?> = Observable(nil)
     let outputSelectedListener: Observable<CalendarType?> = Observable(nil)
+    
+    let inputDateListener: Observable<Date?> = Observable(nil)
+    let outputDateListener: Observable<(Bool, Bool, Bool)> = Observable((true, true, true))
     
     init() {
         
@@ -47,7 +50,7 @@ class CalendarViewModel {
                 self.endDate = nil
                 self.rangeDate = []
                 
-                self.outputSelectedListener.data = .none
+                self.outputSelectedListener.data = .nothing
                 return
             }
             
@@ -73,6 +76,42 @@ class CalendarViewModel {
                 
                 self.outputSelectedListener.data = .only
             }
+        }
+        
+        inputDateListener.bind { date in
+            
+            guard let date else { return }
+            guard let calendarType = self.outputSelectedListener.data else { return }
+            
+            switch calendarType {
+            case .only:
+                // circle만 보여주기
+                if let startDate = self.startDate, startDate == date {
+                    self.outputDateListener.data = (false, true, true)
+                    return
+                }
+            case .both:
+                // circle + 오른쪽
+                if let startDate = self.startDate, startDate == date {
+                    self.outputDateListener.data = (false, true, false)
+                    return
+                // circle + 왼쪽
+                } else if let endDate = self.endDate, endDate == date {
+                    self.outputDateListener.data = (false, false, true)
+                    return
+                // 왼쪽 + 오른쪽
+                } else if self.rangeDate.contains(date) {
+                    self.outputDateListener.data = (true, false, false)
+                    return
+                }
+            case .nothing:
+                // 모두 숨김
+                self.outputDateListener.data = (true, true, true)
+                return
+            }
+            
+            // 모두 숨김
+            self.outputDateListener.data = (true, true, true)
         }
     }
 }

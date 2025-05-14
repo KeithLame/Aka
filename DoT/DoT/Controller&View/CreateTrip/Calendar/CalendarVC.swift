@@ -22,14 +22,11 @@ class CalendarViewController: BaseViewController<CalendarView> {
         calendarVM.outputSelectedListener.bind { [weak self] _ in
             
             guard let self else { return }
+            guard let calendarType = calendarVM.outputSelectedListener.data else { return }
             
             self.layoutView.calendar.reloadData()
+            self.layoutView.saveButton.isEnabled = calendarType == .both ? true : false
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
     }
     
     override func configure() {
@@ -52,28 +49,12 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         
         guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCustomCell.identifier, for: date, at: position) as? CalendarCustomCell else { return FSCalendarCell() }
         
-        let rangeDate = calendarVM.rangeDate
         
-        guard let calendarType = calendarVM.outputSelectedListener.data else { return cell }
+        self.calendarVM.inputDateListener.data = date
         
-        layoutView.saveButton.isEnabled = calendarType == .both ? true : false
+        let (center, left, right) = calendarVM.outputDateListener.data
         
-        switch calendarType {
-        case .only:
-            if let startDate = calendarVM.startDate, startDate == date {
-                cell.configure(centerIsHidden: false, leftIsHidden: true, rightIsHidden: true)
-            }
-        case .both:
-            if let startDate = calendarVM.startDate, startDate == date {
-                cell.configure(centerIsHidden: false, leftIsHidden: true, rightIsHidden: false)
-            } else if let endDate = calendarVM.endDate, endDate == date {
-                cell.configure(centerIsHidden: false, leftIsHidden: false, rightIsHidden: true)
-            } else if rangeDate.contains(date) {
-                cell.configure(centerIsHidden: true, leftIsHidden: false, rightIsHidden: false)
-            }
-        case .nothing:
-            break
-        }
+        cell.configure(centerIsHidden: center, leftIsHidden: left, rightIsHidden: right)
         
         return cell
     }
