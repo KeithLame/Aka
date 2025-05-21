@@ -23,4 +23,21 @@ enum DateUtil {
         
         return datesRange
     }
+    
+    static func isoDateStringFromDate(_ inputDate: Date) -> String {
+        
+        let df = ISO8601DateFormatter()
+        df.formatOptions = .withInternetDateTime
+        df.timeZone = TimeZone.current
+        let dateString = df.string(from: inputDate)
+        return dateString
+    }
+    
+    static func isoDateFromString(_ inputDateString: String) -> Date? {
+        
+        let df = ISO8601DateFormatter()
+        
+        let date = df.date(from: inputDateString)
+        return date
+    }
 }
