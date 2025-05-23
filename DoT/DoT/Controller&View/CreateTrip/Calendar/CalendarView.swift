@@ -66,5 +66,7 @@ class CalendarView: BaseView {
         
         calendar.appearance.headerTitleAlignment = .center
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        
+        calendar.placeholderType = .none
     }
 }

@@ -13,11 +13,17 @@ final class CalendarViewModel {
     private var endDate: Date? = nil
     private var rangeDate: [Date] = []
     
+    var complete: ((_ startDate: Date, _ endDate: Date) -> Void)? = nil
+    
     let inputSelectedListener: Observable<Date?> = Observable(nil)
     let outputSelectedListener: Observable<CalendarType?> = Observable(nil)
     
     let inputDateListener: Observable<Date?> = Observable(nil)
     let outputDateListener: Observable<(Bool, Bool, Bool)> = Observable((true, true, true))
+    
+    let saveButtonClickedListener: Observable<Void?> = Observable(nil)
+    
+    let inputConfigureDataListener: Observable<(startDate: String, endDate: String)?> = Observable(nil)
     
     init() {
         
@@ -95,11 +101,11 @@ final class CalendarViewModel {
                 if let startDate = self.startDate, startDate == date {
                     self.outputDateListener.data = (false, true, false)
                     return
-                // circle + 왼쪽
+                    // circle + 왼쪽
                 } else if let endDate = self.endDate, endDate == date {
                     self.outputDateListener.data = (false, false, true)
                     return
-                // 왼쪽 + 오른쪽
+                    // 왼쪽 + 오른쪽
                 } else if self.rangeDate.contains(date) {
                     self.outputDateListener.data = (true, false, false)
                     return
@@ -112,6 +118,30 @@ final class CalendarViewModel {
             
             // 모두 숨김
             self.outputDateListener.data = (true, true, true)
+        }
+        
+        saveButtonClickedListener.bind { _ in
+            
+            guard let complete = self.complete,
+                  let startDate = self.startDate,
+                  let endDate = self.endDate else { return }
+            
+            complete(startDate, endDate)
+        }
+        
+        inputConfigureDataListener.bind { dates in
+            
+            guard let (start, end) = dates else { return }
+            
+            guard let startDate = DateUtil.isoDateFromString(start),
+                  let endData = DateUtil.isoDateFromString(end) else { return }
+            
+            let rangeDate = DateUtil.datesRange(from: startDate, to: endData)
+            
+            self.startDate = startDate
+            self.endDate = endData
+            self.rangeDate = rangeDate
+            self.outputSelectedListener.data = .both
         }
     }
 }

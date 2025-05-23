@@ -34,10 +34,19 @@ class CalendarViewController: BaseViewController<CalendarView> {
         layoutView.calendar.register(CalendarCustomCell.self, forCellReuseIdentifier: CalendarCustomCell.identifier)
         layoutView.calendar.delegate = self
         layoutView.calendar.dataSource = self
+        
+        layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func saveButtonClicked(_ sender: UIButton) {
+        
+        calendarVM.saveButtonClickedListener.data = ()
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 
-extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
