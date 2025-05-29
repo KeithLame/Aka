@@ -23,7 +23,7 @@ final class CalendarViewModel {
     
     let saveButtonClickedListener: Observable<Void?> = Observable(nil)
     
-    let inputConfigureDataListener: Observable<(startDate: String, endDate: String)?> = Observable(nil)
+    let inputConfigureDataListener: Observable<(startDate: Date, endDate: Date)?> = Observable(nil)
     
     init() {
         
@@ -131,15 +131,12 @@ final class CalendarViewModel {
         
         inputConfigureDataListener.bind { dates in
             
-            guard let (start, end) = dates else { return }
+            guard let (startDate, endDate) = dates else { return }
             
-            guard let startDate = DateUtil.isoDateFromString(start),
-                  let endData = DateUtil.isoDateFromString(end) else { return }
-            
-            let rangeDate = DateUtil.datesRange(from: startDate, to: endData)
+            let rangeDate = DateUtil.datesRange(from: startDate, to: endDate)
             
             self.startDate = startDate
-            self.endDate = endData
+            self.endDate = endDate
             self.rangeDate = rangeDate
             self.outputSelectedListener.data = .both
         }

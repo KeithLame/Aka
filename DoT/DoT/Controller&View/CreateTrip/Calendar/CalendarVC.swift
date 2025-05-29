@@ -29,6 +29,12 @@ class CalendarViewController: BaseViewController<CalendarView> {
         }
     }
     
+    override func configureNavigation() {
+        
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage()
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
+    }
+    
     override func configure() {
         
         layoutView.calendar.register(CalendarCustomCell.self, forCellReuseIdentifier: CalendarCustomCell.identifier)

@@ -33,11 +33,13 @@ enum DateUtil {
         return dateString
     }
     
-    static func isoDateFromString(_ inputDateString: String) -> Date? {
+    static func stringFromDate(_ inputDate: Date) -> String {
         
-        let df = ISO8601DateFormatter()
+        let df = DateFormatter()
+        df.dateFormat = "MM월 dd일(EEEEE)"
+        df.locale = Locale(identifier: "ko_KR")
         
-        let date = df.date(from: inputDateString)
-        return date
+        let dateString = df.string(from: inputDate)
+        return dateString
     }
 }

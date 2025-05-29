@@ -10,12 +10,19 @@ import FSCalendar
 
 class CreateTripViewController: BaseViewController<CreateTripView> {
     
-    var startDate: String = ""
-    var endDate: String = ""
+    let createTripVM = CreateTripViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func bindData() {
+        
+        createTripVM.outputPeriodDataListener.bind { [weak self] period in
+            
+            self?.layoutView.periodButton.configuration?.title = period
+        }
     }
     
     override func configureNavigation() {
@@ -39,17 +46,25 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         let nextVC = CalendarViewController()
         
-        if !startDate.isEmpty, !endDate.isEmpty {
+        // 저장된 시간 정보가 있다면 Calendar VC로 전달
+        let (startDate, endDate) = createTripVM.getDates()
+        
+        if let startDate, let endDate {
             
             nextVC.calendarVM.inputConfigureDataListener.data = (startDate, endDate)
         }
         
-        // 한국 시간으로 넘어와서 -> isoDateString으로 변경
-        nextVC.calendarVM.complete = { start, end in
+        // 한국 시간으로 넘어와서 -> isoDateString으로 변경 및 저장
+        nextVC.calendarVM.complete = { [weak self] startDate, endDate in
             
-            self.startDate = DateUtil.isoDateStringFromDate(start)
-            self.endDate = DateUtil.isoDateStringFromDate(end)
+            self?.createTripVM.inputPeriodDataListener.data = (startDate, endDate)
         }
+        
+        // Back Button 설정
+        let backButton = UIBarButtonItem(title: "돌아가기", style: .plain, target: nil, action: nil)
+        backButton.setTitleTextAttributes([.font : FontManager.getFont(size: .small, scale: .Bold)], for: .normal)
+        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem?.tintColor = .blackWhite
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
