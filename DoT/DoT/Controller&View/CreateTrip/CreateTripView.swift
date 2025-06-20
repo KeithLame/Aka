@@ -24,13 +24,13 @@ class CreateTripView: BaseView {
     
     let budgetLiteralLabel = UILabel()
     let budgetTextField = UITextField()
-    let budgetPerPersonLabel = UILabel()
+    let budgetCurrencyLabel = UILabel()
     
     let periodButton = UIButton()
     
     override func configureHierarchy() {
         
-        [titleTextField, placeLiteralLabel, placeTextField, headcountLiteralLabel, headcountLabel, headcountStepper, currencyLiteralLabel, currencyChoiceButton, budgetLiteralLabel, budgetTextField, budgetPerPersonLabel, periodButton].forEach {
+        [titleTextField, placeLiteralLabel, placeTextField, headcountLiteralLabel, headcountLabel, headcountStepper, currencyLiteralLabel, currencyChoiceButton, budgetLiteralLabel, budgetTextField, budgetCurrencyLabel, periodButton].forEach {
             addSubview($0)
         }
     }
@@ -87,16 +87,16 @@ class CreateTripView: BaseView {
         budgetTextField.snp.makeConstraints {
             $0.top.equalTo(currencyLiteralLabel.snp.bottom).offset(40)
             $0.leading.greaterThanOrEqualTo(budgetLiteralLabel.snp.trailing).offset(10)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
         }
         
-        budgetPerPersonLabel.snp.makeConstraints {
-            $0.top.equalTo(budgetTextField.snp.bottom).offset(10)
+        budgetCurrencyLabel.snp.makeConstraints {
+            $0.top.equalTo(currencyLiteralLabel.snp.bottom).offset(40)
+            $0.leading.greaterThanOrEqualTo(budgetTextField.snp.trailing).offset(10)
             $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
         }
         
         periodButton.snp.makeConstraints {
-            $0.top.equalTo(budgetPerPersonLabel.snp.bottom).offset(40)
+            $0.top.equalTo(budgetCurrencyLabel.snp.bottom).offset(40)
             $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(20)
             $0.height.equalTo(44)
         }
@@ -106,7 +106,7 @@ class CreateTripView: BaseView {
         
         titleTextField.configure(placeHolder: "여행 제목을 입력해주세요", fontSize: .extraLarge, textAlignment: .left)
         placeTextField.configure(placeHolder: "여행지를 입력해주세요")
-        budgetTextField.configure(placeHolder: "0 원")
+        budgetTextField.configure(placeHolder: "0")
         budgetTextField.keyboardType = .decimalPad
         
         placeLiteralLabel.configure(text: "여행지", fontSize: .regular, fontScale: .Bold)
@@ -114,7 +114,7 @@ class CreateTripView: BaseView {
         currencyLiteralLabel.configure(text: "통화", fontSize: .regular, fontScale: .Bold)
         headcountLabel.configure(text: "0명", fontSize: .regular, fontScale: .Medium)
         budgetLiteralLabel.configure(text: "예산", fontSize: .regular, fontScale: .Bold)
-        budgetPerPersonLabel.configure(text: "1인당 0원", fontSize: .small, fontScale: .Medium)
+        budgetCurrencyLabel.configure(text: "원", fontSize: .regular, fontScale: .Bold)
         
         currencyChoiceButton.configure(title: "통화 선택")
         periodButton.configure(title: "여행 기간 설정")

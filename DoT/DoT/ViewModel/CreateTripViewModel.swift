@@ -15,6 +15,9 @@ class CreateTripViewModel {
     let inputPeriodDataListener: Observable<(startDate: Date, endDate: Date)?> = Observable(nil)
     let outputPeriodDataListener: Observable<String> = Observable("")
     
+    let inputCurrecyDataListener: Observable<Consts.Currency?> = Observable(nil)
+    let outputCurrencyDataListener: Observable<String> = Observable("")
+    
     init() {
         
         inputPeriodDataListener.bind { dates in
@@ -28,6 +31,13 @@ class CreateTripViewModel {
             let formatEndDate = DateUtil.stringFromDate(endDate)
             
             self.outputPeriodDataListener.data = "\(formatStartDate)   -   \(formatEndDate)"
+        }
+        
+        inputCurrecyDataListener.bind { currency in
+            
+            guard let currency else { return }
+            
+            self.outputCurrencyDataListener.data = currency.currency
         }
     }
     
