@@ -134,5 +134,20 @@ enum Consts {
             
             return self.allCases.count
         }
+        
+        static func currencyByName(name: String) -> Consts.Currency? {
+            
+            for idx in 0 ..< count {
+                
+                let currency = Currency.allCases[idx]
+                
+                if currency.name == name {
+                    return currency
+                }
+            }
+            
+            return nil
+        }
     }
 }
+

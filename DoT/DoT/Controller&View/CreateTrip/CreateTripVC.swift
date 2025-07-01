@@ -17,6 +17,10 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
     }
     
+    deinit {
+        print("deinit CreateTrip VC")
+    }
+    
     override func bindData() {
         
         // 여행 기간 보여주기
@@ -44,6 +48,10 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         configurePopUpButton()
         
         layoutView.periodButton.addTarget(self, action: #selector(periodButtonClicked), for: .touchUpInside)
+        layoutView.titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
+        layoutView.placeTextField.addTarget(self, action: #selector(placeValueChanged), for: .editingChanged)
+        layoutView.budgetTextField.addTarget(self, action: #selector(budgetValueChanged), for: .editingChanged)
+        layoutView.headcountStepper.addTarget(self, action: #selector(stepperClicked), for: .valueChanged)
     }
     
     // 새로운 여행 정보 저장(등록)
@@ -54,13 +62,13 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     // 국가 통화 선택
     private func configurePopUpButton() {
         
-        let seletedPriority = { (action : UIAction) in
+        let seletedPriority = { [weak self] (action : UIAction) in
             
-            Consts.Currency.allCases.forEach {
-                if $0.name == action.title {
-                    self.createTripVM.inputCurrecyDataListener.data = $0
-                }
-            }
+            guard let self else { return }
+            
+            guard let currency = Consts.Currency.currencyByName(name: action.title) else { return }
+            
+            self.createTripVM.inputCurrecyDataListener.data = currency
         }
         
         let currencyCount = Consts.Currency.count
@@ -108,5 +116,53 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         navigationItem.backBarButtonItem?.tintColor = .blackWhite
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    // 제목 입력
+    @objc private func titleValueChanged(_ sender: UITextField) {
+        
+        guard let title = sender.text else { return }
+        
+        if createTripVM.isWhiteSpace(title: title) {
+            sender.text = ""
+            return
+        }
+        
+        createTripVM.inputTitleDataListener.data = title
+    }
+    
+    // 장소 입력
+    @objc private func placeValueChanged(_ sender: UITextField) {
+        
+        guard let place = sender.text else { return }
+        
+        if createTripVM.isWhiteSpace(title: place) {
+            sender.text = ""
+            return
+        }
+        
+        createTripVM.inputPlaceDataListener.data = place
+    }
+    
+    // 예산 입력
+    @objc private func budgetValueChanged(_ sender: UITextField) {
+        
+        guard let budget = sender.text else { return }
+        
+        if createTripVM.isWhiteSpace(title: budget) {
+            sender.text = ""
+            return
+        }
+        
+        createTripVM.inputBudgetDataListener.data = budget
+    }
+    
+    // 인원 변경
+    @objc private func stepperClicked(_ sender: UIStepper) {
+        
+        let value = Int(sender.value)
+        layoutView.headcountLabel.text = "\(value)명"
+        
+        createTripVM.headCountValueChangedListener.data = value
     }
 }

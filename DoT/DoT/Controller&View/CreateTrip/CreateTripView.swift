@@ -85,7 +85,7 @@ class CreateTripView: BaseView {
         }
         
         budgetTextField.snp.makeConstraints {
-            $0.top.equalTo(currencyLiteralLabel.snp.bottom).offset(40)
+            $0.centerY.equalTo(budgetLiteralLabel.snp.centerY)
             $0.leading.greaterThanOrEqualTo(budgetLiteralLabel.snp.trailing).offset(10)
         }
         
@@ -106,7 +106,7 @@ class CreateTripView: BaseView {
         
         titleTextField.configure(placeHolder: "여행 제목을 입력해주세요", fontSize: .extraLarge, textAlignment: .left)
         placeTextField.configure(placeHolder: "여행지를 입력해주세요")
-        budgetTextField.configure(placeHolder: "0")
+        budgetTextField.configure(placeHolder: "예산")
         budgetTextField.keyboardType = .decimalPad
         
         placeLiteralLabel.configure(text: "여행지", fontSize: .regular, fontScale: .Bold)
@@ -119,8 +119,11 @@ class CreateTripView: BaseView {
         currencyChoiceButton.configure(title: "통화 선택")
         periodButton.configure(title: "여행 기간 설정")
         
-        headcountStepper.maximumValue = 10
+        headcountStepper.maximumValue = 50
         headcountStepper.minimumValue = 0
+        headcountStepper.isContinuous = true
+        headcountStepper.autorepeat = true
+        headcountStepper.wraps = true
         headcountStepper.backgroundColor = .whiteBlack
     }
 }
