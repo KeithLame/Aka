@@ -12,9 +12,10 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     
     let createTripVM = CreateTripViewModel()
     
+    let realmManager = try? RealmManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     deinit {
@@ -34,6 +35,13 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
             
             self?.layoutView.budgetCurrencyLabel.text = currency
             self?.layoutView.budgetTextField.text = ""
+        }
+        
+        createTripVM.outputSaveButtonClickedListener.bind { [weak self] isSuccess in
+            
+            guard let self else { return }
+            
+            isSuccess ? self.dismiss(animated: true) : print("실패!")
         }
     }
     
@@ -57,6 +65,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     // 새로운 여행 정보 저장(등록)
     override func rightBarButtonClicked(_ sender: UIButton) {
         
+        createTripVM.inputSaveButtonClickedListener.data = ()
     }
     
     // 국가 통화 선택
