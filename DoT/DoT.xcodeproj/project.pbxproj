@@ -13,6 +13,7 @@
 		AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668882B9EFAF200AED57A /* RealmManager.swift */; };
 		AC66688B2B9F00FD00AED57A /* TripInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688A2B9F00FD00AED57A /* TripInfoRepository.swift */; };
 		AC66688D2B9F023900AED57A /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688C2B9F023900AED57A /* RealmError.swift */; };
+		AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688E2B9F194700AED57A /* TripCardCVC.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -58,6 +59,7 @@
 		AC6668882B9EFAF200AED57A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		AC66688A2B9F00FD00AED57A /* TripInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoRepository.swift; sourceTree = "<group>"; };
 		AC66688C2B9F023900AED57A /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
+		AC66688E2B9F194700AED57A /* TripCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardCVC.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */,
 				ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */,
 				ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */,
+				AC66688E2B9F194700AED57A /* TripCardCVC.swift */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */,
 				ACF5AD2A2B9D6DDE00DBEF85 /* UITextField++.swift in Sources */,
 				AC66688D2B9F023900AED57A /* RealmError.swift in Sources */,
+				AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */,
 				ACF5AD192B9C650F00DBEF85 /* NSObject++.swift in Sources */,
 				ACF5AD262B9CBC9400DBEF85 /* CalendarType.swift in Sources */,
 				ACF5AD1D2B9C6B1C00DBEF85 /* CalendarViewModel.swift in Sources */,

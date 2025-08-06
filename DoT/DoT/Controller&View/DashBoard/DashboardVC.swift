@@ -18,13 +18,32 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     }
     
     override func configureCollectionView() {
-        layoutView.dashboardCollectionView.register(IntroCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+        layoutView.dashboardCollectionView.register(IntroCollectionViewCell.self, forCellWithReuseIdentifier: IntroCollectionViewCell.identifier)
+        layoutView.dashboardCollectionView.register(TripCardCollectionViewCell.self, forCellWithReuseIdentifier: TripCardCollectionViewCell.identifier)
      
         diffableDataSoure = UICollectionViewDiffableDataSource(collectionView: layoutView.dashboardCollectionView) { collectionView, indexPath, itemIdentifier in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? IntroCollectionViewCell else { preconditionFailure() }
+            guard let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return nil }
             
-            return cell
+            switch section {
+            case .intro:
+                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IntroCollectionViewCell.identifier, for: indexPath) as? IntroCollectionViewCell else { preconditionFailure() }
+                
+                return cell
+                
+            case .tripCard:
+                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TripCardCollectionViewCell.identifier, for: indexPath) as? TripCardCollectionViewCell else { preconditionFailure() }
+                
+                return cell
+                
+            case .exchangeRate:
+                break
+            }
+            
+            return UICollectionViewCell()
         }
     }
     
@@ -48,8 +67,9 @@ extension DashboardViewController {
     private func update() {
         
         var snapshot = NSDiffableDataSourceSnapshot<DashboardCompositionalLayout, String>()
-        snapshot.appendSections([.intro])
+        snapshot.appendSections([.intro, .tripCard])
         snapshot.appendItems(["0"], toSection: .intro)
+        snapshot.appendItems(["1", "2", "3", "4"], toSection: .tripCard)
         self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
     }
 }
