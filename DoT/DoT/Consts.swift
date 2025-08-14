@@ -16,6 +16,7 @@ enum Consts {
         case regular = 17
         case large = 19
         case extraLarge = 23
+        case huge = 30
     }
     
     enum FontScale: String {
@@ -127,6 +128,57 @@ enum Consts {
                 "바트"
             case .USD:
                 "달러"
+            }
+        }
+        
+        var currencySymbol: String {
+            switch self {
+            case .AED:
+                "د.إ"
+            case .AUD:
+                "$AUD"
+            case .BHD:
+                ".د.ب"
+            case .BND:
+                "B$"
+            case .CAD:
+                "$"
+            case .CHF:
+                "F"
+            case .CNH:
+                "Y"
+            case .DKK:
+                ",-"
+            case .EUR:
+                "€"
+            case .GBP:
+                "£"
+            case .HKD:
+                "HK$"
+            case .IDR:
+                "Rp"
+            case .JPY:
+                "¥"
+            case .KRW:
+                "₩"
+            case .KWD:
+                "ك"
+            case .MYR:
+                "RM"
+            case .NOK:
+                "kr"
+            case .NZD:
+                "$"
+            case .SAR:
+                "SR"
+            case .SEK:
+                "kr"
+            case .SGD:
+                "S$"
+            case .THB:
+                "฿"
+            case .USD:
+                "$"
             }
         }
         
