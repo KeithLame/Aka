@@ -33,6 +33,15 @@ enum DateUtil {
         return dateString
     }
     
+    static private func isoFullDateStringFromDate(date: Date) -> String {
+        
+        let df = ISO8601DateFormatter()
+        df.formatOptions = .withFullDate
+        df.timeZone = TimeZone.current
+        let dateString = df.string(from: date)
+        return dateString
+    }
+    
     static func stringFromDate(_ inputDate: Date) -> String {
         
         let df = DateFormatter()
@@ -41,5 +50,13 @@ enum DateUtil {
         
         let dateString = df.string(from: inputDate)
         return dateString
+    }
+    
+    static func isSameDate(first: Date, second: Date) -> Bool {
+        
+        let firstDateString = isoFullDateStringFromDate(date: first)
+        let secondDateString = isoFullDateStringFromDate(date: second)
+        
+        return firstDateString == secondDateString
     }
 }
