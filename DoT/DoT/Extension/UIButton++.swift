@@ -41,7 +41,7 @@ extension UIButton {
         titleAttrribute.font = FontManager.getFont(size: fontSize, scale: fontScale)
         
         let imageConfiguration = UIImage.SymbolConfiguration(weight: .bold)
-        let image = image?.withConfiguration(imageConfiguration).withTintColor(.justWhite, renderingMode: .alwaysOriginal)
+        let image = image?.withConfiguration(imageConfiguration).withTintColor(buttonColor, renderingMode: .alwaysOriginal)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.title = title
