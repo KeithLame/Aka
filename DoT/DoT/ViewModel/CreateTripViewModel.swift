@@ -11,11 +11,13 @@ class CreateTripViewModel {
     
     private var title: String = ""
     private var place: String = ""
-    private var budget: Double = 0
+    private var budget: String = ""
     private var startDate: Date? = nil
     private var endDate: Date? = nil
     private var currency: String = "한국 원"
     private var headCount: Int = 0
+    
+    var dismissCallBack: (() -> Void)?
     
     private let realmManager: RealmManager<TripInfoRepository>? = try? RealmManager()
     
@@ -50,8 +52,6 @@ class CreateTripViewModel {
         
         // budget 저장
         inputBudgetDataListener.bind { budget in
-            
-            guard let budget = Double(budget) else { return }
             
             self.budget = budget
         }
@@ -116,12 +116,59 @@ class CreateTripViewModel {
         return (startDate, endDate)
     }
     
-    func isWhiteSpace(title: String) -> Bool {
+    // 첫 글자 공백 체크
+    func isWhiteSpace(_ input: String) -> Bool {
         
-        if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        if input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return true
         }
         
         return false
+    }
+    
+    // 입력된 문자열 Decimal 형태 및 소수점 표현으로 변경
+    func validString(_ input: String) -> String {
+     
+        if isWhiteSpace(input) { return "" }
+        
+        var dotPoint: Int? = nil
+        let arrText = Array(input)
+        
+        for idx in 0 ..< arrText.count {
+            if arrText[idx] == "." {
+                dotPoint = idx
+            }
+        }
+        
+        if dotPoint != nil {
+            return input
+        }
+        
+        let defaultString = input.replacingOccurrences(of: ",", with: "")
+        if let doubleString = Double(defaultString) {
+            return NumberUtil.convertDecimal(doubleString)
+        }
+        
+        return ""
+    }
+    
+    func validRange(_ input: String, range: Int) -> Bool {
+        
+        var dotPoint: Int? = nil
+        let arrText = Array(input)
+        
+        for idx in 0 ..< arrText.count {
+            if arrText[idx] == "." {
+                dotPoint = idx
+            }
+        }
+        
+        if let dotPoint {
+            if range - dotPoint > 3 {
+                return false
+            }
+        }
+        
+        return true
     }
 }

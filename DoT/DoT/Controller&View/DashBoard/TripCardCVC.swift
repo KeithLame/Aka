@@ -15,13 +15,14 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
     let arrowImageView = UIImageView()
     let titleLabel = UILabel()
     let currencyLabel = UILabel()
+    let budgetLabel = UILabel()
     let remainBudgetLabel = UILabel()
     
     override func configureHierarchy() {
         
         contentView.addSubview(layoutView)
         
-        [periodLabel, arrowImageView, titleLabel, currencyLabel, remainBudgetLabel].forEach {
+        [periodLabel, arrowImageView, titleLabel, currencyLabel, budgetLabel, remainBudgetLabel].forEach {
             layoutView.insertSubview($0, at: 0)
         }
         
@@ -57,8 +58,13 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalTo(layoutView).inset(20)
         }
         
+        budgetLabel.snp.makeConstraints {
+            $0.top.equalTo(currencyLabel.snp.bottom).offset(10)
+            $0.horizontalEdges.equalTo(layoutView).inset(20)
+        }
+        
         remainBudgetLabel.snp.makeConstraints {
-            $0.top.equalTo(currencyLabel.snp.bottom).offset(20)
+            $0.top.equalTo(budgetLabel.snp.bottom).offset(10)
             $0.horizontalEdges.bottom.equalTo(layoutView).inset(20)
         }
     }
@@ -69,14 +75,28 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         layoutView.backgroundColor = .pointBlue
         layoutView.layer.masksToBounds = true
         
-        periodLabel.configure(text: "기간", fontSize: .medium, fontScale: .Bold, color: .justWhite)
-        titleLabel.configure(text: "제목", fontSize: .medium, fontScale: .Bold, color: .justWhite)
-        currencyLabel.configure(text: "통화", fontSize: .regular, fontScale: .Bold, color: .justWhite)
-        remainBudgetLabel.configure(text: "남은 금액", fontSize: .extraLarge, fontScale: .Bold, color: .justWhite)
+        periodLabel.configure(text: "", fontSize: .medium, fontScale: .Bold, color: .justWhite)
+        titleLabel.configure(text: "", fontSize: .medium, fontScale: .Bold, color: .justWhite)
+        currencyLabel.configure(text: "", fontSize: .regular, fontScale: .Bold, color: .justWhite)
+        budgetLabel.configure(text: "", fontSize: .huge, fontScale: .Bold, color: .justWhite)
+        remainBudgetLabel.configure(text: "", fontSize: .extraLarge, fontScale: .Bold, color: .justBlack)
         
         let imageConfiguration = UIImage.SymbolConfiguration(font: FontManager.getFont(size: .large, scale: .Bold), scale: .large)
         arrowImageView.image = UIImage(systemName: "arrow.right")?.withTintColor(.justWhite, renderingMode: .alwaysOriginal).withConfiguration(imageConfiguration)
         arrowImageView.isUserInteractionEnabled = true
+    }
+    
+    func configure(data: TripInfoRepository) {
+        
+        let formatStartDate = DateUtil.stringFromDate(data.startDate)
+        let formatEndDate = DateUtil.stringFromDate(data.endDate)
+        guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
+        
+        periodLabel.text = "\(formatStartDate)   -   \(formatEndDate)"
+        titleLabel.text = data.title
+        currencyLabel.text = data.currency
+        budgetLabel.text = "\(data.budget) \(currency.currency)"
+        remainBudgetLabel.text = "\(data.budget) \(currency.currency)"
     }
     
     @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {

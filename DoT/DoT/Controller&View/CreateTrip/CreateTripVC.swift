@@ -12,8 +12,6 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     
     let createTripVM = CreateTripViewModel()
     
-    let realmManager = try? RealmManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -37,11 +35,16 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
             self?.layoutView.budgetTextField.text = ""
         }
         
+        // 저장 및 화면 내리기
         createTripVM.outputSaveButtonClickedListener.bind { [weak self] isSuccess in
             
             guard let self else { return }
             
-            isSuccess ? self.dismiss(animated: true) : print("실패!")
+            if isSuccess {
+                
+                self.createTripVM.dismissCallBack?()
+                self.dismiss(animated: true)
+            }
         }
     }
     
@@ -60,6 +63,8 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         layoutView.placeTextField.addTarget(self, action: #selector(placeValueChanged), for: .editingChanged)
         layoutView.budgetTextField.addTarget(self, action: #selector(budgetValueChanged), for: .editingChanged)
         layoutView.headcountStepper.addTarget(self, action: #selector(stepperClicked), for: .valueChanged)
+        
+        layoutView.budgetTextField.delegate = self
     }
     
     // 새로운 여행 정보 저장(등록)
@@ -132,7 +137,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         guard let title = sender.text else { return }
         
-        if createTripVM.isWhiteSpace(title: title) {
+        if createTripVM.isWhiteSpace(title) {
             sender.text = ""
             return
         }
@@ -145,7 +150,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         guard let place = sender.text else { return }
         
-        if createTripVM.isWhiteSpace(title: place) {
+        if createTripVM.isWhiteSpace(place) {
             sender.text = ""
             return
         }
@@ -156,14 +161,12 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     // 예산 입력
     @objc private func budgetValueChanged(_ sender: UITextField) {
         
-        guard let budget = sender.text else { return }
+        guard let input = sender.text else { return }
         
-        if createTripVM.isWhiteSpace(title: budget) {
-            sender.text = ""
-            return
-        }
+        let result = createTripVM.validString(input)
+        sender.text = result
         
-        createTripVM.inputBudgetDataListener.data = budget
+        createTripVM.inputBudgetDataListener.data = result
     }
     
     // 인원 변경
@@ -173,5 +176,16 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         layoutView.headcountLabel.text = "\(value)명"
         
         createTripVM.headCountValueChangedListener.data = value
+    }
+}
+
+extension CreateTripViewController: UITextFieldDelegate {
+    
+    // 소수점 3자리 이상부터는 입력 불가
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = textField.text else { return true }
+        
+        return createTripVM.validRange(text, range: range.location)
     }
 }

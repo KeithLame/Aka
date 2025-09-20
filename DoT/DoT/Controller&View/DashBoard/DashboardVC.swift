@@ -8,8 +8,9 @@
 import UIKit
 
 final class DashboardViewController: BaseViewController<DashboardView> {
-
-    var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, String>!
+    
+    var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
+    let dashboardVM = DashboardViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,11 +18,34 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         update()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func bindData() {
+        
+        dashboardVM.fetchListener.data = ()
+        
+        dashboardVM.fetchCompleteListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            self.update()
+        }
+    }
+    
     override func configureCollectionView() {
         
-        layoutView.dashboardCollectionView.register(IntroCollectionViewCell.self, forCellWithReuseIdentifier: IntroCollectionViewCell.identifier)
-        layoutView.dashboardCollectionView.register(TripCardCollectionViewCell.self, forCellWithReuseIdentifier: TripCardCollectionViewCell.identifier)
-     
+        let introSectionRegistration = UICollectionView.CellRegistration<IntroCollectionViewCell, InProgressTripData> { cell, indexPath, itemIdentifier in
+            
+            cell.configure(title: itemIdentifier.title)
+        }
+        
+        let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfoRepository> { cell, indexPath, itemIdentifier in
+            
+            cell.configure(data: itemIdentifier)
+        }
+        
         diffableDataSoure = UICollectionViewDiffableDataSource(collectionView: layoutView.dashboardCollectionView) { collectionView, indexPath, itemIdentifier in
             
             guard let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return nil }
@@ -29,13 +53,17 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             switch section {
             case .intro:
                 
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IntroCollectionViewCell.identifier, for: indexPath) as? IntroCollectionViewCell else { preconditionFailure() }
+                guard let item: InProgressTripData = itemIdentifier as? InProgressTripData else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: introSectionRegistration, for: indexPath, item: item)
                 
                 return cell
                 
             case .tripCard:
                 
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TripCardCollectionViewCell.identifier, for: indexPath) as? TripCardCollectionViewCell else { preconditionFailure() }
+                guard let item: TripInfoRepository = itemIdentifier as? TripInfoRepository else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: tripCardSectionRegistration, for: indexPath, item: item)
                 
                 return cell
                 
@@ -43,7 +71,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 break
             }
             
-            return UICollectionViewCell()
+            return nil
         }
     }
     
@@ -58,6 +86,13 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         let nextVC = CreateTripViewController()
         let naviVC = UINavigationController(rootViewController: nextVC)
         
+        nextVC.createTripVM.dismissCallBack = { [weak self] in
+            
+            guard let self else { return }
+            
+            dashboardVM.fetchListener.data = ()
+        }
+        
         present(naviVC, animated: true)
     }
 }
@@ -66,10 +101,14 @@ extension DashboardViewController {
     
     private func update() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<DashboardCompositionalLayout, String>()
+        let inProgressDatas = dashboardVM.inProgressTripInfoData
+        let allTripInfoDatas = dashboardVM.tripInfoDatas
+        
+        var snapshot = NSDiffableDataSourceSnapshot<DashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections([.intro, .tripCard])
-        snapshot.appendItems(["0"], toSection: .intro)
-        snapshot.appendItems(["1", "2", "3", "4"], toSection: .tripCard)
+        snapshot.appendItems([inProgressDatas], toSection: .intro)
+        snapshot.appendItems(allTripInfoDatas, toSection: .tripCard)
+        
         self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
     }
 }

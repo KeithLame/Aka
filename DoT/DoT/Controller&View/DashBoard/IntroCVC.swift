@@ -44,4 +44,9 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
             self.tripDashboradPushButton.layer.masksToBounds = true
         }
     }
+    
+    func configure(title: String) {
+        
+        introLabel.configure(text: "[\(title)] 여행을\n 진행하고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
+    }
 }
