@@ -14,7 +14,6 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
     let periodLabel = UILabel()
     let arrowImageView = UIImageView()
     let titleLabel = UILabel()
-    let currencyLabel = UILabel()
     let budgetLabel = UILabel()
     let remainBudgetLabel = UILabel()
     
@@ -22,7 +21,7 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         
         contentView.addSubview(layoutView)
         
-        [periodLabel, arrowImageView, titleLabel, currencyLabel, budgetLabel, remainBudgetLabel].forEach {
+        [periodLabel, arrowImageView, titleLabel, budgetLabel, remainBudgetLabel].forEach {
             layoutView.insertSubview($0, at: 0)
         }
         
@@ -37,35 +36,31 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
             $0.edges.equalTo(contentView)
         }
         
-        periodLabel.snp.makeConstraints {
-            $0.top.equalTo(layoutView).inset(15)
-            $0.leading.equalTo(layoutView).inset(20)
-        }
-        
-        arrowImageView.snp.makeConstraints {
-            $0.centerY.equalTo(periodLabel)
-            $0.trailing.equalTo(layoutView).inset(20)
-            $0.leading.greaterThanOrEqualTo(periodLabel.snp.trailing).offset(10)
-        }
-        
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(periodLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(layoutView).inset(20)
-        }
-        
-        currencyLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(layoutView).inset(20)
+            $0.top.equalTo(layoutView).inset(15)
+            $0.centerX.equalTo(layoutView)
         }
         
         budgetLabel.snp.makeConstraints {
-            $0.top.equalTo(currencyLabel.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(layoutView).inset(20)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.centerX.equalTo(layoutView)
         }
         
         remainBudgetLabel.snp.makeConstraints {
             $0.top.equalTo(budgetLabel.snp.bottom).offset(10)
-            $0.horizontalEdges.bottom.equalTo(layoutView).inset(20)
+            $0.centerX.equalTo(layoutView)
+        }
+        
+        periodLabel.snp.makeConstraints {
+            $0.top.equalTo(remainBudgetLabel.snp.bottom).offset(30)
+            $0.leading.equalTo(layoutView).inset(10)
+            $0.bottom.equalTo(layoutView).inset(15)
+        }
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalTo(periodLabel)
+            $0.trailing.equalTo(layoutView).inset(10)
+            $0.leading.greaterThanOrEqualTo(periodLabel.snp.trailing).offset(10)
         }
     }
     
@@ -75,11 +70,10 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         layoutView.backgroundColor = .pointBlue
         layoutView.layer.masksToBounds = true
         
-        periodLabel.configure(text: "", fontSize: .medium, fontScale: .Bold, color: .justWhite)
-        titleLabel.configure(text: "", fontSize: .medium, fontScale: .Bold, color: .justWhite)
-        currencyLabel.configure(text: "", fontSize: .regular, fontScale: .Bold, color: .justWhite)
-        budgetLabel.configure(text: "", fontSize: .huge, fontScale: .Bold, color: .justWhite)
-        remainBudgetLabel.configure(text: "", fontSize: .extraLarge, fontScale: .Bold, color: .justBlack)
+        periodLabel.configure(text: "", fontSize: .small, fontScale: .Bold, color: .justWhite)
+        titleLabel.configure(text: "", fontSize: .small, fontScale: .Bold, color: .justWhite)
+        budgetLabel.configure(text: "", fontSize: .huge, fontScale: .Black, color: .justWhite)
+        remainBudgetLabel.configure(text: "", fontSize: .small, fontScale: .Bold, color: .justWhite)
         
         let imageConfiguration = UIImage.SymbolConfiguration(font: FontManager.getFont(size: .large, scale: .Bold), scale: .large)
         arrowImageView.image = UIImage(systemName: "arrow.right")?.withTintColor(.justWhite, renderingMode: .alwaysOriginal).withConfiguration(imageConfiguration)
@@ -88,15 +82,29 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
     
     func configure(data: TripInfoRepository) {
         
-        let formatStartDate = DateUtil.stringFromDate(data.startDate)
-        let formatEndDate = DateUtil.stringFromDate(data.endDate)
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         
-        periodLabel.text = "\(formatStartDate)   -   \(formatEndDate)"
+        var dateText: String {
+            
+            let startGap = Calendar.current.getDateGap(from: data.startDate, to: Date())
+            let endGap = Calendar.current.getDateGap(from: Date(), to: data.endDate)
+            
+            if startGap == 0 {
+                return "D-Day"
+            } else if startGap > 0, endGap > 0 {
+                return "\(startGap)일차"
+            } else if startGap < 0 {
+                return "여행까지 \(abs(startGap))일 남았습니다!"
+            } else if endGap < 0 {
+                return "DoT!"
+            }
+            return ""
+        }
+        
+        periodLabel.text = "\(dateText)"
         titleLabel.text = data.title
-        currencyLabel.text = data.currency
-        budgetLabel.text = "\(data.budget) \(currency.currency)"
-        remainBudgetLabel.text = "\(data.budget) \(currency.currency)"
+        budgetLabel.text = "\(currency.currencySymbol) \(data.budget)"
+        remainBudgetLabel.text = "잔고 \(data.budget)\(currency.currency)"
     }
     
     @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {

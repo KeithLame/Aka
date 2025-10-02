@@ -21,6 +21,7 @@ enum Consts {
     
     enum FontScale: String {
         
+        case Black = "Black"
         case Bold = "Bold"
         case Medium = "Medium"
     }

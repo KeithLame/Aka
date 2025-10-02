@@ -51,19 +51,19 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
     
     private func createTripCard() -> NSCollectionLayoutSection? {
         
-        let groupInterPadding: CGFloat = 10
-        let leftRightInset: CGFloat = 20
+        let ratio: CGFloat = 0.7
+        let groupInterSpacing = UIScreen.main.bounds.width * (1.0 - ratio) / 4
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .estimated(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(UIScreen.main.bounds.width - (2 * leftRightInset)),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(ratio),
                                                heightDimension: .estimated(100))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = groupInterPadding
+        section.interGroupSpacing = groupInterSpacing
         section.orthogonalScrollingBehavior = .groupPagingCentered
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
