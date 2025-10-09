@@ -137,7 +137,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         guard let title = sender.text else { return }
         
-        if createTripVM.isWhiteSpace(title) {
+        if title.isWhiteSpace() {
             sender.text = ""
             return
         }
@@ -150,7 +150,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         guard let place = sender.text else { return }
         
-        if createTripVM.isWhiteSpace(place) {
+        if place.isWhiteSpace() {
             sender.text = ""
             return
         }
@@ -163,7 +163,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         guard let input = sender.text else { return }
         
-        let result = createTripVM.validString(input)
+        let result = input.convertDecimalString()
         sender.text = result
         
         createTripVM.inputBudgetDataListener.data = result
@@ -186,6 +186,6 @@ extension CreateTripViewController: UITextFieldDelegate {
         
         guard let text = textField.text else { return true }
         
-        return createTripVM.validRange(text, range: range.location)
+        return createTripVM.limitDecimalPoint(text, range: range.location)
     }
 }

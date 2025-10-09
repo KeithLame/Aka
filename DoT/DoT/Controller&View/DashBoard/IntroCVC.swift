@@ -29,12 +29,14 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
             $0.verticalEdges.equalTo(introLabel)
             $0.width.height.equalTo(introLabel.snp.height)
             $0.trailing.equalTo(contentView)
+            $0.leading.equalTo(introLabel.snp.trailing).offset(10)
         }
     }
     
     override func configureView() {
         
-        introLabel.configure(text: "[여행 제목] 여행을\n 진행하고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
+        introLabel.configure(text: "[여행 제목]\n 여행을 진행하고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
+        introLabel.adjustsFontSizeToFitWidth = true
         
         let image = UIImage(systemName: "arrow.right")
         tripDashboradPushButton.configure(image: image)
@@ -47,6 +49,6 @@ final class IntroCollectionViewCell: BaseCollectionViewCell {
     
     func configure(title: String) {
         
-        introLabel.configure(text: "[\(title)] 여행을\n 진행하고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
+        introLabel.configure(text: "[\(title)]\n 여행이 진행되고 있어요", fontSize: .large, fontScale: .Bold, numberOfLines: 2)
     }
 }

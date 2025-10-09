@@ -43,12 +43,12 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         
         budgetLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(30)
-            $0.centerX.equalTo(layoutView)
+            $0.horizontalEdges.equalTo(layoutView).inset(10)
         }
         
         remainBudgetLabel.snp.makeConstraints {
             $0.top.equalTo(budgetLabel.snp.bottom).offset(10)
-            $0.centerX.equalTo(layoutView)
+            $0.horizontalEdges.equalTo(layoutView).inset(10)
         }
         
         periodLabel.snp.makeConstraints {
@@ -86,8 +86,8 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         
         var dateText: String {
             
-            let startGap = Calendar.current.getDateGap(from: data.startDate, to: Date())
-            let endGap = Calendar.current.getDateGap(from: Date(), to: data.endDate)
+            let startGap = DateUtil.getDateGap(from: data.startDate, to: Date())
+            let endGap = DateUtil.getDateGap(from: Date(), to: data.endDate)
             
             if startGap == 0 {
                 return "D-Day"
@@ -105,6 +105,12 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = data.title
         budgetLabel.text = "\(currency.currencySymbol) \(data.budget)"
         remainBudgetLabel.text = "잔고 \(data.budget)\(currency.currency)"
+        
+        budgetLabel.adjustsFontSizeToFitWidth = true
+        remainBudgetLabel.adjustsFontSizeToFitWidth = true
+        
+        budgetLabel.textAlignment = .center
+        remainBudgetLabel.textAlignment = .center
     }
     
     @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {

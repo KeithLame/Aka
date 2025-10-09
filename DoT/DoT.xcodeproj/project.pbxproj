@@ -17,8 +17,7 @@
 		AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */; };
 		AC6668A02BA0179C00AED57A /* InProgressTripData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66689F2BA0179C00AED57A /* InProgressTripData.swift */; };
 		AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A12BA044C100AED57A /* NumberUtil.swift */; };
-		AC6668A42BA06C6300AED57A /* Date++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A32BA06C6300AED57A /* Date++.swift */; };
-		AC6668A62BA06C8700AED57A /* Calendar++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A52BA06C8700AED57A /* Calendar++.swift */; };
+		AC6668AA2BA1A26000AED57A /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A92BA1A26000AED57A /* String++.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -68,8 +67,7 @@
 		AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		AC66689F2BA0179C00AED57A /* InProgressTripData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTripData.swift; sourceTree = "<group>"; };
 		AC6668A12BA044C100AED57A /* NumberUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtil.swift; sourceTree = "<group>"; };
-		AC6668A32BA06C6300AED57A /* Date++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++.swift"; sourceTree = "<group>"; };
-		AC6668A52BA06C8700AED57A /* Calendar++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar++.swift"; sourceTree = "<group>"; };
+		AC6668A92BA1A26000AED57A /* String++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++.swift"; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -275,8 +273,7 @@
 				ACF5AD272B9D6BEC00DBEF85 /* UIButton++.swift */,
 				ACF5AD292B9D6DDE00DBEF85 /* UITextField++.swift */,
 				ACF5AD2B2B9D6F0700DBEF85 /* UILabel++.swift */,
-				AC6668A32BA06C6300AED57A /* Date++.swift */,
-				AC6668A52BA06C8700AED57A /* Calendar++.swift */,
+				AC6668A92BA1A26000AED57A /* String++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -380,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6668AA2BA1A26000AED57A /* String++.swift in Sources */,
 				AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */,
 				ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
@@ -395,7 +393,6 @@
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
-				AC6668A62BA06C8700AED57A /* Calendar++.swift in Sources */,
 				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				ACF5AD2C2B9D6F0700DBEF85 /* UILabel++.swift in Sources */,
@@ -413,7 +410,6 @@
 				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
 				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
-				AC6668A42BA06C6300AED57A /* Date++.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 				ACF5AD0E2B9C0EB200DBEF85 /* CreateTripVC.swift in Sources */,
 			);

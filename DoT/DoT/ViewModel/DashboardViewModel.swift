@@ -26,32 +26,36 @@ class DashboardViewModel {
             let tripInfoData = realmManager.fetch()
             
             self.tripInfoDatas = tripInfoData
-            self.findInProgressTripData()
+            self.inProgressTripInfoData.title = self.getTitleInProgressTrip()
             
             self.fetchCompleteListener.data = ()
         }
     }
     
-    private func findInProgressTripData() {
-        
-        let tripInfoDatas = self.tripInfoDatas
+    /// 현재 진행중인 Trip Data들의 Title을 반환
+    private func getTitleInProgressTrip() -> String {
         
         // 오늘과 동일한 날짜를 포함하는 여행 Info의 타이틀을 InProgressTripData에 저장
-        let inProgressData = tripInfoDatas.filter {
+        let inProgressData = self.tripInfoDatas.filter {
             
-            let rangeDate = DateUtil.datesRange(from: $0.startDate, to: $0.endDate)
+            let rangeDate = DateUtil.getDatesRange(from: $0.startDate, to: $0.endDate)
             var result: Date? = nil
             
-            rangeDate.forEach { date in
+            rangeDate.forEach {
                 
-                if DateUtil.isSameDate(first: date, second: Date()) {
-                    result = date
-                }
+                if DateUtil.isSameDate(first: $0, second: Date()) { result = $0 }
             }
             
+            
             return result != nil
-        }.first
+        }
+        var titles: [String] = []
         
-        inProgressTripInfoData.title = inProgressData?.title ?? ""
+        inProgressData.forEach {
+            
+            titles.append($0.title)
+        }
+        
+        return titles.joined(separator: ", ")
     }
 }

@@ -9,24 +9,13 @@ import Foundation
 
 enum NumberUtil {
     
-    static func convertIntByCondition(_ data: Double) -> Int? {
-        
-        let intData = Int(data)
-        let convertDouble = Double(intData)
-        
-        if data == convertDouble {
-            return intData
-        }
-        
-        return nil
-    }
-    
-    static func convertDecimal(_ data: Any) -> String {
+    /// decimal 포맷으로 변경
+    static func convertDecimal(_ data: NSNumber) -> String {
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        guard let result = numberFormatter.string(from: data as! NSNumber) else { return "" }
+        guard let result = numberFormatter.string(from: data) else { return "" }
         
         return result
     }

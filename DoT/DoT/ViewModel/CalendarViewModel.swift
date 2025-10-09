@@ -72,7 +72,7 @@ final class CalendarViewModel {
             // 5. start date보다 늦으면 end date로 설정
             if date.timeIntervalSince(startDate) > 0 {
                 self.endDate = date
-                self.rangeDate = DateUtil.datesRange(from: startDate, to: date)
+                self.rangeDate = DateUtil.getDatesRange(from: startDate, to: date)
                 
                 self.outputSelectedListener.data = .both
             } else { // 6. start date보다 빠르면 새로운 값을 start date로 설정
@@ -133,7 +133,7 @@ final class CalendarViewModel {
             
             guard let (startDate, endDate) = dates else { return }
             
-            let rangeDate = DateUtil.datesRange(from: startDate, to: endDate)
+            let rangeDate = DateUtil.getDatesRange(from: startDate, to: endDate)
             
             self.startDate = startDate
             self.endDate = endDate

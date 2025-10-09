@@ -33,7 +33,6 @@ class CreateTripViewModel {
     let outputCurrencyDataListener: Observable<String> = Observable("")
     
     let inputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
-    
     let outputSaveButtonClickedListener: Observable<Bool> = Observable(false)
     
     init() {
@@ -64,8 +63,8 @@ class CreateTripViewModel {
             self.startDate = startDate
             self.endDate = endDate
             
-            let formatStartDate = DateUtil.stringFromDate(startDate)
-            let formatEndDate = DateUtil.stringFromDate(endDate)
+            let formatStartDate = DateUtil.getStringFromDate(date: startDate, format: "MM월 dd일(EEEEE)")
+            let formatEndDate = DateUtil.getStringFromDate(date: endDate, format: "MM월 dd일(EEEEE)")
             
             self.outputPeriodDataListener.data = "\(formatStartDate)   -   \(formatEndDate)"
         }
@@ -111,48 +110,14 @@ class CreateTripViewModel {
         }
     }
     
+    /// Start Date와 EndDate 반환
     func getDates() -> (startDate: Date?, endDate: Date?) {
         
         return (startDate, endDate)
     }
     
-    // 첫 글자 공백 체크
-    func isWhiteSpace(_ input: String) -> Bool {
-        
-        if input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return true
-        }
-        
-        return false
-    }
-    
-    // 입력된 문자열 Decimal 형태 및 소수점 표현으로 변경
-    func validString(_ input: String) -> String {
-     
-        if isWhiteSpace(input) { return "" }
-        
-        var dotPoint: Int? = nil
-        let arrText = Array(input)
-        
-        for idx in 0 ..< arrText.count {
-            if arrText[idx] == "." {
-                dotPoint = idx
-            }
-        }
-        
-        if dotPoint != nil {
-            return input
-        }
-        
-        let defaultString = input.replacingOccurrences(of: ",", with: "")
-        if let doubleString = Double(defaultString) {
-            return NumberUtil.convertDecimal(doubleString)
-        }
-        
-        return ""
-    }
-    
-    func validRange(_ input: String, range: Int) -> Bool {
+    /// 소수점 아래 3글자로 제한
+    func limitDecimalPoint(_ input: String, range: Int) -> Bool {
         
         var dotPoint: Int? = nil
         let arrText = Array(input)
