@@ -10,16 +10,13 @@ import UIKit
 final class DashboardViewController: BaseViewController<DashboardView> {
     
     var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
+    var header: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>.SupplementaryViewProvider!
     let dashboardVM = DashboardViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         update()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func bindData() {
@@ -36,16 +33,29 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     override func configureCollectionView() {
         
+        // Intro Section Registration
         let introSectionRegistration = UICollectionView.CellRegistration<IntroCollectionViewCell, InProgressTripData> { cell, indexPath, itemIdentifier in
             
             cell.configure(title: itemIdentifier.title)
         }
         
+        // tripCard Section Registration
         let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfoRepository> { cell, indexPath, itemIdentifier in
             
             cell.configure(data: itemIdentifier)
         }
         
+        // exchangeRate Section Registration
+        let exchangeRateSectionRegistration = UICollectionView.CellRegistration<ExchangeRateCollectionViewCell, Int> { cell, indexPath, itemIdentifier in
+            
+        }
+        
+        // exchangeRate Header Registration
+        let exchangeRateHeaderRegistration = UICollectionView.SupplementaryRegistration<ExchangeRateCollectionReusableView>(elementKind: ExchangeRateCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
+            
+        }
+        
+        // Cell 등록
         diffableDataSoure = UICollectionViewDiffableDataSource(collectionView: layoutView.dashboardCollectionView) { collectionView, indexPath, itemIdentifier in
             
             guard let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return nil }
@@ -68,10 +78,19 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 return cell
                 
             case .exchangeRate:
-                break
+                
+                guard let item: Int = itemIdentifier as? Int else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: exchangeRateSectionRegistration, for: indexPath, item: item)
+                
+                return cell
             }
-            
-            return nil
+        }
+        
+        // Header 등록
+        diffableDataSoure.supplementaryViewProvider = { (view, kind, index) in
+            return self.layoutView.dashboardCollectionView.dequeueConfiguredReusableSupplementary(
+                using: exchangeRateHeaderRegistration, for: index)
         }
     }
     
@@ -105,9 +124,10 @@ extension DashboardViewController {
         let allTripInfoDatas = dashboardVM.tripInfoDatas
         
         var snapshot = NSDiffableDataSourceSnapshot<DashboardCompositionalLayout, AnyHashable>()
-        snapshot.appendSections([.intro, .tripCard])
+        snapshot.appendSections(DashboardCompositionalLayout.allCases)
         snapshot.appendItems([inProgressDatas], toSection: .intro)
         snapshot.appendItems(allTripInfoDatas, toSection: .tripCard)
+        snapshot.appendItems([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], toSection: .exchangeRate)
         
         self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
     }

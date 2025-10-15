@@ -21,18 +21,18 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
             
             switch section {
             case .intro:
-                return section?.createIntro()
+                return createIntro()
             case .tripCard:
-                return section?.createTripCard()
+                return createTripCard()
             case .exchangeRate:
-                return section?.createExchangeRate()
+                return createExchangeRate()
             case nil:
                 return nil
             }
         }
     }
     
-    private func createIntro() -> NSCollectionLayoutSection {
+    private static func createIntro() -> NSCollectionLayoutSection {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .estimated(100))
@@ -49,7 +49,7 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
         return section
     }
     
-    private func createTripCard() -> NSCollectionLayoutSection? {
+    private static func createTripCard() -> NSCollectionLayoutSection {
         
         let ratio: CGFloat = 0.7
         let groupInterSpacing = UIScreen.main.bounds.width * (1.0 - ratio) / 4
@@ -71,8 +71,29 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
         return section
     }
     
-    private func createExchangeRate() -> NSCollectionLayoutSection? {
+    private static func createExchangeRate() -> NSCollectionLayoutSection {
         
-        return nil
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(44))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(44))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [createHeader()]
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+        
+        return section
+    }
+    
+    private static func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: ExchangeRateCollectionReusableView.identifier, alignment: .top)
+        
+        return header
     }
 }
