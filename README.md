@@ -92,23 +92,35 @@
 | Index | Sub Index | (UI/Feat) | Contents | DeTail | Expect | Actual |
 |:-:|:-:|:-:|:-:|:-| :-: | :-: |
 | **1** | | Feat | 부모클래스 | 부모 클래스 생성하여 자주 사용하는 프로퍼티/메소드 미리 지정 | 1 H | 30M |
-| **2** | | Feat | Realm Manager | Realm 객체를 관리하는 매니저 생성 및 Realm의 CRUD 관리 | 5 H | |
+| **2** | | Feat | Realm Manager | Realm 객체를 관리하는 매니저 생성 및 Realm의 CRUD 관리 | 5 H | 1H |
 | **3** | | Feat | API Manager | API 호출 객체, API를 호출하는 메인 기능 관리 | 3 H | |
 | **4** | | Feat | API Model | API 응답으로 온 JSON에 맞추어 데이터를 Decode할 모델 생성 | 3 H | |
-| **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | 30 M |
-| **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | 5 H | |
+| **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | 2 H |
+| **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | | |
+| | **6 - 1** | | | Date Util | 3H | 4H |
+| | **6 - 2** | | | Number Util | 1H | 1H |
 | **7** | | Feat | FileManager | 이미지 저장을 위한 FileManager 객체 생성 및 이미지 저장 및 호출 관리 | 6 H | |
-| **8** | | Feat | Model | Model 객체 생성 및 기능 관리 | ~~10 H~~ | |
-| | **8 - 1** | | | Observable - ViewModel에서 사용할 관찰자(값 변화 탐지용) | | 30 M |
-| **9** | | Feat | ViewModel | View에 필요한 데이터 처리 및 기능 관리 | 20 H | |
-| **10** | | UI | View | View 객체 생성 및 화면 그리기 | ~~15 H~~ | |
+| **8** | | Feat | Model | Model 객체 생성 및 기능 관리 | | |
+| | **8 - 1** | | | Observable - ViewModel에서 사용할 관찰자(값 변화 탐지용) | 1H | 30 M |
+| | **8 - 2** | | | TripInfoRepository - Realm 데이터베이스 모델 | 30 M | 30 M |
+| | **8 - 3** | | | DashboardCompositionalLayout - 레이아웃 | 3 H | 3H |
+| **9** | | Feat | ViewModel | View에 필요한 데이터 처리 및 기능 관리 | | |
+| | **9 - 1** | | | CreateTrip ViewModel | 3H | 4H |
+| | **9 - 2** | | | Dashboard ViewModel | 3H | 2H |
+| | **9 - 3** | | | Calendar ViewModel | 3H | 3H |
+| **10** | | UI | View | View 객체 생성 및 화면 그리기 | | |
 | | **10 - 1** | | | Dashboard View | 3H | 1H |
 | | **10 - 2** | | | CreateTrip View | 2H | 1H 30M |
-| **11** | | Feat | ViewController | ViewController 객체 내 View, ViewModel 관리 및 처리 | ~~20 H~~ | |
-| | **11 - 1** | | | Dashboard VC | 4H | 2H |
-| | **11 - 2** | | | CreateTrip VC | 4H |  |
-| **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | ~~10 H~~ | |
-| | **12 - 1** | | | IntroCollectionViewCell | | 30 M |
+| | **10 - 3** | | | Calendar View | 1H | 1H |
+| **11** | | Feat | ViewController | ViewController 객체 내 View, ViewModel 관리 및 처리 | | |
+| | **11 - 1** | | | Dashboard VC | 4H | 3H |
+| | **11 - 2** | | | CreateTrip VC | 4H | 6H |
+| | **11 - 3** | | | Calendar VC | 2H | 4H |
+| **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | | |
+| | **12 - 1** | | | IntroCollectionViewCell | 1H | 1H |
+| | **12 - 2** | | | CalendarCustomCell | 2H | 4H |
+| | **12 - 3** | | | ExchangeRateCell | 3H | 1H |
+| | **12 - 4** | | | ExchangeRateHeaderCell | 2H | 2H |
 ||||||**101 H**||
 
 ## 데이터베이스 구조
@@ -152,8 +164,16 @@
 - 환율 API Model
 - Consts(Color, Font)
 
+### Iteration - 3 ( 3월 11일 ~ 3월 13일)
+- Realm CRUD 기능 구현
+- API 통신 및 데이터 저장
+- Main VC 화면 구현
+	- Collection View Compositional Layout 적용
+	- Diffable DataSource 적용
+	- 환율 데이터 적용(API)
+
 ### 회고
-3월 8일
+3월 8일(목)
 
 Diffable DataSource를 적용하는데 다음 두가지 어려움이 있어 고민만 하다 시간이 많이 버려졌다.
 
@@ -167,7 +187,8 @@ Diffable DataSource를 적용하는데 다음 두가지 어려움이 있어 고�
 UI를 통해 들어오거나, 로직 처리가 필요한 경우만 Input Observer를 통해 체크하여 로직을 돌리고 output을 통해 View에게 다시 전달해주기만 하면 될 것 같다.   
 내일은 이 부분을 인지하고 다시 코드를 수정해볼 생각이다.
 
-3월 9일
+---
+3월 9일(금)
 
 Calendar 구간 설정 구현에서 많이 애먹었다.
 
@@ -180,3 +201,37 @@ Calendar 구간 설정 구현에서 많이 애먹었다.
 2번의 경우 fsCalendar cell의 프로퍼티로 titleLabel을 찾을 수 있었다. 이를 contentView의 centerY와 일치하게 변경해주었다.
 그 외 fsCalendar에서 제공하는 selection 기능을 모두 꺼버리고 커스텀 cell로 모두 해결하였다. 장점이라면, deselected 처리까지 selected에서 가능캐 하여 viewModel의 deselected의 observer를 없앨 수 있었다.
 다만 아직 리팩토리할 여지가 많이 남아있다. fsCalendar도 collectionview로 이루어져있기 때문에, Diffable Datasource를 적용할 수 만 있다면, 애니메이션 처리가 자연스러워질 것 같다. 가능 여부는 더 살펴봐야 할 것 같다.
+
+---
+3월 10일(일)
+
+Calendar의 버그를 수정 및 기능들을 추가하였다.
+
+기간을 설정하면 커스텀cell에 색칠된 영역의 높이가 조금씩 차이가 났다. 모두 동일한 코드가 적용되는데 다른것이 이상해서, 각 셀별로 높이를 보았더니, 홀수번째 셀은 56.0 짝수번째 셀은 55.5로 적용되어 round 함수를 통해 모두 동일하게 맞추어 주어 버그를 수정했다.
+
+그 외로는 completion 클로저를 만들어 CreateTrip VC쪽으로 Date 데이터를 넘겨주었다.
+
+오늘은 딱히 막힘은 없었다.
+
+---
+3월 11일(월)
+
+Realm CRUD를 설정하여 Realm에 데이터를 추가해주었고, 이를 Trip Card Section에 적용해주었다.
+
+---
+3월 12일(화)
+
+CollectionView Compositional Layout을 설정해주는데는 어려움이 없었지만, Diffable DataSource는 처음이라 많이 어려웠다.
+특히, Section별로 데이터 모델이 달랐기 때문에 이를 적용하기 위한 방법을 찾는데 고군분투했다.
+이는 SnapShot의 특성인 Hashable한 데이터를 활용하여 AnyHashable로 모든 Hashable한 데이터 모델을 넣을 수 있도록 설정해주었다.
+
+그 뒤 Section별로 필요한 데이터로 형변환해서 사용해주었다.
+
+---
+3월 13일(수)
+
+환율 Section을 추가해주었고
+어제와 마찬가지로 Diffable이 문제였는데, Header를 설정하는 방법이 Section별로 Registration하는 방법과는 조금 상이하여 적용하는데 시간이 조금 걸렸다.
+다행히 크게 어렵진 않았다.
+
+아쉬웠던건 컨디션이 안좋아서 오늘 계획했던 API까지는 완성시키진 못했다.
