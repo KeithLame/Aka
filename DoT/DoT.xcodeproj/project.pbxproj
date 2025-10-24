@@ -20,6 +20,11 @@
 		AC6668AA2BA1A26000AED57A /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A92BA1A26000AED57A /* String++.swift */; };
 		AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */; };
 		AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668AD2BA1E4BE00AED57A /* ExchangeRateCRV.swift */; };
+		AC6668B12BA2819200AED57A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668B02BA2819200AED57A /* Alamofire */; };
+		AC6668B42BA281C300AED57A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B32BA281C300AED57A /* APIManager.swift */; };
+		AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B82BA2835A00AED57A /* APIProtocol.swift */; };
+		AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */; };
+		AC6668BF2BA291E100AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* Exchange.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -72,6 +77,10 @@
 		AC6668A92BA1A26000AED57A /* String++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++.swift"; sourceTree = "<group>"; };
 		AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCVC.swift; sourceTree = "<group>"; };
 		AC6668AD2BA1E4BE00AED57A /* ExchangeRateCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCRV.swift; sourceTree = "<group>"; };
+		AC6668B32BA281C300AED57A /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		AC6668B82BA2835A00AED57A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
+		AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
+		AC6668BE2BA291E100AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6668B12BA2819200AED57A /* Alamofire in Frameworks */,
 				AC6668872B9EFAA800AED57A /* RealmSwift in Frameworks */,
 				AC6668852B9EFAA800AED57A /* Realm in Frameworks */,
 				ACF5AD132B9C25C900DBEF85 /* SnapKit in Frameworks */,
@@ -135,6 +145,46 @@
 				AC66688C2B9F023900AED57A /* RealmError.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		AC6668B22BA281B300AED57A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AC6668B32BA281C300AED57A /* APIManager.swift */,
+				AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */,
+				AC6668BE2BA291E100AED57A /* Exchange.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		AC6668B52BA282CE00AED57A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD1E2B9C729C00DBEF85 /* DateUtil.swift */,
+				AC6668A12BA044C100AED57A /* NumberUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AC6668B62BA282E300AED57A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
+				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
+				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
+				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
+				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
+				AC66689F2BA0179C00AED57A /* InProgressTripData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AC6668B72BA2834800AED57A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC6668B82BA2835A00AED57A /* APIProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		ACF5ACB52B99838600DBEF85 = {
@@ -156,12 +206,8 @@
 		ACF5ACC02B99838600DBEF85 /* DoT */ = {
 			isa = PBXGroup;
 			children = (
+				AC6668B72BA2834800AED57A /* Protocol */,
 				ACF5AD172B9C64F800DBEF85 /* Extension */,
-				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
-				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
-				ACF5AD1E2B9C729C00DBEF85 /* DateUtil.swift */,
-				AC6668A12BA044C100AED57A /* NumberUtil.swift */,
-				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
 				ACF5ACF92B9B072800DBEF85 /* Model */,
 				ACF5ACFA2B9B074800DBEF85 /* ViewModel */,
 				ACF5ACFB2B9B078A00DBEF85 /* Controller&View */,
@@ -212,11 +258,11 @@
 		ACF5ACF92B9B072800DBEF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC6668B62BA282E300AED57A /* Data */,
+				AC6668B52BA282CE00AED57A /* Util */,
+				AC6668B22BA281B300AED57A /* API */,
 				AC6668822B9EF9FF00AED57A /* Realm */,
 				ACF5AD032B9B0B5D00DBEF85 /* CompositionalLayout */,
-				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
-				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
-				AC66689F2BA0179C00AED57A /* InProgressTripData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,6 +361,7 @@
 				ACF5AD152B9C5A3F00DBEF85 /* FSCalendar */,
 				AC6668842B9EFAA800AED57A /* Realm */,
 				AC6668862B9EFAA800AED57A /* RealmSwift */,
+				AC6668B02BA2819200AED57A /* Alamofire */,
 			);
 			productName = DoT;
 			productReference = ACF5ACBE2B99838600DBEF85 /* DoT.app */;
@@ -348,6 +395,7 @@
 				ACF5ACED2B9AFD4500DBEF85 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ACF5AD142B9C5A3F00DBEF85 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				AC6668832B9EFAA800AED57A /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AC6668AF2BA2819200AED57A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = ACF5ACBF2B99838600DBEF85 /* Products */;
 			projectDirPath = "";
@@ -397,12 +445,16 @@
 				AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */,
 				AC66688B2B9F00FD00AED57A /* TripInfoRepository.swift in Sources */,
 				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
+				AC6668BF2BA291E100AED57A /* Exchange.swift in Sources */,
 				ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */,
 				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
+				AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */,
+				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
 				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
+				AC6668B42BA281C300AED57A /* APIManager.swift in Sources */,
 				ACF5AD2C2B9D6F0700DBEF85 /* UILabel++.swift in Sources */,
 				ACF5ACF82B9B049200DBEF85 /* BaseViewController.swift in Sources */,
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
@@ -664,6 +716,14 @@
 				minimumVersion = 10.48.0;
 			};
 		};
+		AC6668AF2BA2819200AED57A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
 		ACF5ACED2B9AFD4500DBEF85 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -692,6 +752,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC6668832B9EFAA800AED57A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		AC6668B02BA2819200AED57A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC6668AF2BA2819200AED57A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		ACF5AD122B9C25C900DBEF85 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
