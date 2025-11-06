@@ -12,6 +12,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
     var header: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>.SupplementaryViewProvider!
     let dashboardVM = DashboardViewModel()
+    let apiVM = APIViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +22,25 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     override func bindData() {
         
+        // Trip Data Fetch From Realm
         dashboardVM.fetchListener.data = ()
         
+        // Exchange Data Fetch From API
+        apiVM.callExchangeAPIListener.data = ()
+        
+        // Trip Data Fetch Completion
         dashboardVM.fetchCompleteListener.bind { [weak self] _ in
             
             guard let self else { return }
             
             self.update()
+        }
+        
+        // Exchange Data Fetch Completion
+        apiVM.callExchangeAPICompleteListener.bind { [weak self] data in
+            
+            guard let self else { return }
+                
         }
     }
     

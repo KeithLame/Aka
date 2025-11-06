@@ -25,6 +25,7 @@
 		AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B82BA2835A00AED57A /* APIProtocol.swift */; };
 		AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */; };
 		AC6668BF2BA291E100AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* Exchange.swift */; };
+		AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C02BA2B4D000AED57A /* APIViewModel.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -45,7 +46,6 @@
 		ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */; };
 		ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */; };
 		ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */; };
-		ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */; };
 		ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD062B9B0F3400DBEF85 /* Observable.swift */; };
 		ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */; };
 		ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */; };
@@ -81,6 +81,7 @@
 		AC6668B82BA2835A00AED57A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
 		AC6668BE2BA291E100AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
+		AC6668C02BA2B4D000AED57A /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		ACF5ACFD2B9B07B800DBEF85 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCL.swift; sourceTree = "<group>"; };
-		ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		ACF5AD062B9B0F3400DBEF85 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		ACF5AD082B9B108E00DBEF85 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACF5AD0A2B9B112600DBEF85 /* IntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCVC.swift; sourceTree = "<group>"; };
@@ -270,10 +270,10 @@
 		ACF5ACFA2B9B074800DBEF85 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				ACF5AD042B9B0EC700DBEF85 /* CollectionViewModel.swift */,
 				ACF5AD1C2B9C6B1C00DBEF85 /* CalendarViewModel.swift */,
 				AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */,
 				AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */,
+				AC6668C02BA2B4D000AED57A /* APIViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
-				ACF5AD052B9B0EC700DBEF85 /* CollectionViewModel.swift in Sources */,
+				AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				AC6668B42BA281C300AED57A /* APIManager.swift in Sources */,
 				ACF5AD2C2B9D6F0700DBEF85 /* UILabel++.swift in Sources */,

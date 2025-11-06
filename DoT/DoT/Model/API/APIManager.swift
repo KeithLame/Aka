@@ -14,19 +14,13 @@ class APIManager {
     
     private init() { }
     
-    func callAPI<T: Decodable>(api: APIProtocol, type: T.Type) {
+    func callAPI<T: Decodable>(api: APIProtocol, type: T.Type, completionHandler: @escaping (Result<T, AFError>) -> Void) {
         
-        var url = api.baseURL + api.path
+        let url = api.baseURL + api.path
         
         AF.request(url, method: api.method, parameters: api.param).responseDecodable(of: type) { response in
             
-            switch response.result {
-                
-            case .success(let data):
-                dump(data)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+            completionHandler(response.result)
         }
     }
 }

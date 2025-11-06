@@ -41,7 +41,7 @@ class CalendarCustomCell: FSCalendarCell {
     
     private func configureLayout() {
         
-        let width = contentView.frame.width.rounded()
+        let width = contentView.frame.width.rounded(.toNearestOrEven)
         
         titleLabel.snp.makeConstraints {
             $0.center.equalTo(contentView)
