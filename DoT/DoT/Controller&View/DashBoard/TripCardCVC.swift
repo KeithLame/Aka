@@ -80,7 +80,7 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         arrowImageView.isUserInteractionEnabled = true
     }
     
-    func configure(data: TripInfoRepository) {
+    func configure(data: TripInfo) {
         
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         

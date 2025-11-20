@@ -19,11 +19,11 @@ class APIViewModel {
             // nil -> 오늘 날짜로 호출
             let api = ExchangeAPI.AP01(date: nil)
             
-            APIManager.shared.callAPI(api: api, type: [Exchange].self) { response in
+            APIManager.shared.callAPI(api: api, type: [ExchangeAPIDTO].self) { response in
                 
                 switch response {
                 case .success(let success):
-                    self.callExchangeAPICompleteListener.data = success
+                    self.callExchangeAPICompleteListener.data = success.map { $0.translate() }
                     
                 case .failure(let failure):
                     print(failure.responseCode!)

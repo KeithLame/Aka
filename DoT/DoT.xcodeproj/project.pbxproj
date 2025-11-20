@@ -11,7 +11,7 @@
 		AC6668852B9EFAA800AED57A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668842B9EFAA800AED57A /* Realm */; };
 		AC6668872B9EFAA800AED57A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668862B9EFAA800AED57A /* RealmSwift */; };
 		AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668882B9EFAF200AED57A /* RealmManager.swift */; };
-		AC66688B2B9F00FD00AED57A /* TripInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688A2B9F00FD00AED57A /* TripInfoRepository.swift */; };
+		AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */; };
 		AC66688D2B9F023900AED57A /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688C2B9F023900AED57A /* RealmError.swift */; };
 		AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688E2B9F194700AED57A /* TripCardCVC.swift */; };
 		AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */; };
@@ -24,14 +24,16 @@
 		AC6668B42BA281C300AED57A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B32BA281C300AED57A /* APIManager.swift */; };
 		AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B82BA2835A00AED57A /* APIProtocol.swift */; };
 		AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */; };
-		AC6668BF2BA291E100AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* Exchange.swift */; };
+		AC6668BF2BA291E100AED57A /* ExchangeAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */; };
 		AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C02BA2B4D000AED57A /* APIViewModel.swift */; };
+		AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C72BA2EEFF00AED57A /* APIKey.swift */; };
+		AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C92BA2EF8A00AED57A /* TripInfo.swift */; };
+		AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CB2BA3003D00AED57A /* Exchange.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
 		ACF5ACCB2B99838700DBEF85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */; };
 		ACF5ACCE2B99838700DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACCD2B99838700DBEF85 /* Base */; };
-		ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */; };
 		ACF5ACE62B9AFB9C00DBEF85 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACDF2B9AFB9B00DBEF85 /* NotoSansKR-Medium.otf */; };
 		ACF5ACE72B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */; };
 		ACF5ACE82B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACE12B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf */; };
@@ -68,7 +70,7 @@
 /* Begin PBXFileReference section */
 		AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewModel.swift; sourceTree = "<group>"; };
 		AC6668882B9EFAF200AED57A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		AC66688A2B9F00FD00AED57A /* TripInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoRepository.swift; sourceTree = "<group>"; };
+		AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoDTO.swift; sourceTree = "<group>"; };
 		AC66688C2B9F023900AED57A /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		AC66688E2B9F194700AED57A /* TripCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardCVC.swift; sourceTree = "<group>"; };
 		AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
@@ -80,8 +82,11 @@
 		AC6668B32BA281C300AED57A /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		AC6668B82BA2835A00AED57A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
-		AC6668BE2BA291E100AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
+		AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIDTO.swift; sourceTree = "<group>"; };
 		AC6668C02BA2B4D000AED57A /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
+		AC6668C72BA2EEFF00AED57A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		AC6668C92BA2EF8A00AED57A /* TripInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfo.swift; sourceTree = "<group>"; };
+		AC6668CB2BA3003D00AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +94,6 @@
 		ACF5ACCA2B99838700DBEF85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACF5ACCD2B99838700DBEF85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACF5ACCF2B99838700DBEF85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		ACF5ACDF2B9AFB9B00DBEF85 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		ACF5ACE02B9AFB9C00DBEF85 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		ACF5ACE12B9AFB9C00DBEF85 /* NotoSansKR-DemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-DemiLight.otf"; sourceTree = "<group>"; };
@@ -141,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				AC6668882B9EFAF200AED57A /* RealmManager.swift */,
-				AC66688A2B9F00FD00AED57A /* TripInfoRepository.swift */,
 				AC66688C2B9F023900AED57A /* RealmError.swift */,
 			);
 			path = Realm;
@@ -152,7 +155,6 @@
 			children = (
 				AC6668B32BA281C300AED57A /* APIManager.swift */,
 				AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */,
-				AC6668BE2BA291E100AED57A /* Exchange.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -171,10 +173,12 @@
 			children = (
 				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
 				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
-				ACF5ACD92B99C6D500DBEF85 /* APIKey.swift */,
+				AC6668C72BA2EEFF00AED57A /* APIKey.swift */,
 				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
 				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
 				AC66689F2BA0179C00AED57A /* InProgressTripData.swift */,
+				AC6668C92BA2EF8A00AED57A /* TripInfo.swift */,
+				AC6668CB2BA3003D00AED57A /* Exchange.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -185,6 +189,15 @@
 				AC6668B82BA2835A00AED57A /* APIProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AC6668CD2BA3012E00AED57A /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
+				AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		ACF5ACB52B99838600DBEF85 = {
@@ -258,6 +271,7 @@
 		ACF5ACF92B9B072800DBEF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC6668CD2BA3012E00AED57A /* DTO */,
 				AC6668B62BA282E300AED57A /* Data */,
 				AC6668B52BA282CE00AED57A /* Util */,
 				AC6668B22BA281B300AED57A /* API */,
@@ -443,11 +457,12 @@
 				AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */,
-				AC66688B2B9F00FD00AED57A /* TripInfoRepository.swift in Sources */,
+				AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */,
+				AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */,
 				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
-				AC6668BF2BA291E100AED57A /* Exchange.swift in Sources */,
+				AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */,
+				AC6668BF2BA291E100AED57A /* ExchangeAPIDTO.swift in Sources */,
 				ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */,
-				ACF5ACDA2B99C6D500DBEF85 /* APIKey.swift in Sources */,
 				AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */,
 				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
@@ -468,6 +483,7 @@
 				ACF5AD1D2B9C6B1C00DBEF85 /* CalendarViewModel.swift in Sources */,
 				ACF5AD0B2B9B112600DBEF85 /* IntroCVC.swift in Sources */,
 				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
+				AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */,
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
 				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,

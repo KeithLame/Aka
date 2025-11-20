@@ -10,9 +10,9 @@ import Foundation
 class DashboardViewModel {
     
     var inProgressTripInfoData: InProgressTripData = InProgressTripData()
-    var tripInfoDatas: [TripInfoRepository] = []
+    var tripInfoDatas: [TripInfo] = []
     
-    private let realmManager: RealmManager<TripInfoRepository>? = try? RealmManager()
+    private let realmManager: RealmManager<TripInfoDTO>? = try? RealmManager()
     
     let fetchListener: Observable<Void?> = Observable(nil)
     let fetchCompleteListener: Observable<Void?> = Observable(nil)
@@ -25,7 +25,7 @@ class DashboardViewModel {
             
             let tripInfoData = realmManager.fetch()
             
-            self.tripInfoDatas = tripInfoData
+            self.tripInfoDatas = tripInfoData.map { $0.translate() }
             self.inProgressTripInfoData.title = self.getTitleInProgressTrip()
             
             self.fetchCompleteListener.data = ()

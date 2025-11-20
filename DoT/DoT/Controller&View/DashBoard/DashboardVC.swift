@@ -53,7 +53,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // tripCard Section Registration
-        let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfoRepository> { cell, indexPath, itemIdentifier in
+        let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfo> { cell, indexPath, itemIdentifier in
             
             cell.configure(data: itemIdentifier)
         }
@@ -84,7 +84,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 
             case .tripCard:
                 
-                guard let item: TripInfoRepository = itemIdentifier as? TripInfoRepository else { return nil }
+                guard let item: TripInfo = itemIdentifier as? TripInfo else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: tripCardSectionRegistration, for: indexPath, item: item)
                 
