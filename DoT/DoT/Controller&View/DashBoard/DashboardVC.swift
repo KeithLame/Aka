@@ -47,7 +47,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     override func configureCollectionView() {
         
         // Intro Section Registration
-        let introSectionRegistration = UICollectionView.CellRegistration<IntroCollectionViewCell, InProgressTripData> { cell, indexPath, itemIdentifier in
+        let introSectionRegistration = UICollectionView.CellRegistration<IntroCollectionViewCell, InProgressTrip> { cell, indexPath, itemIdentifier in
             
             cell.configure(title: itemIdentifier.title)
         }
@@ -76,7 +76,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             switch section {
             case .intro:
                 
-                guard let item: InProgressTripData = itemIdentifier as? InProgressTripData else { return nil }
+                guard let item: InProgressTrip = itemIdentifier as? InProgressTrip else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: introSectionRegistration, for: indexPath, item: item)
                 

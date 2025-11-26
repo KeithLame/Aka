@@ -9,7 +9,7 @@ import Foundation
 
 class DashboardViewModel {
     
-    var inProgressTripInfoData: InProgressTripData = InProgressTripData()
+    var inProgressTripInfoData: InProgressTrip = InProgressTrip()
     var tripInfoDatas: [TripInfo] = []
     
     private let realmManager: RealmManager<TripInfoDTO>? = try? RealmManager()

@@ -15,7 +15,7 @@
 		AC66688D2B9F023900AED57A /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688C2B9F023900AED57A /* RealmError.swift */; };
 		AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688E2B9F194700AED57A /* TripCardCVC.swift */; };
 		AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */; };
-		AC6668A02BA0179C00AED57A /* InProgressTripData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66689F2BA0179C00AED57A /* InProgressTripData.swift */; };
+		AC6668A02BA0179C00AED57A /* InProgressTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66689F2BA0179C00AED57A /* InProgressTrip.swift */; };
 		AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A12BA044C100AED57A /* NumberUtil.swift */; };
 		AC6668AA2BA1A26000AED57A /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668A92BA1A26000AED57A /* String++.swift */; };
 		AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */; };
@@ -74,7 +74,7 @@
 		AC66688C2B9F023900AED57A /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		AC66688E2B9F194700AED57A /* TripCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardCVC.swift; sourceTree = "<group>"; };
 		AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
-		AC66689F2BA0179C00AED57A /* InProgressTripData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTripData.swift; sourceTree = "<group>"; };
+		AC66689F2BA0179C00AED57A /* InProgressTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTrip.swift; sourceTree = "<group>"; };
 		AC6668A12BA044C100AED57A /* NumberUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtil.swift; sourceTree = "<group>"; };
 		AC6668A92BA1A26000AED57A /* String++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++.swift"; sourceTree = "<group>"; };
 		AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCVC.swift; sourceTree = "<group>"; };
@@ -171,12 +171,7 @@
 		AC6668B62BA282E300AED57A /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
-				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
-				AC6668C72BA2EEFF00AED57A /* APIKey.swift */,
-				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
-				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
-				AC66689F2BA0179C00AED57A /* InProgressTripData.swift */,
+				AC66689F2BA0179C00AED57A /* InProgressTrip.swift */,
 				AC6668C92BA2EF8A00AED57A /* TripInfo.swift */,
 				AC6668CB2BA3003D00AED57A /* Exchange.swift */,
 			);
@@ -198,6 +193,18 @@
 				AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		AC6668CE2BA3023000AED57A /* ETC */ = {
+			isa = PBXGroup;
+			children = (
+				ACF5AD062B9B0F3400DBEF85 /* Observable.swift */,
+				ACF5AD252B9CBC9400DBEF85 /* CalendarType.swift */,
+				AC6668C72BA2EEFF00AED57A /* APIKey.swift */,
+				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
+				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
+			);
+			path = ETC;
 			sourceTree = "<group>";
 		};
 		ACF5ACB52B99838600DBEF85 = {
@@ -271,6 +278,7 @@
 		ACF5ACF92B9B072800DBEF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC6668CE2BA3023000AED57A /* ETC */,
 				AC6668CD2BA3012E00AED57A /* DTO */,
 				AC6668B62BA282E300AED57A /* Data */,
 				AC6668B52BA282CE00AED57A /* Util */,
@@ -475,7 +483,7 @@
 				ACF5ACF32B9B008F00DBEF85 /* FontManager.swift in Sources */,
 				ACF5AD222B9CB14300DBEF85 /* CalendarVC.swift in Sources */,
 				ACF5AD2A2B9D6DDE00DBEF85 /* UITextField++.swift in Sources */,
-				AC6668A02BA0179C00AED57A /* InProgressTripData.swift in Sources */,
+				AC6668A02BA0179C00AED57A /* InProgressTrip.swift in Sources */,
 				AC66688D2B9F023900AED57A /* RealmError.swift in Sources */,
 				AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */,
 				ACF5AD192B9C650F00DBEF85 /* NSObject++.swift in Sources */,
