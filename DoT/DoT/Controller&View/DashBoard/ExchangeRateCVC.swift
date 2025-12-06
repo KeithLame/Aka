@@ -13,11 +13,10 @@ class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
     let currencyLabel = UILabel()
     let currencyUnitLabel = UILabel()
     let exchangeRateLabel = UILabel()
-    let incDecRateLabel = UILabel()
     
     override func configureHierarchy() {
         
-        [currencyLabel, currencyUnitLabel, exchangeRateLabel, incDecRateLabel].forEach {
+        [currencyLabel, currencyUnitLabel, exchangeRateLabel].forEach {
             contentView.addSubview($0)
         }
     }
@@ -25,7 +24,7 @@ class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
     override func configureLayout() {
         
         currencyLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView).inset(10)
+            $0.top.equalTo(contentView).inset(20)
             $0.leading.equalTo(contentView).inset(10)
         }
         
@@ -38,12 +37,7 @@ class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalTo(contentView).inset(10)
             $0.trailing.equalTo(contentView).inset(20)
             $0.leading.greaterThanOrEqualTo(currencyUnitLabel).offset(10)
-        }
-        
-        incDecRateLabel.snp.makeConstraints {
-            $0.top.equalTo(exchangeRateLabel.snp.bottom).offset(5)
-            $0.leading.equalTo(exchangeRateLabel)
-            $0.bottom.equalTo(contentView).inset(10)
+            $0.bottom.equalTo(contentView).inset(20)
         }
     }
     
@@ -52,6 +46,5 @@ class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
         currencyLabel.configure(text: "미국 달러", fontSize: .medium, fontScale: .Bold)
         currencyUnitLabel.configure(text: "USD", fontSize: .small, fontScale: .Bold, color: .justGray)
         exchangeRateLabel.configure(text: "1,331원", fontSize: .medium, fontScale: .Bold)
-        incDecRateLabel.configure(text: "+ 13.3", fontSize: .small, fontScale: .Bold, color: .pointBlue)
     }
 }

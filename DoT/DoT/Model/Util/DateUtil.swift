@@ -30,7 +30,6 @@ enum DateUtil {
         
         let df = ISO8601DateFormatter()
         df.formatOptions = .withInternetDateTime
-        df.timeZone = TimeZone.current
         let dateString = df.string(from: date)
         return dateString
     }
@@ -67,5 +66,16 @@ enum DateUtil {
         let secondDateString = self.getOnlyDate(second)
         
         return firstDateString == secondDateString
+    }
+    
+    /// 2024-03-14 11:15:30 +0000 포맷을 Date로 변경
+    static func convertStringToDate(dateStr: String) -> Date? {
+        
+        let df = DateFormatter()
+        print(dateStr)
+        df.dateFormat = "YYYY-MM-dd HH:mm:ssZ"
+        df.locale = Locale(identifier: "ko_KR")
+        
+        return df.date(from: dateStr)
     }
 }

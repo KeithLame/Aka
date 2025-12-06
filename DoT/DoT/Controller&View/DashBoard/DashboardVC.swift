@@ -11,6 +11,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
     var header: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>.SupplementaryViewProvider!
+    
     let dashboardVM = DashboardViewModel()
     let apiVM = APIViewModel()
     
@@ -23,13 +24,13 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     override func bindData() {
         
         // Trip Data Fetch From Realm
-        dashboardVM.fetchListener.data = ()
+        dashboardVM.tripInfoFetchListener.data = ()
         
         // Exchange Data Fetch From API
         apiVM.callExchangeAPIListener.data = ()
         
         // Trip Data Fetch Completion
-        dashboardVM.fetchCompleteListener.bind { [weak self] _ in
+        dashboardVM.tripInfoFetchCompleteListener.bind { [weak self] _ in
             
             guard let self else { return }
             
@@ -40,6 +41,14 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         apiVM.callExchangeAPICompleteListener.bind { [weak self] data in
             
             guard let self else { return }
+            
+            // 오늘 호출해서 데이터가 저장되어있는지 체크
+            if dashboardVM.isCalledToday() {
+                return
+            } else {
+                // 호출 및 저장 안했으면 API 호출
+                dashboardVM.createExchangeRateListener.data = data
+            }
                 
         }
     }
@@ -122,7 +131,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             
             guard let self else { return }
             
-            dashboardVM.fetchListener.data = ()
+            dashboardVM.tripInfoFetchListener.data = ()
         }
         
         present(naviVC, animated: true)

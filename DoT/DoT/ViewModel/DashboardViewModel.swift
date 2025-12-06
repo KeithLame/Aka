@@ -12,23 +12,67 @@ class DashboardViewModel {
     var inProgressTripInfoData: InProgressTrip = InProgressTrip()
     var tripInfoDatas: [TripInfo] = []
     
-    private let realmManager: RealmManager<TripInfoDTO>? = try? RealmManager()
+    private let realmManager: RealmManager? = try? RealmManager()
     
-    let fetchListener: Observable<Void?> = Observable(nil)
-    let fetchCompleteListener: Observable<Void?> = Observable(nil)
+    let tripInfoFetchListener: Observable<Void?> = Observable(nil)
+    let tripInfoFetchCompleteListener: Observable<Void?> = Observable(nil)
+    
+    let createExchangeRateListener: Observable<[Exchange]> = Observable([])
+    let createExchangeRateCompletionListener: Observable<Bool> = Observable(true)
     
     init() {
         
-        fetchListener.bind { _ in
+        realmManager?.realmURL()
+        
+        tripInfoFetchListener.bind { _ in
             
             guard let realmManager = self.realmManager else { return }
             
-            let tripInfoData = realmManager.fetch()
+            let tripInfoData = realmManager.fetch(TripInfoDTO.self)
             
             self.tripInfoDatas = tripInfoData.map { $0.translate() }
             self.inProgressTripInfoData.title = self.getTitleInProgressTrip()
             
-            self.fetchCompleteListener.data = ()
+            self.tripInfoFetchCompleteListener.data = ()
+        }
+        
+        createExchangeRateListener.bind { datas in
+            
+            guard let realmManager = self.realmManager else { return }
+            
+            // 새로운 데이터를 담기 전에 모두 삭제
+            let oldDatas = realmManager.fetch(ExchangeRealmDTO.self)
+            
+            for oldData in oldDatas {
+                do {
+                    try realmManager.delete(oldData)
+                } catch let error {
+                    switch error {
+                    case RealmError.objectDeleteFailed:
+                        print("delete Error")
+                    default: break
+                    }
+                }
+            }
+            
+            // 새로운 데이터로 저장
+            for newdata in datas {
+                
+                let newExchangeDTO = ExchangeRealmDTO(date: newdata.id, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
+                
+                do {
+                    try realmManager.create(newExchangeDTO)
+                } catch let error {
+                    switch error {
+                    case RealmError.objectCreateFailed:
+                        print("create Error")
+                    default: break
+                    }
+                }
+            }
+            print("save complete")
+            
+            self.createExchangeRateCompletionListener.data = true
         }
     }
     
@@ -57,5 +101,20 @@ class DashboardViewModel {
         }
         
         return titles.joined(separator: ", ")
+    }
+    
+    func isCalledToday() -> Bool {
+        
+        guard let realmManager = self.realmManager else { return false }
+        
+        let exchangeDTODatas = realmManager.fetch(ExchangeRealmDTO.self)
+        let exchangeDatas = exchangeDTODatas.map { $0.translate() }
+        
+        guard let exchangeData = exchangeDatas.first else { return false }
+        
+        guard let savedDate = DateUtil.convertStringToDate(dateStr: exchangeData.id) else { return false }
+        guard let nowDate = DateUtil.convertStringToDate(dateStr: Date().description) else { return false }
+        
+        return DateUtil.isSameDate(first: savedDate, second: nowDate)
     }
 }

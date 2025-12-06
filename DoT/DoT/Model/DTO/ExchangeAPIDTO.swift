@@ -21,7 +21,7 @@ struct ExchangeAPIDTO: Decodable {
     
     func translate() -> Exchange {
         
-        let exchange = Exchange(currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
+        let exchange = Exchange(id: Date().description, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
         
         return exchange
     }

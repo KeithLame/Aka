@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class RealmManager<T: Object> {
+final class RealmManager {
     
     private let realm: Realm
     
@@ -24,14 +24,14 @@ final class RealmManager<T: Object> {
         print(url)
     }
     
-    func fetch() -> [T] {
+    func fetch<T: Object>(_ type: T.Type) -> [T] {
         
         let result = realm.objects(T.self)
         
         return Array(result)
     }
     
-    func create(_ object: T) throws {
+    func create<T: Object>(_ object: T) throws {
         do {
             try realm.write {
                 realm.add(object)
@@ -41,7 +41,7 @@ final class RealmManager<T: Object> {
         }
     }
     
-    func delete(_ object: T) throws {
+    func delete<T: Object>(_ object: T) throws {
         do {
             try realm.write {
                 realm.delete(object)

@@ -9,12 +9,14 @@ import Foundation
 
 struct Exchange: Hashable {
     
-    let id: String = UUID().uuidString
+    let id: String
     let currencyUnit: String
     let exchangeRate: String
     let currencyName: String
     
-    init(currencyUnit: String, exchangeRate: String, currencyName: String) {
+    init(id: String , currencyUnit: String, exchangeRate: String, currencyName: String) {
+        
+        self.id = id
         self.currencyUnit = currencyUnit
         self.exchangeRate = exchangeRate
         self.currencyName = currencyName

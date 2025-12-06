@@ -19,7 +19,7 @@ class CreateTripViewModel {
     
     var dismissCallBack: (() -> Void)?
     
-    private let realmManager: RealmManager<TripInfoDTO>? = try? RealmManager()
+    private let realmManager: RealmManager? = try? RealmManager()
     
     let inputTitleDataListener: Observable<String> = Observable("")
     let inputPlaceDataListener: Observable<String> = Observable("")
