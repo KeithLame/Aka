@@ -26,6 +26,9 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         // Trip Data Fetch From Realm
         dashboardVM.tripInfoFetchListener.data = ()
         
+        // Exchange Data Fetch From Realm
+        dashboardVM.exchangeFetchListener.data = ()
+        
         // Exchange Data Fetch From API
         apiVM.callExchangeAPIListener.data = ()
         
@@ -34,7 +37,14 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             
             guard let self else { return }
             
-            self.update()
+            update()
+        }
+        
+        dashboardVM.exchangeFetchCompleteListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            update()
         }
         
         // Exchange Data Fetch Completion
@@ -49,7 +59,15 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 // 호출 및 저장 안했으면 API 호출
                 dashboardVM.createExchangeRateListener.data = data
             }
-                
+        }
+        
+        dashboardVM.createExchangeRateCompletionListener.bind { [weak self] isComplete in
+            
+            guard let self else { return }
+            
+            if isComplete {
+                update()
+            }
         }
     }
     
@@ -68,8 +86,9 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // exchangeRate Section Registration
-        let exchangeRateSectionRegistration = UICollectionView.CellRegistration<ExchangeRateCollectionViewCell, Int> { cell, indexPath, itemIdentifier in
+        let exchangeRateSectionRegistration = UICollectionView.CellRegistration<ExchangeRateCollectionViewCell, Exchange> { cell, indexPath, itemIdentifier in
             
+            cell.configure(data: itemIdentifier)
         }
         
         // exchangeRate Header Registration
@@ -101,7 +120,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 
             case .exchangeRate:
                 
-                guard let item: Int = itemIdentifier as? Int else { return nil }
+                guard let item: Exchange = itemIdentifier as? Exchange else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: exchangeRateSectionRegistration, for: indexPath, item: item)
                 
@@ -144,12 +163,13 @@ extension DashboardViewController {
         
         let inProgressDatas = dashboardVM.inProgressTripInfoData
         let allTripInfoDatas = dashboardVM.tripInfoDatas
+        let exchangeDatas = dashboardVM.exchangeDatas
         
         var snapshot = NSDiffableDataSourceSnapshot<DashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections(DashboardCompositionalLayout.allCases)
         snapshot.appendItems([inProgressDatas], toSection: .intro)
         snapshot.appendItems(allTripInfoDatas, toSection: .tripCard)
-        snapshot.appendItems([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], toSection: .exchangeRate)
+        snapshot.appendItems(exchangeDatas, toSection: .exchangeRate)
         
         self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
     }

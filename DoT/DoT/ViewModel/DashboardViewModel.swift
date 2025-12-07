@@ -11,11 +11,15 @@ class DashboardViewModel {
     
     var inProgressTripInfoData: InProgressTrip = InProgressTrip()
     var tripInfoDatas: [TripInfo] = []
+    var exchangeDatas: [Exchange] = []
     
     private let realmManager: RealmManager? = try? RealmManager()
     
     let tripInfoFetchListener: Observable<Void?> = Observable(nil)
     let tripInfoFetchCompleteListener: Observable<Void?> = Observable(nil)
+    
+    let exchangeFetchListener: Observable<Void?> = Observable(nil)
+    let exchangeFetchCompleteListener: Observable<Void?> = Observable(nil)
     
     let createExchangeRateListener: Observable<[Exchange]> = Observable([])
     let createExchangeRateCompletionListener: Observable<Bool> = Observable(true)
@@ -32,6 +36,17 @@ class DashboardViewModel {
             
             self.tripInfoDatas = tripInfoData.map { $0.translate() }
             self.inProgressTripInfoData.title = self.getTitleInProgressTrip()
+            
+            self.tripInfoFetchCompleteListener.data = ()
+        }
+        
+        exchangeFetchListener.bind { _ in
+            
+            guard let realmManager = self.realmManager else { return }
+            
+            let exchangeData = realmManager.fetch(ExchangeRealmDTO.self)
+            
+            self.exchangeDatas = exchangeData.map { $0.translate() }
             
             self.tripInfoFetchCompleteListener.data = ()
         }
@@ -70,8 +85,8 @@ class DashboardViewModel {
                     }
                 }
             }
-            print("save complete")
             
+            self.exchangeDatas = datas
             self.createExchangeRateCompletionListener.data = true
         }
     }
