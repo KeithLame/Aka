@@ -62,7 +62,7 @@ class ExchangeRateCollectionReusableView: UICollectionReusableView {
         
         titleLabel.configure(text: "환율", fontSize: .large, fontScale: .Bold)
         currencyLabel.configure(text: "통화", fontSize: .medium, fontScale: .Bold)
-        exchangeLabel.configure(text: "환율", fontSize: .medium, fontScale: .Bold)
+        exchangeLabel.configure(text: "오늘의 환율", fontSize: .medium, fontScale: .Bold)
         
         exchangeLabel.textAlignment = .left
         separateView.backgroundColor = .blackWhite

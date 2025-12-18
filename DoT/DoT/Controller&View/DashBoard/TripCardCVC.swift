@@ -54,13 +54,14 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         periodLabel.snp.makeConstraints {
             $0.top.equalTo(remainBudgetLabel.snp.bottom).offset(30)
             $0.leading.equalTo(layoutView).inset(10)
-            $0.bottom.equalTo(layoutView).inset(15)
+            // $0.bottom.equalTo(layoutView).inset(15)
         }
         
         arrowImageView.snp.makeConstraints {
             $0.centerY.equalTo(periodLabel)
             $0.trailing.equalTo(layoutView).inset(10)
             $0.leading.greaterThanOrEqualTo(periodLabel.snp.trailing).offset(10)
+            $0.bottom.equalTo(layoutView).inset(10)
         }
     }
     
@@ -95,7 +96,7 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
                 return "\(startGap)일차"
             } else if startGap < 0 {
                 return "여행까지 \(abs(startGap))일 남았습니다!"
-            } else if endGap < 0 {
+            } else if endGap <= 0 {
                 return "DoT!"
             }
             return ""

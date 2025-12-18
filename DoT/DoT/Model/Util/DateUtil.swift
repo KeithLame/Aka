@@ -72,7 +72,6 @@ enum DateUtil {
     static func convertStringToDate(dateStr: String) -> Date? {
         
         let df = DateFormatter()
-        print(dateStr)
         df.dateFormat = "YYYY-MM-dd HH:mm:ssZ"
         df.locale = Locale(identifier: "ko_KR")
         
