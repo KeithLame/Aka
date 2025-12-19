@@ -210,6 +210,13 @@
 			path = ETC;
 			sourceTree = "<group>";
 		};
+		AC78E2E82BA439D3005B2E99 /* TripDashboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TripDashboard;
+			sourceTree = "<group>";
+		};
 		ACF5ACB52B99838600DBEF85 = {
 			isa = PBXGroup;
 			children = (
@@ -306,13 +313,14 @@
 		ACF5ACFB2B9B078A00DBEF85 /* Controller&View */ = {
 			isa = PBXGroup;
 			children = (
+				AC78E2E82BA439D3005B2E99 /* TripDashboard */,
 				ACF5AD0C2B9C0E9200DBEF85 /* CreateTrip */,
-				ACF5ACFC2B9B079F00DBEF85 /* DashBoard */,
+				ACF5ACFC2B9B079F00DBEF85 /* Dashboard */,
 			);
 			path = "Controller&View";
 			sourceTree = "<group>";
 		};
-		ACF5ACFC2B9B079F00DBEF85 /* DashBoard */ = {
+		ACF5ACFC2B9B079F00DBEF85 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
 				ACF5ACFF2B9B07C700DBEF85 /* DashboardVC.swift */,
@@ -322,7 +330,7 @@
 				AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */,
 				AC6668AD2BA1E4BE00AED57A /* ExchangeRateCRV.swift */,
 			);
-			path = DashBoard;
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 		ACF5AD032B9B0B5D00DBEF85 /* CompositionalLayout */ = {

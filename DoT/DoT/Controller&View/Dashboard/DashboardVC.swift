@@ -23,14 +23,13 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     override func bindData() {
         
+        // MARK: DashBoardVM
+        
         // Trip Data Fetch From Realm
         dashboardVM.tripInfoFetchListener.data = ()
         
         // Exchange Data Fetch From Realm
         dashboardVM.exchangeFetchListener.data = ()
-        
-        // Exchange Data Fetch From API
-        apiVM.callExchangeAPIListener.data = ()
         
         // Trip Data Fetch Completion
         dashboardVM.tripInfoFetchCompleteListener.bind { [weak self] _ in
@@ -40,12 +39,27 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             update()
         }
         
+        // Exchange Data Fetch Completion
         dashboardVM.exchangeFetchCompleteListener.bind { [weak self] _ in
             
             guard let self else { return }
             
             update()
         }
+        
+        // Add Exchange Data to Realm Completion
+        dashboardVM.createExchangeRateCompletionListener.bind { [weak self] isComplete in
+            
+            guard let self else { return }
+            
+            if isComplete {
+                update()
+            }
+        }
+        
+        // MARK: APIVM
+        // Exchange Data Fetch From API
+        apiVM.callExchangeAPIListener.data = ()
         
         // Exchange Data Fetch Completion
         apiVM.callExchangeAPICompleteListener.bind { [weak self] data in
@@ -58,15 +72,6 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             } else {
                 // 호출 및 저장 안했으면 API 호출
                 dashboardVM.createExchangeRateListener.data = data
-            }
-        }
-        
-        dashboardVM.createExchangeRateCompletionListener.bind { [weak self] isComplete in
-            
-            guard let self else { return }
-            
-            if isComplete {
-                update()
             }
         }
     }
