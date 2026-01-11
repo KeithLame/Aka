@@ -85,9 +85,15 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // tripCard Section Registration
-        let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfo> { cell, indexPath, itemIdentifier in
+        let tripCardSectionRegistration = UICollectionView.CellRegistration<TripCardCollectionViewCell, TripInfo> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
             
             cell.configure(data: itemIdentifier)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tripCardTapped))
+            
+            cell.layoutView.addGestureRecognizer(tapGesture)
         }
         
         // exchangeRate Section Registration
@@ -159,6 +165,14 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         present(naviVC, animated: true)
+    }
+    
+    @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {
+        
+        let nextVC = TripDashboardViewController()
+        makeBackBarButton()
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

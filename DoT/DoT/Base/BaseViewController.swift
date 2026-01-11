@@ -58,6 +58,13 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         return createBarButton
     }
     
+    func makeBackBarButton() {
+        let backButton = UIBarButtonItem(title: "돌아가기", style: .plain, target: nil, action: nil)
+        backButton.setTitleTextAttributes([.font : FontManager.getFont(size: .small, scale: .Bold)], for: .normal)
+        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem?.tintColor = .blackWhite
+    }
+    
     @objc func rightBarButtonClicked(_ sender: UIButton) {
         
     }

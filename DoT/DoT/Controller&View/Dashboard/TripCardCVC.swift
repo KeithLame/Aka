@@ -24,10 +24,6 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         [periodLabel, arrowImageView, titleLabel, budgetLabel, remainBudgetLabel].forEach {
             layoutView.insertSubview($0, at: 0)
         }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tripCardTapped))
-        
-        layoutView.addGestureRecognizer(tapGesture)
     }
     
     override func configureLayout() {
@@ -112,10 +108,5 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         
         budgetLabel.textAlignment = .center
         remainBudgetLabel.textAlignment = .center
-    }
-    
-    @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {
-        
-        print("tap")
     }
 }

@@ -30,6 +30,10 @@
 		AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C92BA2EF8A00AED57A /* TripInfo.swift */; };
 		AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CB2BA3003D00AED57A /* Exchange.swift */; };
 		AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */; };
+		AC78E2EA2BA43BF5005B2E99 /* TripDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2E92BA43BF5005B2E99 /* TripDashboardViewController.swift */; };
+		AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */; };
+		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
+		AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -89,6 +93,10 @@
 		AC6668C92BA2EF8A00AED57A /* TripInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfo.swift; sourceTree = "<group>"; };
 		AC6668CB2BA3003D00AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRealmDTO.swift; sourceTree = "<group>"; };
+		AC78E2E92BA43BF5005B2E99 /* TripDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardViewController.swift; sourceTree = "<group>"; };
+		AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
+		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
+		AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntroCVC.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +221,9 @@
 		AC78E2E82BA439D3005B2E99 /* TripDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				AC78E2E92BA43BF5005B2E99 /* TripDashboardViewController.swift */,
+				AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */,
+				AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */,
 			);
 			path = TripDashboard;
 			sourceTree = "<group>";
@@ -337,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF5AD012B9B0AD500DBEF85 /* DashboardCL.swift */,
+				AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -468,6 +480,8 @@
 				AC6668AA2BA1A26000AED57A /* String++.swift in Sources */,
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
+				AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */,
+				AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */,
 				AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */,
 				ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
@@ -476,6 +490,7 @@
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
+				AC78E2EA2BA43BF5005B2E99 /* TripDashboardViewController.swift in Sources */,
 				AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */,
 				AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */,
 				AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */,
@@ -487,6 +502,7 @@
 				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
+				AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */,
 				AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				AC6668B42BA281C300AED57A /* APIManager.swift in Sources */,
