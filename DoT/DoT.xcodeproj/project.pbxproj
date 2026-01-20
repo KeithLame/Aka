@@ -34,6 +34,7 @@
 		AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */; };
 		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
 		AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */; };
+		AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -97,6 +98,7 @@
 		AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
 		AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntroCVC.swift; sourceTree = "<group>"; };
+		AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCardCVC.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				AC78E2E92BA43BF5005B2E99 /* TripDashboardViewController.swift */,
 				AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */,
 				AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */,
+				AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */,
 			);
 			path = TripDashboard;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */,
 				AC6668AA2BA1A26000AED57A /* String++.swift in Sources */,
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
+				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
 				AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */,
 				AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */,

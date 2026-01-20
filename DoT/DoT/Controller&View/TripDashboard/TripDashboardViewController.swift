@@ -21,6 +21,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
         let tripIntroRegistration = UICollectionView.CellRegistration<TripIntroCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
             
+        }
+        
+        let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
             
         }
         
@@ -36,7 +39,11 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 return cell
                 
             case .budgetCard:
-                break
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: budgetCardRegistration, for: indexPath, item: itemIdentifier)
+                
+                return cell
+                
             case .expense:
                 break
             }
@@ -53,6 +60,7 @@ extension TripDashboardViewController {
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections(TripDashboardCompositionalLayout.allCases)
         snapshot.appendItems([1], toSection: .intro)
+        snapshot.appendItems([2], toSection: .budgetCard)
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }

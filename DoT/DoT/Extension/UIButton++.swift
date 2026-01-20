@@ -9,11 +9,11 @@ import UIKit
 
 extension UIButton {
     
-    func configure(title: String) {
+    func configure(title: String, scale: Consts.FontScale = .Medium) {
         
         let buttonTitle = title
         var titleAttrribute = AttributedString.init(buttonTitle)
-        titleAttrribute.font = FontManager.getFont(size: .regular, scale: .Medium)
+        titleAttrribute.font = FontManager.getFont(size: .regular, scale: scale)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.title = title
