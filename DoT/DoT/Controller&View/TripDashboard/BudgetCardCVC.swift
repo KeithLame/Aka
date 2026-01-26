@@ -44,6 +44,7 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalTo(contentView)
             $0.trailing.equalTo(contentView.snp.centerX).offset(-5)
             $0.height.equalTo(44)
+            $0.bottom.equalTo(contentView)
         }
         
         expenseButton.snp.makeConstraints {
@@ -51,6 +52,7 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalTo(contentView.snp.centerX).offset(5)
             $0.trailing.equalTo(contentView)
             $0.height.equalTo(44)
+            $0.bottom.equalTo(contentView)
         }
     }
     

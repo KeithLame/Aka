@@ -7,27 +7,25 @@
 
 import UIKit
 
-enum TripDashboardCompositionalLayout: Int, CaseIterable {
+enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
+    
+    static var allCases: [TripDashboardCompositionalLayout] = [.budgetCard, .intro]
     
     case intro
     case budgetCard
-    case expense
+    case expense(section: String)
     
     static func create() -> UICollectionViewCompositionalLayout {
         
         return UICollectionViewCompositionalLayout { section, environment in
             
-            let section = TripDashboardCompositionalLayout(rawValue: section)
-            
             switch section {
-            case .intro:
+            case 0:
                 return createIntro()
-            case .budgetCard:
+            case 1:
                 return createBudgetCard()
-            case .expense:
+            default:
                 return createExpense()
-            case nil:
-                return nil
             }
         }
     }
@@ -75,7 +73,6 @@ enum TripDashboardCompositionalLayout: Int, CaseIterable {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .estimated(44))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        // group.supplementaryItems = [createHeader()]
         
         let section = NSCollectionLayoutSection(group: group)
         // section.boundarySupplementaryItems = [createHeader()]

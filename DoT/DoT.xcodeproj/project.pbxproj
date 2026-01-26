@@ -35,6 +35,7 @@
 		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
 		AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */; };
 		AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */; };
+		AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -99,6 +100,7 @@
 		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
 		AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntroCVC.swift; sourceTree = "<group>"; };
 		AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCardCVC.swift; sourceTree = "<group>"; };
+		AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCVC.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */,
 				AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */,
 				AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */,
+				AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */,
 			);
 			path = TripDashboard;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */,
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
 				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
+				AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 				ACF5AD0E2B9C0EB200DBEF85 /* CreateTripVC.swift in Sources */,
 			);

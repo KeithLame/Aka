@@ -10,7 +10,7 @@ import UIKit
 class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
     var diffableDataSource: UICollectionViewDiffableDataSource<TripDashboardCompositionalLayout, AnyHashable>!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,28 +27,35 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
         }
         
+        let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
+            
+            
+        }
+        
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
-            guard let section = TripDashboardCompositionalLayout(rawValue: indexPath.section) else { return nil }
+            let section = indexPath.section
             
             switch section {
-            case .intro:
+            case 0:
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: tripIntroRegistration, for: indexPath, item: itemIdentifier)
                 
                 return cell
                 
-            case .budgetCard:
+            case 1:
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: budgetCardRegistration, for: indexPath, item: itemIdentifier)
                 
                 return cell
                 
-            case .expense:
-                break
+            default:
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: expenseRegistration, for: indexPath, item: itemIdentifier)
+                
+                return cell
+                
             }
-            
-            return nil
         })
     }
 }
@@ -62,6 +69,25 @@ extension TripDashboardViewController {
         snapshot.appendItems([1], toSection: .intro)
         snapshot.appendItems([2], toSection: .budgetCard)
         
+        snapshot.appendSections([.expense(section: "20140313")])
+        snapshot.appendItems([3], toSection: .expense(section: "20140313"))
+        
+        snapshot.appendSections([.expense(section: "20140314")])
+        snapshot.appendItems([4], toSection: .expense(section: "20140314"))
+        
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func append() {
+        
+        // 현재상태 snapshot 복사
+        var curSnapshot = diffableDataSource.snapshot()
+        
+        // Section 추가
+        curSnapshot.appendSections([.expense(section: "11111")])
+        // item 추가
+        curSnapshot.appendItems([5])
+        
+        diffableDataSource.apply(curSnapshot)
     }
 }
