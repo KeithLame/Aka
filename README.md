@@ -92,8 +92,8 @@
 | Index | Sub Index | (UI/Feat) | Contents | DeTail | Expect | Actual |
 |:-:|:-:|:-:|:-:|:-| :-: | :-: |
 | **1** | | Feat | 부모클래스 | 부모 클래스 생성하여 자주 사용하는 프로퍼티/메소드 미리 지정 | 1 H | 30M |
-| **2** | | Feat | Realm Manager | Realm 객체를 관리하는 매니저 생성 및 Realm의 CRUD 관리 | 5 H | 1H |
-| **3** | | Feat | API Manager | API 호출 객체, API를 호출하는 메인 기능 관리 | 3 H | |
+| **2** | | Feat | Realm Manager | Realm 객체를 관리하는 매니저 생성 및 Realm의 CRUD 관리 | 5 H | 3H |
+| **3** | | Feat | API Manager | API 호출 객체, API를 호출하는 메인 기능 관리 | 3 H | 2H |
 | **4** | | Feat | API Model | API 응답으로 온 JSON에 맞추어 데이터를 Decode할 모델 생성 | 3 H | |
 | **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | 2 H |
 | **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | | |
@@ -104,6 +104,7 @@
 | | **8 - 1** | | | Observable - ViewModel에서 사용할 관찰자(값 변화 탐지용) | 1H | 30 M |
 | | **8 - 2** | | | TripInfoRepository - Realm 데이터베이스 모델 | 30 M | 30 M |
 | | **8 - 3** | | | DashboardCompositionalLayout - 레이아웃 | 3 H | 3H |
+| | **8 - 4** | | | TripDashboardCompositionalLayout - 레이아웃 | 4 H | |
 | **9** | | Feat | ViewModel | View에 필요한 데이터 처리 및 기능 관리 | | |
 | | **9 - 1** | | | CreateTrip ViewModel | 3H | 4H |
 | | **9 - 2** | | | Dashboard ViewModel | 3H | 2H |
@@ -112,15 +113,20 @@
 | | **10 - 1** | | | Dashboard View | 3H | 1H |
 | | **10 - 2** | | | CreateTrip View | 2H | 1H 30M |
 | | **10 - 3** | | | Calendar View | 1H | 1H |
+| | **11 - 4** | | | TripDashboard View | 1H | 1H |
 | **11** | | Feat | ViewController | ViewController 객체 내 View, ViewModel 관리 및 처리 | | |
-| | **11 - 1** | | | Dashboard VC | 4H | 3H |
+| | **11 - 1** | | | Dashboard VC | 4H | 6H |
 | | **11 - 2** | | | CreateTrip VC | 4H | 6H |
 | | **11 - 3** | | | Calendar VC | 2H | 4H |
+| | **11 - 4** | | | TripDashboard VC | 4H | 2H |
 | **12** | | UI/Feat | Cell | Cell UI 및 기능 관리 | | |
-| | **12 - 1** | | | IntroCollectionViewCell | 1H | 1H |
-| | **12 - 2** | | | CalendarCustomCell | 2H | 4H |
-| | **12 - 3** | | | ExchangeRateCell | 3H | 1H |
-| | **12 - 4** | | | ExchangeRateHeaderCell | 2H | 2H |
+| | **12 - 1** | | | Intro Cell | 1H | 1H |
+| | **12 - 2** | | | CalendarCustom Cell | 2H | 4H |
+| | **12 - 3** | | | ExchangeRate Cell | 3H | 1H |
+| | **12 - 4** | | | ExchangeRate HeaderCell | 2H | 2H |
+| | **12 - 5** | | | TripIntro Cell | 2H | 1H |
+| | **12 - 6** | | | BudgetCard Cell | 2H | 1H |
+| | **12 - 7** | | | Expense Cell | 2H | 3H |
 ||||||**101 H**||
 
 ## 데이터베이스 구조
@@ -166,11 +172,17 @@
 
 ### Iteration - 3 ( 3월 11일 ~ 3월 13일)
 - Realm CRUD 기능 구현
-- API 통신 및 데이터 저장
+- API 통신 및 데이터 저장 -> Iteration 4
 - Main VC 화면 구현
 	- Collection View Compositional Layout 적용
 	- Diffable DataSource 적용
-	- 환율 데이터 적용(API)
+	- 환율 데이터 적용(API) -> Iteration 4
+
+### Iteration - 4 ( 3월 14일 ~ 3월 17일)
+- API 통신 및 데이터 저장
+	- 환율 데이터 저장 및 적용
+- TripDashboard VC
+	- CollecitonView Compositional Layout
 
 ### 회고
 3월 8일(목)
@@ -242,3 +254,21 @@ CollectionView Compositional Layout을 설정해주는데는 어려움이 없었
 API나 Realm을 통해 가공되는 DTO객체와 View나 ViewController에서 관리하는 객체로 변경해주었다.
 이렇게 한 이유는 API에서 전송되는 프로퍼티(?)나 Realm이 마이그레이션된다면 DTO와 관리객체만 변경해주면 되기 때문이다.
 종속성을 조금 더 덜어내는 과정이라고 이해했다. 다만 처음 접한 개념이고 처음 적용을하다보니 간단한 데이터였지만 3시간이나 걸려버렸다.
+
+---
+3월 15일(금)
+
+Trip Dashboard VC의 UI를 모두 그렸다. CollectionView로 모든 뷰를 그렸고, Section별로 Compositional Layout을 적용했다.
+문제는 마지막 Section을 날짜별로 지출액을 다르게 표현하게 하기 시작하면서부터 시작됐다.
+날짜별로 구분하기 위해서는 헤더가 필요한데, 기존코드에서는 Layout이 enum의 3가지 case로 나누어 3개의 섹션만 가질 수 있었다.
+
+정리하면 섹션이 날짜별로 추가되어야하는데, 3개의 섹션밖에 못만드는 상황이었다. 다행인점은, 추가로 생성되는 섹션은 기존 3번째 섹션과 동일한 레이아웃을 가지게 된다는 점이다.
+
+처음에는 compositional의 group마다 header를 붙여줄 수 있는지를 찾아봤다. 그러나 그런 방법은 없었고, group마다 구분할 수 있는 indexPath도 존재하지 않았다.
+
+두번째는 콜렉션 뷰 셀안에 테이블뷰를 만들었다, 이렇게 되면 테이블 뷰안에서 다시 섹션을 구분할 수 있기 때문에 괜찮았다.
+그러나 콜렉션 뷰와 테이블뷰의 스크롤이 따로 놀았다. 나는 하나의 view처럼 동작하길 원했기 때문에 이 역시 폐기했다.
+
+마지막으로 고민하다 생각해낸것이 enum의 연관값이다. 날짜별로 섹션을 생성할 것이기 때문에, 3번째 섹션의 날짜를 받을 수 있는 String 연관값을 붙여주었다.
+이렇게 되면 enum에서 case를 날짜별로 hashable하게 무한히 만들 수 있기에 Diffable에서도 사용이 가능했다.
+다만 연관값을 사용하다보니, 원시값(Int)을 사용하지 못하게 되면서, section과 Int의 raw value로 매칭하던 switch문이 못생겨졌다.
