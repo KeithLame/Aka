@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */; };
+		AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6542BA6BB8300EF14BD /* TripIntro.swift */; };
 		AC66687F2B9DA74C00AED57A /* CreateTripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */; };
 		AC6668852B9EFAA800AED57A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668842B9EFAA800AED57A /* Realm */; };
 		AC6668872B9EFAA800AED57A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668862B9EFAA800AED57A /* RealmSwift */; };
@@ -75,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardViewModel.swift; sourceTree = "<group>"; };
+		AC61A6542BA6BB8300EF14BD /* TripIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntro.swift; sourceTree = "<group>"; };
 		AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewModel.swift; sourceTree = "<group>"; };
 		AC6668882B9EFAF200AED57A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoDTO.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				AC66689F2BA0179C00AED57A /* InProgressTrip.swift */,
+				AC61A6542BA6BB8300EF14BD /* TripIntro.swift */,
 				AC6668C92BA2EF8A00AED57A /* TripInfo.swift */,
 				AC6668CB2BA3003D00AED57A /* Exchange.swift */,
 			);
@@ -322,6 +327,7 @@
 				ACF5AD1C2B9C6B1C00DBEF85 /* CalendarViewModel.swift */,
 				AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */,
 				AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */,
+				AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */,
 				AC6668C02BA2B4D000AED57A /* APIViewModel.swift */,
 			);
 			path = ViewModel;
@@ -487,6 +493,7 @@
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
 				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
+				AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */,
 				AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */,
 				AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */,
 				AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */,
@@ -505,6 +512,7 @@
 				AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */,
 				AC6668BF2BA291E100AED57A /* ExchangeAPIDTO.swift in Sources */,
 				ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */,
+				AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */,
 				AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */,
 				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,

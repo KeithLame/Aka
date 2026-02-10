@@ -37,4 +37,10 @@ class TripIntroCollectionViewCell: BaseCollectionViewCell {
         tripTitle.configure(text: "여행 제목", fontSize: .huge, fontScale: .Bold)
         tripDay.configure(text: "여행 일차", fontSize: .large, fontScale: .Bold)
     }
+    
+    func configure(data: TripIntro) {
+        
+        tripTitle.text = data.title
+        tripDay.text = data.preriod
+    }
 }

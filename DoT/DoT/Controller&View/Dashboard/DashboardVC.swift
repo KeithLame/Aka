@@ -92,6 +92,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             cell.configure(data: itemIdentifier)
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tripCardTapped))
+            tapGesture.view?.tag = indexPath.item
             
             cell.layoutView.addGestureRecognizer(tapGesture)
         }
@@ -169,8 +170,10 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     
     @objc func tripCardTapped(_ sender: UITapGestureRecognizer) {
         
-        let nextVC = TripDashboardViewController()
+        let allTripInfoDatas = dashboardVM.tripInfoDatas
+        let nextVC: TripDashboardViewController = TripDashboardViewController()
         makeBackBarButton()
+        nextVC.tripDashboardVM.tripInfoListener.data = allTripInfoDatas[sender.view?.tag ?? 0]
         
         navigationController?.pushViewController(nextVC, animated: true)
     }

@@ -10,6 +10,7 @@ import UIKit
 class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
     var diffableDataSource: UICollectionViewDiffableDataSource<TripDashboardCompositionalLayout, AnyHashable>!
+    var tripDashboardVM = TripDashboardViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +20,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
     override func configureCollectionView() {
         
-        let tripIntroRegistration = UICollectionView.CellRegistration<TripIntroCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
+        let tripIntroRegistration = UICollectionView.CellRegistration<TripIntroCollectionViewCell, TripIntro> { cell,indexPath,itemIdentifier in
             
+            cell.configure(data: itemIdentifier)
         }
         
         let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
@@ -39,7 +41,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             switch section {
             case 0:
                 
-                let cell = collectionView.dequeueConfiguredReusableCell(using: tripIntroRegistration, for: indexPath, item: itemIdentifier)
+                guard let item: TripIntro = itemIdentifier as? TripIntro else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: tripIntroRegistration, for: indexPath, item: item)
                 
                 return cell
                 
@@ -64,9 +68,12 @@ extension TripDashboardViewController {
     
     private func update() {
         
+        let tripIntro = tripDashboardVM.tripIntro
+        
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
-        snapshot.appendSections(TripDashboardCompositionalLayout.allCases)
-        snapshot.appendItems([1], toSection: .intro)
+        snapshot.appendSections([.intro, .budgetCard])
+        
+        snapshot.appendItems([tripIntro], toSection: .intro)
         snapshot.appendItems([2], toSection: .budgetCard)
         
         snapshot.appendSections([.expense(section: "20140313")])
