@@ -69,4 +69,12 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         expenseButton.configuration?.background.backgroundColor = .blackWhite
         expenseButton.configuration?.baseForegroundColor = .whiteBlack
     }
+    
+    func configure(data: TripInfo) {
+        
+        currencyLabel.text = data.currency
+        
+        guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
+        budgetLabel.text = "\(currency.currencySymbol) \(data.budget)" // MARK: remain으로 변경해야됨
+    }
 }

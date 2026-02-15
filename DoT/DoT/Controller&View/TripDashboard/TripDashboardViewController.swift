@@ -25,8 +25,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.configure(data: itemIdentifier)
         }
         
-        let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
+        let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, TripInfo> { cell,indexPath,itemIdentifier in
             
+            cell.configure(data: itemIdentifier)
         }
         
         let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
@@ -49,7 +50,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
             case 1:
                 
-                let cell = collectionView.dequeueConfiguredReusableCell(using: budgetCardRegistration, for: indexPath, item: itemIdentifier)
+                guard let item: TripInfo = itemIdentifier as? TripInfo else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: budgetCardRegistration, for: indexPath, item: item)
                 
                 return cell
                 
@@ -69,12 +72,13 @@ extension TripDashboardViewController {
     private func update() {
         
         let tripIntro = tripDashboardVM.tripIntro
+        guard let tripInfo = tripDashboardVM.tripInfoListener.data else { return }
         
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections([.intro, .budgetCard])
         
         snapshot.appendItems([tripIntro], toSection: .intro)
-        snapshot.appendItems([2], toSection: .budgetCard)
+        snapshot.appendItems([tripInfo], toSection: .budgetCard)
         
         snapshot.appendSections([.expense(section: "20140313")])
         snapshot.appendItems([3], toSection: .expense(section: "20140313"))
