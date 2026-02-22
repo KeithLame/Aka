@@ -15,9 +15,9 @@ struct TripInfo: Hashable {
     var budget: String
     var startDate: Date
     var endDate: Date
+    var tripDetail: [TripDetail] = []
     
-    
-    init(objectID: String, title: String, headCount: Int, currency: String, budget: String, startDate: Date, endDate: Date) {
+    init(objectID: String, title: String, headCount: Int, currency: String, budget: String, startDate: Date, endDate: Date, tripDetail: [TripDetail] = []) {
     
         self.objectID = objectID
         self.title = title
@@ -26,5 +26,6 @@ struct TripInfo: Hashable {
         self.budget = budget
         self.startDate = startDate
         self.endDate = endDate
+        self.tripDetail = tripDetail
     }
 }
