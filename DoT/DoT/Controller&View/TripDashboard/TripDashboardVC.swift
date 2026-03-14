@@ -28,6 +28,7 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, TripInfo> { cell,indexPath,itemIdentifier in
             
             cell.configure(data: itemIdentifier)
+            cell.expenseButton.addTarget(self, action: #selector(self.expenseButtonClicked), for: .touchUpInside)
         }
         
         let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
@@ -64,6 +65,13 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
             }
         })
+    }
+    
+    @objc func expenseButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = ExpenseViewController()
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

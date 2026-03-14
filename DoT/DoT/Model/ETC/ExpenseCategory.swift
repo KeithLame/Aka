@@ -8,12 +8,12 @@
 import Foundation
 import RealmSwift
 
-enum ExpenseCategory: String, PersistableEnum {
-    case transport
-    case roomCharge
-    case food
-    case cafe
-    case airport
-    case taxi
-    case etc
+enum ExpenseCategory: String, PersistableEnum, Hashable {
+    case transport = "교통비"
+    case roomCharge = "숙박비"
+    case food = "식비"
+    case cafe = "카페"
+    case airport = "항공기"
+    case taxi = "택시"
+    case etc = "기타"
 }
