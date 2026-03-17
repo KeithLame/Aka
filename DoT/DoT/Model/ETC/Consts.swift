@@ -17,6 +17,7 @@ enum Consts {
         case large = 19
         case extraLarge = 23
         case huge = 30
+        case extraHuge = 50
     }
     
     enum FontScale: String {
