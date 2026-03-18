@@ -58,7 +58,8 @@ class ExpenseView: BaseView {
     override func configureView() {
         
         symbolLabel.configure(text: "KRW", fontSize: .medium, fontScale: .Bold)
-        expenseLabel.configure(text: "100,000원", fontSize: .huge, fontScale: .Bold)
+        expenseLabel.configure(text: "100,000원", fontSize: .extraHuge, fontScale: .Bold)
+        expenseLabel.adjustsFontSizeToFitWidth = true
         
         expenseCollectionView.backgroundColor = .clear
         numberPadCollectionView.backgroundColor = .clear

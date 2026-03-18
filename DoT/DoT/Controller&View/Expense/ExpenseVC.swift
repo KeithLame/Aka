@@ -39,9 +39,14 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         
         layoutView.numberPadCollectionView.isScrollEnabled = false
         
-        let numberPadRegistration = UICollectionView.CellRegistration<NumberPadCollectionViewCell, String> { cell, indexPath, itemIdentifier in
+        let numberPadRegistration = UICollectionView.CellRegistration<NumberPadCollectionViewCell, String> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(numberPadTapped))
             
             cell.configure(data: itemIdentifier)
+            cell.numberLabel.addGestureRecognizer(tapGesture)
         }
         
         numberPadDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.numberPadCollectionView) {collectionView, indexPath, itemIdentifier in
@@ -52,6 +57,14 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             
             return cell
         }
+    }
+    
+    @objc func numberPadTapped(sender: UITapGestureRecognizer) {
+        
+        guard let label = sender.view as? UILabel,
+              let input = label.text else { return }
+        
+        
     }
 }
 
@@ -69,7 +82,7 @@ extension ExpenseViewController {
         var numberPadSnapshot = NSDiffableDataSourceSnapshot<NumberPadCompositionalLayout, String>()
         numberPadSnapshot.appendSections([.numberPad])
         
-        numberPadSnapshot.appendItems(["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "+"], toSection: .numberPad)
+        numberPadSnapshot.appendItems(["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "X"], toSection: .numberPad)
         
         self.numberPadDataSource.apply(numberPadSnapshot, animatingDifferences: true)
     }

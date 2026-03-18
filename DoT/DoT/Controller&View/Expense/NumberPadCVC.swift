@@ -28,6 +28,7 @@ class NumberPadCollectionViewCell: BaseCollectionViewCell {
         
         numberLabel.configure(text: "1", fontSize: .huge, fontScale: .Bold)
         numberLabel.textAlignment = .center
+        numberLabel.isUserInteractionEnabled = true
     }
     
     func configure(data: String) {
