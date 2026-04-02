@@ -48,7 +48,7 @@ class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
         exchangeRateLabel.configure(text: "1,331원", fontSize: .medium, fontScale: .Bold)
     }
     
-    func configure(data: Exchange) {
+    func configure(data: ExchangeRealm) {
         
         currencyLabel.text = data.currencyName
         currencyUnitLabel.text = data.currencyUnit

@@ -19,10 +19,13 @@ class TripDashboardViewModel {
             guard let tripInfo else { return }
             
             let title = tripInfo.title
+            let startDate = tripInfo.startDate
+            let endDate = tripInfo.endDate
+            
             var dateText: String {
                 
-                let startGap = DateUtil.getDateGap(from: tripInfo.startDate, to: Date())
-                let endGap = DateUtil.getDateGap(from: Date(), to: tripInfo.endDate)
+                let startGap = DateUtil.getDateGap(from: startDate, to: Date())
+                let endGap = DateUtil.getDateGap(from: Date(), to: endDate)
                 
                 if startGap == 0 {
                     return "D-Day"

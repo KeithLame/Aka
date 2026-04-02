@@ -11,7 +11,7 @@ class DashboardViewModel {
     
     var inProgressTripInfoData: InProgressTrip = InProgressTrip()
     var tripInfoDatas: [TripInfo] = []
-    var exchangeDatas: [Exchange] = []
+    var exchangeDatas: [ExchangeRealm] = []
     
     private let realmManager: RealmManager? = try? RealmManager()
     
@@ -21,7 +21,7 @@ class DashboardViewModel {
     let exchangeFetchListener: Observable<Void?> = Observable(nil)
     let exchangeFetchCompleteListener: Observable<Void?> = Observable(nil)
     
-    let createExchangeRateListener: Observable<[Exchange]> = Observable([])
+    let createExchangeRateListener: Observable<[ExchangeAPIModel]> = Observable([])
     let createExchangeRateCompletionListener: Observable<Bool> = Observable(true)
     
     init() {
@@ -32,9 +32,9 @@ class DashboardViewModel {
             
             guard let realmManager = self.realmManager else { return }
             
-            let tripInfoData = realmManager.fetch(TripInfoDTO.self)
+            let tripInfoData = realmManager.fetch(TripInfo.self)
             
-            self.tripInfoDatas = tripInfoData.map { $0.translate() }
+            self.tripInfoDatas = tripInfoData
             self.inProgressTripInfoData.title = self.getTitleInProgressTrip()
             
             self.tripInfoFetchCompleteListener.data = ()
@@ -44,11 +44,11 @@ class DashboardViewModel {
             
             guard let realmManager = self.realmManager else { return }
             
-            let exchangeData = realmManager.fetch(ExchangeRealmDTO.self)
+            let exchangeData = realmManager.fetch(ExchangeRealm.self)
             
-            self.exchangeDatas = exchangeData.map { $0.translate() }
+            self.exchangeDatas = exchangeData
             
-            self.tripInfoFetchCompleteListener.data = ()
+            self.exchangeFetchCompleteListener.data = ()
         }
         
         createExchangeRateListener.bind { datas in
@@ -56,7 +56,7 @@ class DashboardViewModel {
             guard let realmManager = self.realmManager else { return }
             
             // 새로운 데이터를 담기 전에 모두 삭제
-            let oldDatas = realmManager.fetch(ExchangeRealmDTO.self)
+            let oldDatas = realmManager.fetch(ExchangeRealm.self)
             
             for oldData in oldDatas {
                 do {
@@ -73,7 +73,7 @@ class DashboardViewModel {
             // 새로운 데이터로 저장
             for newdata in datas {
                 
-                let newExchangeDTO = ExchangeRealmDTO(date: newdata.id, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
+                let newExchangeDTO = ExchangeRealm(date: Date().description, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
                 
                 do {
                     try realmManager.create(newExchangeDTO)
@@ -86,7 +86,7 @@ class DashboardViewModel {
                 }
             }
             
-            self.exchangeDatas = datas
+            self.exchangeDatas = datas.map { $0.convertRealm() }
             self.createExchangeRateCompletionListener.data = true
         }
     }
@@ -122,12 +122,11 @@ class DashboardViewModel {
         
         guard let realmManager = self.realmManager else { return false }
         
-        let exchangeDTODatas = realmManager.fetch(ExchangeRealmDTO.self)
-        let exchangeDatas = exchangeDTODatas.map { $0.translate() }
+        let exchangeDatas = realmManager.fetch(ExchangeRealm.self)
         
         guard let exchangeData = exchangeDatas.first else { return false }
         
-        guard let savedDate = DateUtil.convertStringToDate(dateStr: exchangeData.id) else { return false }
+        guard let savedDate = DateUtil.convertStringToDate(dateStr: exchangeData.date) else { return false }
         guard let nowDate = DateUtil.convertStringToDate(dateStr: Date().description) else { return false }
         
         return DateUtil.isSameDate(first: savedDate, second: nowDate)

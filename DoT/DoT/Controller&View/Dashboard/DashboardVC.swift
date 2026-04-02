@@ -98,7 +98,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // exchangeRate Section Registration
-        let exchangeRateSectionRegistration = UICollectionView.CellRegistration<ExchangeRateCollectionViewCell, Exchange> { cell, indexPath, itemIdentifier in
+        let exchangeRateSectionRegistration = UICollectionView.CellRegistration<ExchangeRateCollectionViewCell, ExchangeRealm> { cell, indexPath, itemIdentifier in
             
             cell.configure(data: itemIdentifier)
         }
@@ -132,7 +132,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 
             case .exchangeRate:
                 
-                guard let item: Exchange = itemIdentifier as? Exchange else { return nil }
+                guard let item: ExchangeRealm = itemIdentifier as? ExchangeRealm else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: exchangeRateSectionRegistration, for: indexPath, item: item)
                 

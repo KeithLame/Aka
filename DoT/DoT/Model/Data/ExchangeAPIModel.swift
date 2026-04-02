@@ -1,5 +1,5 @@
 //
-//  ExchangeDTO.swift
+//  ExchangeAPIModel.swift
 //  DoT
 //
 //  Created by 이중엽 on 3/14/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExchangeAPIDTO: Decodable {
+struct ExchangeAPIModel: Decodable {
     
     let currencyUnit: String
     let exchangeRate: String
@@ -19,10 +19,10 @@ struct ExchangeAPIDTO: Decodable {
         case currencyName = "cur_nm"
     }
     
-    func translate() -> Exchange {
+    func convertRealm() -> ExchangeRealm {
         
-        let exchange = Exchange(id: Date().description, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
+        let newExchangeRealm = ExchangeRealm(date: Date().description, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
         
-        return exchange
+        return newExchangeRealm
     }
 }

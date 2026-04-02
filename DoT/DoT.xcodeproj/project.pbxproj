@@ -10,7 +10,6 @@
 		AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */; };
 		AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6542BA6BB8300EF14BD /* TripIntro.swift */; };
 		AC61A6572BA6C97400EF14BD /* TripDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6562BA6C97400EF14BD /* TripDetailDTO.swift */; };
-		AC61A6592BA6DD7E00EF14BD /* TripDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6582BA6DD7E00EF14BD /* TripDetail.swift */; };
 		AC61A65B2BA6E31F00EF14BD /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A65A2BA6E31F00EF14BD /* ExpenseCategory.swift */; };
 		AC61A65E2BA6E67200EF14BD /* ExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A65D2BA6E67200EF14BD /* ExpenseVC.swift */; };
 		AC61A6602BA6E67B00EF14BD /* ExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A65F2BA6E67B00EF14BD /* ExpenseView.swift */; };
@@ -22,7 +21,7 @@
 		AC6668852B9EFAA800AED57A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668842B9EFAA800AED57A /* Realm */; };
 		AC6668872B9EFAA800AED57A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC6668862B9EFAA800AED57A /* RealmSwift */; };
 		AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668882B9EFAF200AED57A /* RealmManager.swift */; };
-		AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */; };
+		AC66688B2B9F00FD00AED57A /* TripInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688A2B9F00FD00AED57A /* TripInfo.swift */; };
 		AC66688D2B9F023900AED57A /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688C2B9F023900AED57A /* RealmError.swift */; };
 		AC66688F2B9F194700AED57A /* TripCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC66688E2B9F194700AED57A /* TripCardCVC.swift */; };
 		AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */; };
@@ -35,12 +34,10 @@
 		AC6668B42BA281C300AED57A /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B32BA281C300AED57A /* APIManager.swift */; };
 		AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B82BA2835A00AED57A /* APIProtocol.swift */; };
 		AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */; };
-		AC6668BF2BA291E100AED57A /* ExchangeAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */; };
+		AC6668BF2BA291E100AED57A /* ExchangeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */; };
 		AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C02BA2B4D000AED57A /* APIViewModel.swift */; };
 		AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C72BA2EEFF00AED57A /* APIKey.swift */; };
-		AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C92BA2EF8A00AED57A /* TripInfo.swift */; };
-		AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CB2BA3003D00AED57A /* Exchange.swift */; };
-		AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */; };
+		AC6668D02BA306E600AED57A /* ExchangeRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CF2BA306E600AED57A /* ExchangeRealm.swift */; };
 		AC78E2EA2BA43BF5005B2E99 /* TripDashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */; };
 		AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */; };
 		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
@@ -89,7 +86,6 @@
 		AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardViewModel.swift; sourceTree = "<group>"; };
 		AC61A6542BA6BB8300EF14BD /* TripIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntro.swift; sourceTree = "<group>"; };
 		AC61A6562BA6C97400EF14BD /* TripDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailDTO.swift; sourceTree = "<group>"; };
-		AC61A6582BA6DD7E00EF14BD /* TripDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetail.swift; sourceTree = "<group>"; };
 		AC61A65A2BA6E31F00EF14BD /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
 		AC61A65D2BA6E67200EF14BD /* ExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseVC.swift; sourceTree = "<group>"; };
 		AC61A65F2BA6E67B00EF14BD /* ExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseView.swift; sourceTree = "<group>"; };
@@ -99,7 +95,7 @@
 		AC61A6672BA742F100EF14BD /* NumberPadCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadCL.swift; sourceTree = "<group>"; };
 		AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewModel.swift; sourceTree = "<group>"; };
 		AC6668882B9EFAF200AED57A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoDTO.swift; sourceTree = "<group>"; };
+		AC66688A2B9F00FD00AED57A /* TripInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfo.swift; sourceTree = "<group>"; };
 		AC66688C2B9F023900AED57A /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		AC66688E2B9F194700AED57A /* TripCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardCVC.swift; sourceTree = "<group>"; };
 		AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
@@ -111,12 +107,10 @@
 		AC6668B32BA281C300AED57A /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		AC6668B82BA2835A00AED57A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
-		AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIDTO.swift; sourceTree = "<group>"; };
+		AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIModel.swift; sourceTree = "<group>"; };
 		AC6668C02BA2B4D000AED57A /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
 		AC6668C72BA2EEFF00AED57A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		AC6668C92BA2EF8A00AED57A /* TripInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfo.swift; sourceTree = "<group>"; };
-		AC6668CB2BA3003D00AED57A /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
-		AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRealmDTO.swift; sourceTree = "<group>"; };
+		AC6668CF2BA306E600AED57A /* ExchangeRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRealm.swift; sourceTree = "<group>"; };
 		AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardVC.swift; sourceTree = "<group>"; };
 		AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
@@ -218,11 +212,12 @@
 		AC6668B62BA282E300AED57A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				AC66688A2B9F00FD00AED57A /* TripInfo.swift */,
+				AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */,
+				AC6668CF2BA306E600AED57A /* ExchangeRealm.swift */,
+				AC61A6562BA6C97400EF14BD /* TripDetailDTO.swift */,
 				AC66689F2BA0179C00AED57A /* InProgressTrip.swift */,
 				AC61A6542BA6BB8300EF14BD /* TripIntro.swift */,
-				AC6668C92BA2EF8A00AED57A /* TripInfo.swift */,
-				AC6668CB2BA3003D00AED57A /* Exchange.swift */,
-				AC61A6582BA6DD7E00EF14BD /* TripDetail.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -233,17 +228,6 @@
 				AC6668B82BA2835A00AED57A /* APIProtocol.swift */,
 			);
 			path = Protocol;
-			sourceTree = "<group>";
-		};
-		AC6668CD2BA3012E00AED57A /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
-				AC6668BE2BA291E100AED57A /* ExchangeAPIDTO.swift */,
-				AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */,
-				AC61A6562BA6C97400EF14BD /* TripDetailDTO.swift */,
-			);
-			path = DTO;
 			sourceTree = "<group>";
 		};
 		AC6668CE2BA3023000AED57A /* ETC */ = {
@@ -343,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				AC6668CE2BA3023000AED57A /* ETC */,
-				AC6668CD2BA3012E00AED57A /* DTO */,
 				AC6668B62BA282E300AED57A /* Data */,
 				AC6668B52BA282CE00AED57A /* Util */,
 				AC6668B22BA281B300AED57A /* API */,
@@ -524,7 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC61A6642BA6EAB600EF14BD /* CategoryCVC.swift in Sources */,
-				AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */,
+				AC6668D02BA306E600AED57A /* ExchangeRealm.swift in Sources */,
 				AC6668AA2BA1A26000AED57A /* String++.swift in Sources */,
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
 				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
@@ -537,18 +520,15 @@
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				AC66687F2B9DA74C00AED57A /* CreateTripViewModel.swift in Sources */,
-				AC61A6592BA6DD7E00EF14BD /* TripDetail.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				AC78E2EA2BA43BF5005B2E99 /* TripDashboardVC.swift in Sources */,
 				AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */,
-				AC6668CA2BA2EF8A00AED57A /* TripInfo.swift in Sources */,
-				AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */,
+				AC66688B2B9F00FD00AED57A /* TripInfo.swift in Sources */,
 				AC61A65E2BA6E67200EF14BD /* ExpenseVC.swift in Sources */,
 				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
-				AC6668CC2BA3003D00AED57A /* Exchange.swift in Sources */,
-				AC6668BF2BA291E100AED57A /* ExchangeAPIDTO.swift in Sources */,
+				AC6668BF2BA291E100AED57A /* ExchangeAPIModel.swift in Sources */,
 				ACF5AD242B9CB14E00DBEF85 /* CalendarView.swift in Sources */,
 				AC61A6572BA6C97400EF14BD /* TripDetailDTO.swift in Sources */,
 				AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */,

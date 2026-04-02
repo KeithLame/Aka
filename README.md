@@ -96,7 +96,7 @@
 | **3** | | Feat | API Manager | API 호출 객체, API를 호출하는 메인 기능 관리 | 3 H | 2H |
 | **4** | | Feat | API Model | API 응답으로 온 JSON에 맞추어 데이터를 Decode할 모델 생성 | 3 H | |
 | **5** | | Feat | Consts | Literal 문자열 저장 및 고정으로 사용하는 데이터 저장할 객체 | 3 H | 2 H |
-| **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | | |
+| **6** | | Feat | Util | 각 종 편의성(Formatter 등)과 관련된 기능 코드들 작성 | 3H | 4H |
 | | **6 - 1** | | | Date Util | 3H | 4H |
 | | **6 - 2** | | | Number Util | 1H | 1H |
 | **7** | | Feat | FileManager | 이미지 저장을 위한 FileManager 객체 생성 및 이미지 저장 및 호출 관리 | 6 H | |
@@ -104,7 +104,9 @@
 | | **8 - 1** | | | Observable - ViewModel에서 사용할 관찰자(값 변화 탐지용) | 1H | 30 M |
 | | **8 - 2** | | | TripInfoRepository - Realm 데이터베이스 모델 | 30 M | 30 M |
 | | **8 - 3** | | | DashboardCompositionalLayout - 레이아웃 | 3 H | 3H |
-| | **8 - 4** | | | TripDashboardCompositionalLayout - 레이아웃 | 4 H | |
+| | **8 - 4** | | | TripDashboardCompositionalLayout - 레이아웃 | 4 H | 6H |
+| | **8 - 5** | | | CategoryCompositionalLayout - 레이아웃 | 2 H | 4H |
+| | **8 - 6** | | | NumberPadCompositionalLayout - 레이아웃 | 2 H | 2H |
 | **9** | | Feat | ViewModel | View에 필요한 데이터 처리 및 기능 관리 | | |
 | | **9 - 1** | | | CreateTrip ViewModel | 3H | 4H |
 | | **9 - 2** | | | Dashboard ViewModel | 3H | 2H |
@@ -127,6 +129,8 @@
 | | **12 - 5** | | | TripIntro Cell | 2H | 1H |
 | | **12 - 6** | | | BudgetCard Cell | 2H | 1H |
 | | **12 - 7** | | | Expense Cell | 2H | 3H |
+| | **12 - 8** | | | Category Cell | 1H | 1H |
+| | **12 - 9** | | | NumberPad Cell | 1H | 1H |
 ||||||**101 H**||
 
 ## 데이터베이스 구조
@@ -272,3 +276,16 @@ Trip Dashboard VC의 UI를 모두 그렸다. CollectionView로 모든 뷰를 그
 마지막으로 고민하다 생각해낸것이 enum의 연관값이다. 날짜별로 섹션을 생성할 것이기 때문에, 3번째 섹션의 날짜를 받을 수 있는 String 연관값을 붙여주었다.
 이렇게 되면 enum에서 case를 날짜별로 hashable하게 무한히 만들 수 있기에 Diffable에서도 사용이 가능했다.
 다만 연관값을 사용하다보니, 원시값(Int)을 사용하지 못하게 되면서, section과 Int의 raw value로 매칭하던 switch문이 못생겨졌다.
+
+---
+3월 17일(일)
+
+카테고리 셀의 너비가 동적으로 작용해야하는데, 아무리 해도 안먹었다.
+Cell에서 contentView에 뷰를 추가한게 아니라 그냥 추가해버려서 compasitional에서 estimated로 아무리 너비를 설정해도 contentview의 너비를 알수가 없었던것 같다.
+컴파일 오류로도 안잡혀서 한참 헤매였다.
+
+넘버패드와 카테고리 모두 콜렉션뷰로 만들었는데, 기존과는 다르게 섹션 으로 구분짓지 않고 각기 다른 콜렉션뷰로 만들어주었다.
+그 이유는 넘버패드는 스크롤이 안먹어야하고 값이 고정되어 추후에도 변 경될 가능성이 아예 없기 때문에 그렇게 만들었다.
+더불어 카테고리와 넘버패드는 Layout을 계속 재사용해야 하는데,분리를 통해 언제든 재사용할 수 있다는 장점이 있었다.
+
+아직 DTO 개념이 완벽하지 않다보니 코드도 불안정해진거같아 고민이 많은데, 우선 지출 VC까지 완료한다음 DTO를 적용했던 코드들은 모두 원래 상태로 돌리려고 한다.
