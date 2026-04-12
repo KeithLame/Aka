@@ -24,10 +24,7 @@ extension String {
      
         if self.isWhiteSpace() { return "" }
         
-        var isExistDot: Bool = false
-        
-        // "." 존재 여부 체크
-        for char in Array(self) { if char == "." { isExistDot = true } }
+        var isExistDot = self.isExistDot()
         
         // "."이 있으면 그대로 입력
         if isExistDot { return self }
@@ -41,5 +38,27 @@ extension String {
         }
         
         return "숫자를 입력해주세요."
+    }
+    
+    func convertStringWithoutDecimal() -> String {
+        
+        return self.replacingOccurrences(of: ",", with: "")
+    }
+    
+    func convertDouble() -> Double {
+        
+        guard let result = Double(self) else { return 0 }
+        
+        return result
+    }
+    
+    func isExistDot() -> Bool {
+        
+        var isExistDot: Bool = false
+        
+        // "." 존재 여부 체크
+        for char in Array(self) { if char == "." { isExistDot = true } }
+        
+        return isExistDot
     }
 }

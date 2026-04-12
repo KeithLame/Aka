@@ -70,6 +70,7 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
     @objc func expenseButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
+        nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
         
         navigationController?.pushViewController(nextVC, animated: true)
     }

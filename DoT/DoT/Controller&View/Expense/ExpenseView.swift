@@ -12,13 +12,13 @@ class ExpenseView: BaseView {
     
     let symbolLabel = UILabel()
     let expenseLabel = UILabel()
-    let expenseCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CategoryCompositionalLayout.create())
+    let categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CategoryCompositionalLayout.create())
     let numberPadCollectionView = UICollectionView(frame: .zero, collectionViewLayout: NumberPadCompositionalLayout.create())
     let saveButton = UIButton()
 
     override func configureHierarchy() {
         
-        [symbolLabel, expenseLabel, expenseCollectionView, numberPadCollectionView, saveButton].forEach { addSubview($0) }
+        [symbolLabel, expenseLabel, categoryCollectionView, numberPadCollectionView, saveButton].forEach { addSubview($0) }
     }
     
     override func configureLayout() {
@@ -33,17 +33,17 @@ class ExpenseView: BaseView {
         
         expenseLabel.snp.makeConstraints {
             $0.top.equalTo(symbolLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(20)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(20)
         }
         
-        expenseCollectionView.snp.makeConstraints {
+        categoryCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.snp.centerY).offset(-44)
             $0.horizontalEdges.equalTo(self)
             $0.height.equalTo(32)
         }
         
         numberPadCollectionView.snp.makeConstraints {
-            $0.top.equalTo(expenseCollectionView.snp.bottom)
+            $0.top.equalTo(categoryCollectionView.snp.bottom)
             $0.horizontalEdges.equalTo(self)
         }
         
@@ -58,11 +58,18 @@ class ExpenseView: BaseView {
     override func configureView() {
         
         symbolLabel.configure(text: "KRW", fontSize: .medium, fontScale: .Bold)
-        expenseLabel.configure(text: "100,000원", fontSize: .extraHuge, fontScale: .Bold)
+        expenseLabel.configure(text: "0", fontSize: .extraHuge, fontScale: .Bold)
         expenseLabel.adjustsFontSizeToFitWidth = true
         
-        expenseCollectionView.backgroundColor = .clear
+        categoryCollectionView.backgroundColor = .clear
         numberPadCollectionView.backgroundColor = .clear
         saveButton.configure(title: "지출 추가", image: .plane)
+    }
+    
+    func configre(data: TripInfo, input: String) {
+        
+        guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
+        symbolLabel.text = currency.name
+        expenseLabel.text = input
     }
 }

@@ -27,12 +27,17 @@ class CategoryCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         
-        
         categoryButton.configure(title: "", image: nil, fontSize: .regular, fontScale: .Black , backgroundColor: .blackWhite, foregroundColor: .whiteBlack)
     }
     
     func configure(data: ExpenseCategory) {
         
-        categoryButton.configuration?.title = data.rawValue
+        categoryButton.configuration?.title = data.name
+    }
+    
+    func refresh() {
+        
+        categoryButton.configuration?.background.backgroundColor = .blackWhite
+        categoryButton.configuration?.baseForegroundColor = .whiteBlack
     }
 }

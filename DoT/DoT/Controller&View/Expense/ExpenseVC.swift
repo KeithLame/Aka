@@ -9,6 +9,7 @@ import UIKit
 
 class ExpenseViewController: BaseViewController<ExpenseView> {
     
+    let expenseVM = ExpenseViewModel()
     var categoryDataSource: UICollectionViewDiffableDataSource<CategoryCompositionalLayout, ExpenseCategory>!
     var numberPadDataSource: UICollectionViewDiffableDataSource<NumberPadCompositionalLayout, String>!
     
@@ -18,15 +19,44 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         update()
     }
     
-    override func configureCollectionView() {
+    override func bindData() {
         
-        // MARK: Category Collecion View
-        let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> { cell, indexPath, itemIdentifier in
+        expenseVM.ouputNumberPadListener.bind { [weak self] output in
             
-            cell.configure(data: itemIdentifier)
+            guard let self, let data = expenseVM.tripInfoData else { return }
+            
+            layoutView.configre(data: data, input: output)
         }
         
-        categoryDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.expenseCollectionView) {collectionView, indexPath, itemIdentifier in
+        expenseVM.outputCategoryButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            let count = ExpenseCategory.allCases.count
+            
+            for idx in 0 ..< count {
+                let indexPath = IndexPath(item: idx, section: 0)
+                guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
+                cell.refresh()
+            }
+        }
+    }
+    
+    override func configureCollectionView() {
+        
+        layoutView.categoryCollectionView.showsHorizontalScrollIndicator = false
+        
+        // MARK: Category Collecion View
+        let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> {[weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+            
+            cell.configure(data: itemIdentifier)
+            cell.categoryButton.tag = indexPath.item
+            cell.categoryButton.addTarget(self, action: #selector(self.categoryButtonClicked), for: .touchUpInside)
+        }
+        
+        categoryDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.categoryCollectionView) {collectionView, indexPath, itemIdentifier in
             
             let cell = collectionView.dequeueConfiguredReusableCell(using: categoryRegistration,
                                                                     for: indexPath,
@@ -59,12 +89,30 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         }
     }
     
+    override func configure() {
+        
+        guard let data = expenseVM.tripInfoData else { return }
+        
+        layoutView.configre(data: data, input: "0")
+    }
+    
+    @objc func categoryButtonClicked(sender: UIButton) {
+        
+        guard let category = ExpenseCategory(rawValue: sender.tag) else { return }
+        
+        expenseVM.inputCategoryButtonClickedListener.data = category
+        
+        sender.configuration?.background.backgroundColor = .pointBlue
+        sender.configuration?.baseForegroundColor = .justWhite
+    }
+    
     @objc func numberPadTapped(sender: UITapGestureRecognizer) {
         
         guard let label = sender.view as? UILabel,
-              let input = label.text else { return }
+              let input = label.text,
+              let inputText = layoutView.expenseLabel.text else { return }
         
-        
+        expenseVM.inputNumberPadListener.data = (input, inputText)
     }
 }
 
