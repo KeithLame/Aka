@@ -10,14 +10,21 @@ import Foundation
 class ExpenseViewModel {
     
     var tripInfoData: TripInfo? = nil
-    var category: ExpenseCategory = .transport
+    var category: ExpenseCategory? = nil
     var expense: Double = 0
+    
+    var complete: (() -> Void)? = nil
+    
+    let realmManager = try? RealmManager()
     
     let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
     let outputCategoryButtonClickedListener: Observable<Void?> = Observable(nil)
     
     let inputNumberPadListener: Observable<(input: String, text: String)> = Observable(("", ""))
     let ouputNumberPadListener: Observable<String> = Observable("")
+    
+    let inputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
+    let outputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
     
     init() {
         
@@ -72,6 +79,24 @@ class ExpenseViewModel {
             self.category = data
             
             outputCategoryButtonClickedListener.data = ()
+        }
+        
+        inputSaveButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self, let realmManager, let tripInfoData, let category else { return }
+            
+            let newExpense = TripDetailInfo(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
+            
+            let tripInfo = realmManager.fetchOrigin(TripInfo.self)
+            
+            for data in tripInfo {
+                if data.objectID == tripInfoData.objectID {
+                    realmManager.appendTripDetail(data, tripDetail: newExpense)
+                    break
+                }
+            }
+            
+            outputSaveButtonClickedListener.data = ()
         }
     }
 }

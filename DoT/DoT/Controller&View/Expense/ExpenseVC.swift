@@ -19,6 +19,10 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         update()
     }
     
+    deinit {
+        print("deinit Expense VC")
+    }
+    
     override func bindData() {
         
         expenseVM.ouputNumberPadListener.bind { [weak self] output in
@@ -39,6 +43,13 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
                 cell.refresh()
             }
+        }
+        
+        expenseVM.outputSaveButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -66,7 +77,6 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         }
         
         // MARK: NumberPad Collecion View
-        
         layoutView.numberPadCollectionView.isScrollEnabled = false
         
         let numberPadRegistration = UICollectionView.CellRegistration<NumberPadCollectionViewCell, String> { [weak self] cell, indexPath, itemIdentifier in
@@ -94,6 +104,13 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         guard let data = expenseVM.tripInfoData else { return }
         
         layoutView.configre(data: data, input: "0")
+        
+        layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func saveButtonClicked(sender: UIButton) {
+        
+        self.expenseVM.inputSaveButtonClickedListener.data = ()
     }
     
     @objc func categoryButtonClicked(sender: UIButton) {

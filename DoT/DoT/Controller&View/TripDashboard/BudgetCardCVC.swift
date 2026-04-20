@@ -74,7 +74,20 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         
         currencyLabel.text = data.currency
         
+        let tripDetail = data.tripDetail
+        
+        var expense: Double = 0
+        
+        for detail in tripDetail {
+            expense += detail.expense
+        }
+        
+        let budget = data.budget.convertDouble()
+        let remainBudget = budget - expense
+        
+        let remain = NumberUtil.convertDecimal(remainBudget as NSNumber)
+        
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
-        budgetLabel.text = "\(currency.currencySymbol) \(data.budget)" // MARK: remain으로 변경해야됨
+        budgetLabel.text = "\(currency.currencySymbol) \(remain)" // MARK: remain으로 변경해야됨
     }
 }

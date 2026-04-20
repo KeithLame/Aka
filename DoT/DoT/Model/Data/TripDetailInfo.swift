@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class TripDetailInfo: Object {
-    @Persisted(primaryKey: true) var objectID = ObjectId()
+    @Persisted(primaryKey: true) var objectID: String = UUID().uuidString
     @Persisted var expense: Double
     @Persisted var category: ExpenseCategory
     @Persisted var photo: String?

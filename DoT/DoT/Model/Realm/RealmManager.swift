@@ -31,6 +31,13 @@ final class RealmManager {
         return Array(result)
     }
     
+    func fetchOrigin<T: Object>(_ type: T.Type) -> Results<T> {
+        
+        let result = realm.objects(T.self)
+        
+        return result
+    }
+    
     func create<T: Object>(_ object: T) throws {
         do {
             try realm.write {
@@ -48,6 +55,28 @@ final class RealmManager {
             }
         } catch {
             throw RealmError.objectDeleteFailed
+        }
+    }
+    
+    func updateTripDetailByID<T: Object>(_ type: T.Type, id: ObjectId, value: TripDetailInfo) {
+        do {
+            try realm.write {
+                realm.create(type,
+                             value: [
+                                "id": id,
+                                "tripDetail": value
+                             ],
+                             update: .modified)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func appendTripDetail(_ data: TripInfo, tripDetail: TripDetailInfo) {
+        
+        try! realm.write {
+            data.tripDetail.append(tripDetail)
         }
     }
 }
