@@ -71,6 +71,12 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
+        nextVC.expenseVM.complete = { [weak self] in
+            
+            guard let self else { return }
+            
+            update()
+        }
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
