@@ -9,8 +9,11 @@ import Foundation
 
 class TripDashboardViewModel {
     
+    var realmManager: RealmManager? = try? RealmManager()
+    
     var tripIntro: TripIntro = TripIntro()
     var tripInfoListener: Observable<TripInfo?> = Observable(nil)
+    var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
     
     init() {
         
@@ -41,5 +44,35 @@ class TripDashboardViewModel {
             
             self.tripIntro = TripIntro(title: title, preriod: dateText)
         }
+        
+        tripInfoUpdateListener.bind { [weak self] _ in
+            
+            guard let self, let realmManager, let tripInfo = tripInfoListener.data else { return }
+            
+            let tripInfoDatas = realmManager.fetch(TripInfo.self)
+            
+            for newTripInfo in tripInfoDatas {
+                if newTripInfo.objectID == tripInfo.objectID {
+                    tripInfoListener.data = newTripInfo
+                }
+            }
+        }
+    }
+    
+    func getRemainBudgetByObjectID(_ id: String) -> Double {
+        
+        guard let tripInfoData = tripInfoListener.data else { return 0 }
+        let tripDetail = tripInfoData.tripDetail
+        
+        var budget = tripInfoData.budget.convertDouble()
+        
+        for data in tripDetail {
+            
+            budget -= data.expense
+            
+            if data.objectID == id { break }
+        }
+        
+        return budget
     }
 }

@@ -31,9 +31,12 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.expenseButton.addTarget(self, action: #selector(self.expenseButtonClicked), for: .touchUpInside)
         }
         
-        let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, AnyHashable> { cell,indexPath,itemIdentifier in
+        let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, TripDetailInfo> { [weak self] cell,indexPath,itemIdentifier in
             
+            guard let self else { return }
             
+            let remainBudget = tripDashboardVM.getRemainBudgetByObjectID(itemIdentifier.objectID)
+            cell.configure(data: itemIdentifier, remainBudget: remainBudget)
         }
         
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -59,7 +62,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
             default:
                 
-                let cell = collectionView.dequeueConfiguredReusableCell(using: expenseRegistration, for: indexPath, item: itemIdentifier)
+                guard let item: TripDetailInfo = itemIdentifier as? TripDetailInfo else { return nil }
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: expenseRegistration, for: indexPath, item: item)
                 
                 return cell
                 
@@ -75,6 +80,10 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
             guard let self else { return }
             
+            tripDashboardVM.tripInfoUpdateListener.data = ()
+            
+            let snapShot = diffableDataSource.snapshot()
+            diffableDataSource.applySnapshotUsingReloadData(snapShot)
             update()
         }
         
@@ -89,17 +98,27 @@ extension TripDashboardViewController {
         let tripIntro = tripDashboardVM.tripIntro
         guard let tripInfo = tripDashboardVM.tripInfoListener.data else { return }
         
+        // 빠른 날짜 순으로 정렬
+        let tripDetail = Array(tripInfo.tripDetail).sorted { $0.expenseDate > $1.expenseDate }
+        
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections([.intro, .budgetCard])
         
         snapshot.appendItems([tripIntro], toSection: .intro)
         snapshot.appendItems([tripInfo], toSection: .budgetCard)
         
-        snapshot.appendSections([.expense(section: "20140313")])
-        snapshot.appendItems([3], toSection: .expense(section: "20140313"))
-        
-        snapshot.appendSections([.expense(section: "20140314")])
-        snapshot.appendItems([4], toSection: .expense(section: "20140314"))
+        tripDetail.forEach {
+            
+            let newSectionName = DateUtil.getStringFromDate(date: $0.expenseDate, format: "YYYYMMdd")
+            let isExistSection: Bool = snapshot.sectionIdentifiers.contains(.expense(section: newSectionName))
+            
+            if isExistSection {
+                snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
+            } else {
+                snapshot.appendSections([.expense(section: newSectionName)])
+                snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
+            }
+        }
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }

@@ -46,4 +46,11 @@ class ExpenseCollectionViewCell: BaseCollectionViewCell {
         expenseLabel.configure(text: "130,000원", fontSize: .large, fontScale: .Bold)
         remainLabel.configure(text: "500,000원", fontSize: .medium, fontScale: .Bold, color: .justGray)
     }
+    
+    func configure(data: TripDetailInfo, remainBudget: Double) {
+        
+        categoryLabel.text = data.category.name
+        expenseLabel.text = "\(data.expense)"
+        remainLabel.text = NumberUtil.convertDecimal(remainBudget as NSNumber)
+    }
 }

@@ -75,7 +75,7 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         currencyLabel.text = data.currency
         
         let tripDetail = data.tripDetail
-        
+        dump(data.tripDetail)
         var expense: Double = 0
         
         for detail in tripDetail {

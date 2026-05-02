@@ -47,7 +47,8 @@ extension String {
     
     func convertDouble() -> Double {
         
-        guard let result = Double(self) else { return 0 }
+        let withoutDecimal = self.convertStringWithoutDecimal()
+        guard let result = Double(withoutDecimal) else { return 0 }
         
         return result
     }

@@ -49,6 +49,8 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             
             guard let self else { return }
             
+            self.expenseVM.complete?()
+            
             navigationController?.popViewController(animated: true)
         }
     }
