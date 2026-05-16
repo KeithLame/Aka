@@ -45,6 +45,7 @@
 		AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */; };
 		AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */; };
 		AC939C232BA82FEF0048956B /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C222BA82FEF0048956B /* ExpenseViewModel.swift */; };
+		AC939C252BA88EF50048956B /* ExpenseCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C242BA88EF50048956B /* ExpenseCRV.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -119,6 +120,7 @@
 		AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCardCVC.swift; sourceTree = "<group>"; };
 		AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCVC.swift; sourceTree = "<group>"; };
 		AC939C222BA82FEF0048956B /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
+		AC939C242BA88EF50048956B /* ExpenseCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCRV.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */,
 				AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */,
 				AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */,
+				AC939C242BA88EF50048956B /* ExpenseCRV.swift */,
 			);
 			path = TripDashboard;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				AC6668D02BA306E600AED57A /* ExchangeRealm.swift in Sources */,
 				AC6668AA2BA1A26000AED57A /* String++.swift in Sources */,
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
+				AC939C252BA88EF50048956B /* ExpenseCRV.swift in Sources */,
 				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
 				AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */,

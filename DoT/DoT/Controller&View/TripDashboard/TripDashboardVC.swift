@@ -39,6 +39,17 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.configure(data: itemIdentifier, remainBudget: remainBudget)
         }
         
+        let expenseHeaderRegistration = UICollectionView.SupplementaryRegistration<ExpenseCollectionReusableView>(elementKind: ExpenseCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
+            
+            guard let self else { return }
+            
+            let snapshot = diffableDataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            guard let items = snapshot.itemIdentifiers(inSection: section) as? [TripDetailInfo] else { return }
+            
+            supplementaryView.configure(data: items, title: section.title)
+        }
+        
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
             let section = indexPath.section
@@ -70,6 +81,13 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
             }
         })
+        
+        // Header 등록
+        diffableDataSource.supplementaryViewProvider = { (view, kind, index) in
+            return self.layoutView.tripDashboradCollectionView.dequeueConfiguredReusableSupplementary(
+                using: expenseHeaderRegistration, for: index)
+            
+        }
     }
     
     @objc func expenseButtonClicked(_ sender: UIButton) {
@@ -109,30 +127,18 @@ extension TripDashboardViewController {
         
         tripDetail.forEach {
             
-            let newSectionName = DateUtil.getStringFromDate(date: $0.expenseDate, format: "YYYYMMdd")
+            let newSectionName = DateUtil.getStringFromDate(date: $0.expenseDate, format: "yy.MM.dd")
             let isExistSection: Bool = snapshot.sectionIdentifiers.contains(.expense(section: newSectionName))
             
             if isExistSection {
                 snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
             } else {
+                tripDashboardVM.tripDetailSectionName.append(newSectionName)
                 snapshot.appendSections([.expense(section: newSectionName)])
                 snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
             }
         }
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
-    }
-    
-    func append() {
-        
-        // 현재상태 snapshot 복사
-        var curSnapshot = diffableDataSource.snapshot()
-        
-        // Section 추가
-        curSnapshot.appendSections([.expense(section: "11111")])
-        // item 추가
-        curSnapshot.appendItems([5])
-        
-        diffableDataSource.apply(curSnapshot)
     }
 }

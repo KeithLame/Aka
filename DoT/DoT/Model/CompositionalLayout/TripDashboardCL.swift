@@ -15,6 +15,14 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     case budgetCard
     case expense(section: String)
     
+    var title: String {
+        switch self {
+        case .expense(let section):
+            return section
+        default: return ""
+        }
+    }
+    
     static func create() -> UICollectionViewCompositionalLayout {
         
         return UICollectionViewCompositionalLayout { section, environment in
@@ -75,9 +83,9 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        // section.boundarySupplementaryItems = [createHeader()]
+        section.boundarySupplementaryItems = [createHeader()]
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         
         return section
     }
@@ -85,7 +93,9 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     private static func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .estimated(44))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: ExchangeRateCollectionReusableView.identifier, alignment: .top)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: ExpenseCollectionReusableView.identifier, alignment: .top)
+        
+        header.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 10, bottom: 0, trailing: 10)
         
         return header
     }

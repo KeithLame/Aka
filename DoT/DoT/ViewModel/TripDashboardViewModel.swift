@@ -11,6 +11,8 @@ class TripDashboardViewModel {
     
     var realmManager: RealmManager? = try? RealmManager()
     
+    var tripDetailSectionName: [String] = []
+    
     var tripIntro: TripIntro = TripIntro()
     var tripInfoListener: Observable<TripInfo?> = Observable(nil)
     var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
@@ -62,7 +64,7 @@ class TripDashboardViewModel {
     func getRemainBudgetByObjectID(_ id: String) -> Double {
         
         guard let tripInfoData = tripInfoListener.data else { return 0 }
-        let tripDetail = tripInfoData.tripDetail
+        let tripDetail = tripInfoData.tripDetail.sorted { $0.expenseDate < $1.expenseDate }
         
         var budget = tripInfoData.budget.convertDouble()
         

@@ -50,7 +50,7 @@ class ExpenseCollectionViewCell: BaseCollectionViewCell {
     func configure(data: TripDetailInfo, remainBudget: Double) {
         
         categoryLabel.text = data.category.name
-        expenseLabel.text = "\(data.expense)"
+        expenseLabel.text = NumberUtil.convertDecimal(data.expense as NSNumber)
         remainLabel.text = NumberUtil.convertDecimal(remainBudget as NSNumber)
     }
 }
