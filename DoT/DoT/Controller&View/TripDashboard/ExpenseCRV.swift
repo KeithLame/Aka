@@ -12,6 +12,7 @@ class ExpenseCollectionReusableView: UICollectionReusableView {
     
     let dateLabel = UILabel()
     let accumulateLabel = UILabel()
+    let separateLineView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +28,7 @@ class ExpenseCollectionReusableView: UICollectionReusableView {
     
     private func configureHierarchy() {
         
-        [dateLabel, accumulateLabel].forEach { addSubview($0) }
+        [dateLabel, accumulateLabel, separateLineView].forEach { addSubview($0) }
     }
     
     private func configureLayout() {
@@ -35,20 +36,27 @@ class ExpenseCollectionReusableView: UICollectionReusableView {
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(self).inset(30)
             $0.bottom.equalTo(self).inset(10)
-            $0.leading.equalTo(self).inset(10)
+            $0.leading.equalTo(self).inset(20)
         }
         
         accumulateLabel.snp.makeConstraints {
             $0.top.equalTo(self).inset(30)
             $0.bottom.equalTo(self).inset(10)
-            $0.trailing.equalTo(self).inset(10)
+            $0.trailing.equalTo(self).inset(20)
+        }
+        
+        separateLineView.snp.makeConstraints {
+            $0.bottom.equalTo(self)
+            $0.horizontalEdges.equalTo(self).inset(20)
+            $0.height.equalTo(1)
         }
     }
     
     private func configureView() {
         
         dateLabel.configure(text: "날짜", fontSize: .medium, fontScale: .Bold, color: .justGray)
-        accumulateLabel.configure(text: "누적금액", fontSize: .medium, fontScale: .Bold, color: .justGray)
+        accumulateLabel.configure(text: "누적금액", fontSize: .medium, fontScale: .Bold, color: .blackWhite)
+        separateLineView.backgroundColor = .justGray
     }
     
     func configure(data: [TripDetailInfo], title: String) {
@@ -58,6 +66,6 @@ class ExpenseCollectionReusableView: UICollectionReusableView {
         var accumulate: Double = 0
         
         for detail in data { accumulate += detail.expense }
-        accumulateLabel.text = "누적 \(NumberUtil.convertDecimal(accumulate as NSNumber))"
+        accumulateLabel.text = "- \(NumberUtil.convertDecimal(accumulate as NSNumber))"
     }
 }

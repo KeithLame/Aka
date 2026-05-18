@@ -84,9 +84,9 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
         // Header 등록
         diffableDataSource.supplementaryViewProvider = { (view, kind, index) in
+            
             return self.layoutView.tripDashboradCollectionView.dequeueConfiguredReusableSupplementary(
                 using: expenseHeaderRegistration, for: index)
-            
         }
     }
     
@@ -94,6 +94,8 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
+        
+        // 지출 저장 완료 시 Trip Info 데이터 업데이트 및 스냅샷 업데이트 호출
         nextVC.expenseVM.complete = { [weak self] in
             
             guard let self else { return }
