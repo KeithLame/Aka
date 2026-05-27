@@ -16,6 +16,7 @@ class TripDashboardViewModel {
     var tripIntro: TripIntro = TripIntro()
     var tripInfoListener: Observable<TripInfo?> = Observable(nil)
     var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
+    var tripInfoUpdateCompleteListener: Observable<Void?> = Observable(nil)
     
     init() {
         
@@ -58,6 +59,8 @@ class TripDashboardViewModel {
                     tripInfoListener.data = newTripInfo
                 }
             }
+            
+            tripInfoUpdateCompleteListener.data = ()
         }
     }
     

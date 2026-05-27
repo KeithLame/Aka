@@ -12,8 +12,10 @@ class ExpenseViewModel {
     var tripInfoData: TripInfo? = nil
     var category: ExpenseCategory? = nil
     var expense: Double = 0
+    var expenseViewType: ExpenseViewType = .expense
     
-    var complete: (() -> Void)? = nil
+    var ExpenseSaveComplete: (() -> Void)? = nil
+    var BudgetEditSaveComplete: (() -> Void)? = nil
     
     let realmManager = try? RealmManager()
     
@@ -83,17 +85,30 @@ class ExpenseViewModel {
         
         inputSaveButtonClickedListener.bind { [weak self] _ in
             
-            guard let self, let realmManager, let tripInfoData, let category else { return }
+            guard let self, let realmManager, let tripInfoData else { return }
             
-            let newExpense = TripDetailInfo(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
-            
-            let tripInfo = realmManager.fetchOrigin(TripInfo.self)
-            
-            for data in tripInfo {
-                if data.objectID == tripInfoData.objectID {
-                    realmManager.appendTripDetail(data, tripDetail: newExpense)
-                    break
+            switch expenseViewType {
+            case .expense:
+                
+                guard let category else { return }
+                
+                let newExpense = TripDetailInfo(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
+                
+                let tripInfo = realmManager.fetchOrigin(TripInfo.self)
+                
+                for data in tripInfo {
+                    if data.objectID == tripInfoData.objectID {
+                        realmManager.appendTripDetail(data, tripDetail: newExpense)
+                        break
+                    }
                 }
+                
+            case .budgetEdit:
+                
+                let objectID = tripInfoData.objectID
+                let newBudget = NumberUtil.convertDecimal(expense as NSNumber)
+                
+                realmManager.updateTripBudgetByID(id: objectID, value: newBudget)
             }
             
             outputSaveButtonClickedListener.data = ()

@@ -15,7 +15,24 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        update()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        tripDashboardVM.tripInfoUpdateListener.data = ()
+    }
+    
+    override func bindData() {
+        
+        tripDashboardVM.tripInfoUpdateCompleteListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            
+            let snapShot = diffableDataSource.snapshot()
+            diffableDataSource.applySnapshotUsingReloadData(snapShot)
+            update()
+        }
     }
     
     override func configureCollectionView() {
@@ -25,10 +42,13 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.configure(data: itemIdentifier)
         }
         
-        let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, TripInfo> { cell,indexPath,itemIdentifier in
+        let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, TripInfo> { [weak self] cell,indexPath,itemIdentifier in
+            
+            guard let self else { return }
             
             cell.configure(data: itemIdentifier)
-            cell.expenseButton.addTarget(self, action: #selector(self.expenseButtonClicked), for: .touchUpInside)
+            cell.expenseButton.addTarget(self, action: #selector(expenseButtonClicked), for: .touchUpInside)
+            cell.budgetEditButton.addTarget(self, action: #selector(budgetEditButtonClicked), for: .touchUpInside)
         }
         
         let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, TripDetailInfo> { [weak self] cell,indexPath,itemIdentifier in
@@ -93,19 +113,17 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
     @objc func expenseButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
+        nextVC.expenseVM.expenseViewType = .expense
         nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
         
-        // 지출 저장 완료 시 Trip Info 데이터 업데이트 및 스냅샷 업데이트 호출
-        nextVC.expenseVM.complete = { [weak self] in
-            
-            guard let self else { return }
-            
-            tripDashboardVM.tripInfoUpdateListener.data = ()
-            
-            let snapShot = diffableDataSource.snapshot()
-            diffableDataSource.applySnapshotUsingReloadData(snapShot)
-            update()
-        }
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func budgetEditButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = ExpenseViewController()
+        nextVC.expenseVM.expenseViewType = .budgetEdit
+        nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
         
         navigationController?.pushViewController(nextVC, animated: true)
     }

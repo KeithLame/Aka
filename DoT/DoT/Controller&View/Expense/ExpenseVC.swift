@@ -29,7 +29,7 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             
             guard let self, let data = expenseVM.tripInfoData else { return }
             
-            layoutView.configre(data: data, input: output)
+            layoutView.configre(data: data, input: output, type: expenseVM.expenseViewType)
         }
         
         expenseVM.outputCategoryButtonClickedListener.bind { [weak self] _ in
@@ -49,7 +49,12 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             
             guard let self else { return }
             
-            self.expenseVM.complete?()
+            switch expenseVM.expenseViewType {
+            case .expense:
+                expenseVM.ExpenseSaveComplete?()
+            case .budgetEdit:
+                expenseVM.BudgetEditSaveComplete?()
+            }
             
             navigationController?.popViewController(animated: true)
         }
@@ -105,7 +110,17 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         
         guard let data = expenseVM.tripInfoData else { return }
         
-        layoutView.configre(data: data, input: "0")
+        let type = expenseVM.expenseViewType
+        var input: String
+        
+        switch type {
+        case .expense:
+            input = "0"
+        case .budgetEdit:
+            input = data.budget
+        }
+        
+        layoutView.configre(data: data, input: input, type: type)
         
         layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
     }

@@ -98,6 +98,7 @@ class CreateTripViewModel {
             do {
                 try self.realmManager?.create(newTrip)
             } catch let error {
+                
                 switch error {
                 case RealmError.objectCreateFailed:
                     print("create Error")

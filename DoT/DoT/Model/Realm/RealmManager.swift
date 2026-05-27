@@ -57,13 +57,35 @@ final class RealmManager {
             throw RealmError.objectDeleteFailed
         }
     }
-    
-    func updateTripDetailByID<T: Object>(_ type: T.Type, id: ObjectId, value: TripDetailInfo) {
+}
+
+// Trip Info
+extension RealmManager {
+    func updateTripBudgetByID(id: String, value: String) {
         do {
             try realm.write {
-                realm.create(type,
+                realm.create(TripInfo.self,
                              value: [
-                                "id": id,
+                                "objectID": id,
+                                "budget": value
+                             ],
+                             update: .modified)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+
+// Trip Detail Info
+extension RealmManager {
+    func updateTripDetailByID(id: String, value: TripDetailInfo) {
+        do {
+            try realm.write {
+                realm.create(TripDetailInfo.self,
+                             value: [
+                                "objectID": id,
                                 "tripDetail": value
                              ],
                              update: .modified)

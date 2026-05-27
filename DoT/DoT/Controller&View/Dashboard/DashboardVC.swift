@@ -9,7 +9,7 @@ import UIKit
 
 final class DashboardViewController: BaseViewController<DashboardView> {
     
-    var diffableDataSoure: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
+    var diffableDataSource: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>!
     var header: UICollectionViewDiffableDataSource<DashboardCompositionalLayout, AnyHashable>.SupplementaryViewProvider!
     
     let dashboardVM = DashboardViewModel()
@@ -18,7 +18,11 @@ final class DashboardViewController: BaseViewController<DashboardView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        update()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        dashboardVM.tripInfoFetchListener.data = ()
     }
     
     override func bindData() {
@@ -36,6 +40,8 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             
             guard let self else { return }
             
+            let snapShot = diffableDataSource.snapshot()
+            diffableDataSource.applySnapshotUsingReloadData(snapShot)
             update()
         }
         
@@ -109,7 +115,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // Cell 등록
-        diffableDataSoure = UICollectionViewDiffableDataSource(collectionView: layoutView.dashboardCollectionView) { collectionView, indexPath, itemIdentifier in
+        diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.dashboardCollectionView) { collectionView, indexPath, itemIdentifier in
             
             guard let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return nil }
             
@@ -141,7 +147,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // Header 등록
-        diffableDataSoure.supplementaryViewProvider = { (view, kind, index) in
+        diffableDataSource.supplementaryViewProvider = { (view, kind, index) in
             return self.layoutView.dashboardCollectionView.dequeueConfiguredReusableSupplementary(
                 using: exchangeRateHeaderRegistration, for: index)
         }
@@ -195,6 +201,6 @@ extension DashboardViewController {
         snapshot.appendItems(allTripInfoDatas, toSection: .tripCard)
         snapshot.appendItems(exchangeDatas, toSection: .exchangeRate)
         
-        self.diffableDataSoure.apply(snapshot, animatingDifferences: true)
+        self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }
 }

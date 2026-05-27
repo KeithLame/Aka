@@ -46,6 +46,7 @@
 		AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */; };
 		AC939C232BA82FEF0048956B /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C222BA82FEF0048956B /* ExpenseViewModel.swift */; };
 		AC939C252BA88EF50048956B /* ExpenseCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C242BA88EF50048956B /* ExpenseCRV.swift */; };
+		AC939C2E2BA947970048956B /* ExpenseViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C2D2BA947970048956B /* ExpenseViewType.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -121,6 +122,7 @@
 		AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCVC.swift; sourceTree = "<group>"; };
 		AC939C222BA82FEF0048956B /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		AC939C242BA88EF50048956B /* ExpenseCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCRV.swift; sourceTree = "<group>"; };
+		AC939C2D2BA947970048956B /* ExpenseViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewType.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				ACF5ACF02B9AFF5000DBEF85 /* Consts.swift */,
 				ACF5ACF22B9B008F00DBEF85 /* FontManager.swift */,
 				AC61A65A2BA6E31F00EF14BD /* ExpenseCategory.swift */,
+				AC939C2D2BA947970048956B /* ExpenseViewType.swift */,
 			);
 			path = ETC;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
 				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
 				AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */,
+				AC939C2E2BA947970048956B /* ExpenseViewType.swift in Sources */,
 				ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */,
 				ACF5AD0E2B9C0EB200DBEF85 /* CreateTripVC.swift in Sources */,
 			);

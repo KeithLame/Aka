@@ -66,10 +66,18 @@ class ExpenseView: BaseView {
         saveButton.configure(title: "지출 추가", image: .plane)
     }
     
-    func configre(data: TripInfo, input: String) {
+    func configre(data: TripInfo, input: String, type: ExpenseViewType) {
         
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         symbolLabel.text = currency.name
         expenseLabel.text = input
+        
+        switch type {
+        case .expense:
+            saveButton.configuration?.title = "지출 추가"
+        case .budgetEdit:
+            saveButton.configuration?.title = "예산 수정"
+            categoryCollectionView.isHidden = true
+        }
     }
 }
