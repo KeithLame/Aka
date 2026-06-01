@@ -14,9 +14,6 @@ class ExpenseViewModel {
     var expense: Double = 0
     var expenseViewType: ExpenseViewType = .expense
     
-    var ExpenseSaveComplete: (() -> Void)? = nil
-    var BudgetEditSaveComplete: (() -> Void)? = nil
-    
     let realmManager = try? RealmManager()
     
     let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)

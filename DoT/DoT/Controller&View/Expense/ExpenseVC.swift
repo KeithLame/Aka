@@ -49,13 +49,6 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             
             guard let self else { return }
             
-            switch expenseVM.expenseViewType {
-            case .expense:
-                expenseVM.ExpenseSaveComplete?()
-            case .budgetEdit:
-                expenseVM.BudgetEditSaveComplete?()
-            }
-            
             navigationController?.popViewController(animated: true)
         }
     }
