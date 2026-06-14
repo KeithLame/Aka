@@ -64,7 +64,7 @@ extension RealmManager {
     func updateTripBudgetByID(id: String, value: String) {
         do {
             try realm.write {
-                realm.create(TripInfo.self,
+                realm.create(TripInfoDTO.self,
                              value: [
                                 "objectID": id,
                                 "budget": value
@@ -98,7 +98,7 @@ extension RealmManager {
     func appendTripDetail(_ data: TripInfo, tripDetail: TripDetailInfo) {
         
         try! realm.write {
-            data.tripDetail.append(tripDetail)
+            // data.tripDetail.append(tripDetail)
         }
     }
 }

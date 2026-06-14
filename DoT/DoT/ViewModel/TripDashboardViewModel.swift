@@ -52,7 +52,7 @@ class TripDashboardViewModel {
             
             guard let self, let realmManager, let tripInfo = tripInfoListener.data else { return }
             
-            let tripInfoDatas = realmManager.fetch(TripInfo.self)
+            let tripInfoDatas = realmManager.fetch(TripInfoDTO.self).map { $0.translate() }
             
             for newTripInfo in tripInfoDatas {
                 if newTripInfo.objectID == tripInfo.objectID {

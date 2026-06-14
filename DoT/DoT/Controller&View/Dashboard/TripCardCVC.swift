@@ -34,7 +34,7 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(layoutView).inset(15)
-            $0.centerX.equalTo(layoutView)
+            $0.horizontalEdges.equalTo(layoutView).inset(10)
         }
         
         budgetLabel.snp.makeConstraints {
@@ -50,7 +50,6 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         periodLabel.snp.makeConstraints {
             $0.top.equalTo(remainBudgetLabel.snp.bottom).offset(30)
             $0.leading.equalTo(layoutView).inset(10)
-            // $0.bottom.equalTo(layoutView).inset(15)
         }
         
         arrowImageView.snp.makeConstraints {
@@ -106,6 +105,7 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         budgetLabel.adjustsFontSizeToFitWidth = true
         remainBudgetLabel.adjustsFontSizeToFitWidth = true
         
+        titleLabel.textAlignment = .center
         budgetLabel.textAlignment = .center
         remainBudgetLabel.textAlignment = .center
     }

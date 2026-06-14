@@ -10,7 +10,6 @@ import SnapKit
 
 class ExchangeRateCollectionReusableView: UICollectionReusableView {
     
-    let titleLabel = UILabel()
     let currencyLabel = UILabel()
     let exchangeLabel = UILabel()
     let separateView = UIView()
@@ -29,25 +28,20 @@ class ExchangeRateCollectionReusableView: UICollectionReusableView {
     
     private func configureHierarchy() {
         
-        [titleLabel, currencyLabel, exchangeLabel, separateView].forEach { addSubview($0) }
+        [currencyLabel, exchangeLabel, separateView].forEach { addSubview($0) }
     }
     
     private func configureLayout() {
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self).inset(40)
-            $0.leading.equalTo(self).inset(10)
-        }
-        
         currencyLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(self).inset(10)
             $0.leading.equalTo(self).inset(10)
+            $0.bottom.equalTo(self).inset(10)
         }
         
         exchangeLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.trailing.equalTo(self).inset(20)
-            $0.bottom.equalTo(self).inset(20)
+            $0.leading.equalTo(currencyLabel.snp.trailing).offset(5)
+            $0.bottom.equalTo(currencyLabel)
         }
         
         separateView.snp.makeConstraints {
@@ -60,11 +54,15 @@ class ExchangeRateCollectionReusableView: UICollectionReusableView {
     
     private func configureView() {
         
-        titleLabel.configure(text: "환율", fontSize: .large, fontScale: .Bold)
-        currencyLabel.configure(text: "통화", fontSize: .medium, fontScale: .Bold)
-        exchangeLabel.configure(text: "오늘의 환율", fontSize: .medium, fontScale: .Bold)
+        currencyLabel.configure(text: "환율", fontSize: .regular, fontScale: .Bold)
+        exchangeLabel.configure(text: "오늘의 환율", fontSize: .small, fontScale: .Medium, color: .justGray)
         
         exchangeLabel.textAlignment = .left
         separateView.backgroundColor = .blackWhite
+    }
+    
+    func configure(_ date: String) {
+        
+        exchangeLabel.text = date
     }
 }

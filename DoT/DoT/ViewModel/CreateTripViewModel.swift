@@ -93,7 +93,7 @@ class CreateTripViewModel {
             
             guard let startDate = self.startDate, let endDate = self.endDate else { return }
             
-            let newTrip = TripInfo(title: self.title, headCount: self.headCount, currency: self.currency, budget: self.budget, startDate: startDate, endDate: endDate)
+            let newTrip = TripInfoDTO(title: self.title, headCount: self.headCount, currency: self.currency, budget: self.budget, startDate: startDate, endDate: endDate)
             
             do {
                 try self.realmManager?.create(newTrip)

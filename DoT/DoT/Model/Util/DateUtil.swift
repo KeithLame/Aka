@@ -77,4 +77,51 @@ enum DateUtil {
         
         return df.date(from: dateStr)
     }
+    
+    /// 오늘 포함. 마지막 평일 데이터를 반환 - Format ( yyyMMdd )
+    static func getLastWeekdayString() -> String {
+        
+        var value = 0
+        var date: Date = Date()
+        var isWeekend = true
+        
+        while isWeekend == false {
+            date = Calendar.current.date(byAdding: .day, value: value, to: Date()) ?? Date()
+            isWeekend = Calendar.current.isDateInWeekend(date)
+            value -= 1
+        }
+        
+        let result = getStringFromDate(date: date, format: "yyyyMMdd")
+        
+        return result
+    }
+    
+    /// 오늘 제외. 마지막 평일 데이터를 반환 - Format ( yyyMMdd )
+    static func getLastWeekdayStringExceptToday() -> String {
+        
+        var value = 0
+        var date: Date = Date()
+        var isWeekend = true
+        
+        while isWeekend == false {
+            value -= 1
+            date = Calendar.current.date(byAdding: .day, value: value, to: Date()) ?? Date()
+            isWeekend = Calendar.current.isDateInWeekend(date)
+        }
+        
+        let result = getStringFromDate(date: date, format: "yyyyMMdd")
+        
+        return result
+    }
+    
+    /// 입력된 hour을 넘겼는지 판별
+    static func isOverTimeAt(_ hour: Int) -> Bool {
+        let component = Calendar.current.dateComponents([.hour], from: Date())
+        
+        if let curHour = component.hour {
+            return curHour > hour
+        }
+        
+        return false
+    }
 }

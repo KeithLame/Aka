@@ -16,7 +16,7 @@ final class TripDetailInfo: Object {
     @Persisted var memo: String?
     @Persisted var expenseDate: Date
     
-    @Persisted(originProperty: "tripDetail") var tripInfo: LinkingObjects<TripInfo>
+    // @Persisted(originProperty: "tripDetail") var tripInfo: LinkingObjects<TripInfo>
     
     convenience init(expense: Double, category: ExpenseCategory, photo: String?, memo: String?, expenseDate: Date) {
         self.init()

@@ -10,7 +10,7 @@ import RealmSwift
 
 final class ExchangeRealm: Object {
     
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted(primaryKey: true) var objectID: String = UUID().uuidString
     @Persisted var date: String
     @Persisted var currencyUnit: String
     @Persisted var exchangeRate: String
