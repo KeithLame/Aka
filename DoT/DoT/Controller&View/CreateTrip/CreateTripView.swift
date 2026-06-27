@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CreateTripView: BaseView {
+final class CreateTripView: BaseView {
 
     let titleTextField = UITextField()
     

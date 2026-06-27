@@ -21,13 +21,13 @@ class CreateTripViewModel {
     
     private let realmManager: RealmManager? = try? RealmManager()
     
-    let inputTitleDataListener: Observable<String> = Observable("")
-    let inputPlaceDataListener: Observable<String> = Observable("")
-    let inputBudgetDataListener: Observable<String> = Observable("")
-    let headCountValueChangedListener: Observable<Int?> = Observable(nil)
+    let inputTitleListener: Observable<String> = Observable("")
+    let inputPlaceListener: Observable<String> = Observable("")
+    let inputBudgetListener: Observable<String> = Observable("")
+    let inputHeadCountListener: Observable<Int?> = Observable(nil)
     
-    let inputPeriodDataListener: Observable<(startDate: Date, endDate: Date)?> = Observable(nil)
-    let outputPeriodDataListener: Observable<String> = Observable("")
+    let inputPeriodListener: Observable<(startDate: Date, endDate: Date)?> = Observable(nil)
+    let outputPeriodListener: Observable<String> = Observable("")
     
     let inputCurrecyDataListener: Observable<Consts.Currency?> = Observable(nil)
     let outputCurrencyDataListener: Observable<String> = Observable("")
@@ -35,30 +35,42 @@ class CreateTripViewModel {
     let inputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
     let outputSaveButtonClickedListener: Observable<Bool> = Observable(false)
     
+    let inputCheckSaveButtonEnabledListener: Observable<Void?> = Observable(nil)
+    let outputCheckSaveButtonEnabledListener: Observable<Bool> = Observable(false)
+    
     init() {
         
         // title 저장
-        inputTitleDataListener.bind { title in
+        inputTitleListener.bind { [weak self] title in
+            
+            guard let self else { return }
             
             self.title = title
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // place 저장
-        inputPlaceDataListener.bind { place in
+        inputPlaceListener.bind { [weak self] place in
+            
+            guard let self else { return }
             
             self.place = place
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // budget 저장
-        inputBudgetDataListener.bind { budget in
+        inputBudgetListener.bind { [weak self] budget in
+            
+            guard let self else { return }
             
             self.budget = budget
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // startData, endDate 저장
-        inputPeriodDataListener.bind { dates in
+        inputPeriodListener.bind { [weak self] dates in
             
-            guard let (startDate, endDate) = dates else { return }
+            guard let self, let (startDate, endDate) = dates else { return }
             
             self.startDate = startDate
             self.endDate = endDate
@@ -66,48 +78,69 @@ class CreateTripViewModel {
             let formatStartDate = DateUtil.getStringFromDate(date: startDate, format: "MM월 dd일(EEEEE)")
             let formatEndDate = DateUtil.getStringFromDate(date: endDate, format: "MM월 dd일(EEEEE)")
             
-            self.outputPeriodDataListener.data = "\(formatStartDate)   -   \(formatEndDate)"
+            self.outputPeriodListener.data = "\(formatStartDate)   -   \(formatEndDate)"
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // cerrency 저장
-        inputCurrecyDataListener.bind { currency in
+        inputCurrecyDataListener.bind { [weak self] currency in
             
-            guard let currency else { return }
+            guard let self, let currency else { return }
             
-            self.outputCurrencyDataListener.data = currency.currency
             self.currency = currency.name
+            self.outputCurrencyDataListener.data = currency.currency
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // haedCount 저장
-        headCountValueChangedListener.bind { count in
+        inputHeadCountListener.bind { [weak self] count in
             
-            guard let count else { return }
+            guard let self, let count else { return }
             
             self.headCount = count
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // save 버튼 클릭시 TripInfo object 생성하여 realm에 저장
-        inputSaveButtonClickedListener.bind { _ in
+        inputSaveButtonClickedListener.bind { [weak self] _ in
             
-            self.realmManager?.realmURL()
+            guard let self, let realmManager else { return }
+            realmManager.realmURL()
             
             guard let startDate = self.startDate, let endDate = self.endDate else { return }
             
             let newTrip = TripInfoDTO(title: self.title, headCount: self.headCount, currency: self.currency, budget: self.budget, startDate: startDate, endDate: endDate)
             
             do {
-                try self.realmManager?.create(newTrip)
+                try realmManager.create(newTrip)
             } catch let error {
                 
                 switch error {
                 case RealmError.objectCreateFailed:
                     print("create Error")
-                    self.outputSaveButtonClickedListener.data = false
+                    outputSaveButtonClickedListener.data = false
                 default: break
                 }
             }
             
-            self.outputSaveButtonClickedListener.data = true
+            outputSaveButtonClickedListener.data = true
+        }
+        
+        // 버튼 활성화 가능 여부 체크
+        inputCheckSaveButtonEnabledListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            var result: Bool = true
+            
+            if place == "" { result = false }
+            if budget == "" { result = false }
+            if startDate == nil { result = false }
+            if endDate == nil { result = false }
+            if currency == "" { result = false }
+            if headCount == 0 { result = false }
+            
+            outputCheckSaveButtonEnabledListener.data = result
         }
     }
     
@@ -136,5 +169,9 @@ class CreateTripViewModel {
         }
         
         return true
+    }
+    
+    deinit {
+        print("CreateTripViewModel Deinit")
     }
 }

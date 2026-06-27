@@ -14,6 +14,8 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createTripVM.inputCheckSaveButtonEnabledListener.data = ()
     }
     
     deinit {
@@ -22,13 +24,13 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
     
     override func bindData() {
         
-        // 여행 기간 보여주기
-        createTripVM.outputPeriodDataListener.bind { [weak self] period in
+        // 여행 기간 표시
+        createTripVM.outputPeriodListener.bind { [weak self] period in
             
             self?.layoutView.periodButton.configuration?.title = period
         }
         
-        // 여행 국가 통화 보여주기 및 입력된 예산 정보 리셋
+        // 여행 국가 통화 표시 및 입력된 예산 정보 리셋
         createTripVM.outputCurrencyDataListener.bind { [weak self] currency in
             
             self?.layoutView.budgetCurrencyLabel.text = currency
@@ -45,6 +47,13 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
                 self.createTripVM.dismissCallBack?()
                 self.dismiss(animated: true)
             }
+        }
+        
+        createTripVM.outputCheckSaveButtonEnabledListener.bind { [weak self] isEnabled in
+            
+            guard let self else { return }
+            
+            navigationItem.rightBarButtonItem?.isEnabled = isEnabled
         }
     }
     
@@ -78,9 +87,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         let seletedPriority = { [weak self] (action : UIAction) in
             
-            guard let self else { return }
-            
-            guard let currency = Consts.Currency.currencyByName(name: action.title) else { return }
+            guard let self, let currency = Consts.Currency.currencyByName(name: action.title) else { return }
             
             self.createTripVM.inputCurrecyDataListener.data = currency
         }
@@ -120,7 +127,9 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         // 한국 시간으로 넘어와서 -> isoDateString으로 변경 및 저장
         nextVC.calendarVM.complete = { [weak self] startDate, endDate in
             
-            self?.createTripVM.inputPeriodDataListener.data = (startDate, endDate)
+            guard let self else { return }
+            
+            createTripVM.inputPeriodListener.data = (startDate, endDate)
         }
         
         // Back Button 설정
@@ -139,10 +148,9 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         if title.isWhiteSpace() {
             sender.text = ""
-            return
         }
         
-        createTripVM.inputTitleDataListener.data = title
+        createTripVM.inputTitleListener.data = title
     }
     
     // 장소 입력
@@ -152,10 +160,9 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         
         if place.isWhiteSpace() {
             sender.text = ""
-            return
         }
         
-        createTripVM.inputPlaceDataListener.data = place
+        createTripVM.inputPlaceListener.data = place
     }
     
     // 예산 입력
@@ -166,7 +173,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         let result = input.convertDecimalString()
         sender.text = result
         
-        createTripVM.inputBudgetDataListener.data = result
+        createTripVM.inputBudgetListener.data = result
     }
     
     // 인원 변경
@@ -175,7 +182,7 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         let value = Int(sender.value)
         layoutView.headcountLabel.text = "\(value)명"
         
-        createTripVM.headCountValueChangedListener.data = value
+        createTripVM.inputHeadCountListener.data = value
     }
 }
 
