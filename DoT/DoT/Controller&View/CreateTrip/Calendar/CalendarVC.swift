@@ -21,8 +21,7 @@ class CalendarViewController: BaseViewController<CalendarView> {
         
         calendarVM.outputSelectedListener.bind { [weak self] _ in
             
-            guard let self else { return }
-            guard let calendarType = calendarVM.outputSelectedListener.data else { return }
+            guard let self, let calendarType = calendarVM.outputSelectedListener.data else { return }
             
             self.layoutView.calendar.reloadData()
             self.layoutView.saveButton.isEnabled = calendarType == .both ? true : false
@@ -49,6 +48,10 @@ class CalendarViewController: BaseViewController<CalendarView> {
         calendarVM.saveButtonClickedListener.data = ()
         
         navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        print("CalendarViewController deinit")
     }
 }
 

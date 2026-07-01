@@ -27,9 +27,10 @@ final class CalendarViewModel {
     
     init() {
         
-        inputSelectedListener.bind { date in
+        // 버튼 클릭
+        inputSelectedListener.bind { [weak self] date in
             
-            guard let date else { return }
+            guard let self, let date else { return }
             
             // 1. 둘 다 있지만, endDate를 지운 경우
             if self.endDate == date {
@@ -84,10 +85,10 @@ final class CalendarViewModel {
             }
         }
         
-        inputDateListener.bind { date in
+        // 선택 셀 표시 방법 결정
+        inputDateListener.bind { [weak self] date in
             
-            guard let date else { return }
-            guard let calendarType = self.outputSelectedListener.data else { return }
+            guard let self, let date, let calendarType = self.outputSelectedListener.data else { return }
             
             switch calendarType {
             case .only:
@@ -120,18 +121,20 @@ final class CalendarViewModel {
             self.outputDateListener.data = (true, true, true)
         }
         
-        saveButtonClickedListener.bind { _ in
+        // 데이터 전달
+        saveButtonClickedListener.bind { [weak self]  _ in
             
-            guard let complete = self.complete,
+            guard let self,
+                  let complete = self.complete,
                   let startDate = self.startDate,
                   let endDate = self.endDate else { return }
             
             complete(startDate, endDate)
         }
         
-        inputConfigureDataListener.bind { dates in
+        inputConfigureDataListener.bind { [weak self] dates in
             
-            guard let (startDate, endDate) = dates else { return }
+            guard let self, let (startDate, endDate) = dates else { return }
             
             let rangeDate = DateUtil.getDatesRange(from: startDate, to: endDate)
             
@@ -140,5 +143,9 @@ final class CalendarViewModel {
             self.rangeDate = rangeDate
             self.outputSelectedListener.data = .both
         }
+    }
+    
+    deinit {
+        print("CalendarViewModel Deinit")
     }
 }
