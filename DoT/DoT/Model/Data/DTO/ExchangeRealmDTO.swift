@@ -1,5 +1,5 @@
 //
-//  ExchangeRealm.swift
+//  ExchangeRealmDTO.swift
 //  DoT
 //
 //  Created by 이중엽 on 3/14/24.
@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class ExchangeRealm: Object {
+final class ExchangeRealmDTO: Object {
     
     @Persisted(primaryKey: true) var objectID: String = UUID().uuidString
     @Persisted var date: String
@@ -23,5 +23,12 @@ final class ExchangeRealm: Object {
         self.currencyUnit = currencyUnit
         self.exchangeRate = exchangeRate
         self.currencyName = currencyName
+    }
+    
+    func translate() -> Exchange {
+        
+        let translateExchange = Exchange(objectID: self.objectID, date: self.date, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
+        
+        return translateExchange
     }
 }

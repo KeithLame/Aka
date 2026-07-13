@@ -19,9 +19,9 @@ struct ExchangeAPIModel: Decodable {
         case currencyName = "cur_nm"
     }
     
-    func convertRealm() -> ExchangeRealm {
+    func convertRealm() -> ExchangeRealmDTO {
         
-        let newExchangeRealm = ExchangeRealm(date: Date().description, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
+        let newExchangeRealm = ExchangeRealmDTO(date: Date().description, currencyUnit: self.currencyUnit, exchangeRate: self.exchangeRate, currencyName: self.currencyName)
         
         return newExchangeRealm
     }

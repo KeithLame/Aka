@@ -10,7 +10,7 @@ import Foundation
 final class DashboardViewModel {
     
     var tripInfoDatas: [TripInfo] = []
-    var exchangeDatas: [ExchangeRealm] = []
+    var exchangeDatas: [Exchange] = []
     var onComingDatas: [TripInfo] = []
     var lastUpdatedDate: String = ""
     
@@ -56,7 +56,7 @@ final class DashboardViewModel {
             
             guard let realmManager = realmManager else { return }
             
-            exchangeDatas = realmManager.fetch(ExchangeRealm.self)
+            exchangeDatas = realmManager.fetch(ExchangeRealmDTO.self).map { $0.translate() }
             
             // 마지막 업데이트 일 저장
             if let firstData = exchangeDatas.first {
@@ -75,7 +75,7 @@ final class DashboardViewModel {
             guard let self, let realmManager else { return }
             
             // 새로운 데이터를 담기 전에 모두 삭제
-            let oldDatas = realmManager.fetch(ExchangeRealm.self)
+            let oldDatas = realmManager.fetch(ExchangeRealmDTO.self)
             
             for oldData in oldDatas {
                 do {
@@ -88,7 +88,7 @@ final class DashboardViewModel {
             // 새로운 데이터로 저장
             for newdata in datas {
                 
-                let newExchange = ExchangeRealm(date: Date().description, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
+                let newExchange = ExchangeRealmDTO(date: Date().description, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
                 
                 do {
                     try realmManager.create(newExchange)
@@ -172,7 +172,7 @@ final class DashboardViewModel {
         
         guard let realmManager = self.realmManager else { return false }
         
-        let exchangeDatas = realmManager.fetch(ExchangeRealm.self)
+        let exchangeDatas = realmManager.fetch(ExchangeRealmDTO.self)
         
         guard let exchangeData = exchangeDatas.first else { return false }
         
