@@ -24,7 +24,7 @@ extension String {
      
         if self.isWhiteSpace() { return "" }
         
-        var isExistDot = self.isExistDot()
+        let isExistDot = self.isExistDot()
         
         // "."이 있으면 그대로 입력
         if isExistDot { return self }

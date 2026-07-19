@@ -2,29 +2,31 @@
 //  TripDetailInfo.swift
 //  DoT
 //
-//  Created by 이중엽 on 3/17/24.
+//  Created by 이중엽 on 3/20/24.
 //
 
 import Foundation
-import RealmSwift
 
-final class TripDetailInfo: Object {
-    @Persisted(primaryKey: true) var objectID: String = UUID().uuidString
-    @Persisted var expense: Double
-    @Persisted var category: ExpenseCategory
-    @Persisted var photo: String?
-    @Persisted var memo: String?
-    @Persisted var expenseDate: Date
+struct TripDetailInfo: Hashable {
+    var objectID: String = UUID().uuidString
+    var expense: Double
+    var category: ExpenseCategory
+    var photo: String?
+    var memo: String?
+    var expenseDate: Date
+    var tripInfo: TripInfo? = nil
     
-    // @Persisted(originProperty: "tripDetail") var tripInfo: LinkingObjects<TripInfo>
-    
-    convenience init(expense: Double, category: ExpenseCategory, photo: String?, memo: String?, expenseDate: Date) {
-        self.init()
+    init(objectID: String, expense: Double, category: ExpenseCategory, photo: String? = nil, memo: String? = nil, expenseDate: Date) {
         
+        self.objectID = objectID
         self.expense = expense
         self.category = category
         self.photo = photo
         self.memo = memo
         self.expenseDate = expenseDate
+    }
+    
+    mutating func append(_ data: TripInfo) {
+        self.tripInfo = data
     }
 }

@@ -16,7 +16,7 @@ final class TripInfoDTO: Object {
     @Persisted var budget: String
     @Persisted var startDate: Date
     @Persisted var endDate: Date
-    @Persisted var tripDetail: List<TripDetailInfo>
+    @Persisted var tripDetail: List<TripDetailInfoDTO>
     
     
     convenience init(title: String, headCount: Int, currency: String, budget: String, startDate: Date, endDate: Date) {
@@ -32,7 +32,9 @@ final class TripInfoDTO: Object {
     
     func translate() -> TripInfo {
         
-        let translateData = TripInfo(objectID: self.objectID, title: self.title, headCount: self.headCount, currency: self.currency, budget: self.budget, startDate: self.startDate, endDate: self.endDate, tripDetail: Array(self.tripDetail))
+        let tripDetail = Array(tripDetail).map { $0.translate() }
+        
+        let translateData = TripInfo(objectID: self.objectID, title: self.title, headCount: self.headCount, currency: self.currency, budget: self.budget, startDate: self.startDate, endDate: self.endDate, tripDetail: tripDetail )
         
         return translateData
     }

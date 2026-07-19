@@ -80,10 +80,10 @@ extension RealmManager {
 
 // Trip Detail Info
 extension RealmManager {
-    func updateTripDetailByID(id: String, value: TripDetailInfo) {
+    func updateTripDetailByID(id: String, value: TripDetailInfoDTO) {
         do {
             try realm.write {
-                realm.create(TripDetailInfo.self,
+                realm.create(TripDetailInfoDTO.self,
                              value: [
                                 "objectID": id,
                                 "tripDetail": value
@@ -95,10 +95,10 @@ extension RealmManager {
         }
     }
     
-    func appendTripDetail(_ data: TripInfo, tripDetail: TripDetailInfo) {
+    func appendTripDetail(_ data: TripInfoDTO, tripDetail: TripDetailInfoDTO) {
         
         try! realm.write {
-            // data.tripDetail.append(tripDetail)
+            data.tripDetail.append(tripDetail)
         }
     }
 }

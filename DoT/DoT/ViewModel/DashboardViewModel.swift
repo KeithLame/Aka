@@ -12,7 +12,6 @@ final class DashboardViewModel {
     var tripInfoDatas: [TripInfo] = []
     var exchangeDatas: [Exchange] = []
     var onComingDatas: [TripInfo] = []
-    var lastUpdatedDate: String = ""
     
     private let realmManager: RealmManager? = try? RealmManager()
     
@@ -30,6 +29,9 @@ final class DashboardViewModel {
     
     // Call Exchange Info API
     let callExchangeAPIListener: Observable<Void?> = Observable(nil)
+    
+    let inputLastUpdateDateListener: Observable<Date?> = Observable(nil)
+    let outputLastUpdateDateListener: Observable<String> = Observable("")
     
     init() {
         
@@ -58,13 +60,8 @@ final class DashboardViewModel {
             
             exchangeDatas = realmManager.fetch(ExchangeRealmDTO.self).map { $0.translate() }
             
-            // 마지막 업데이트 일 저장
-            if let firstData = exchangeDatas.first {
-                
-                guard let updateDate = DateUtil.convertStringToDate(dateStr: firstData.date) else { return }
-                
-                lastUpdatedDate = DateUtil.getStringFromDate(date: updateDate, format: "yy년 MM월 dd일 기준")
-            }
+            guard let exchangeData = exchangeDatas.first, let date = DateUtil.convertStringToDate(dateStr: exchangeData.date) else { return }
+            outputLastUpdateDateListener.data = DateUtil.getStringFromDate(date: date, format: "yy년 MM월 dd일 기준")
             
             exchangeFetchCompleteListener.data = ()
         }
@@ -88,7 +85,9 @@ final class DashboardViewModel {
             // 새로운 데이터로 저장
             for newdata in datas {
                 
-                let newExchange = ExchangeRealmDTO(date: Date().description, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
+                guard let lastUpdateDate = inputLastUpdateDateListener.data else { return }
+                
+                let newExchange = ExchangeRealmDTO(date: lastUpdateDate.description, currencyUnit: newdata.currencyUnit, exchangeRate: newdata.exchangeRate, currencyName: newdata.currencyName)
                 
                 do {
                     try realmManager.create(newExchange)
@@ -130,6 +129,14 @@ final class DashboardViewModel {
             
             // 기존 데이터가 있으나, 오전 11시가 지났다면 (오늘 포함 주말 판단) 환율 API 호출
             callAPI(exceptToday: false)
+        }
+        
+        // 마지막 업데이트 기준 날짜 저장
+        inputLastUpdateDateListener.bind { [weak self] date in
+            
+            guard let self, let date else { return }
+            
+            outputLastUpdateDateListener.data = DateUtil.getStringFromDate(date: date, format: "yy년 MM월 dd일 기준")
         }
     }
     
@@ -189,6 +196,9 @@ final class DashboardViewModel {
         let date: String = exceptToday ? DateUtil.getLastWeekdayStringExceptToday() : DateUtil.getLastWeekdayString()
         let api = ExchangeAPI.AP01(date: date)
         
+        // 환율 정보 업데이트 기준 날짜 저장
+        inputLastUpdateDateListener.data = DateUtil.convertStringToDate(dateStr: date, type: .exchange)
+        
         APIManager.shared.callAPI(api: api, type: [ExchangeAPIModel].self) { [weak self] response in
             
             print("환율 API를 호출했습니다.")
@@ -202,7 +212,7 @@ final class DashboardViewModel {
                 if success.isEmpty {
                     exchangeFetchListener.data = ()
                     
-                // 정상적인 데이터가 넘어오면, 새로운 데이터로 덮어씌우기
+                    // 정상적인 데이터가 넘어오면, 새로운 데이터로 덮어씌우기
                 } else {
                     createExchangeListener.data = success
                 }

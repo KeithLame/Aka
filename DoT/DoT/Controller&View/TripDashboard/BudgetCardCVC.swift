@@ -34,7 +34,7 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         }
         
         budgetLabel.snp.makeConstraints {
-            $0.top.equalTo(currencyLabel.snp.centerY).offset(20)
+            $0.top.greaterThanOrEqualTo(currencyLabel.snp.centerY).offset(20)
             $0.horizontalEdges.equalTo(budgetCardLayoutView).inset(20)
             $0.bottom.equalTo(budgetCardLayoutView).inset(30)
         }

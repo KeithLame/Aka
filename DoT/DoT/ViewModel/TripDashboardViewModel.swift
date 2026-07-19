@@ -11,8 +11,6 @@ class TripDashboardViewModel {
     
     var realmManager: RealmManager? = try? RealmManager()
     
-    var tripDetailSectionName: [String] = []
-    
     var tripIntro: TripIntro = TripIntro()
     var tripInfoListener: Observable<TripInfo?> = Observable(nil)
     var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
@@ -20,9 +18,9 @@ class TripDashboardViewModel {
     
     init() {
         
-        tripInfoListener.bind { tripInfo in
+        tripInfoListener.bind { [weak self] tripInfo in
             
-            guard let tripInfo else { return }
+            guard let self, let tripInfo else { return }
             
             let title = tripInfo.title
             let startDate = tripInfo.startDate

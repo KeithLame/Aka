@@ -69,10 +69,10 @@ enum DateUtil {
     }
     
     /// 2024-03-14 11:15:30 +0000 포맷을 Date로 변경
-    static func convertStringToDate(dateStr: String) -> Date? {
+    static func convertStringToDate(dateStr: String, type: DateFormatType = .basic) -> Date? {
         
         let df = DateFormatter()
-        df.dateFormat = "YYYY-MM-dd HH:mm:ssZ"
+        df.dateFormat = type.rawValue
         df.locale = Locale(identifier: "ko_KR")
         
         return df.date(from: dateStr)
@@ -85,7 +85,7 @@ enum DateUtil {
         var date: Date = Date()
         var isWeekend = true
         
-        while isWeekend == false {
+        while isWeekend {
             date = Calendar.current.date(byAdding: .day, value: value, to: Date()) ?? Date()
             isWeekend = Calendar.current.isDateInWeekend(date)
             value -= 1
@@ -103,7 +103,7 @@ enum DateUtil {
         var date: Date = Date()
         var isWeekend = true
         
-        while isWeekend == false {
+        while isWeekend {
             value -= 1
             date = Calendar.current.date(byAdding: .day, value: value, to: Date()) ?? Date()
             isWeekend = Calendar.current.isDateInWeekend(date)

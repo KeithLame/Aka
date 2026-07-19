@@ -89,9 +89,9 @@ class ExpenseViewModel {
                 
                 guard let category else { return }
                 
-                let newExpense = TripDetailInfo(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
+                let newExpense = TripDetailInfoDTO(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
                 
-                let tripInfo = realmManager.fetchOrigin(TripInfoDTO.self).map { $0.translate() }
+                let tripInfo = realmManager.fetchOrigin(TripInfoDTO.self)
                 
                 for data in tripInfo {
                     if data.objectID == tripInfoData.objectID {

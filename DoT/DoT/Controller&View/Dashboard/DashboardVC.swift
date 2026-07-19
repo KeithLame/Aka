@@ -32,7 +32,6 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             
             guard let self else { return }
             
-            // let snapShot = dataSource.snapshot()
             update()
         }
         
@@ -46,6 +45,13 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         
         // Add Exchange Data to Realm Completion
         dashboardVM.createExchangeCompletionListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            update()
+        }
+        
+        dashboardVM.outputLastUpdateDateListener.bind { [weak self] dateStr in
             
             guard let self else { return }
             
@@ -114,7 +120,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             
             guard let self else { return }
             
-            let lastUpdatedDate = dashboardVM.lastUpdatedDate
+            let lastUpdatedDate = dashboardVM.outputLastUpdateDateListener.data
             supplementaryView.configure(lastUpdatedDate)
         }
         

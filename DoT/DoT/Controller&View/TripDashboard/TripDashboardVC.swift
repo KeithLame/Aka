@@ -28,9 +28,6 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
             guard let self else { return }
             
-            
-            let snapShot = diffableDataSource.snapshot()
-            diffableDataSource.applySnapshotUsingReloadData(snapShot)
             update()
         }
     }
@@ -137,7 +134,7 @@ extension TripDashboardViewController {
         guard let tripInfo = tripDashboardVM.tripInfoListener.data else { return }
         
         // 빠른 날짜 순으로 정렬
-        let tripDetail = Array(tripInfo.tripDetail).sorted { $0.expenseDate > $1.expenseDate }
+        let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate > $1.expenseDate }
         
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections([.intro, .budgetCard])
@@ -145,17 +142,20 @@ extension TripDashboardViewController {
         snapshot.appendItems([tripIntro], toSection: .intro)
         snapshot.appendItems([tripInfo], toSection: .budgetCard)
         
-        tripDetail.forEach {
+        for idx in 0 ..< tripDetail.count {
             
-            let newSectionName = DateUtil.getStringFromDate(date: $0.expenseDate, format: "yy.MM.dd")
+            var data = tripDetail[idx]
+            
+            data.append(tripInfo)
+            
+            let newSectionName = DateUtil.getStringFromDate(date: data.expenseDate, format: "yy.MM.dd")
             let isExistSection: Bool = snapshot.sectionIdentifiers.contains(.expense(section: newSectionName))
             
             if isExistSection {
-                snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
+                snapshot.appendItems([data], toSection: .expense(section: newSectionName))
             } else {
-                tripDashboardVM.tripDetailSectionName.append(newSectionName)
                 snapshot.appendSections([.expense(section: newSectionName)])
-                snapshot.appendItems([$0], toSection: .expense(section: newSectionName))
+                snapshot.appendItems([data], toSection: .expense(section: newSectionName))
             }
         }
         
