@@ -64,11 +64,18 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         // plus Section Registration
         let plusSectionRegistration = UICollectionView.CellRegistration<PlusCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self else { return }
+            guard let self, let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return }
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusTapped))
+            switch section {
+            case .tripCard:
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusTapped))
+                
+                cell.layoutView.addGestureRecognizer(tapGesture)
+            case .onComing:
+                cell.configureEmpty()
+            default: break
+            }
             
-            cell.layoutView.addGestureRecognizer(tapGesture)
         }
         
         // tripCard Section Registration

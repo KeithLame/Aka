@@ -56,4 +56,18 @@ final class PlusCollectionViewCell: BaseCollectionViewCell {
         plusImageView.image = UIImage(systemName: "plus")?.withTintColor(.justWhite, renderingMode: .alwaysOriginal).withConfiguration(imageConfiguration)
         plusImageView.isUserInteractionEnabled = true
     }
+    
+    func configureEmpty() {
+        
+        layoutView.willRemoveSubview(plusImageView)
+        plusImageView.snp.removeConstraints()
+        
+        plusImageView.image = nil
+        
+        titleLabel.snp.remakeConstraints {
+            $0.edges.equalTo(layoutView).inset(10)
+        }
+        
+        titleLabel.text = "예정된 여행이 없습니다 ⚠️"
+    }
 }

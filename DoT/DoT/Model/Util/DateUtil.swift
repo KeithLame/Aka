@@ -30,6 +30,7 @@ enum DateUtil {
         
         let df = ISO8601DateFormatter()
         df.formatOptions = .withInternetDateTime
+        df.timeZone = .autoupdatingCurrent
         let dateString = df.string(from: date)
         return dateString
     }
@@ -39,7 +40,8 @@ enum DateUtil {
         
         let df = DateFormatter()
         df.dateFormat = format
-        df.locale = Locale(identifier: "ko_KR")
+        df.timeZone = .autoupdatingCurrent
+        df.locale = Locale.current
         
         let dateString = df.string(from: date)
         return dateString
@@ -73,7 +75,8 @@ enum DateUtil {
         
         let df = DateFormatter()
         df.dateFormat = type.rawValue
-        df.locale = Locale(identifier: "ko_KR")
+        df.timeZone = .autoupdatingCurrent
+        df.locale = .current
         
         return df.date(from: dateStr)
     }
