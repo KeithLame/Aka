@@ -9,12 +9,16 @@ import Foundation
 
 class ExpenseViewModel {
     
-    var tripInfoData: TripInfo? = nil
+    var tripInfo: TripInfo? = nil
     var category: ExpenseCategory? = nil
+    
     var expense: Double = 0
     var expenseViewType: ExpenseViewType = .expense
     
     let realmManager = try? RealmManager()
+    
+    let inputAmountListener: Observable<Void?> = Observable(nil)
+    let outputAmountListener: Observable<String> = Observable("")
     
     let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
     let outputCategoryButtonClickedListener: Observable<Void?> = Observable(nil)
@@ -27,28 +31,49 @@ class ExpenseViewModel {
     
     init() {
         
+        inputAmountListener.bind { [weak self] _ in
+            
+            guard let self, let tripInfo else { return }
+            
+            switch expenseViewType {
+            case .expense:
+                
+                outputAmountListener.data = "0"
+                
+            case .budgetEdit:
+                
+                outputAmountListener.data = tripInfo.budget
+                expense = tripInfo.budget.convertDouble()
+            }
+        }
+        
         inputNumberPadListener.bind { [weak self] data in
             
             guard let self else { return }
             
             var (input, text) = data
             
+            // 지우기 및 text가 한자리라면 0으로 변경
             if input == "X", text.count == 1  {
-                self.ouputNumberPadListener.data = "0"
+                
+                expense = 0
+                ouputNumberPadListener.data = "0"
                 return
             }
             
+            // 지우기 및 text가 여러자리라면 마지막 글자 삭제
             if input == "X", !text.isEmpty {
                 text.removeLast()
                 self.ouputNumberPadListener.data = text.convertDecimalString()
                 return
             }
             
+            // "."은 한번만 입력가능
             if input == ".", text.isExistDot() {
                 return
             }
             
-            
+            // "."이하 세자리까지 입력 제한
             var dotPoint: Int? = nil
             let arrText = Array(text)
             
@@ -82,7 +107,7 @@ class ExpenseViewModel {
         
         inputSaveButtonClickedListener.bind { [weak self] _ in
             
-            guard let self, let realmManager, let tripInfoData else { return }
+            guard let self, let realmManager, let tripInfo else { return }
             
             switch expenseViewType {
             case .expense:
@@ -91,10 +116,10 @@ class ExpenseViewModel {
                 
                 let newExpense = TripDetailInfoDTO(expense: expense, category: category, photo: nil, memo: nil, expenseDate: Date())
                 
-                let tripInfo = realmManager.fetchOrigin(TripInfoDTO.self)
+                let tripInfoDTO = realmManager.fetchOrigin(TripInfoDTO.self)
                 
-                for data in tripInfo {
-                    if data.objectID == tripInfoData.objectID {
+                for data in tripInfoDTO {
+                    if data.objectID == tripInfo.objectID {
                         realmManager.appendTripDetail(data, tripDetail: newExpense)
                         break
                     }
@@ -102,7 +127,7 @@ class ExpenseViewModel {
                 
             case .budgetEdit:
                 
-                let objectID = tripInfoData.objectID
+                let objectID = tripInfo.objectID
                 let newBudget = NumberUtil.convertDecimal(expense as NSNumber)
                 
                 realmManager.updateTripBudgetByID(id: objectID, value: newBudget)

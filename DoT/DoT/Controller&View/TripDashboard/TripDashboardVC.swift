@@ -7,9 +7,9 @@
 
 import UIKit
 
-class TripDashboardViewController: BaseViewController<TripDashboardView> {
+final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
-    var diffableDataSource: UICollectionViewDiffableDataSource<TripDashboardCompositionalLayout, AnyHashable>!
+    private var diffableDataSource: UICollectionViewDiffableDataSource<TripDashboardCompositionalLayout, AnyHashable>!
     var tripDashboardVM = TripDashboardViewModel()
     
     override func viewDidLoad() {
@@ -17,13 +17,19 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
     }
     
+    deinit {
+        print("TripDashboardViewController Deinit")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
+        // Trip Info Update
         tripDashboardVM.tripInfoUpdateListener.data = ()
     }
     
     override func bindData() {
         
+        // Trip Info Update Complete
         tripDashboardVM.tripInfoUpdateCompleteListener.bind { [weak self] _ in
             
             guard let self else { return }
@@ -52,7 +58,8 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
             guard let self else { return }
             
-            let remainBudget = tripDashboardVM.getRemainBudgetByObjectID(itemIdentifier.objectID)
+            tripDashboardVM.remainBudgetByObjectIDListener.data = itemIdentifier.objectID
+            let remainBudget = tripDashboardVM.remainBudget
             cell.configure(data: itemIdentifier, remainBudget: remainBudget)
         }
         
@@ -67,6 +74,7 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
             supplementaryView.configure(data: items, title: section.title)
         }
         
+        // Section 등록
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
             let section = indexPath.section
@@ -102,25 +110,27 @@ class TripDashboardViewController: BaseViewController<TripDashboardView> {
         // Header 등록
         diffableDataSource.supplementaryViewProvider = { (view, kind, index) in
             
-            return self.layoutView.tripDashboradCollectionView.dequeueConfiguredReusableSupplementary(
+            return view.dequeueConfiguredReusableSupplementary(
                 using: expenseHeaderRegistration, for: index)
         }
     }
     
+    // 지출 추가 버튼 클릭
     @objc func expenseButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.expenseViewType = .expense
-        nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
+        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    // 예산 변경 버튼 클릭
     @objc func budgetEditButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.expenseViewType = .budgetEdit
-        nextVC.expenseVM.tripInfoData = tripDashboardVM.tripInfoListener.data
+        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -131,7 +141,7 @@ extension TripDashboardViewController {
     private func update() {
         
         let tripIntro = tripDashboardVM.tripIntro
-        guard let tripInfo = tripDashboardVM.tripInfoListener.data else { return }
+        guard let tripInfo = tripDashboardVM.tripInfo else { return }
         
         // 빠른 날짜 순으로 정렬
         let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate > $1.expenseDate }

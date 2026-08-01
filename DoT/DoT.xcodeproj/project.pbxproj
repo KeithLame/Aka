@@ -232,7 +232,6 @@
 				AC939C352BA9B74C0048956B /* TripInfo.swift */,
 				AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */,
 				AC939C382BA9CD640048956B /* Exchange.swift */,
-				AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */,
 				AC66689F2BA0179C00AED57A /* InProgressTrip.swift */,
 				AC61A6542BA6BB8300EF14BD /* TripIntro.swift */,
 			);
@@ -278,6 +277,7 @@
 		AC939C372BA9BA460048956B /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */,
 				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
 				AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */,
 				AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */,

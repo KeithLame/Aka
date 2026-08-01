@@ -66,13 +66,13 @@ class ExpenseView: BaseView {
         saveButton.configure(title: "지출 추가", image: .plane)
     }
     
-    func configre(data: TripInfo, input: String, type: ExpenseViewType) {
+    func configre(data: TripInfo, amount: String, viewType: ExpenseViewType) {
         
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         symbolLabel.text = currency.name
-        expenseLabel.text = input
+        expenseLabel.text = amount
         
-        switch type {
+        switch viewType {
         case .expense:
             saveButton.configuration?.title = "지출 추가"
         case .budgetEdit:

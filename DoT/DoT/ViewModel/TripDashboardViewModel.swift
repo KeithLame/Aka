@@ -7,20 +7,24 @@
 
 import Foundation
 
-class TripDashboardViewModel {
+final class TripDashboardViewModel {
     
-    var realmManager: RealmManager? = try? RealmManager()
+    private var realmManager: RealmManager? = try? RealmManager()
     
     var tripIntro: TripIntro = TripIntro()
-    var tripInfoListener: Observable<TripInfo?> = Observable(nil)
+    var tripInfo: TripInfo? = nil
+    var remainBudget: Double = 0
+    
     var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
     var tripInfoUpdateCompleteListener: Observable<Void?> = Observable(nil)
     
+    var remainBudgetByObjectIDListener: Observable<String> = Observable("")
+    
     init() {
         
-        tripInfoListener.bind { [weak self] tripInfo in
+        tripInfoUpdateListener.bind { [weak self] _ in
             
-            guard let self, let tripInfo else { return }
+            guard let self, let realmManager, let tripInfo else { return }
             
             let title = tripInfo.title
             let startDate = tripInfo.startDate
@@ -44,30 +48,36 @@ class TripDashboardViewModel {
             }
             
             self.tripIntro = TripIntro(title: title, preriod: dateText)
-        }
-        
-        tripInfoUpdateListener.bind { [weak self] _ in
-            
-            guard let self, let realmManager, let tripInfo = tripInfoListener.data else { return }
             
             let tripInfoDatas = realmManager.fetch(TripInfoDTO.self).map { $0.translate() }
             
             for newTripInfo in tripInfoDatas {
                 if newTripInfo.objectID == tripInfo.objectID {
-                    tripInfoListener.data = newTripInfo
+                    self.tripInfo = newTripInfo
                 }
             }
             
             tripInfoUpdateCompleteListener.data = ()
         }
+        
+        remainBudgetByObjectIDListener.bind { [weak self] objectID in
+            
+            guard let self else { return }
+            
+            remainBudget = getRemainBudgetByObjectID(objectID)
+        }
     }
     
-    func getRemainBudgetByObjectID(_ id: String) -> Double {
+    deinit {
+        print("TripDashboardViewModel Deinit")
+    }
+    
+    private func getRemainBudgetByObjectID(_ id: String) -> Double {
         
-        guard let tripInfoData = tripInfoListener.data else { return 0 }
-        let tripDetail = tripInfoData.tripDetail.sorted { $0.expenseDate < $1.expenseDate }
+        guard let tripInfo else { return 0 }
+        let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate < $1.expenseDate }
         
-        var budget = tripInfoData.budget.convertDouble()
+        var budget = tripInfo.budget.convertDouble()
         
         for data in tripDetail {
             

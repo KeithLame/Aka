@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ExpenseViewController: BaseViewController<ExpenseView> {
+final class ExpenseViewController: BaseViewController<ExpenseView> {
     
     let expenseVM = ExpenseViewModel()
-    var categoryDataSource: UICollectionViewDiffableDataSource<CategoryCompositionalLayout, ExpenseCategory>!
-    var numberPadDataSource: UICollectionViewDiffableDataSource<NumberPadCompositionalLayout, String>!
+    private var categoryDataSource: UICollectionViewDiffableDataSource<CategoryCompositionalLayout, ExpenseCategory>!
+    private var numberPadDataSource: UICollectionViewDiffableDataSource<NumberPadCompositionalLayout, String>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,19 +25,34 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
     
     override func bindData() {
         
-        expenseVM.ouputNumberPadListener.bind { [weak self] output in
+        // 금액 설정 및 view configure
+        expenseVM.outputAmountListener.bind { [weak self] amount in
             
-            guard let self, let data = expenseVM.tripInfoData else { return }
+            guard let self, let tripInfo = expenseVM.tripInfo else { return }
             
-            layoutView.configre(data: data, input: output, type: expenseVM.expenseViewType)
+            let type = expenseVM.expenseViewType
+            
+            layoutView.configre(data: tripInfo, amount: amount, viewType: type)
+            layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
         }
         
+        // NumberPad 입력값
+        expenseVM.ouputNumberPadListener.bind { [weak self] number in
+            
+            guard let self else { return }
+            
+            layoutView.expenseLabel.text = number
+        }
+        
+        // Category 선택
         expenseVM.outputCategoryButtonClickedListener.bind { [weak self] _ in
             
             guard let self else { return }
             
             let count = ExpenseCategory.allCases.count
             
+            // 가지고 있는 모든 카테고리 Cell을 원상태로 복구
+            // 선택한 셀만 선택하기 위함
             for idx in 0 ..< count {
                 let indexPath = IndexPath(item: idx, section: 0)
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
@@ -45,6 +60,7 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
             }
         }
         
+        // 저장 버튼 클릭
         expenseVM.outputSaveButtonClickedListener.bind { [weak self] _ in
             
             guard let self else { return }
@@ -58,7 +74,7 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
         layoutView.categoryCollectionView.showsHorizontalScrollIndicator = false
         
         // MARK: Category Collecion View
-        let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> {[weak self] cell, indexPath, itemIdentifier in
+        let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> { [weak self] cell, indexPath, itemIdentifier in
             
             guard let self else { return }
             
@@ -101,21 +117,7 @@ class ExpenseViewController: BaseViewController<ExpenseView> {
     
     override func configure() {
         
-        guard let data = expenseVM.tripInfoData else { return }
-        
-        let type = expenseVM.expenseViewType
-        var input: String
-        
-        switch type {
-        case .expense:
-            input = "0"
-        case .budgetEdit:
-            input = data.budget
-        }
-        
-        layoutView.configre(data: data, input: input, type: type)
-        
-        layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
+        expenseVM.inputAmountListener.data = ()
     }
     
     @objc func saveButtonClicked(sender: UIButton) {
