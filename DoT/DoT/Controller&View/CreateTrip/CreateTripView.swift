@@ -116,8 +116,8 @@ final class CreateTripView: BaseView {
         budgetLiteralLabel.configure(text: "예산", fontSize: .regular, fontScale: .Bold)
         budgetCurrencyLabel.configure(text: "원", fontSize: .regular, fontScale: .Bold)
         
-        currencyChoiceButton.configure(title: "통화 선택")
-        periodButton.configure(title: "여행 기간 설정")
+        currencyChoiceButton.configure(title: "통화 선택", image: nil)
+        periodButton.configure(title: "여행 기간 설정", image: nil)
         
         headcountStepper.maximumValue = 50
         headcountStepper.minimumValue = 0

@@ -39,7 +39,8 @@ class CalendarView: BaseView {
         
         configureCalendar()
         
-        saveButton.configure(title: "기간 선택 완료")
+        saveButton.configure(title: "기간 선택 완료", image: nil)
+        saveButton.updateConfiguration()
         saveButton.isEnabled = false
     }
     

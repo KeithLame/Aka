@@ -64,6 +64,7 @@ class ExpenseView: BaseView {
         categoryCollectionView.backgroundColor = .clear
         numberPadCollectionView.backgroundColor = .clear
         saveButton.configure(title: "지출 추가", image: .plane)
+        saveButton.updateConfiguration()
     }
     
     func configre(data: TripInfo, amount: String, viewType: ExpenseViewType) {

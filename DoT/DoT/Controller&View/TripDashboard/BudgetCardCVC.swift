@@ -64,8 +64,8 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         budgetCardLayoutView.layer.cornerRadius = 10
         budgetCardLayoutView.backgroundColor = .pointBlue
         
-        budgetEditButton.configure(title: "예산 수정", scale: .Bold)
-        expenseButton.configure(title: "지출", scale: .Bold)
+        budgetEditButton.configure(title: "예산 수정", image: nil, fontScale: .Bold)
+        expenseButton.configure(title: "지출", image: nil, fontScale: .Bold)
         expenseButton.configuration?.background.backgroundColor = .blackWhite
         expenseButton.configuration?.baseForegroundColor = .whiteBlack
     }

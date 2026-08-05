@@ -67,6 +67,14 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
             
             navigationController?.popViewController(animated: true)
         }
+        
+        // 저장 버튼 활성화 여부 체크
+        expenseVM.outputCheckSaveButtonEnabledListener.bind { [weak self] isEnabled in
+            
+            guard let self else { return }
+            
+            layoutView.saveButton.isEnabled = isEnabled
+        }
     }
     
     override func configureCollectionView() {
@@ -118,6 +126,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
     override func configure() {
         
         expenseVM.inputAmountListener.data = ()
+        expenseVM.inputCheckSaveButtonEnabledListener.data = ()
     }
     
     @objc func saveButtonClicked(sender: UIButton) {
@@ -130,6 +139,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         guard let category = ExpenseCategory(rawValue: sender.tag) else { return }
         
         expenseVM.inputCategoryButtonClickedListener.data = category
+        expenseVM.inputCheckSaveButtonEnabledListener.data = ()
         
         sender.configuration?.background.backgroundColor = .pointBlue
         sender.configuration?.baseForegroundColor = .justWhite
@@ -142,6 +152,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
               let inputText = layoutView.expenseLabel.text else { return }
         
         expenseVM.inputNumberPadListener.data = (input, inputText)
+        expenseVM.inputCheckSaveButtonEnabledListener.data = ()
     }
 }
 

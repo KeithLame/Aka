@@ -29,6 +29,9 @@ class ExpenseViewModel {
     let inputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
     let outputSaveButtonClickedListener: Observable<Void?> = Observable(nil)
     
+    let inputCheckSaveButtonEnabledListener: Observable<Void?> = Observable(nil)
+    let outputCheckSaveButtonEnabledListener: Observable<Bool> = Observable(false)
+    
     init() {
         
         inputAmountListener.bind { [weak self] _ in
@@ -134,6 +137,18 @@ class ExpenseViewModel {
             }
             
             outputSaveButtonClickedListener.data = ()
+        }
+        
+        inputCheckSaveButtonEnabledListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            var result = true
+            
+            if expense == 0 { result = false }
+            if category == nil { result = false }
+            
+            outputCheckSaveButtonEnabledListener.data = result
         }
     }
 }

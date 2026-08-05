@@ -51,7 +51,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         let createCustomView = UIButton()
         let buttonImage = UIImage.plane
         
-        createCustomView.configure(title: title, image: buttonImage, fontSize: .small, fontScale: .Bold, backgroundColor: .clear, foregroundColor: .blackWhite, buttonColor: .blackWhite)
+        createCustomView.configure(title: title, image: buttonImage, fontSize: .small, fontScale: .Bold, backgroundColor: .clear, foregroundColor: .blackWhite, imageColor: .blackWhite)
         createCustomView.addTarget(self, action: #selector(rightBarButtonClicked), for: .touchUpInside)
         
         let createBarButton = UIBarButtonItem(customView: createCustomView)
