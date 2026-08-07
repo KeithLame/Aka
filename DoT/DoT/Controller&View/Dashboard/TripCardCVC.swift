@@ -86,13 +86,15 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
             let endGap = DateUtil.getDateGap(from: Date(), to: data.endDate)
             
             if startGap == 0 {
-                return "D-Day"
+                return "첫째 날"
             } else if startGap > 0, endGap > 0 {
-                return "\(startGap)일차"
+                return "여행 \(startGap)일차"
             } else if startGap < 0 {
                 return "여행까지 \(abs(startGap))일 남았습니다!"
-            } else if endGap <= 0 {
-                return "DoT!"
+            } else if endGap == 0 {
+                return "마지막 날"
+            } else if endGap < 0 {
+                return "종료된 여행"
             }
             return ""
         }
@@ -100,7 +102,16 @@ class TripCardCollectionViewCell: BaseCollectionViewCell {
         periodLabel.text = "\(dateText)"
         titleLabel.text = data.title
         budgetLabel.text = "\(currency.currencySymbol) \(data.budget)"
-        remainBudgetLabel.text = "잔고 \(data.budget)\(currency.currency)"
+        
+        let tripDetail = data.tripDetail
+        var remain = data.budget.convertDouble()
+        
+        for data in tripDetail {
+            
+            remain -= data.expense
+        }
+        
+        remainBudgetLabel.text = "잔고 \(NumberUtil.convertDecimal(remain as NSNumber))\(currency.currency)"
         
         budgetLabel.adjustsFontSizeToFitWidth = true
         remainBudgetLabel.adjustsFontSizeToFitWidth = true

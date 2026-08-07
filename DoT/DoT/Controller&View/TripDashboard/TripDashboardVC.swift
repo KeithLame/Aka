@@ -40,11 +40,13 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
     override func configureCollectionView() {
         
+        // Trip Intro Cell
         let tripIntroRegistration = UICollectionView.CellRegistration<TripIntroCollectionViewCell, TripIntro> { cell,indexPath,itemIdentifier in
             
             cell.configure(data: itemIdentifier)
         }
         
+        // Budget Card Cell
         let budgetCardRegistration = UICollectionView.CellRegistration<BudgetCardCollectionViewCell, TripInfo> { [weak self] cell,indexPath,itemIdentifier in
             
             guard let self else { return }
@@ -54,6 +56,20 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.budgetEditButton.addTarget(self, action: #selector(budgetEditButtonClicked), for: .touchUpInside)
         }
         
+        // Delete Cell
+        let deleteRegistration = UICollectionView.CellRegistration<DeleteCollectionViewCell, String> { [weak self] cell,indexPath,itemIdentifier in
+            
+            guard let self else { return }
+            
+            // cell.deleteButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        }
+        
+        // Empty Cell
+        let emptyRegistration = UICollectionView.CellRegistration<EmptyCollectionViewCell, String> { cell,indexPath,itemIdentifier in
+            
+        }
+        
+        // Expense Cell
         let expenseRegistration = UICollectionView.CellRegistration<ExpenseCollectionViewCell, TripDetailInfo> { [weak self] cell,indexPath,itemIdentifier in
             
             guard let self else { return }
@@ -63,6 +79,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.configure(data: itemIdentifier, remainBudget: remainBudget)
         }
         
+        // Expense Header Cell
         let expenseHeaderRegistration = UICollectionView.SupplementaryRegistration<ExpenseCollectionReusableView>(elementKind: ExpenseCollectionReusableView.identifier) { [weak self] supplementaryView, elementKind, indexPath in
             
             guard let self else { return }
@@ -77,6 +94,9 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         // Section 등록
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
+            guard let lastSectionNumber = TripDashboardCompositionalLayout.lastSectionNumber else { return nil }
+            
+            let emptySection = TripDashboardCompositionalLayout.emptySectionNumber
             let section = indexPath.section
             
             switch section {
@@ -96,13 +116,33 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
                 return cell
                 
-            default:
+            case lastSectionNumber:
                 
-                guard let item: TripDetailInfo = itemIdentifier as? TripDetailInfo else { return nil }
+                guard let item: String = itemIdentifier as? String else { return nil }
                 
-                let cell = collectionView.dequeueConfiguredReusableCell(using: expenseRegistration, for: indexPath, item: item)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: deleteRegistration, for: indexPath, item: item)
                 
                 return cell
+                
+            default:
+                
+                if emptySection == nil {
+                    
+                    guard let item: TripDetailInfo = itemIdentifier as? TripDetailInfo else { return nil }
+                    
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: expenseRegistration, for: indexPath, item: item)
+                    
+                    return cell
+                    
+                } else {
+                    
+                    guard let item: String = itemIdentifier as? String else { return nil }
+                    
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: emptyRegistration, for: indexPath, item: item)
+                    
+                    return cell
+                    
+                }
                 
             }
         })
@@ -121,6 +161,14 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.expenseViewType = .expense
         nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
+        
+        nextVC.expenseVM.complete.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            let snapshot = diffableDataSource.snapshot()
+            diffableDataSource.applySnapshotUsingReloadData(snapshot)
+        }
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -149,10 +197,18 @@ extension TripDashboardViewController {
         var snapshot = NSDiffableDataSourceSnapshot<TripDashboardCompositionalLayout, AnyHashable>()
         snapshot.appendSections([.intro, .budgetCard])
         
+        // Section 추가 - Intro
         snapshot.appendItems([tripIntro], toSection: .intro)
+        
+        // Section 추가 - BudgetCard
         snapshot.appendItems([tripInfo], toSection: .budgetCard)
         
+        // Section 추가 - Expense
         for idx in 0 ..< tripDetail.count {
+            
+            // empty Section은 미리 삭제
+            snapshot.deleteSections([.empty])
+            TripDashboardCompositionalLayout.emptySectionNumber = nil
             
             var data = tripDetail[idx]
             
@@ -168,6 +224,20 @@ extension TripDashboardViewController {
                 snapshot.appendItems([data], toSection: .expense(section: newSectionName))
             }
         }
+        
+        // Section 추가 - Empty (Expense가 없는 경우에 한하여)
+        if tripDetail.isEmpty {
+            snapshot.appendSections([.empty])
+            snapshot.appendItems(["empty"], toSection: .empty)
+            
+            TripDashboardCompositionalLayout.emptySectionNumber = snapshot.indexOfSection(.empty)
+        }
+        
+        // Section 추가 - Delete
+        snapshot.appendSections([.delete])
+        snapshot.appendItems(["delete"], toSection: .delete)
+        
+        TripDashboardCompositionalLayout.lastSectionNumber = snapshot.numberOfSections - 1
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }

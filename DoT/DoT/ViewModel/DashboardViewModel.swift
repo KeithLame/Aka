@@ -164,12 +164,14 @@ final class DashboardViewModel {
     /// 예정된 Trip Data를 반환
     private func getOnComingTrip(data: [TripInfo]) -> [TripInfo] {
         
-        let onComingData = data.filter {
+        var onComingData = data.filter {
             
             let gap = DateUtil.getDateGap(from: $0.startDate, to: Date())
             
             return gap < 0
         }
+        
+        onComingData.sort { $0.startDate < $1.startDate }
         
         return onComingData
     }
@@ -201,7 +203,7 @@ final class DashboardViewModel {
         
         APIManager.shared.callAPI(api: api, type: [ExchangeAPIModel].self) { [weak self] response in
             
-            print("환율 API를 호출했습니다.")
+            print("############# 환율 API 호출 #############")
             
             guard let self else { return }
             

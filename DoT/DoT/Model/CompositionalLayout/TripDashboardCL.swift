@@ -14,6 +14,8 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     case intro
     case budgetCard
     case expense(section: String)
+    case delete
+    case empty
     
     var title: String {
         switch self {
@@ -23,17 +25,28 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         }
     }
     
+    static var lastSectionNumber: Int?
+    static var emptySectionNumber: Int?
+    
     static func create() -> UICollectionViewCompositionalLayout {
         
         return UICollectionViewCompositionalLayout { section, environment in
+            
+            guard let lastSectionNumber else { return nil }
             
             switch section {
             case 0:
                 return createIntro()
             case 1:
                 return createBudgetCard()
+            case lastSectionNumber:
+                return createDefault()
             default:
-                return createExpense()
+                if emptySectionNumber == nil{
+                    return createExpense()
+                } else {
+                    return createDefault()
+                }
             }
         }
     }
@@ -84,6 +97,23 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createHeader()]
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        
+        return section
+    }
+    
+    private static func createDefault() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(44))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(44))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         

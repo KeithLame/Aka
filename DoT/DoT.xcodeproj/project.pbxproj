@@ -52,6 +52,8 @@
 		AC939C392BA9CD640048956B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C382BA9CD640048956B /* Exchange.swift */; };
 		AC939C3B2BA9E5900048956B /* TripDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */; };
 		AC939C3D2BA9F86D0048956B /* DateFormatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3C2BA9F86D0048956B /* DateFormatType.swift */; };
+		AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3F2BAB45E10048956B /* DeleteCVC.swift */; };
+		AC939C422BAB48B60048956B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C412BAB48B60048956B /* EmptyCVC.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -133,6 +135,8 @@
 		AC939C382BA9CD640048956B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailInfo.swift; sourceTree = "<group>"; };
 		AC939C3C2BA9F86D0048956B /* DateFormatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatType.swift; sourceTree = "<group>"; };
+		AC939C3F2BAB45E10048956B /* DeleteCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCVC.swift; sourceTree = "<group>"; };
+		AC939C412BAB48B60048956B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 				AC78E2EF2BA442D8005B2E99 /* TripIntroCVC.swift */,
 				AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */,
 				AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */,
+				AC939C412BAB48B60048956B /* EmptyCVC.swift */,
+				AC939C3F2BAB45E10048956B /* DeleteCVC.swift */,
 				AC939C242BA88EF50048956B /* ExpenseCRV.swift */,
 			);
 			path = TripDashboard;
@@ -552,6 +558,7 @@
 				AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */,
 				AC939C322BA9A58D0048956B /* TripCardCRV.swift in Sources */,
 				AC6668A22BA044C100AED57A /* NumberUtil.swift in Sources */,
+				AC939C422BAB48B60048956B /* EmptyCVC.swift in Sources */,
 				AC939C392BA9CD640048956B /* Exchange.swift in Sources */,
 				ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
@@ -596,6 +603,7 @@
 				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
 				AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */,
 				AC939C232BA82FEF0048956B /* ExpenseViewModel.swift in Sources */,
+				AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */,
 				AC61A6622BA6E9CF00EF14BD /* CategoryCL.swift in Sources */,
 				AC939C362BA9B74C0048956B /* TripInfo.swift in Sources */,
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,

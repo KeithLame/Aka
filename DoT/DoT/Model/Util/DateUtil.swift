@@ -41,7 +41,7 @@ enum DateUtil {
         let df = DateFormatter()
         df.dateFormat = format
         df.timeZone = .autoupdatingCurrent
-        df.locale = Locale.current
+        df.locale = Locale(identifier: "ko_KR")
         
         let dateString = df.string(from: date)
         return dateString
@@ -76,7 +76,7 @@ enum DateUtil {
         let df = DateFormatter()
         df.dateFormat = type.rawValue
         df.timeZone = .autoupdatingCurrent
-        df.locale = .current
+        df.locale = Locale(identifier: "ko_KR")
         
         return df.date(from: dateStr)
     }

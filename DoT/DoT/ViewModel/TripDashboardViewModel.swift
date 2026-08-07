@@ -36,13 +36,15 @@ final class TripDashboardViewModel {
                 let endGap = DateUtil.getDateGap(from: Date(), to: endDate)
                 
                 if startGap == 0 {
-                    return "D-Day"
+                    return "첫째 날"
                 } else if startGap > 0, endGap > 0 {
-                    return "\(startGap)일차"
+                    return "여행 \(startGap)일차"
                 } else if startGap < 0 {
                     return "여행까지 \(abs(startGap))일 남았습니다!"
-                } else if endGap <= 0 {
-                    return "DoT!"
+                } else if endGap == 0 {
+                    return "마지막 날"
+                } else if endGap < 0 {
+                    return "종료된 여행"
                 }
                 return ""
             }

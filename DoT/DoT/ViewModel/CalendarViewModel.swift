@@ -24,6 +24,7 @@ final class CalendarViewModel {
     let saveButtonClickedListener: Observable<Void?> = Observable(nil)
     
     let inputConfigureDataListener: Observable<(startDate: Date, endDate: Date)?> = Observable(nil)
+    let outputConfigureDataListener: Observable<Void?> = Observable(nil)
     
     init() {
         

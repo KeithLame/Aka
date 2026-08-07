@@ -17,6 +17,8 @@ class ExpenseViewModel {
     
     let realmManager = try? RealmManager()
     
+    let complete: Observable<Void?> = Observable(nil)
+    
     let inputAmountListener: Observable<Void?> = Observable(nil)
     let outputAmountListener: Observable<String> = Observable("")
     
@@ -67,7 +69,8 @@ class ExpenseViewModel {
             // 지우기 및 text가 여러자리라면 마지막 글자 삭제
             if input == "X", !text.isEmpty {
                 text.removeLast()
-                self.ouputNumberPadListener.data = text.convertDecimalString()
+                expense = text.convertDouble()
+                ouputNumberPadListener.data = text.convertDecimalString()
                 return
             }
             
@@ -128,6 +131,8 @@ class ExpenseViewModel {
                     }
                 }
                 
+                complete.data = ()
+                
             case .budgetEdit:
                 
                 let objectID = tripInfo.objectID
@@ -145,8 +150,15 @@ class ExpenseViewModel {
             
             var result = true
             
-            if expense == 0 { result = false }
-            if category == nil { result = false }
+            switch expenseViewType {
+            case .budgetEdit:
+                if expense == 0 { result = false }
+                
+            case .expense:
+                
+                if expense == 0 { result = false }
+                if category == nil { result = false }
+            }
             
             outputCheckSaveButtonEnabledListener.data = result
         }

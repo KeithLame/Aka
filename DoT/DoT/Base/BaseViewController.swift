@@ -26,6 +26,12 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         configureNavigation()
         configureCollectionView()
         configure()
+        makeBackBarButton()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
     }
     
     func bindData() { }

@@ -74,6 +74,8 @@ class CreateTripViewController: BaseViewController<CreateTripView> {
         layoutView.headcountStepper.addTarget(self, action: #selector(stepperClicked), for: .valueChanged)
         
         layoutView.budgetTextField.delegate = self
+        layoutView.placeTextField.delegate = self
+        layoutView.titleTextField.delegate = self
     }
     
     // 새로운 여행 정보 저장(등록)
@@ -194,5 +196,11 @@ extension CreateTripViewController: UITextFieldDelegate {
         guard let text = textField.text else { return true }
         
         return createTripVM.limitDecimalPoint(text, range: range.location)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

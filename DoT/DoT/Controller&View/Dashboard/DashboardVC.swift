@@ -235,7 +235,6 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         
         let tripInfoDatas = dashboardVM.tripInfoDatas
         let nextVC: TripDashboardViewController = TripDashboardViewController()
-        makeBackBarButton()
         nextVC.tripDashboardVM.tripInfo = tripInfoDatas[layoutView.tag]
         
         navigationController?.pushViewController(nextVC, animated: true)
@@ -247,7 +246,6 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         
         let onComingDatas = dashboardVM.onComingDatas
         let nextVC: TripDashboardViewController = TripDashboardViewController()
-        makeBackBarButton()
         nextVC.tripDashboardVM.tripInfo = onComingDatas[layoutView.tag]
         
         navigationController?.pushViewController(nextVC, animated: true)

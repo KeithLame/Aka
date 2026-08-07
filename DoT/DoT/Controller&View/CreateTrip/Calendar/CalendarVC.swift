@@ -41,6 +41,10 @@ class CalendarViewController: BaseViewController<CalendarView> {
         layoutView.calendar.dataSource = self
         
         layoutView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
+        
+        guard let calendarType = calendarVM.outputSelectedListener.data else { return }
+        
+        self.layoutView.saveButton.isEnabled = calendarType == .both ? true : false
     }
     
     @objc func saveButtonClicked(_ sender: UIButton) {
