@@ -36,6 +36,13 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
             update()
         }
+        
+        tripDashboardVM.outputDeleteButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     override func configureCollectionView() {
@@ -61,7 +68,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
             
             guard let self else { return }
             
-            // cell.deleteButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+            cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         }
         
         // Empty Cell
@@ -181,6 +188,11 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func deleteButtonClicked(_ sender: UIButton) {
+        
+        tripDashboardVM.inputDeleteButtonClickedListener.data = ()
     }
 }
 

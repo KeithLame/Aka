@@ -18,6 +18,9 @@ final class TripDashboardViewModel {
     var tripInfoUpdateListener: Observable<Void?> = Observable(nil)
     var tripInfoUpdateCompleteListener: Observable<Void?> = Observable(nil)
     
+    var inputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    var outputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    
     var remainBudgetByObjectIDListener: Observable<String> = Observable("")
     
     init() {
@@ -67,6 +70,36 @@ final class TripDashboardViewModel {
             guard let self else { return }
             
             remainBudget = getRemainBudgetByObjectID(objectID)
+        }
+        
+        inputDeleteButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self, let tripInfo, let realmManager else { return }
+            
+            let tripInfoDTO = realmManager.fetch(TripInfoDTO.self)
+            
+            tripInfoDTO.forEach {
+                if $0.objectID == tripInfo.objectID {
+                    
+                    $0.tripDetail.forEach { tripDetailInfo in
+                        
+                        do {
+                            try realmManager.delete(tripDetailInfo)
+                        } catch {
+                            print(error)
+                        }
+                        
+                    }
+                    
+                    do {
+                        try realmManager.delete($0)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+            
+            outputDeleteButtonClickedListener.data = ()
         }
     }
     
