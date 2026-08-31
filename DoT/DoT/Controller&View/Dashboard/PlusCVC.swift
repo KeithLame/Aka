@@ -11,8 +11,8 @@ import SnapKit
 final class PlusCollectionViewCell: BaseCollectionViewCell {
     
     let layoutView = UIView()
-    let plusImageView = UIImageView()
-    let titleLabel = UILabel()
+    private let plusImageView = UIImageView()
+    private let titleLabel = UILabel()
     
     override func configureHierarchy() {
         
@@ -55,19 +55,5 @@ final class PlusCollectionViewCell: BaseCollectionViewCell {
         let imageConfiguration = UIImage.SymbolConfiguration(font: FontManager.getFont(size: .large, scale: .Medium), scale: .large)
         plusImageView.image = UIImage(systemName: "plus")?.withTintColor(.justWhite, renderingMode: .alwaysOriginal).withConfiguration(imageConfiguration)
         plusImageView.isUserInteractionEnabled = true
-    }
-    
-    func configureEmpty() {
-        
-        layoutView.willRemoveSubview(plusImageView)
-        plusImageView.snp.removeConstraints()
-        
-        plusImageView.image = nil
-        
-        titleLabel.snp.remakeConstraints {
-            $0.edges.equalTo(layoutView).inset(10)
-        }
-        
-        titleLabel.text = "예정된 여행이 없습니다 ⚠️"
     }
 }

@@ -64,17 +64,15 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         // plus Section Registration
         let plusSectionRegistration = UICollectionView.CellRegistration<PlusCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self, let section = DashboardCompositionalLayout(rawValue: indexPath.section) else { return }
+            guard let self else { return }
             
-            switch section {
-            case .tripCard:
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusTapped))
-                
-                cell.layoutView.addGestureRecognizer(tapGesture)
-            case .onComing:
-                cell.configureEmpty()
-            default: break
-            }
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusTapped))
+            
+            cell.layoutView.addGestureRecognizer(tapGesture)
+        }
+        
+        // EmptyOnComing Section Registration
+        let emptyOnComingSectionRegistration = UICollectionView.CellRegistration<EmptyOnComingCollectionViewCell, AnyHashable> { cell, indexPath, itemIdentifier in
             
         }
         
@@ -162,7 +160,7 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 
                 if onComingDatas.isEmpty {
                     
-                    let cell = collectionView.dequeueConfiguredReusableCell(using: plusSectionRegistration, for: indexPath, item: itemIdentifier)
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: emptyOnComingSectionRegistration, for: indexPath, item: itemIdentifier)
                     
                     return cell
                     
@@ -279,16 +277,16 @@ extension DashboardViewController {
         snapshot.appendSections(DashboardCompositionalLayout.allCases)
         
         if tripInfoDatas.isEmpty {
-            snapshot.appendItems(["TempData"], toSection: .tripCard)
+            snapshot.appendItems(["TripCard"], toSection: .tripCard)
         } else {
-            snapshot.deleteItems(["TempData"])
+            snapshot.deleteItems(["TripCard"])
             snapshot.appendItems(tripInfoDatas, toSection: .tripCard)
         }
         
         if onComingDatas.isEmpty {
-            snapshot.appendItems(["TempData2"], toSection: .onComing)
+            snapshot.appendItems(["OnComing"], toSection: .onComing)
         } else {
-            snapshot.deleteItems(["TempData2"])
+            snapshot.deleteItems(["OnComing"])
             snapshot.appendItems(onComingDatas, toSection: .onComing)
         }
         
