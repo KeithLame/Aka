@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-class TripIntroCollectionViewCell: BaseCollectionViewCell {
+final class TripIntroCollectionViewCell: BaseCollectionViewCell {
     
-    let tripTitle = UILabel()
-    let tripDay = UILabel()
+    private let tripTitle = UILabel()
+    private let tripDay = UILabel()
     
     override func configureHierarchy() {
         
@@ -42,5 +42,9 @@ class TripIntroCollectionViewCell: BaseCollectionViewCell {
         
         tripTitle.text = data.title
         tripDay.text = data.preriod
+    }
+    
+    deinit {
+        print("TripIntroCVC deinit")
     }
 }

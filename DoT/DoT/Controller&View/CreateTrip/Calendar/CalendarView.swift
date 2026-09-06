@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class CalendarView: BaseView {
+final class CalendarView: BaseView {
 
     let calendar = FSCalendar()
     let saveButton = UIButton()
@@ -69,5 +69,9 @@ class CalendarView: BaseView {
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         
         calendar.placeholderType = .none
+    }
+    
+    deinit {
+        print("CalendarView deinit")
     }
 }

@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ExpenseCollectionReusableView: UICollectionReusableView {
+final class ExpenseCollectionReusableView: UICollectionReusableView {
     
-    let dateLabel = UILabel()
-    let accumulateLabel = UILabel()
-    let separateLineView = UIView()
+    private let dateLabel = UILabel()
+    private let accumulateLabel = UILabel()
+    private let separateLineView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,5 +67,9 @@ class ExpenseCollectionReusableView: UICollectionReusableView {
         
         for detail in data { accumulate += detail.expense }
         accumulateLabel.text = "- \(NumberUtil.convertDecimal(accumulate as NSNumber))"
+    }
+    
+    deinit {
+        print("ExpenseCRV deinit")
     }
 }

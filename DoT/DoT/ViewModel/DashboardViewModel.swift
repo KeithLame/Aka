@@ -9,11 +9,11 @@ import Foundation
 
 final class DashboardViewModel {
     
+    private let realmManager: RealmManager? = try? RealmManager()
+    
     var tripInfoDatas: [TripInfo] = []
     var exchangeDatas: [Exchange] = []
     var onComingDatas: [TripInfo] = []
-    
-    private let realmManager: RealmManager? = try? RealmManager()
     
     // Trip Info Fetch / Fetch Complete
     let tripInfoFetchListener: Observable<Void?> = Observable(nil)

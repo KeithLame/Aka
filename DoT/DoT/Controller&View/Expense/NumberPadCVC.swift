@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NumberPadCollectionViewCell: BaseCollectionViewCell {
+final class NumberPadCollectionViewCell: BaseCollectionViewCell {
     
     let numberLabel = UILabel()
     
@@ -34,5 +34,9 @@ class NumberPadCollectionViewCell: BaseCollectionViewCell {
     func configure(data: String) {
         
         numberLabel.text = data
+    }
+    
+    deinit {
+        print("NumberPadCVC deinit")
     }
 }

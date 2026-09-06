@@ -7,15 +7,15 @@
 
 import Foundation
 
-class ExpenseViewModel {
+final class ExpenseViewModel {
+    
+    private let realmManager = try? RealmManager()
     
     var tripInfo: TripInfo? = nil
     var category: ExpenseCategory? = nil
     
     var expense: Double = 0
     var expenseViewType: ExpenseViewType = .expense
-    
-    let realmManager = try? RealmManager()
     
     let complete: Observable<Void?> = Observable(nil)
     

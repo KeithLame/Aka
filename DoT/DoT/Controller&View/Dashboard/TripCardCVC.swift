@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-class TripCardCollectionViewCell: BaseCollectionViewCell {
+final class TripCardCollectionViewCell: BaseCollectionViewCell {
  
     let layoutView = UIView()
-    let periodLabel = UILabel()
-    let arrowImageView = UIImageView()
-    let titleLabel = UILabel()
-    let budgetLabel = UILabel()
-    let remainBudgetLabel = UILabel()
+    private let periodLabel = UILabel()
+    private let arrowImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let budgetLabel = UILabel()
+    private let remainBudgetLabel = UILabel()
     
     override func configureHierarchy() {
         

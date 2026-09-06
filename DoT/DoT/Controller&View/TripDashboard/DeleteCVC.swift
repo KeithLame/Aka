@@ -30,4 +30,8 @@ final class DeleteCollectionViewCell: BaseCollectionViewCell {
         
         deleteButton.configure(title: "데이터 삭제", image: nil)
     }
+    
+    deinit {
+        print("DeleteCVC deinit")
+    }
 }

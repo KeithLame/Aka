@@ -7,7 +7,9 @@
 
 import Foundation
 
-class CreateTripViewModel {
+final class CreateTripViewModel {
+    
+    private let realmManager: RealmManager? = try? RealmManager()
     
     private var title: String = ""
     private var place: String = ""
@@ -18,8 +20,6 @@ class CreateTripViewModel {
     private var headCount: Int = 0
     
     var dismissCallBack: (() -> Void)?
-    
-    private let realmManager: RealmManager? = try? RealmManager()
     
     let inputTitleListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")

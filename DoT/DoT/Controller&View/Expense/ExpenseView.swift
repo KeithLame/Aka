@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ExpenseView: BaseView {
+final class ExpenseView: BaseView {
     
     let symbolLabel = UILabel()
     let expenseLabel = UILabel()
@@ -80,5 +80,9 @@ class ExpenseView: BaseView {
             saveButton.configuration?.title = "예산 수정"
             categoryCollectionView.isHidden = true
         }
+    }
+    
+    deinit {
+        print("ExpenseView deinit")
     }
 }

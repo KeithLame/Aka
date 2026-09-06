@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIViewModel {
+final class APIViewModel {
     
     let callExchangeAPIListener: Observable<Void?> = Observable(nil)
     let callExchangeAPICompleteListener: Observable<[ExchangeAPIModel]> = Observable([])

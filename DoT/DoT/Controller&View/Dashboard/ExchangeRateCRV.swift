@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ExchangeRateCollectionReusableView: UICollectionReusableView {
+final class ExchangeRateCollectionReusableView: UICollectionReusableView {
     
-    let currencyLabel = UILabel()
-    let exchangeLabel = UILabel()
-    let separateView = UIView()
+    private let currencyLabel = UILabel()
+    private let exchangeLabel = UILabel()
+    private let separateView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

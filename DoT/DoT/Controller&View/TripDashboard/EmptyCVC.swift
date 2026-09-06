@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class EmptyCollectionViewCell: BaseCollectionViewCell {
+final class EmptyCollectionViewCell: BaseCollectionViewCell {
     
-    let emptyLabel = UILabel()
+    private let emptyLabel = UILabel()
     
     override func configureHierarchy() {
         
@@ -31,5 +31,9 @@ class EmptyCollectionViewCell: BaseCollectionViewCell {
         emptyLabel.configure(text: "아직 입력된 지출 내역이 없습니다", fontSize: .regular, fontScale: .Bold)
         emptyLabel.adjustsFontSizeToFitWidth = true
         emptyLabel.textAlignment = .center
+    }
+    
+    deinit {
+        print("EmptyCVC deinit")
     }
 }

@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ExpenseCollectionViewCell: BaseCollectionViewCell {
+final class ExpenseCollectionViewCell: BaseCollectionViewCell {
     
-    let categoryLabel = UILabel()
-    let expenseLabel = UILabel()
-    let remainLabel = UILabel()
+    private let categoryLabel = UILabel()
+    private let expenseLabel = UILabel()
+    private let remainLabel = UILabel()
     
     override func configureHierarchy() {
         
@@ -52,5 +52,9 @@ class ExpenseCollectionViewCell: BaseCollectionViewCell {
         categoryLabel.text = data.category.name
         expenseLabel.text = NumberUtil.convertDecimal(data.expense as NSNumber)
         remainLabel.text = NumberUtil.convertDecimal(remainBudget as NSNumber)
+    }
+    
+    deinit {
+        print("expenseCVC deinit")
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TripDashboardView: BaseView {
+final class TripDashboardView: BaseView {
 
     let tripDashboradCollectionView = UICollectionView(frame: .zero, collectionViewLayout: TripDashboardCompositionalLayout.create())
     
@@ -28,5 +28,9 @@ class TripDashboardView: BaseView {
     override func configureView() {
         
         tripDashboradCollectionView.backgroundColor = .clear
+    }
+    
+    deinit {
+        print("TripDashboard deinit")
     }
 }

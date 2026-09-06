@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class TripCardCollectionReusableView: UICollectionReusableView {
+final class TripCardCollectionReusableView: UICollectionReusableView {
     
-    let titleLabel = UILabel()
+    private let titleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

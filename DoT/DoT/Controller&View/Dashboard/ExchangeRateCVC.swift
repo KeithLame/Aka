@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
+final class ExchangeRateCollectionViewCell: BaseCollectionViewCell {
     
-    let currencyLabel = UILabel()
-    let currencyUnitLabel = UILabel()
-    let exchangeRateLabel = UILabel()
+    private let currencyLabel = UILabel()
+    private let currencyUnitLabel = UILabel()
+    private let exchangeRateLabel = UILabel()
     
     override func configureHierarchy() {
         

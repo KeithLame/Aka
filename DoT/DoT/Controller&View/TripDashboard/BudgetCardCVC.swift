@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class BudgetCardCollectionViewCell: BaseCollectionViewCell {
+final class BudgetCardCollectionViewCell: BaseCollectionViewCell {
     
     let budgetCardLayoutView = UIView()
-    let currencyLabel = UILabel()
-    let budgetLabel = UILabel()
+    private let currencyLabel = UILabel()
+    private let budgetLabel = UILabel()
     let budgetEditButton = UIButton()
     let expenseButton = UIButton()
     
@@ -34,7 +34,7 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         }
         
         budgetLabel.snp.makeConstraints {
-            $0.top.greaterThanOrEqualTo(currencyLabel.snp.centerY).offset(20)
+            $0.top.equalTo(currencyLabel.snp.centerY).offset(20)
             $0.horizontalEdges.equalTo(budgetCardLayoutView).inset(20)
             $0.bottom.equalTo(budgetCardLayoutView).inset(30)
         }
@@ -89,5 +89,9 @@ class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         budgetLabel.text = "\(currency.currencySymbol) \(remain)" // MARK: remain으로 변경해야됨
+    }
+    
+    deinit {
+        print("budgetCard deinit")
     }
 }

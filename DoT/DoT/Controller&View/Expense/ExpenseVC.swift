@@ -129,12 +129,12 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         expenseVM.inputCheckSaveButtonEnabledListener.data = ()
     }
     
-    @objc func saveButtonClicked(sender: UIButton) {
+    @objc private func saveButtonClicked(sender: UIButton) {
         
         self.expenseVM.inputSaveButtonClickedListener.data = ()
     }
     
-    @objc func categoryButtonClicked(sender: UIButton) {
+    @objc private func categoryButtonClicked(sender: UIButton) {
         
         guard let category = ExpenseCategory(rawValue: sender.tag) else { return }
         
@@ -145,7 +145,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         sender.configuration?.baseForegroundColor = .justWhite
     }
     
-    @objc func numberPadTapped(sender: UITapGestureRecognizer) {
+    @objc private func numberPadTapped(sender: UITapGestureRecognizer) {
         
         guard let label = sender.view as? UILabel,
               let input = label.text,

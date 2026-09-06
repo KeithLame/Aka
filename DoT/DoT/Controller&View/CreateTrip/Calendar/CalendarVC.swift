@@ -8,7 +8,7 @@
 import UIKit
 import FSCalendar
 
-class CalendarViewController: BaseViewController<CalendarView> {
+final class CalendarViewController: BaseViewController<CalendarView> {
 
     let calendarVM = CalendarViewModel()
     
@@ -47,7 +47,7 @@ class CalendarViewController: BaseViewController<CalendarView> {
         self.layoutView.saveButton.isEnabled = calendarType == .both ? true : false
     }
     
-    @objc func saveButtonClicked(_ sender: UIButton) {
+    @objc private func saveButtonClicked(_ sender: UIButton) {
         
         calendarVM.saveButtonClickedListener.data = ()
         

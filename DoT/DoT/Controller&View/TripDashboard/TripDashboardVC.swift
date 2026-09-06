@@ -163,7 +163,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     }
     
     // 지출 추가 버튼 클릭
-    @objc func expenseButtonClicked(_ sender: UIButton) {
+    @objc private func expenseButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.expenseViewType = .expense
@@ -181,7 +181,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     }
     
     // 예산 변경 버튼 클릭
-    @objc func budgetEditButtonClicked(_ sender: UIButton) {
+    @objc private func budgetEditButtonClicked(_ sender: UIButton) {
         
         let nextVC = ExpenseViewController()
         nextVC.expenseVM.expenseViewType = .budgetEdit
@@ -190,7 +190,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func deleteButtonClicked(_ sender: UIButton) {
+    @objc private func deleteButtonClicked(_ sender: UIButton) {
         
         tripDashboardVM.inputDeleteButtonClickedListener.data = ()
     }

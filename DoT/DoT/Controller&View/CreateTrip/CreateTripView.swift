@@ -12,17 +12,17 @@ final class CreateTripView: BaseView {
 
     let titleTextField = UITextField()
     
-    let placeLiteralLabel = UILabel()
+    private let placeLiteralLabel = UILabel()
     let placeTextField = UITextField()
     
-    let headcountLiteralLabel = UILabel()
+    private let headcountLiteralLabel = UILabel()
     let headcountLabel = UILabel()
     let headcountStepper = UIStepper()
     
-    let currencyLiteralLabel = UILabel()
+    private let currencyLiteralLabel = UILabel()
     let currencyChoiceButton = UIButton()
     
-    let budgetLiteralLabel = UILabel()
+    private let budgetLiteralLabel = UILabel()
     let budgetTextField = UITextField()
     let budgetCurrencyLabel = UILabel()
     
@@ -125,5 +125,9 @@ final class CreateTripView: BaseView {
         headcountStepper.autorepeat = true
         headcountStepper.wraps = true
         headcountStepper.backgroundColor = .whiteBlack
+    }
+    
+    deinit {
+        print("CreateTripView deinit")
     }
 }

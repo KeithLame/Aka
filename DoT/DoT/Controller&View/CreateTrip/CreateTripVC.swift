@@ -8,7 +8,7 @@
 import UIKit
 import FSCalendar
 
-class CreateTripViewController: BaseViewController<CreateTripView> {
+final class CreateTripViewController: BaseViewController<CreateTripView> {
     
     let createTripVM = CreateTripViewModel()
     

@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class CalendarCustomCell: FSCalendarCell {
+final class CalendarCustomCell: FSCalendarCell {
     
-    let centerCircle = UIView()
-    let leftRangeBox = UIView()
-    let rightRangeBox = UIView()
+    private let centerCircle = UIView()
+    private let leftRangeBox = UIView()
+    private let rightRangeBox = UIView()
     
     override init!(frame: CGRect) {
         super.init(frame: frame)
@@ -89,5 +89,9 @@ class CalendarCustomCell: FSCalendarCell {
         centerCircle.isHidden = centerIsHidden
         leftRangeBox.isHidden = leftIsHidden
         rightRangeBox.isHidden = rightIsHidden
+    }
+    
+    deinit {
+        print("Calendar Custom Cell deinit")
     }
 }

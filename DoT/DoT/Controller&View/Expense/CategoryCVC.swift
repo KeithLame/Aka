@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CategoryCollectionViewCell: BaseCollectionViewCell {
+final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
     let categoryButton = UIButton()
     
@@ -39,5 +39,9 @@ class CategoryCollectionViewCell: BaseCollectionViewCell {
         
         categoryButton.configuration?.background.backgroundColor = .blackWhite
         categoryButton.configuration?.baseForegroundColor = .whiteBlack
+    }
+    
+    deinit {
+        print("CategoryCVC deinit")
     }
 }
