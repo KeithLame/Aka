@@ -122,7 +122,7 @@ enum DateUtil {
         let component = Calendar.current.dateComponents([.hour], from: Date())
         
         if let curHour = component.hour {
-            return curHour > hour
+            return curHour >= hour
         }
         
         return false

@@ -30,7 +30,12 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     
     static func create() -> UICollectionViewCompositionalLayout {
         
-        return UICollectionViewCompositionalLayout { section, environment in
+        let deleteActionTitle = NSLocalizedString("Delete", comment: "Delete action title")
+        let deleteAction = UIContextualAction(style: .destructive, title: deleteActionTitle) { _, _, completion in
+        }
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        let layout = UICollectionViewCompositionalLayout { section, environment in
             
             guard let lastSectionNumber else { return nil }
             
@@ -49,6 +54,10 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
                 }
             }
         }
+        
+        
+        
+        return layout
     }
     
     private static func createIntro() -> NSCollectionLayoutSection {

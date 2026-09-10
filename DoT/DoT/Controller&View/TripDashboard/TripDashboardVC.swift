@@ -190,9 +190,36 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    // 삭제 버튼 클릭
     @objc private func deleteButtonClicked(_ sender: UIButton) {
         
-        tripDashboardVM.inputDeleteButtonClickedListener.data = ()
+        let alertTitle = "여행 정보를 모두 삭제합니다"
+        let deleteTitle = "삭제"
+        let cancelTitle = "취소"
+        
+        let attributeAlertTitle = NSMutableAttributedString(string: alertTitle)
+        let attributeDeleteTitle = NSMutableAttributedString(string: deleteTitle)
+        let attributeCancelTitle = NSMutableAttributedString(string: cancelTitle)
+        let font = FontManager.getFont(size: .medium, scale: .Bold)
+        
+        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.justBlack], range: (alertTitle as NSString).range(of: alertTitle))
+        
+        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        let deleteButton = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in
+            
+            guard let self else { return }
+            
+            tripDashboardVM.inputDeleteButtonClickedListener.data = ()
+        }
+        let cancelButton = UIAlertAction(title: cancelTitle, style: .cancel)
+        
+        alert.setValue(attributeAlertTitle, forKey: "attributedTitle")
+        deleteButton.setValue(UIColor.justRed, forKey: "titleTextColor")
+        cancelButton.setValue(UIColor.justGray, forKey: "titleTextColor")
+        
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true)
     }
 }
 
