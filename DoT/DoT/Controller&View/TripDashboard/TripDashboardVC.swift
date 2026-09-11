@@ -198,11 +198,9 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         let cancelTitle = "취소"
         
         let attributeAlertTitle = NSMutableAttributedString(string: alertTitle)
-        let attributeDeleteTitle = NSMutableAttributedString(string: deleteTitle)
-        let attributeCancelTitle = NSMutableAttributedString(string: cancelTitle)
         let font = FontManager.getFont(size: .medium, scale: .Bold)
         
-        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.justBlack], range: (alertTitle as NSString).range(of: alertTitle))
+        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.blackWhite], range: (alertTitle as NSString).range(of: alertTitle))
         
         let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
         let deleteButton = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in

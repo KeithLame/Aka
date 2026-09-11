@@ -21,6 +21,7 @@ final class APIViewModel {
             
             APIManager.shared.callAPI(api: api, type: [ExchangeAPIModel].self) { response in
                 
+                // response.result
                 switch response {
                 case .success(let success):
                     self.callExchangeAPICompleteListener.data = success
