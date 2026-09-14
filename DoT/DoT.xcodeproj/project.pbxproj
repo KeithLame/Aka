@@ -55,6 +55,9 @@
 		AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3F2BAB45E10048956B /* DeleteCVC.swift */; };
 		AC939C422BAB48B60048956B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C412BAB48B60048956B /* EmptyCVC.swift */; };
 		AC939C442BABC4900048956B /* EmptyOnComingCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */; };
+		AC939C472BAC1F050048956B /* ExpenseEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C462BAC1F050048956B /* ExpenseEditVC.swift */; };
+		AC939C492BAC1F0D0048956B /* ExpenseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */; };
+		AC939C4B2BAC256D0048956B /* ExpenseEditCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -139,6 +142,9 @@
 		AC939C3F2BAB45E10048956B /* DeleteCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCVC.swift; sourceTree = "<group>"; };
 		AC939C412BAB48B60048956B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOnComingCVC.swift; sourceTree = "<group>"; };
+		AC939C462BAC1F050048956B /* ExpenseEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditVC.swift; sourceTree = "<group>"; };
+		AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditView.swift; sourceTree = "<group>"; };
+		AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditCL.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +299,15 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		AC939C452BAC1EE90048956B /* ExpenseEdit */ = {
+			isa = PBXGroup;
+			children = (
+				AC939C462BAC1F050048956B /* ExpenseEditVC.swift */,
+				AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */,
+			);
+			path = ExpenseEdit;
+			sourceTree = "<group>";
+		};
 		ACF5ACB52B99838600DBEF85 = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +405,7 @@
 		ACF5ACFB2B9B078A00DBEF85 /* Controller&View */ = {
 			isa = PBXGroup;
 			children = (
+				AC939C452BAC1EE90048956B /* ExpenseEdit */,
 				AC61A65C2BA6E64D00EF14BD /* Expense */,
 				AC78E2E82BA439D3005B2E99 /* TripDashboard */,
 				ACF5AD0C2B9C0E9200DBEF85 /* CreateTrip */,
@@ -420,6 +436,7 @@
 				AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */,
 				AC61A6612BA6E9CF00EF14BD /* CategoryCL.swift */,
 				AC61A6672BA742F100EF14BD /* NumberPadCL.swift */,
+				AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -567,12 +584,14 @@
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				AC66687F2B9DA74C00AED57A /* CreateTripViewModel.swift in Sources */,
+				AC939C4B2BAC256D0048956B /* ExpenseEditCL.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
 				AC78E2EA2BA43BF5005B2E99 /* TripDashboardVC.swift in Sources */,
 				AC6668992B9FF37F00AED57A /* DashboardViewModel.swift in Sources */,
 				AC66688B2B9F00FD00AED57A /* TripInfoDTO.swift in Sources */,
+				AC939C492BAC1F0D0048956B /* ExpenseEditView.swift in Sources */,
 				AC61A65E2BA6E67200EF14BD /* ExpenseVC.swift in Sources */,
 				ACF5AD072B9B0F3400DBEF85 /* Observable.swift in Sources */,
 				AC6668BF2BA291E100AED57A /* ExchangeAPIModel.swift in Sources */,
@@ -580,6 +599,7 @@
 				AC61A6572BA6C97400EF14BD /* TripDetailInfoDTO.swift in Sources */,
 				AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */,
 				AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */,
+				AC939C472BAC1F050048956B /* ExpenseEditVC.swift in Sources */,
 				AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */,
 				ACF5AD022B9B0AD500DBEF85 /* DashboardCL.swift in Sources */,
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,

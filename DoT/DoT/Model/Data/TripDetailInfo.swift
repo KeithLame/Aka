@@ -14,7 +14,6 @@ struct TripDetailInfo: Hashable {
     var photo: String?
     var memo: String?
     var expenseDate: Date
-    var tripInfo: TripInfo? = nil
     
     init(objectID: String, expense: Double, category: ExpenseCategory, photo: String? = nil, memo: String? = nil, expenseDate: Date) {
         
@@ -24,9 +23,5 @@ struct TripDetailInfo: Hashable {
         self.photo = photo
         self.memo = memo
         self.expenseDate = expenseDate
-    }
-    
-    mutating func append(_ data: TripInfo) {
-        self.tripInfo = data
     }
 }

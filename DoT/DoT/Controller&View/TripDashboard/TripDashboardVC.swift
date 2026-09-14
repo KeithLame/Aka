@@ -47,6 +47,8 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     
     override func configureCollectionView() {
         
+        layoutView.tripDashboradCollectionView.delegate = self
+        
         // Trip Intro Cell
         let tripIntroRegistration = UICollectionView.CellRegistration<TripIntroCollectionViewCell, TripIntro> { cell,indexPath,itemIdentifier in
             
@@ -101,9 +103,9 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         // Section 등록
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
-            guard let lastSectionNumber = TripDashboardCompositionalLayout.lastSectionNumber else { return nil }
+            let lastSectionNumber = TripDashboardCompositionalLayout.lastSectionNumber
+            let isExistEmptySeciton = TripDashboardCompositionalLayout.isExistEmptySeciton
             
-            let emptySection = TripDashboardCompositionalLayout.emptySectionNumber
             let section = indexPath.section
             
             switch section {
@@ -133,7 +135,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 
             default:
                 
-                if emptySection == nil {
+                if isExistEmptySeciton == false {
                     
                     guard let item: TripDetailInfo = itemIdentifier as? TripDetailInfo else { return nil }
                     
@@ -221,8 +223,27 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
     }
 }
 
+extension TripDashboardViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let expenseIndexOfSection = TripDashboardCompositionalLayout.expenseIndexOfSection
+        
+        for section in expenseIndexOfSection {
+            
+            if section == indexPath.section {
+                
+                let nextVC = ExpenseEditViewController()
+                
+                navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
+    }
+}
+
 extension TripDashboardViewController {
     
+    // SectionSnapshot -> Section 열거형
     private func update() {
         
         let tripIntro = tripDashboardVM.tripIntro
@@ -245,11 +266,9 @@ extension TripDashboardViewController {
             
             // empty Section은 미리 삭제
             snapshot.deleteSections([.empty])
-            TripDashboardCompositionalLayout.emptySectionNumber = nil
+            TripDashboardCompositionalLayout.isExistEmptySeciton = false
             
-            var data = tripDetail[idx]
-            
-            data.append(tripInfo)
+            let data = tripDetail[idx]
             
             let newSectionName = DateUtil.getStringFromDate(date: data.expenseDate, format: "yy.MM.dd")
             let isExistSection: Bool = snapshot.sectionIdentifiers.contains(.expense(section: newSectionName))
@@ -260,6 +279,10 @@ extension TripDashboardViewController {
                 snapshot.appendSections([.expense(section: newSectionName)])
                 snapshot.appendItems([data], toSection: .expense(section: newSectionName))
             }
+            
+            // 추가된 expense Section 저장
+            guard let expenseIndexOfSection = snapshot.indexOfSection(.expense(section: newSectionName)) else { return }
+            TripDashboardCompositionalLayout.expenseIndexOfSection.insert(expenseIndexOfSection)
         }
         
         // Section 추가 - Empty (Expense가 없는 경우에 한하여)
@@ -267,13 +290,14 @@ extension TripDashboardViewController {
             snapshot.appendSections([.empty])
             snapshot.appendItems(["empty"], toSection: .empty)
             
-            TripDashboardCompositionalLayout.emptySectionNumber = snapshot.indexOfSection(.empty)
+            TripDashboardCompositionalLayout.isExistEmptySeciton = true
         }
         
         // Section 추가 - Delete
         snapshot.appendSections([.delete])
         snapshot.appendItems(["delete"], toSection: .delete)
         
+        // 마지막 섹션 넘버 저장
         TripDashboardCompositionalLayout.lastSectionNumber = snapshot.numberOfSections - 1
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)

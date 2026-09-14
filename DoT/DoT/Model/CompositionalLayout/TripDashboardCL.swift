@@ -26,7 +26,8 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     }
     
     static var lastSectionNumber: Int?
-    static var emptySectionNumber: Int?
+    static var isExistEmptySeciton: Bool = false
+    static var expenseIndexOfSection: Set<Int> = []
     
     static func create() -> UICollectionViewCompositionalLayout {
         
@@ -47,7 +48,7 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
             case lastSectionNumber:
                 return createDefault()
             default:
-                if emptySectionNumber == nil{
+                if isExistEmptySeciton == false {
                     return createExpense()
                 } else {
                     return createDefault()
