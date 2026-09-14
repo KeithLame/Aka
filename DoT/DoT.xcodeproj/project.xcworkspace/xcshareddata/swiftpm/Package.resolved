@@ -1,5 +1,5 @@
 {
-  "originHash" : "75f5d87d56baeec2c3176a6a12e60a047de7b249ce278d7fa0558006f7997aa6",
+  "originHash" : "d08f2d1c973da926cf95f47bec3931800855a90ebe1b3c4819619aaa4cf825d2",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -44,6 +44,15 @@
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "textfieldeffects",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/raulriera/TextFieldEffects.git",
+      "state" : {
+        "revision" : "7e563d4d6d755bb1ab6c1c049f8c215d7c489100",
+        "version" : "1.7.0"
       }
     }
   ],

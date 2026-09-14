@@ -35,9 +35,10 @@
 		AC6668B92BA2835A00AED57A /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668B82BA2835A00AED57A /* APIProtocol.swift */; };
 		AC6668BB2BA284AC00AED57A /* ExchangeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */; };
 		AC6668BF2BA291E100AED57A /* ExchangeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */; };
-		AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C02BA2B4D000AED57A /* APIViewModel.swift */; };
 		AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668C72BA2EEFF00AED57A /* APIKey.swift */; };
 		AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */; };
+		AC6DF5BA2BAC4DDE00EB224D /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = AC6DF5B92BAC4DDE00EB224D /* TextFieldEffects */; };
+		AC6DF5BC2BAC658500EB224D /* ExpenseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DF5BB2BAC658500EB224D /* ExpenseEditViewModel.swift */; };
 		AC78E2EA2BA43BF5005B2E99 /* TripDashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */; };
 		AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */; };
 		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
@@ -57,7 +58,6 @@
 		AC939C442BABC4900048956B /* EmptyOnComingCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */; };
 		AC939C472BAC1F050048956B /* ExpenseEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C462BAC1F050048956B /* ExpenseEditVC.swift */; };
 		AC939C492BAC1F0D0048956B /* ExpenseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */; };
-		AC939C4B2BAC256D0048956B /* ExpenseEditCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */; };
 		ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */; };
 		ACF5ACC42B99838600DBEF85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */; };
 		ACF5ACC92B99838600DBEF85 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = ACF5ACC82B99838600DBEF85 /* Base */; };
@@ -122,9 +122,9 @@
 		AC6668B82BA2835A00AED57A /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		AC6668BA2BA284AC00AED57A /* ExchangeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPI.swift; sourceTree = "<group>"; };
 		AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAPIModel.swift; sourceTree = "<group>"; };
-		AC6668C02BA2B4D000AED57A /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
 		AC6668C72BA2EEFF00AED57A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRealmDTO.swift; sourceTree = "<group>"; };
+		AC6DF5BB2BAC658500EB224D /* ExpenseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditViewModel.swift; sourceTree = "<group>"; };
 		AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardVC.swift; sourceTree = "<group>"; };
 		AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
@@ -144,7 +144,6 @@
 		AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOnComingCVC.swift; sourceTree = "<group>"; };
 		AC939C462BAC1F050048956B /* ExpenseEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditVC.swift; sourceTree = "<group>"; };
 		AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditView.swift; sourceTree = "<group>"; };
-		AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditCL.swift; sourceTree = "<group>"; };
 		ACF5ACBE2B99838600DBEF85 /* DoT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +190,7 @@
 				AC6668B12BA2819200AED57A /* Alamofire in Frameworks */,
 				AC6668872B9EFAA800AED57A /* RealmSwift in Frameworks */,
 				AC6668852B9EFAA800AED57A /* Realm in Frameworks */,
+				AC6DF5BA2BAC4DDE00EB224D /* TextFieldEffects in Frameworks */,
 				ACF5AD132B9C25C900DBEF85 /* SnapKit in Frameworks */,
 				ACF5AD162B9C5A3F00DBEF85 /* FSCalendar in Frameworks */,
 			);
@@ -396,8 +396,8 @@
 				AC66687E2B9DA74C00AED57A /* CreateTripViewModel.swift */,
 				AC6668982B9FF37F00AED57A /* DashboardViewModel.swift */,
 				AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */,
-				AC6668C02BA2B4D000AED57A /* APIViewModel.swift */,
 				AC939C222BA82FEF0048956B /* ExpenseViewModel.swift */,
+				AC6DF5BB2BAC658500EB224D /* ExpenseEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -436,7 +436,6 @@
 				AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */,
 				AC61A6612BA6E9CF00EF14BD /* CategoryCL.swift */,
 				AC61A6672BA742F100EF14BD /* NumberPadCL.swift */,
-				AC939C4A2BAC256D0048956B /* ExpenseEditCL.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -495,6 +494,7 @@
 				AC6668842B9EFAA800AED57A /* Realm */,
 				AC6668862B9EFAA800AED57A /* RealmSwift */,
 				AC6668B02BA2819200AED57A /* Alamofire */,
+				AC6DF5B92BAC4DDE00EB224D /* TextFieldEffects */,
 			);
 			productName = DoT;
 			productReference = ACF5ACBE2B99838600DBEF85 /* DoT.app */;
@@ -529,6 +529,7 @@
 				ACF5AD142B9C5A3F00DBEF85 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				AC6668832B9EFAA800AED57A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				AC6668AF2BA2819200AED57A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AC6DF5B82BAC4DDE00EB224D /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
 			);
 			productRefGroup = ACF5ACBF2B99838600DBEF85 /* Products */;
 			projectDirPath = "";
@@ -584,7 +585,6 @@
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				AC66687F2B9DA74C00AED57A /* CreateTripViewModel.swift in Sources */,
-				AC939C4B2BAC256D0048956B /* ExpenseEditCL.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,
 				AC6668892B9EFAF200AED57A /* RealmManager.swift in Sources */,
 				ACF5ACC22B99838600DBEF85 /* AppDelegate.swift in Sources */,
@@ -605,7 +605,6 @@
 				ACF5ACF62B9B03FC00DBEF85 /* BaseView.swift in Sources */,
 				AC61A6602BA6E67B00EF14BD /* ExpenseView.swift in Sources */,
 				AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */,
-				AC6668C12BA2B4D000AED57A /* APIViewModel.swift in Sources */,
 				AC61A65B2BA6E31F00EF14BD /* ExpenseCategory.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				AC6668B42BA281C300AED57A /* APIManager.swift in Sources */,
@@ -630,6 +629,7 @@
 				AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */,
 				AC61A6622BA6E9CF00EF14BD /* CategoryCL.swift in Sources */,
 				AC939C362BA9B74C0048956B /* TripInfo.swift in Sources */,
+				AC6DF5BC2BAC658500EB224D /* ExpenseEditViewModel.swift in Sources */,
 				ACF5AD102B9C0EBB00DBEF85 /* CreateTripView.swift in Sources */,
 				ACF5AD1F2B9C729C00DBEF85 /* DateUtil.swift in Sources */,
 				AC78E2F42BA46753005B2E99 /* ExpenseCVC.swift in Sources */,
@@ -888,6 +888,14 @@
 				minimumVersion = 5.9.0;
 			};
 		};
+		AC6DF5B82BAC4DDE00EB224D /* XCRemoteSwiftPackageReference "TextFieldEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raulriera/TextFieldEffects.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 		ACF5ACED2B9AFD4500DBEF85 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -921,6 +929,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC6668AF2BA2819200AED57A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		AC6DF5B92BAC4DDE00EB224D /* TextFieldEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC6DF5B82BAC4DDE00EB224D /* XCRemoteSwiftPackageReference "TextFieldEffects" */;
+			productName = TextFieldEffects;
 		};
 		ACF5AD122B9C25C900DBEF85 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

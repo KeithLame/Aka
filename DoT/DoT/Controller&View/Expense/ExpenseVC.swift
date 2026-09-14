@@ -56,7 +56,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
             for idx in 0 ..< count {
                 let indexPath = IndexPath(item: idx, section: 0)
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-                cell.refresh()
+                cell.categoryButton.isSelected = false
             }
         }
         
@@ -141,8 +141,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         expenseVM.inputCategoryButtonClickedListener.data = category
         expenseVM.inputCheckSaveButtonEnabledListener.data = ()
         
-        sender.configuration?.background.backgroundColor = .pointBlue
-        sender.configuration?.baseForegroundColor = .justWhite
+        sender.isSelected = true
     }
     
     @objc private func numberPadTapped(sender: UITapGestureRecognizer) {

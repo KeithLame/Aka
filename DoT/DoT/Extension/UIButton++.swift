@@ -50,5 +50,26 @@ extension UIButton {
         
         self.configurationUpdateHandler = updateHandler
     }
+    
+    func updateConfigurationForCategory() {
+        
+        let backgroundColor = self.configuration?.background.backgroundColor
+        let foregroundColor = self.configuration?.baseForegroundColor
+        
+        let updateHandler: UIButton.ConfigurationUpdateHandler = { btn in
+            
+            switch btn.state {
+            case .selected:
+                
+                btn.configuration?.background.backgroundColor = .pointBlue
+                btn.configuration?.attributedTitle?.foregroundColor = UIColor.justWhite
+            default:
+                btn.configuration?.background.backgroundColor = backgroundColor
+                btn.configuration?.attributedTitle?.foregroundColor = foregroundColor
+            }
+        }
+        
+        self.configurationUpdateHandler = updateHandler
+    }
 }
 
