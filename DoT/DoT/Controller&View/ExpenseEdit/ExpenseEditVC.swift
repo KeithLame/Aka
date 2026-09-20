@@ -6,21 +6,26 @@
 //
 
 import UIKit
+import PhotosUI
 
 class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     
     private var categoryDataSource: UICollectionViewDiffableDataSource<CategoryCompositionalLayout, ExpenseCategory>!
+    private var photoDataSource: UICollectionViewDiffableDataSource<PhotoCompositionalLayout, AnyHashable>!
     let expenseEditVM = ExpenseEditViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         update()
         
         expenseEditVM.inputCheckSaveButtonEnabledListener.data = ()
     }
     
     override func configure() {
+        
+        guard let tripDetailInfo = expenseEditVM.tripDetailInfo else { return }
+        layoutView.configure(data: tripDetailInfo)
         
         layoutView.expenseTextField.addTarget(self, action: #selector(expenseValueChanged), for: .editingChanged)
         layoutView.placeTextField.addTarget(self, action: #selector(placeValueChanged), for: .editingChanged)
@@ -34,18 +39,14 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     override func bindData() {
         
         // Category 선택
-        expenseEditVM.outputCategoryButtonClickedListener.bind { [weak self] _ in
+        expenseEditVM.outputCategoryButtonClickedListener.bind { [weak self] category in
             
-            guard let self else { return }
+            guard let self, let category else { return }
             
-            let count = ExpenseCategory.allCases.count
-            
-            // 가지고 있는 모든 카테고리 Cell을 원상태로 복구
-            // 선택한 셀만 선택하기 위함
-            for idx in 0 ..< count {
+            for idx in 0 ..< ExpenseCategory.allCases.count {
                 let indexPath = IndexPath(item: idx, section: 0)
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-                cell.categoryButton.isSelected = false
+                cell.setCategory(data: category)
             }
         }
         
@@ -69,7 +70,10 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         // MARK: Category Collecion View
         let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self else { return }
+            guard let self, let tripDetailInfo = expenseEditVM.tripDetailInfo else { return }
+            
+            // Category Button Selected
+            expenseEditVM.inputCategoryButtonClickedListener.data = tripDetailInfo.category
             
             cell.configure(data: itemIdentifier)
             cell.categoryButton.tag = indexPath.item
@@ -79,6 +83,26 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         categoryDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.categoryCollectionView) {collectionView, indexPath, itemIdentifier in
             
             let cell = collectionView.dequeueConfiguredReusableCell(using: categoryRegistration,
+                                                                    for: indexPath,
+                                                                    item: itemIdentifier)
+            
+            return cell
+        }
+        
+        layoutView.photoCollectionView.showsHorizontalScrollIndicator = false
+        
+        // MARK: Photo Collecion View
+        let photoRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+            
+            guard let self else { return }
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
+            cell.photoImageView.addGestureRecognizer(tapGesture)
+        }
+        
+        photoDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.photoCollectionView) {collectionView, indexPath, itemIdentifier in
+            
+            let cell = collectionView.dequeueConfiguredReusableCell(using: photoRegistration,
                                                                     for: indexPath,
                                                                     item: itemIdentifier)
             
@@ -121,9 +145,42 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         sender.isSelected = true
     }
     
+    // 수정 버튼 클릭
     @objc private func editButtonClicked(sender: UIButton) {
         
         expenseEditVM.inputEditButtonClickedListener.data = ()
+    }
+    
+    @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
+        
+        var config = PHPickerConfiguration()
+        config.selectionLimit = 5
+        let phPicker = PHPickerViewController(configuration: config)
+        phPicker.delegate = self
+        
+        present(phPicker, animated: true)
+    }
+}
+
+extension ExpenseEditViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            
+            
+            itemProvider.loadObject(ofClass: UIImage.self) { readingImage, error in
+                
+                // dump(readingImage as? UIImage)
+                
+                // DispatchQueue.main.async {
+                //     self.layoutView.photoImageView.image =
+                // }
+            }
+            
+        }
+        
+        picker.dismiss(animated: true)
     }
 }
 
@@ -161,11 +218,20 @@ extension ExpenseEditViewController {
     
     private func update() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
-        snapshot.appendSections([.category])
+        // Category Snapshot
+        var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
+        categorySnapshot.appendSections([.category])
         
-        snapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
+        categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
         
-        self.categoryDataSource.apply(snapshot, animatingDifferences: true)
+        self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
+        
+        // Photo Snapshot
+        var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
+        photoSnapshot.appendSections([.photo])
+        
+        photoSnapshot.appendItems(["1"], toSection: .photo)
+        
+        self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
     }
 }

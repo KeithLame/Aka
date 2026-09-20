@@ -10,6 +10,7 @@ import Foundation
 struct TripInfo: Hashable {
     
     var objectID: String
+    var place: String
     var title: String
     var headCount: Int
     var currency: String

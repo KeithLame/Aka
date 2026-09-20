@@ -14,22 +14,24 @@ final class TripDetailInfoDTO: Object {
     @Persisted var category: ExpenseCategory
     @Persisted var photo: String?
     @Persisted var memo: String?
+    @Persisted var place: String?
     @Persisted var expenseDate: Date
     @Persisted(originProperty: "tripDetail") var tripInfo: LinkingObjects<TripInfoDTO>
     
-    convenience init(expense: Double, category: ExpenseCategory, photo: String?, memo: String?, expenseDate: Date) {
+    convenience init(expense: Double, category: ExpenseCategory, photo: String?, memo: String?, place: String?, expenseDate: Date) {
         self.init()
         
         self.expense = expense
         self.category = category
         self.photo = photo
         self.memo = memo
+        self.place = place
         self.expenseDate = expenseDate
     }
     
     func translate() -> TripDetailInfo {
         
-        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, expense: self.expense, category: self.category, expenseDate: self.expenseDate)
+        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, place: self.place ,expense: self.expense, category: self.category, expenseDate: self.expenseDate)
         
         return translateTripDetailInfo
     }

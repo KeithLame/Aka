@@ -36,6 +36,15 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
         categoryButton.configuration?.title = data.name
     }
     
+    func setCategory(data: ExpenseCategory) {
+        
+        if data.name == categoryButton.configuration?.title {
+            categoryButton.isSelected = true
+        } else {
+            categoryButton.isSelected = false
+        }
+    }
+    
     deinit {
         print("CategoryCVC deinit")
     }

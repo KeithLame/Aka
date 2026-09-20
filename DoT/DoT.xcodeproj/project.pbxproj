@@ -39,6 +39,8 @@
 		AC6668D02BA306E600AED57A /* ExchangeRealmDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */; };
 		AC6DF5BA2BAC4DDE00EB224D /* TextFieldEffects in Frameworks */ = {isa = PBXBuildFile; productRef = AC6DF5B92BAC4DDE00EB224D /* TextFieldEffects */; };
 		AC6DF5BC2BAC658500EB224D /* ExpenseEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DF5BB2BAC658500EB224D /* ExpenseEditViewModel.swift */; };
+		AC6DF5BF2BAF03CE00EB224D /* PhotoCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DF5BE2BAF03CE00EB224D /* PhotoCL.swift */; };
+		AC6DF5C12BAF04BD00EB224D /* PhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6DF5C02BAF04BD00EB224D /* PhotoCVC.swift */; };
 		AC78E2EA2BA43BF5005B2E99 /* TripDashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */; };
 		AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */; };
 		AC78E2EE2BA440BD005B2E99 /* TripDashboardCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */; };
@@ -125,6 +127,8 @@
 		AC6668C72BA2EEFF00AED57A /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRealmDTO.swift; sourceTree = "<group>"; };
 		AC6DF5BB2BAC658500EB224D /* ExpenseEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditViewModel.swift; sourceTree = "<group>"; };
+		AC6DF5BE2BAF03CE00EB224D /* PhotoCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCL.swift; sourceTree = "<group>"; };
+		AC6DF5C02BAF04BD00EB224D /* PhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCVC.swift; sourceTree = "<group>"; };
 		AC78E2E92BA43BF5005B2E99 /* TripDashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardVC.swift; sourceTree = "<group>"; };
 		AC78E2EB2BA43C04005B2E99 /* TripDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardView.swift; sourceTree = "<group>"; };
 		AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardCL.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 			children = (
 				AC939C462BAC1F050048956B /* ExpenseEditVC.swift */,
 				AC939C482BAC1F0D0048956B /* ExpenseEditView.swift */,
+				AC6DF5C02BAF04BD00EB224D /* PhotoCVC.swift */,
 			);
 			path = ExpenseEdit;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				AC78E2ED2BA440BD005B2E99 /* TripDashboardCL.swift */,
 				AC61A6612BA6E9CF00EF14BD /* CategoryCL.swift */,
 				AC61A6672BA742F100EF14BD /* NumberPadCL.swift */,
+				AC6DF5BE2BAF03CE00EB224D /* PhotoCL.swift */,
 			);
 			path = CompositionalLayout;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				AC6668AE2BA1E4BE00AED57A /* ExchangeRateCRV.swift in Sources */,
 				AC939C252BA88EF50048956B /* ExpenseCRV.swift in Sources */,
 				AC78E2F22BA44ED6005B2E99 /* BudgetCardCVC.swift in Sources */,
+				AC6DF5C12BAF04BD00EB224D /* PhotoCVC.swift in Sources */,
 				AC6668AC2BA1D6F400AED57A /* ExchangeRateCVC.swift in Sources */,
 				AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */,
 				AC78E2EC2BA43C04005B2E99 /* TripDashboardView.swift in Sources */,
@@ -583,6 +590,7 @@
 				AC939C392BA9CD640048956B /* Exchange.swift in Sources */,
 				ACF5AD1B2B9C677600DBEF85 /* CalendarCustomCell.swift in Sources */,
 				ACF5ACF12B9AFF5000DBEF85 /* Consts.swift in Sources */,
+				AC6DF5BF2BAF03CE00EB224D /* PhotoCL.swift in Sources */,
 				ACF5AD002B9B07C700DBEF85 /* DashboardVC.swift in Sources */,
 				AC66687F2B9DA74C00AED57A /* CreateTripViewModel.swift in Sources */,
 				ACF5ACFE2B9B07B800DBEF85 /* DashboardView.swift in Sources */,

@@ -227,6 +227,9 @@ extension TripDashboardViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        guard let tripInfo = tripDashboardVM.tripInfo else { return }
+        let tripDetail = tripInfo.tripDetail.sorted { $0.expenseDate > $1.expenseDate }
+        
         let expenseIndexOfSection = TripDashboardCompositionalLayout.expenseIndexOfSection
         
         for section in expenseIndexOfSection {
@@ -234,6 +237,7 @@ extension TripDashboardViewController: UICollectionViewDelegate {
             if section == indexPath.section {
                 
                 let nextVC = ExpenseEditViewController()
+                nextVC.expenseEditVM.tripDetailInfo = tripDetail[indexPath.item]
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -268,7 +272,8 @@ extension TripDashboardViewController {
             snapshot.deleteSections([.empty])
             TripDashboardCompositionalLayout.isExistEmptySeciton = false
             
-            let data = tripDetail[idx]
+            var data = tripDetail[idx]
+            data.tripInfo = tripInfo
             
             let newSectionName = DateUtil.getStringFromDate(date: data.expenseDate, format: "yy.MM.dd")
             let isExistSection: Bool = snapshot.sectionIdentifiers.contains(.expense(section: newSectionName))

@@ -15,12 +15,14 @@ class ExpenseEditViewModel {
     var place: String = ""
     var photo: String = ""
     
+    var tripDetailInfo: TripDetailInfo?
+    
     let inputExpenseListener: Observable<String> = Observable("")
     let inputMemoListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")
     
     var inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
-    var outputCategoryButtonClickedListener: Observable<Void?> = Observable(nil)
+    var outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
     
     let inputCheckSaveButtonEnabledListener: Observable<Void?> = Observable(nil)
     let outputCheckSaveButtonEnabledListener: Observable<Bool> = Observable(false)
@@ -54,13 +56,13 @@ class ExpenseEditViewModel {
         }
         
         // 카테고리 저장
-        inputCategoryButtonClickedListener.bind { [weak self] data in
+        inputCategoryButtonClickedListener.bind { [weak self] category in
             
             guard let self else { return }
             
-            self.category = data
+            self.category = category
             
-            outputCategoryButtonClickedListener.data = ()
+            outputCategoryButtonClickedListener.data = category
         }
         
         // 수정 버튼 활성화 가능 여부 체크
