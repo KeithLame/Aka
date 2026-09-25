@@ -45,18 +45,14 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         }
         
         // Category 선택
-        expenseVM.outputCategoryButtonClickedListener.bind { [weak self] _ in
+        expenseVM.outputCategoryButtonClickedListener.bind { [weak self] category in
             
-            guard let self else { return }
+            guard let self, let category else { return }
             
-            let count = ExpenseCategory.allCases.count
-            
-            // 가지고 있는 모든 카테고리 Cell을 원상태로 복구
-            // 선택한 셀만 선택하기 위함
-            for idx in 0 ..< count {
+            for idx in 0 ..< ExpenseCategory.allCases.count {
                 let indexPath = IndexPath(item: idx, section: 0)
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-                cell.categoryButton.isSelected = false
+                cell.setCategory(data: category)
             }
         }
         
@@ -139,9 +135,6 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         guard let category = ExpenseCategory(rawValue: sender.tag) else { return }
         
         expenseVM.inputCategoryButtonClickedListener.data = category
-        expenseVM.inputCheckSaveButtonEnabledListener.data = ()
-        
-        sender.isSelected = true
     }
     
     @objc private func numberPadTapped(sender: UITapGestureRecognizer) {

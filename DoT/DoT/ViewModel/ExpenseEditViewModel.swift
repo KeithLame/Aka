@@ -63,6 +63,7 @@ class ExpenseEditViewModel {
             self.category = category
             
             outputCategoryButtonClickedListener.data = category
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         // 수정 버튼 활성화 가능 여부 체크

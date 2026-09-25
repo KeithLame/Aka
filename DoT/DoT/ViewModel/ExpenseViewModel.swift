@@ -23,7 +23,7 @@ final class ExpenseViewModel {
     let outputAmountListener: Observable<String> = Observable("")
     
     let inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
-    let outputCategoryButtonClickedListener: Observable<Void?> = Observable(nil)
+    let outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
     
     let inputNumberPadListener: Observable<(input: String, text: String)> = Observable(("", ""))
     let ouputNumberPadListener: Observable<String> = Observable("")
@@ -102,13 +102,14 @@ final class ExpenseViewModel {
             self.ouputNumberPadListener.data = result
         }
         
-        inputCategoryButtonClickedListener.bind { [weak self] data in
+        inputCategoryButtonClickedListener.bind { [weak self] category in
             
             guard let self else { return }
             
-            self.category = data
+            self.category = category
             
-            outputCategoryButtonClickedListener.data = ()
+            outputCategoryButtonClickedListener.data = category
+            inputCheckSaveButtonEnabledListener.data = ()
         }
         
         inputSaveButtonClickedListener.bind { [weak self] _ in

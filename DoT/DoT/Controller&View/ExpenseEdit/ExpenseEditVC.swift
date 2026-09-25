@@ -38,7 +38,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     
     override func bindData() {
         
-        // Category 선택
+        // Category 선택된 셀 이외 모두 선택 끄기
         expenseEditVM.outputCategoryButtonClickedListener.bind { [weak self] category in
             
             guard let self, let category else { return }
@@ -140,9 +140,6 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         guard let category = ExpenseCategory(rawValue: sender.tag) else { return }
         
         expenseEditVM.inputCategoryButtonClickedListener.data = category
-        expenseEditVM.inputCheckSaveButtonEnabledListener.data = ()
-        
-        sender.isSelected = true
     }
     
     // 수정 버튼 클릭
