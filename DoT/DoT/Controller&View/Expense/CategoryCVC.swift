@@ -36,7 +36,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
         categoryButton.configuration?.title = data.name
     }
     
-    func setCategory(data: ExpenseCategory) {
+    func update(data: ExpenseCategory) {
         
         if data.name == categoryButton.configuration?.title {
             categoryButton.isSelected = true

@@ -52,7 +52,7 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
             for idx in 0 ..< ExpenseCategory.allCases.count {
                 let indexPath = IndexPath(item: idx, section: 0)
                 guard let cell = layoutView.categoryCollectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-                cell.setCategory(data: category)
+                cell.update(data: category)
             }
         }
         
