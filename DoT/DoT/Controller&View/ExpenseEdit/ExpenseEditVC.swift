@@ -24,6 +24,9 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     
     override func configure() {
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        layoutView.mainScrollView.addGestureRecognizer(tapGesture)
+        
         guard let tripDetailInfo = expenseEditVM.tripDetailInfo else { return }
         layoutView.configure(data: tripDetailInfo)
         
@@ -50,11 +53,20 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             }
         }
         
+        // 수정 버튼 클릭 활성화 여부 체크
         expenseEditVM.outputCheckSaveButtonEnabledListener.bind { [weak self] isEnabled in
             
             guard let self else { return }
             
             layoutView.editButton.isEnabled = isEnabled
+        }
+        
+        // 이미지 선택 시 사진 콜렉션뷰 업데이트
+        expenseEditVM.outputImageDataListener.bind { [weak self] datas in
+            
+            guard let self else { return }
+            
+            update()
         }
     }
     
@@ -74,7 +86,6 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             
             // Category Button Selected
             expenseEditVM.inputCategoryButtonClickedListener.data = tripDetailInfo.category
-            
             cell.configure(data: itemIdentifier)
             cell.categoryButton.tag = indexPath.item
             cell.categoryButton.addTarget(self, action: #selector(self.categoryButtonClicked), for: .touchUpInside)
@@ -98,6 +109,12 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
             cell.photoImageView.addGestureRecognizer(tapGesture)
+            guard let imageData = itemIdentifier as? Data, let image = UIImage(data: imageData) else { return }
+            
+            cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
+            cell.deleteButton.tag = imageData.hashValue
+            
+            cell.configure(data: image)
         }
         
         photoDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.photoCollectionView) {collectionView, indexPath, itemIdentifier in
@@ -148,6 +165,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         expenseEditVM.inputEditButtonClickedListener.data = ()
     }
     
+    // 사진첩 선택
     @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
         
         var config = PHPickerConfiguration()
@@ -157,24 +175,50 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         
         present(phPicker, animated: true)
     }
+    
+    @objc private func deleteButtonClicked(sender: UIButton) {
+        
+        let dataHashVaulue = sender.tag
+        var datas = expenseEditVM.inputImageDataListener.data
+        
+        for idx in 0 ..< datas.count {
+            if datas[idx].hashValue == dataHashVaulue {
+                datas.remove(at: idx)
+                break
+            }
+        }
+        
+        expenseEditVM.inputImageDataListener.data = datas
+    }
+    
+    // 키보드 내리기
+    @objc private func viewTapped(_ sender: UITapGestureRecognizer) {
+        
+        layoutView.endEditing(true)
+    }
 }
 
 extension ExpenseEditViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         
-        if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+        expenseEditVM.inputImageDataListener.data = []
+        
+        for idx in 0 ..< results.count {
             
+            let itemProvider = results[idx].itemProvider
             
-            itemProvider.loadObject(ofClass: UIImage.self) { readingImage, error in
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
                 
-                // dump(readingImage as? UIImage)
-                
-                // DispatchQueue.main.async {
-                //     self.layoutView.photoImageView.image =
-                // }
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] readingImage, error in
+                    
+                    guard let self, let image = readingImage as? UIImage else { return }
+                    
+                    guard let data = image.jpegData(compressionQuality: 1.0) else { return }
+                    
+                    self.expenseEditVM.inputImageDataListener.data.append(data)
+                }
             }
-            
         }
         
         picker.dismiss(animated: true)
@@ -215,20 +259,27 @@ extension ExpenseEditViewController {
     
     private func update() {
         
-        // Category Snapshot
-        var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
-        categorySnapshot.appendSections([.category])
-        
-        categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
-        
-        self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
-        
-        // Photo Snapshot
-        var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
-        photoSnapshot.appendSections([.photo])
-        
-        photoSnapshot.appendItems(["1"], toSection: .photo)
-        
-        self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            // Category Snapshot
+            var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
+            categorySnapshot.appendSections([.category])
+            
+            categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
+            
+            self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
+            
+            // Photo Snapshot
+            var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
+            photoSnapshot.appendSections([.photo])
+            
+            let datas = self.expenseEditVM.outputImageDataListener.data
+            if !datas.isEmpty {
+                photoSnapshot.appendItems(datas, toSection: .photo)
+            }
+            photoSnapshot.appendItems(["plus Photo"], toSection: .photo)
+            
+            
+            self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
+        }
     }
 }

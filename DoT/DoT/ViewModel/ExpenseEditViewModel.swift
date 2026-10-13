@@ -9,6 +9,7 @@ import Foundation
 
 class ExpenseEditViewModel {
     
+    var photoIDs: [String] = []
     var expense: String = ""
     var category: ExpenseCategory? = nil
     var memo: String = ""
@@ -20,6 +21,9 @@ class ExpenseEditViewModel {
     let inputExpenseListener: Observable<String> = Observable("")
     let inputMemoListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")
+    
+    var inputImageDataListener: Observable<[Data]> = Observable([])
+    var outputImageDataListener: Observable<[Data]> = Observable([])
     
     var inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
     var outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
@@ -84,6 +88,13 @@ class ExpenseEditViewModel {
             guard let self else { return }
             
             
+        }
+        
+        inputImageDataListener.bind { [weak self] datas in
+            
+            guard let self else { return }
+            
+            outputImageDataListener.data = datas
         }
     }
     

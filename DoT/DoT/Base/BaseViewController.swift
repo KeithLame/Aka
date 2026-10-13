@@ -31,7 +31,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        self.view.endEditing(true)
+        self.layoutView.endEditing(true)
     }
     
     func bindData() { }
