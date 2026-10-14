@@ -89,6 +89,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             cell.configure(data: itemIdentifier)
             cell.categoryButton.tag = indexPath.item
             cell.categoryButton.addTarget(self, action: #selector(self.categoryButtonClicked), for: .touchUpInside)
+            cell.update(data: tripDetailInfo.category)
         }
         
         categoryDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.categoryCollectionView) {collectionView, indexPath, itemIdentifier in
