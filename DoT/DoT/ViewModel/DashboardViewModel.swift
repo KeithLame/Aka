@@ -106,8 +106,6 @@ final class DashboardViewModel {
             
             guard let self else { return }
             
-            print(DateUtil.isOverTimeAt(11))
-            
             // 기존 데이터 Fetch
             exchangeFetchListener.data = ()
             

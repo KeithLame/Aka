@@ -11,7 +11,7 @@ import PhotosUI
 class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     
     private var categoryDataSource: UICollectionViewDiffableDataSource<CategoryCompositionalLayout, ExpenseCategory>!
-    private var photoDataSource: UICollectionViewDiffableDataSource<PhotoCompositionalLayout, AnyHashable>!
+    // private var photoDataSource: UICollectionViewDiffableDataSource<PhotoCompositionalLayout, AnyHashable>!
     let expenseEditVM = ExpenseEditViewModel()
     
     override func viewDidLoad() {
@@ -101,31 +101,31 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             return cell
         }
         
-        layoutView.photoCollectionView.showsHorizontalScrollIndicator = false
+        // layoutView.photoCollectionView.showsHorizontalScrollIndicator = false
         
         // MARK: Photo Collecion View
-        let photoRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
-            
-            guard let self else { return }
-            
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
-            cell.photoImageView.addGestureRecognizer(tapGesture)
-            guard let imageData = itemIdentifier as? Data, let image = UIImage(data: imageData) else { return }
-            
-            cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
-            cell.deleteButton.tag = imageData.hashValue
-            
-            cell.configure(data: image)
-        }
+        // let photoRegistration = UICollectionView.CellRegistration<PhotoCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
+        //     
+        //     guard let self else { return }
+        //     
+        //     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageSelectedButtonTapped))
+        //     cell.photoImageView.addGestureRecognizer(tapGesture)
+        //     guard let imageData = itemIdentifier as? Data, let image = UIImage(data: imageData) else { return }
+        //     
+        //     cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
+        //     cell.deleteButton.tag = imageData.hashValue
+        //     
+        //     cell.configure(data: image)
+        // }
         
-        photoDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.photoCollectionView) {collectionView, indexPath, itemIdentifier in
-            
-            let cell = collectionView.dequeueConfiguredReusableCell(using: photoRegistration,
-                                                                    for: indexPath,
-                                                                    item: itemIdentifier)
-            
-            return cell
-        }
+        // photoDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.photoCollectionView) {collectionView, indexPath, itemIdentifier in
+        //     
+        //     let cell = collectionView.dequeueConfiguredReusableCell(using: photoRegistration,
+        //                                                             for: indexPath,
+        //                                                             item: itemIdentifier)
+        //     
+        //     return cell
+        // }
     }
     
     // 지출 변경
@@ -203,6 +203,11 @@ extension ExpenseEditViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         
+        if results.isEmpty {
+            picker.dismiss(animated: true)
+            return
+        }
+        
         expenseEditVM.inputImageDataListener.data = []
         
         for idx in 0 ..< results.count {
@@ -260,27 +265,25 @@ extension ExpenseEditViewController {
     
     private func update() {
         
-        DispatchQueue.main.async {
-            // Category Snapshot
-            var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
-            categorySnapshot.appendSections([.category])
-            
-            categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
-            
-            self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
-            
-            // Photo Snapshot
-            var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
-            photoSnapshot.appendSections([.photo])
-            
-            let datas = self.expenseEditVM.outputImageDataListener.data
-            if !datas.isEmpty {
-                photoSnapshot.appendItems(datas, toSection: .photo)
-            }
-            photoSnapshot.appendItems(["plus Photo"], toSection: .photo)
-            
-            
-            self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
-        }
+        // Category Snapshot
+        var categorySnapshot = NSDiffableDataSourceSnapshot<CategoryCompositionalLayout, ExpenseCategory>()
+        categorySnapshot.appendSections([.category])
+        
+        categorySnapshot.appendItems(ExpenseCategory.allCases, toSection: .category)
+        
+        self.categoryDataSource.apply(categorySnapshot, animatingDifferences: true)
+        
+        // Photo Snapshot
+        // var photoSnapshot = NSDiffableDataSourceSnapshot<PhotoCompositionalLayout, AnyHashable>()
+        // photoSnapshot.appendSections([.photo])
+        // 
+        // let datas = self.expenseEditVM.outputImageDataListener.data
+        // if !datas.isEmpty {
+        //     photoSnapshot.appendItems(datas, toSection: .photo)
+        // }
+        // photoSnapshot.appendItems(["plus Photo"], toSection: .photo)
+        
+        
+        // self.photoDataSource.apply(photoSnapshot, animatingDifferences: true)
     }
 }

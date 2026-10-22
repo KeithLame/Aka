@@ -296,8 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				AC6668BE2BA291E100AED57A /* ExchangeAPIModel.swift */,
-				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
 				AC6668CF2BA306E600AED57A /* ExchangeRealmDTO.swift */,
+				AC66688A2B9F00FD00AED57A /* TripInfoDTO.swift */,
 				AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */,
 			);
 			path = DTO;
