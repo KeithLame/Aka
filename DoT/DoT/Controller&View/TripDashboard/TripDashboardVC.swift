@@ -237,7 +237,7 @@ extension TripDashboardViewController: UICollectionViewDelegate {
             if section == indexPath.section {
                 
                 let nextVC = ExpenseEditViewController()
-                nextVC.expenseEditVM.tripDetailInfo = tripDetail[indexPath.item]
+                nextVC.expenseEditVM.inputTripDetailInfoListener.data = tripDetail[indexPath.item]
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }

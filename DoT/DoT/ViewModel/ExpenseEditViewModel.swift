@@ -16,14 +16,14 @@ class ExpenseEditViewModel {
     var place: String = ""
     var photo: String = ""
     
-    var tripDetailInfo: TripDetailInfo?
+    var inputTripDetailInfoListener: Observable<TripDetailInfo?> = Observable(nil)
     
     let inputExpenseListener: Observable<String> = Observable("")
     let inputMemoListener: Observable<String> = Observable("")
     let inputPlaceListener: Observable<String> = Observable("")
     
-    var inputImageDataListener: Observable<[Data]> = Observable([])
-    var outputImageDataListener: Observable<[Data]> = Observable([])
+    // var inputImageDataListener: Observable<[Data]> = Observable([])
+    // var outputImageDataListener: Observable<[Data]> = Observable([])
     
     var inputCategoryButtonClickedListener: Observable<ExpenseCategory> = Observable(.transport)
     var outputCategoryButtonClickedListener: Observable<ExpenseCategory?> = Observable(nil)
@@ -34,6 +34,15 @@ class ExpenseEditViewModel {
     let inputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     
     init() {
+        
+        inputTripDetailInfoListener.bind { [weak self] tripDetailInfo in
+            
+            guard let self, let tripDetailInfo else { return }
+            
+            inputExpenseListener.data = NumberUtil.convertDecimal(tripDetailInfo.expense as NSNumber)
+            inputMemoListener.data = tripDetailInfo.memo ?? ""
+            inputPlaceListener.data = tripDetailInfo.place ?? ""
+        }
         
         // expense 저장
         inputExpenseListener.bind { [weak self] expense in
@@ -83,19 +92,19 @@ class ExpenseEditViewModel {
             outputCheckSaveButtonEnabledListener.data = result
         }
         
-        inputEditButtonClickedListener.bind { [weak self] _ in
-            
-            guard let self else { return }
-            
-            
-        }
-        
-        inputImageDataListener.bind { [weak self] datas in
-            
-            guard let self else { return }
-            
-            outputImageDataListener.data = datas
-        }
+        // inputEditButtonClickedListener.bind { [weak self] _ in
+        //     
+        //     guard let self else { return }
+        //     
+        //     
+        // }
+        // 
+        // inputImageDataListener.bind { [weak self] datas in
+        //     
+        //     guard let self else { return }
+        //     
+        //     outputImageDataListener.data = datas
+        // }
     }
     
     /// 소수점 아래 3글자로 제한

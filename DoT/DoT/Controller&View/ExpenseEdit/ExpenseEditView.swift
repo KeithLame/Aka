@@ -23,15 +23,15 @@ class ExpenseEditView: BaseView {
     let memoTextView = UITextView()
     let placeLiteralLabel = UILabel()
     let placeTextField = MadokaTextField()
-    let photoLiteralLabel = UILabel()
-    let photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: PhotoCompositionalLayout.create())
+    // let photoLiteralLabel = UILabel()
+    // let photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: PhotoCompositionalLayout.create())
     
     override func configureHierarchy() {
         
         [mainScrollView, editButton].forEach { addSubview($0) }
         mainScrollView.addSubview(contentView)
         
-        [expenseLiteralLabel, expenseTextField, categoryLiteralLabel, categoryCollectionView, memoLiteralLabel, memoTextView, placeLiteralLabel, placeTextField, photoLiteralLabel, photoCollectionView].forEach { contentView.addSubview($0) }
+        [expenseLiteralLabel, expenseTextField, categoryLiteralLabel, categoryCollectionView, memoLiteralLabel, memoTextView, placeLiteralLabel, placeTextField].forEach { contentView.addSubview($0) }
     }
     
     override func configureLayout() {
@@ -91,19 +91,20 @@ class ExpenseEditView: BaseView {
         placeTextField.snp.makeConstraints {
             $0.top.equalTo(placeLiteralLabel.snp.bottom).offset(15)
             $0.horizontalEdges.equalTo(contentView).inset(5)
+            $0.bottom.greaterThanOrEqualTo(contentView).inset(100)
         }
         
-        photoLiteralLabel.snp.makeConstraints {
-            $0.top.equalTo(placeTextField.snp.bottom).offset(30)
-            $0.horizontalEdges.equalTo(contentView).inset(10)
-        }
-        
-        photoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(photoLiteralLabel.snp.bottom).offset(15)
-            $0.height.equalTo(180)
-            $0.horizontalEdges.equalTo(contentView)
-            $0.bottom.equalTo(contentView).inset(100)
-        }
+        // photoLiteralLabel.snp.makeConstraints {
+        //     $0.top.equalTo(placeTextField.snp.bottom).offset(30)
+        //     $0.horizontalEdges.equalTo(contentView).inset(10)
+        // }
+        // 
+        // photoCollectionView.snp.makeConstraints {
+        //     $0.top.equalTo(photoLiteralLabel.snp.bottom).offset(15)
+        //     $0.height.equalTo(180)
+        //     $0.horizontalEdges.equalTo(contentView)
+        //     $0.bottom.equalTo(contentView).inset(100)
+        // }
     }
     
     override func configureView() {
@@ -111,7 +112,7 @@ class ExpenseEditView: BaseView {
         mainScrollView.backgroundColor = .clear
         contentView.backgroundColor = .clear
         categoryCollectionView.backgroundColor = .clear
-        photoCollectionView.backgroundColor = .clear
+        // photoCollectionView.backgroundColor = .clear
         
         editButton.configure(title: "지출 수정", image: .plane)
         editButton.updateConfiguration()
@@ -143,7 +144,7 @@ class ExpenseEditView: BaseView {
         placeTextField.textColor = .blackWhite
         placeTextField.placeholderFontScale = 0.85
         
-        photoLiteralLabel.configure(text: "사진", fontSize: .large, fontScale: .Bold)
+        // photoLiteralLabel.configure(text: "사진", fontSize: .large, fontScale: .Bold)
     }
     
     func configure(data: TripDetailInfo) {

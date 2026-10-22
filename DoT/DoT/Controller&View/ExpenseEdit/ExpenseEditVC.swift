@@ -27,7 +27,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         layoutView.mainScrollView.addGestureRecognizer(tapGesture)
         
-        guard let tripDetailInfo = expenseEditVM.tripDetailInfo else { return }
+        guard let tripDetailInfo = expenseEditVM.inputTripDetailInfoListener.data else { return }
         layoutView.configure(data: tripDetailInfo)
         
         layoutView.expenseTextField.addTarget(self, action: #selector(expenseValueChanged), for: .editingChanged)
@@ -62,12 +62,12 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         }
         
         // 이미지 선택 시 사진 콜렉션뷰 업데이트
-        expenseEditVM.outputImageDataListener.bind { [weak self] datas in
-            
-            guard let self else { return }
-            
-            update()
-        }
+        // expenseEditVM.outputImageDataListener.bind { [weak self] datas in
+        //     
+        //     guard let self else { return }
+        //     
+        //     update()
+        // }
     }
     
     override func configureNavigation() {
@@ -82,7 +82,7 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         // MARK: Category Collecion View
         let categoryRegistration = UICollectionView.CellRegistration<CategoryCollectionViewCell, ExpenseCategory> { [weak self] cell, indexPath, itemIdentifier in
             
-            guard let self, let tripDetailInfo = expenseEditVM.tripDetailInfo else { return }
+            guard let self, let tripDetailInfo = expenseEditVM.inputTripDetailInfoListener.data else { return }
             
             // Category Button Selected
             expenseEditVM.inputCategoryButtonClickedListener.data = tripDetailInfo.category
@@ -167,30 +167,31 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     }
     
     // 사진첩 선택
-    @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
-        
-        var config = PHPickerConfiguration()
-        config.selectionLimit = 5
-        let phPicker = PHPickerViewController(configuration: config)
-        phPicker.delegate = self
-        
-        present(phPicker, animated: true)
-    }
+    // @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
+    //     
+    //     var config = PHPickerConfiguration()
+    //     config.selectionLimit = 5
+    //     let phPicker = PHPickerViewController(configuration: config)
+    //     phPicker.delegate = self
+    //     
+    //     present(phPicker, animated: true)
+    // }
     
-    @objc private func deleteButtonClicked(sender: UIButton) {
-        
-        let dataHashVaulue = sender.tag
-        var datas = expenseEditVM.inputImageDataListener.data
-        
-        for idx in 0 ..< datas.count {
-            if datas[idx].hashValue == dataHashVaulue {
-                datas.remove(at: idx)
-                break
-            }
-        }
-        
-        expenseEditVM.inputImageDataListener.data = datas
-    }
+    // 선택된 사진 삭제
+    // @objc private func deleteButtonClicked(sender: UIButton) {
+    //     
+    //     let dataHashVaulue = sender.tag
+    //     var datas = expenseEditVM.inputImageDataListener.data
+    //     
+    //     for idx in 0 ..< datas.count {
+    //         if datas[idx].hashValue == dataHashVaulue {
+    //             datas.remove(at: idx)
+    //             break
+    //         }
+    //     }
+    //     
+    //     expenseEditVM.inputImageDataListener.data = datas
+    // }
     
     // 키보드 내리기
     @objc private func viewTapped(_ sender: UITapGestureRecognizer) {
@@ -199,37 +200,37 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     }
 }
 
-extension ExpenseEditViewController: PHPickerViewControllerDelegate {
-    
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        
-        if results.isEmpty {
-            picker.dismiss(animated: true)
-            return
-        }
-        
-        expenseEditVM.inputImageDataListener.data = []
-        
-        for idx in 0 ..< results.count {
-            
-            let itemProvider = results[idx].itemProvider
-            
-            if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                
-                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] readingImage, error in
-                    
-                    guard let self, let image = readingImage as? UIImage else { return }
-                    
-                    guard let data = image.jpegData(compressionQuality: 1.0) else { return }
-                    
-                    self.expenseEditVM.inputImageDataListener.data.append(data)
-                }
-            }
-        }
-        
-        picker.dismiss(animated: true)
-    }
-}
+// extension ExpenseEditViewController: PHPickerViewControllerDelegate {
+//     
+//     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+//         
+//         if results.isEmpty {
+//             picker.dismiss(animated: true)
+//             return
+//         }
+//         
+//         expenseEditVM.inputImageDataListener.data = []
+//         
+//         for idx in 0 ..< results.count {
+//             
+//             let itemProvider = results[idx].itemProvider
+//             
+//             if itemProvider.canLoadObject(ofClass: UIImage.self) {
+//                 
+//                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] readingImage, error in
+//                     
+//                     guard let self, let image = readingImage as? UIImage else { return }
+//                     
+//                     guard let data = image.jpegData(compressionQuality: 1.0) else { return }
+//                     
+//                     self.expenseEditVM.inputImageDataListener.data.append(data)
+//                 }
+//             }
+//         }
+//         
+//         picker.dismiss(animated: true)
+//     }
+// }
 
 extension ExpenseEditViewController: UITextFieldDelegate {
     
