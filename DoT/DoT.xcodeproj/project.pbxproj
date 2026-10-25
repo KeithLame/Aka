@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC5FF4EF2BB03F3D00962363 /* PrivacyPolicyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FF4EE2BB03F3D00962363 /* PrivacyPolicyCVC.swift */; };
 		AC61A6532BA6B6C000EF14BD /* TripDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */; };
 		AC61A6552BA6BB8300EF14BD /* TripIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6542BA6BB8300EF14BD /* TripIntro.swift */; };
 		AC61A6572BA6C97400EF14BD /* TripDetailInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC5FF4EE2BB03F3D00962363 /* PrivacyPolicyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyCVC.swift; sourceTree = "<group>"; };
 		AC61A6522BA6B6C000EF14BD /* TripDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDashboardViewModel.swift; sourceTree = "<group>"; };
 		AC61A6542BA6BB8300EF14BD /* TripIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIntro.swift; sourceTree = "<group>"; };
 		AC61A6562BA6C97400EF14BD /* TripDetailInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailInfoDTO.swift; sourceTree = "<group>"; };
@@ -337,7 +339,6 @@
 				ACF5ACF92B9B072800DBEF85 /* Model */,
 				ACF5ACFA2B9B074800DBEF85 /* ViewModel */,
 				ACF5ACFB2B9B078A00DBEF85 /* Controller&View */,
-				ACF5ACF42B9B03D400DBEF85 /* Base */,
 				ACF5ACC12B99838600DBEF85 /* AppDelegate.swift */,
 				ACF5ACC32B99838600DBEF85 /* SceneDelegate.swift */,
 				ACF5ACC72B99838600DBEF85 /* Main.storyboard */,
@@ -429,7 +430,9 @@
 				AC66688E2B9F194700AED57A /* TripCardCVC.swift */,
 				AC939C312BA9A58D0048956B /* TripCardCRV.swift */,
 				AC6668AB2BA1D6F400AED57A /* ExchangeRateCVC.swift */,
+				AC5FF4EE2BB03F3D00962363 /* PrivacyPolicyCVC.swift */,
 				AC6668AD2BA1E4BE00AED57A /* ExchangeRateCRV.swift */,
+				ACF5ACF42B9B03D400DBEF85 /* Base */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				AC61A6602BA6E67B00EF14BD /* ExpenseView.swift in Sources */,
 				AC78E2F02BA442D8005B2E99 /* TripIntroCVC.swift in Sources */,
 				AC61A65B2BA6E31F00EF14BD /* ExpenseCategory.swift in Sources */,
+				AC5FF4EF2BB03F3D00962363 /* PrivacyPolicyCVC.swift in Sources */,
 				ACF5AD282B9D6BEC00DBEF85 /* UIButton++.swift in Sources */,
 				AC6668B42BA281C300AED57A /* APIManager.swift in Sources */,
 				ACF5AD2C2B9D6F0700DBEF85 /* UILabel++.swift in Sources */,

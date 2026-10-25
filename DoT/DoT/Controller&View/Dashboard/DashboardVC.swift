@@ -106,6 +106,14 @@ final class DashboardViewController: BaseViewController<DashboardView> {
             cell.configure(data: itemIdentifier)
         }
         
+        // privacyPolicy Section Registration
+        let privacyPolicySectionRegistration = UICollectionView.CellRegistration<PrivacyPolicyCollectionViewCell, AnyHashable> { cell, indexPath, itemIdentifier in
+         
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.policyLinkTapped))
+            cell.privacyPolicyLinkLabel.isUserInteractionEnabled = true
+            cell.privacyPolicyLinkLabel.addGestureRecognizer(tapGesture)
+        }
+        
         // Trip Card Header Registration
         let tripCardHeaderRegistration = UICollectionView.SupplementaryRegistration<TripCardCollectionReusableView>(elementKind: TripCardCollectionReusableView.identifier) { supplementaryView, elementKind, indexPath in
             
@@ -179,6 +187,12 @@ final class DashboardViewController: BaseViewController<DashboardView> {
                 guard let item: Exchange = itemIdentifier as? Exchange else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: exchangeRateSectionRegistration, for: indexPath, item: item)
+                
+                return cell
+                
+            case .privacyPolicy:
+                
+                let cell = collectionView.dequeueConfiguredReusableCell(using: privacyPolicySectionRegistration, for: indexPath, item: itemIdentifier)
                 
                 return cell
             }
@@ -263,6 +277,11 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         
         present(naviVC, animated: true)
     }
+    
+    @objc func policyLinkTapped(_ sender: UITapGestureRecognizer) {
+        
+        openExternalLink(urlStr: "https://www.notion.so/DoT-efbfcc80d7a4447390ffb8777e77a387?pvs=4")
+    }
 }
 
 extension DashboardViewController {
@@ -291,6 +310,7 @@ extension DashboardViewController {
         }
         
         snapshot.appendItems(exchangeDatas, toSection: .exchangeRate)
+        snapshot.appendItems(["privacyPolicy"], toSection: .privacyPolicy)
         
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }

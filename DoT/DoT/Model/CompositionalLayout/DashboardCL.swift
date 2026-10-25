@@ -13,6 +13,7 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
     case tripCard
     case onComing
     case exchangeRate
+    case privacyPolicy
     
     static func create() -> UICollectionViewCompositionalLayout {
         
@@ -25,6 +26,8 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
                 return createTripCard()
             case .exchangeRate:
                 return createExchangeRate()
+            case .privacyPolicy:
+                return createPrivacyPolicy()
             case nil:
                 return nil
             }
@@ -75,6 +78,23 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
         section.boundarySupplementaryItems = [createHeader(ExchangeRateCollectionReusableView.identifier)]
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+        
+        return section
+    }
+    
+    private static func createPrivacyPolicy() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(44))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(44))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 20, bottom: 30, trailing: 20)
         
         return section
     }
