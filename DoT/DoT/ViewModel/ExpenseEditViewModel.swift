@@ -9,12 +9,16 @@ import Foundation
 
 class ExpenseEditViewModel {
     
+    private let realmManager = try? RealmManager()
+    
     var photoIDs: [String] = []
     var expense: String = ""
     var category: ExpenseCategory? = nil
     var memo: String = ""
     var place: String = ""
     var photo: String = ""
+    
+    var complete: Observable<Void?> = Observable(nil)
     
     var inputTripDetailInfoListener: Observable<TripDetailInfo?> = Observable(nil)
     
@@ -32,6 +36,7 @@ class ExpenseEditViewModel {
     let outputCheckSaveButtonEnabledListener: Observable<Bool> = Observable(false)
     
     let inputEditButtonClickedListener: Observable<Void?> = Observable(nil)
+    let outputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     
     init() {
         
@@ -92,13 +97,21 @@ class ExpenseEditViewModel {
             outputCheckSaveButtonEnabledListener.data = result
         }
         
-        // inputEditButtonClickedListener.bind { [weak self] _ in
-        //     
-        //     guard let self else { return }
-        //     
-        //     
-        // }
-        // 
+        // 수정 버튼 클릭
+        inputEditButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self, let realmManager, let category, var tripDetail = inputTripDetailInfoListener.data else { return }
+            print(expense)
+            tripDetail.expense = expense.convertDouble()
+            tripDetail.category = category
+            tripDetail.memo = memo
+            tripDetail.place = place
+            
+            realmManager.updateTripDetailByID(id: tripDetail.objectID, value: tripDetail)
+            
+            outputEditButtonClickedListener.data = ()
+        }
+        
         // inputImageDataListener.bind { [weak self] datas in
         //     
         //     guard let self else { return }

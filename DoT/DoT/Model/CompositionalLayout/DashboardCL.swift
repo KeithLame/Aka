@@ -94,7 +94,7 @@ enum DashboardCompositionalLayout: Int, CaseIterable {
         
         let section = NSCollectionLayoutSection(group: group)
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 20, bottom: 30, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20)
         
         return section
     }

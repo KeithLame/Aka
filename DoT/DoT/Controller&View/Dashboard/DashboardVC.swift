@@ -107,8 +107,10 @@ final class DashboardViewController: BaseViewController<DashboardView> {
         }
         
         // privacyPolicy Section Registration
-        let privacyPolicySectionRegistration = UICollectionView.CellRegistration<PrivacyPolicyCollectionViewCell, AnyHashable> { cell, indexPath, itemIdentifier in
+        let privacyPolicySectionRegistration = UICollectionView.CellRegistration<PrivacyPolicyCollectionViewCell, AnyHashable> { [weak self] cell, indexPath, itemIdentifier in
          
+            guard let self else { return }
+            
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.policyLinkTapped))
             cell.privacyPolicyLinkLabel.isUserInteractionEnabled = true
             cell.privacyPolicyLinkLabel.addGestureRecognizer(tapGesture)

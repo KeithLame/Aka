@@ -80,13 +80,16 @@ extension RealmManager {
 
 // Trip Detail Info
 extension RealmManager {
-    func updateTripDetailByID(id: String, value: TripDetailInfoDTO) {
+    func updateTripDetailByID(id: String, value: TripDetailInfo) {
         do {
             try realm.write {
                 realm.create(TripDetailInfoDTO.self,
                              value: [
                                 "objectID": id,
-                                "tripDetail": value
+                                "expense": value.expense,
+                                "category": value.category,
+                                "memo": value.memo ?? "",
+                                "place": value.place ?? ""
                              ],
                              update: .modified)
             }

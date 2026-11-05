@@ -238,6 +238,13 @@ extension TripDashboardViewController: UICollectionViewDelegate {
                 
                 let nextVC = ExpenseEditViewController()
                 nextVC.expenseEditVM.inputTripDetailInfoListener.data = tripDetail[indexPath.item]
+                nextVC.expenseEditVM.complete.bind { [weak self] _ in
+                    
+                    guard let self else { return }
+                    
+                    let snapshot = diffableDataSource.snapshot()
+                    diffableDataSource.applySnapshotUsingReloadData(snapshot)
+                }
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }

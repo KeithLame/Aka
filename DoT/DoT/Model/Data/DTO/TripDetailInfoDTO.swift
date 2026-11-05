@@ -31,7 +31,7 @@ final class TripDetailInfoDTO: Object {
     
     func translate() -> TripDetailInfo {
         
-        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, place: self.place ,expense: self.expense, category: self.category, expenseDate: self.expenseDate)
+        let translateTripDetailInfo = TripDetailInfo(objectID: self.objectID, place: self.place ,expense: self.expense, category: self.category, memo: self.memo , expenseDate: self.expenseDate)
         
         return translateTripDetailInfo
     }

@@ -61,6 +61,15 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             layoutView.editButton.isEnabled = isEnabled
         }
         
+        expenseEditVM.outputEditButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            expenseEditVM.complete.data = ()
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
         // 이미지 선택 시 사진 콜렉션뷰 업데이트
         // expenseEditVM.outputImageDataListener.bind { [weak self] datas in
         //     

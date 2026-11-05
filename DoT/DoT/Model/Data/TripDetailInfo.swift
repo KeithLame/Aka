@@ -17,7 +17,7 @@ struct TripDetailInfo: Hashable {
     var expenseDate: Date
     var tripInfo: TripInfo?
     
-    init(objectID: String, place: String?, expense: Double, category: ExpenseCategory, photo: String? = nil, memo: String? = nil, expenseDate: Date) {
+    init(objectID: String, place: String?, expense: Double, category: ExpenseCategory, photo: String? = nil, memo: String?, expenseDate: Date) {
         
         self.objectID = objectID
         self.place = place
