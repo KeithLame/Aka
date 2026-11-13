@@ -38,8 +38,12 @@ class ExpenseEditViewModel {
     let inputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     let outputEditButtonClickedListener: Observable<Void?> = Observable(nil)
     
+    var inputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    var outputDeleteButtonClickedListener: Observable<Void?> = Observable(nil)
+    
     init() {
         
+        // 초기 설정
         inputTripDetailInfoListener.bind { [weak self] tripDetailInfo in
             
             guard let self, let tripDetailInfo else { return }
@@ -101,7 +105,7 @@ class ExpenseEditViewModel {
         inputEditButtonClickedListener.bind { [weak self] _ in
             
             guard let self, let realmManager, let category, var tripDetail = inputTripDetailInfoListener.data else { return }
-            print(expense)
+            
             tripDetail.expense = expense.convertDouble()
             tripDetail.category = category
             tripDetail.memo = memo
@@ -112,10 +116,31 @@ class ExpenseEditViewModel {
             outputEditButtonClickedListener.data = ()
         }
         
+        // 삭제 버튼 클릭
+        inputDeleteButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self, var tripDetail = inputTripDetailInfoListener.data, let realmManager else { return }
+            
+            let TripDetailInfoDTO = realmManager.fetch(TripDetailInfoDTO.self)
+            
+            TripDetailInfoDTO.forEach {
+                
+                if $0.objectID == tripDetail.objectID {
+                    do {
+                        try realmManager.delete($0)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+            
+            outputDeleteButtonClickedListener.data = ()
+        }
+        
         // inputImageDataListener.bind { [weak self] datas in
-        //     
+        //
         //     guard let self else { return }
-        //     
+        //
         //     outputImageDataListener.data = datas
         // }
     }

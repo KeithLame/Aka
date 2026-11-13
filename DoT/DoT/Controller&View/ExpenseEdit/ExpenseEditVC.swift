@@ -24,6 +24,15 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     
     override func configure() {
         
+        let createCustomView = UIButton()
+        
+        createCustomView.configure(title: "지출내역 삭제", image: nil, fontSize: .small, fontScale: .Bold, backgroundColor: .clear, foregroundColor: .justRed, imageColor: .blackWhite)
+        createCustomView.addTarget(self, action: #selector(rightBarButtonClicked), for: .touchUpInside)
+        
+        let createBarButton = UIBarButtonItem(customView: createCustomView)
+        
+        navigationItem.rightBarButtonItem = createBarButton
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         layoutView.mainScrollView.addGestureRecognizer(tapGesture)
         
@@ -70,6 +79,14 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
             self.navigationController?.popViewController(animated: true)
         }
         
+        expenseEditVM.outputDeleteButtonClickedListener.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            navigationController?.popViewController(animated: true)
+        }
+        
+        
         // 이미지 선택 시 사진 콜렉션뷰 업데이트
         // expenseEditVM.outputImageDataListener.bind { [weak self] datas in
         //     
@@ -77,11 +94,6 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         //     
         //     update()
         // }
-    }
-    
-    override func configureNavigation() {
-        
-        navigationController?.topViewController?.title = "가나다라"
     }
     
     override func configureCollectionView() {
@@ -137,6 +149,35 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         // }
     }
     
+    override func rightBarButtonClicked(_ sender: UIButton) {
+        
+        let alertTitle = "해당 지출내역을 삭제합니다"
+        let deleteTitle = "삭제"
+        let cancelTitle = "취소"
+        
+        let attributeAlertTitle = NSMutableAttributedString(string: alertTitle)
+        let font = FontManager.getFont(size: .medium, scale: .Bold)
+        
+        attributeAlertTitle.addAttributes([.font: font, .foregroundColor: UIColor.blackWhite], range: (alertTitle as NSString).range(of: alertTitle))
+        
+        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        let deleteButton = UIAlertAction(title: deleteTitle, style: .destructive) { [weak self] _ in
+            
+            guard let self else { return }
+            
+            expenseEditVM.inputDeleteButtonClickedListener.data = ()
+        }
+        let cancelButton = UIAlertAction(title: cancelTitle, style: .cancel)
+        
+        alert.setValue(attributeAlertTitle, forKey: "attributedTitle")
+        deleteButton.setValue(UIColor.justRed, forKey: "titleTextColor")
+        cancelButton.setValue(UIColor.justGray, forKey: "titleTextColor")
+        
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true)
+    }
+    
     // 지출 변경
     @objc private func expenseValueChanged(_ sender: UITextField) {
         
@@ -175,6 +216,12 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
         expenseEditVM.inputEditButtonClickedListener.data = ()
     }
     
+    // 키보드 내리기
+    @objc private func viewTapped(_ sender: UITapGestureRecognizer) {
+        
+        layoutView.endEditing(true)
+    }
+    
     // 사진첩 선택
     // @objc private func imageSelectedButtonTapped(sender: UITapGestureRecognizer) {
     //     
@@ -201,12 +248,6 @@ class ExpenseEditViewController: BaseViewController<ExpenseEditView> {
     //     
     //     expenseEditVM.inputImageDataListener.data = datas
     // }
-    
-    // 키보드 내리기
-    @objc private func viewTapped(_ sender: UITapGestureRecognizer) {
-        
-        layoutView.endEditing(true)
-    }
 }
 
 // extension ExpenseEditViewController: PHPickerViewControllerDelegate {

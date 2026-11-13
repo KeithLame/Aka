@@ -45,6 +45,18 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         }
     }
     
+    override func configure() {
+        
+        let createCustomView = UIButton()
+        
+        createCustomView.configure(title: "데이터 삭제", image: nil, fontSize: .small, fontScale: .Bold, backgroundColor: .clear, foregroundColor: .justRed, imageColor: .blackWhite)
+        createCustomView.addTarget(self, action: #selector(rightBarButtonClicked), for: .touchUpInside)
+        
+        let createBarButton = UIBarButtonItem(customView: createCustomView)
+        
+        navigationItem.rightBarButtonItem = createBarButton
+    }
+    
     override func configureCollectionView() {
         
         layoutView.tripDashboradCollectionView.delegate = self
@@ -63,14 +75,6 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
             cell.configure(data: itemIdentifier)
             cell.expenseButton.addTarget(self, action: #selector(expenseButtonClicked), for: .touchUpInside)
             cell.budgetEditButton.addTarget(self, action: #selector(budgetEditButtonClicked), for: .touchUpInside)
-        }
-        
-        // Delete Cell
-        let deleteRegistration = UICollectionView.CellRegistration<DeleteCollectionViewCell, String> { [weak self] cell,indexPath,itemIdentifier in
-            
-            guard let self else { return }
-            
-            cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         }
         
         // Empty Cell
@@ -103,7 +107,6 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         // Section 등록
         diffableDataSource = UICollectionViewDiffableDataSource(collectionView: layoutView.tripDashboradCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
-            let lastSectionNumber = TripDashboardCompositionalLayout.lastSectionNumber
             let isExistEmptySeciton = TripDashboardCompositionalLayout.isExistEmptySeciton
             
             let section = indexPath.section
@@ -122,14 +125,6 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
                 guard let item: TripInfo = itemIdentifier as? TripInfo else { return nil }
                 
                 let cell = collectionView.dequeueConfiguredReusableCell(using: budgetCardRegistration, for: indexPath, item: item)
-                
-                return cell
-                
-            case lastSectionNumber:
-                
-                guard let item: String = itemIdentifier as? String else { return nil }
-                
-                let cell = collectionView.dequeueConfiguredReusableCell(using: deleteRegistration, for: indexPath, item: item)
                 
                 return cell
                 
@@ -164,36 +159,7 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         }
     }
     
-    // 지출 추가 버튼 클릭
-    @objc private func expenseButtonClicked(_ sender: UIButton) {
-        
-        let nextVC = ExpenseViewController()
-        nextVC.expenseVM.expenseViewType = .expense
-        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
-        
-        nextVC.expenseVM.complete.bind { [weak self] _ in
-            
-            guard let self else { return }
-            
-            let snapshot = diffableDataSource.snapshot()
-            diffableDataSource.applySnapshotUsingReloadData(snapshot)
-        }
-        
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
-    // 예산 변경 버튼 클릭
-    @objc private func budgetEditButtonClicked(_ sender: UIButton) {
-        
-        let nextVC = ExpenseViewController()
-        nextVC.expenseVM.expenseViewType = .budgetEdit
-        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
-        
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
-    // 삭제 버튼 클릭
-    @objc private func deleteButtonClicked(_ sender: UIButton) {
+    override func rightBarButtonClicked(_ sender: UIButton) {
         
         let alertTitle = "여행 정보를 모두 삭제합니다"
         let deleteTitle = "삭제"
@@ -220,6 +186,34 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         alert.addAction(deleteButton)
         alert.addAction(cancelButton)
         present(alert, animated: true)
+    }
+    
+    // 지출 추가 버튼 클릭
+    @objc private func expenseButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = ExpenseViewController()
+        nextVC.expenseVM.expenseViewType = .expense
+        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
+        
+        nextVC.expenseVM.complete.bind { [weak self] _ in
+            
+            guard let self else { return }
+            
+            let snapshot = diffableDataSource.snapshot()
+            diffableDataSource.applySnapshotUsingReloadData(snapshot)
+        }
+        
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    // 예산 변경 버튼 클릭
+    @objc private func budgetEditButtonClicked(_ sender: UIButton) {
+        
+        let nextVC = ExpenseViewController()
+        nextVC.expenseVM.expenseViewType = .budgetEdit
+        nextVC.expenseVM.tripInfo = tripDashboardVM.tripInfo
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -304,13 +298,6 @@ extension TripDashboardViewController {
             
             TripDashboardCompositionalLayout.isExistEmptySeciton = true
         }
-        
-        // Section 추가 - Delete
-        snapshot.appendSections([.delete])
-        snapshot.appendItems(["delete"], toSection: .delete)
-        
-        // 마지막 섹션 넘버 저장
-        TripDashboardCompositionalLayout.lastSectionNumber = snapshot.numberOfSections - 1
         
         self.diffableDataSource.apply(snapshot, animatingDifferences: true)
     }

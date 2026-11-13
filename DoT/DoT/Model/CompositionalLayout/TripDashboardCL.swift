@@ -14,7 +14,6 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
     case intro
     case budgetCard
     case expense(section: String)
-    case delete
     case empty
     
     var title: String {
@@ -25,7 +24,6 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         }
     }
     
-    static var lastSectionNumber: Int?
     static var isExistEmptySeciton: Bool = false
     static var expenseIndexOfSection: Set<Int> = []
     
@@ -38,15 +36,11 @@ enum TripDashboardCompositionalLayout: CaseIterable, Hashable {
         
         let layout = UICollectionViewCompositionalLayout { section, environment in
             
-            guard let lastSectionNumber else { return nil }
-            
             switch section {
             case 0:
                 return createIntro()
             case 1:
                 return createBudgetCard()
-            case lastSectionNumber:
-                return createDefault()
             default:
                 if isExistEmptySeciton == false {
                     return createExpense()

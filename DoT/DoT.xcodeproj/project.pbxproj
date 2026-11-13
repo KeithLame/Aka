@@ -56,7 +56,6 @@
 		AC939C392BA9CD640048956B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C382BA9CD640048956B /* Exchange.swift */; };
 		AC939C3B2BA9E5900048956B /* TripDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */; };
 		AC939C3D2BA9F86D0048956B /* DateFormatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3C2BA9F86D0048956B /* DateFormatType.swift */; };
-		AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C3F2BAB45E10048956B /* DeleteCVC.swift */; };
 		AC939C422BAB48B60048956B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C412BAB48B60048956B /* EmptyCVC.swift */; };
 		AC939C442BABC4900048956B /* EmptyOnComingCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */; };
 		AC939C472BAC1F050048956B /* ExpenseEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC939C462BAC1F050048956B /* ExpenseEditVC.swift */; };
@@ -145,7 +144,6 @@
 		AC939C382BA9CD640048956B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		AC939C3A2BA9E5900048956B /* TripDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailInfo.swift; sourceTree = "<group>"; };
 		AC939C3C2BA9F86D0048956B /* DateFormatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatType.swift; sourceTree = "<group>"; };
-		AC939C3F2BAB45E10048956B /* DeleteCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCVC.swift; sourceTree = "<group>"; };
 		AC939C412BAB48B60048956B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		AC939C432BABC4900048956B /* EmptyOnComingCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOnComingCVC.swift; sourceTree = "<group>"; };
 		AC939C462BAC1F050048956B /* ExpenseEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditVC.swift; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 				AC78E2F12BA44ED6005B2E99 /* BudgetCardCVC.swift */,
 				AC78E2F32BA46753005B2E99 /* ExpenseCVC.swift */,
 				AC939C412BAB48B60048956B /* EmptyCVC.swift */,
-				AC939C3F2BAB45E10048956B /* DeleteCVC.swift */,
 				AC939C242BA88EF50048956B /* ExpenseCRV.swift */,
 			);
 			path = TripDashboard;
@@ -638,7 +635,6 @@
 				ACF5AD092B9B108E00DBEF85 /* BaseCollectionViewCell.swift in Sources */,
 				AC6668C82BA2EEFF00AED57A /* APIKey.swift in Sources */,
 				AC939C232BA82FEF0048956B /* ExpenseViewModel.swift in Sources */,
-				AC939C402BAB45E10048956B /* DeleteCVC.swift in Sources */,
 				AC61A6622BA6E9CF00EF14BD /* CategoryCL.swift in Sources */,
 				AC939C362BA9B74C0048956B /* TripInfo.swift in Sources */,
 				AC6DF5BC2BAC658500EB224D /* ExpenseEditViewModel.swift in Sources */,
