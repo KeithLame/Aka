@@ -90,8 +90,4 @@ final class BudgetCardCollectionViewCell: BaseCollectionViewCell {
         guard let currency = Consts.Currency.currencyByName(name: data.currency) else { return }
         budgetLabel.text = "\(currency.currencySymbol) \(remain)" // MARK: remain으로 변경해야됨
     }
-    
-    deinit {
-        print("budgetCard deinit")
-    }
 }

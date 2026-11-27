@@ -90,8 +90,4 @@ final class CalendarCustomCell: FSCalendarCell {
         leftRangeBox.isHidden = leftIsHidden
         rightRangeBox.isHidden = rightIsHidden
     }
-    
-    deinit {
-        print("Calendar Custom Cell deinit")
-    }
 }

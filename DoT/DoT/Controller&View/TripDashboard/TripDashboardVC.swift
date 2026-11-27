@@ -17,10 +17,6 @@ final class TripDashboardViewController: BaseViewController<TripDashboardView> {
         
     }
     
-    deinit {
-        print("TripDashboardViewController Deinit")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         
         // Trip Info Update

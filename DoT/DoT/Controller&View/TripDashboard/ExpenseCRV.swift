@@ -68,8 +68,4 @@ final class ExpenseCollectionReusableView: UICollectionReusableView {
         for detail in data { accumulate += detail.expense }
         accumulateLabel.text = "- \(NumberUtil.convertDecimal(accumulate as NSNumber))"
     }
-    
-    deinit {
-        print("ExpenseCRV deinit")
-    }
 }

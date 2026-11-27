@@ -19,10 +19,6 @@ final class ExpenseViewController: BaseViewController<ExpenseView> {
         update()
     }
     
-    deinit {
-        print("deinit Expense VC")
-    }
-    
     override func bindData() {
         
         // 금액 설정 및 view configure

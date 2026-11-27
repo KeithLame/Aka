@@ -126,8 +126,4 @@ final class CreateTripView: BaseView {
         headcountStepper.wraps = true
         headcountStepper.backgroundColor = .whiteBlack
     }
-    
-    deinit {
-        print("CreateTripView deinit")
-    }
 }

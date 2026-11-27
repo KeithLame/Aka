@@ -164,8 +164,4 @@ final class ExpenseViewModel {
             outputCheckSaveButtonEnabledListener.data = result
         }
     }
-    
-    deinit {
-        print("ExpenseViewModel deinit")
-    }
 }

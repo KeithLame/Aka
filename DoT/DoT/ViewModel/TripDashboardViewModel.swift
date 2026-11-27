@@ -103,10 +103,6 @@ final class TripDashboardViewModel {
         }
     }
     
-    deinit {
-        print("TripDashboardViewModel Deinit")
-    }
-    
     private func getRemainBudgetByObjectID(_ id: String) -> Double {
         
         guard let tripInfo else { return 0 }

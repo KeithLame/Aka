@@ -70,8 +70,4 @@ final class CalendarView: BaseView {
         
         calendar.placeholderType = .none
     }
-    
-    deinit {
-        print("CalendarView deinit")
-    }
 }

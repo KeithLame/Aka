@@ -53,8 +53,4 @@ final class ExpenseCollectionViewCell: BaseCollectionViewCell {
         expenseLabel.text = NumberUtil.convertDecimal(data.expense as NSNumber)
         remainLabel.text = NumberUtil.convertDecimal(remainBudget as NSNumber)
     }
-    
-    deinit {
-        print("expenseCVC deinit")
-    }
 }

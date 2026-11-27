@@ -43,8 +43,4 @@ final class TripIntroCollectionViewCell: BaseCollectionViewCell {
         tripTitle.text = data.title
         tripDay.text = data.preriod
     }
-    
-    deinit {
-        print("TripIntroCVC deinit")
-    }
 }

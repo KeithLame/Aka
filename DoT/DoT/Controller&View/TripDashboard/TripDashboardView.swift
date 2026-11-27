@@ -29,8 +29,4 @@ final class TripDashboardView: BaseView {
         
         tripDashboradCollectionView.backgroundColor = .clear
     }
-    
-    deinit {
-        print("TripDashboard deinit")
-    }
 }

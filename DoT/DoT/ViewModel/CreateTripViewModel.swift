@@ -170,8 +170,4 @@ final class CreateTripViewModel {
         
         return true
     }
-    
-    deinit {
-        print("CreateTripViewModel Deinit")
-    }
 }

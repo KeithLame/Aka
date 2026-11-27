@@ -18,10 +18,6 @@ final class CreateTripViewController: BaseViewController<CreateTripView> {
         createTripVM.inputCheckSaveButtonEnabledListener.data = ()
     }
     
-    deinit {
-        print("deinit CreateTrip VC")
-    }
-    
     override func bindData() {
         
         // 여행 기간 표시

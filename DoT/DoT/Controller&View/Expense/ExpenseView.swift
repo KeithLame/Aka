@@ -81,8 +81,4 @@ final class ExpenseView: BaseView {
             categoryCollectionView.isHidden = true
         }
     }
-    
-    deinit {
-        print("ExpenseView deinit")
-    }
 }

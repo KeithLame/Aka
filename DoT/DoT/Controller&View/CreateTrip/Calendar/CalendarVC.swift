@@ -53,10 +53,6 @@ final class CalendarViewController: BaseViewController<CalendarView> {
         
         navigationController?.popViewController(animated: true)
     }
-    
-    deinit {
-        print("CalendarViewController deinit")
-    }
 }
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {

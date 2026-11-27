@@ -35,8 +35,4 @@ final class NumberPadCollectionViewCell: BaseCollectionViewCell {
         
         numberLabel.text = data
     }
-    
-    deinit {
-        print("NumberPadCVC deinit")
-    }
 }

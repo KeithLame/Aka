@@ -145,8 +145,4 @@ final class CalendarViewModel {
             self.outputSelectedListener.data = .both
         }
     }
-    
-    deinit {
-        print("CalendarViewModel Deinit")
-    }
 }

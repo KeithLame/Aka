@@ -44,8 +44,4 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             categoryButton.isSelected = false
         }
     }
-    
-    deinit {
-        print("CategoryCVC deinit")
-    }
 }

@@ -32,8 +32,4 @@ final class EmptyCollectionViewCell: BaseCollectionViewCell {
         emptyLabel.adjustsFontSizeToFitWidth = true
         emptyLabel.textAlignment = .center
     }
-    
-    deinit {
-        print("EmptyCVC deinit")
-    }
 }
