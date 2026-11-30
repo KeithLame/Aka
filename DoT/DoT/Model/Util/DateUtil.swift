@@ -117,6 +117,11 @@ enum DateUtil {
         return result
     }
     
+    static func isWeekend() -> Bool {
+        
+        return Calendar.current.isDateInWeekend(Date())
+    }
+    
     /// 입력된 hour을 넘겼는지 판별
     static func isOverTimeAt(_ hour: Int) -> Bool {
         let component = Calendar.current.dateComponents([.hour], from: Date())

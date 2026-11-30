@@ -71,6 +71,8 @@ final class DashboardViewModel {
             
             guard let self, let realmManager else { return }
             
+            if datas.isEmpty { return }
+            
             // 새로운 데이터를 담기 전에 모두 삭제
             let oldDatas = realmManager.fetch(ExchangeRealmDTO.self)
             
@@ -126,6 +128,11 @@ final class DashboardViewModel {
             
             // 금일 정보를 이미 호출해서 저장했다면 기존 데이터 그대로 사용
             if isCalledToday() { return }
+            
+            // MARK: 주말엔 접속할때마다 호출해서 우선 막아둠, 검토가 필요함
+            if !exchangeDatas.isEmpty, DateUtil.isWeekend() {
+                return
+            }
             
             // 기존 데이터가 있으나, 오전 11시가 지났다면 (오늘 포함 주말 판단) 환율 API 호출
             callAPI(exceptToday: false)
@@ -220,6 +227,7 @@ final class DashboardViewModel {
                 }
                 
             case .failure(let failure):
+                createExchangeListener.data = []
                 print(failure.responseCode!)
             }
         }
